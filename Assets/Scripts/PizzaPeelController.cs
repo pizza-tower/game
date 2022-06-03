@@ -55,6 +55,7 @@ public class PizzaPeelController : MonoBehaviour
         Drop_pos.y += 7; 
         newSlice.transform.position = Drop_pos;
         newSlice.transform.rotation = Anchor.transform.rotation;
+        Anchor.GetComponent<Wobble>().AddSlice();
         
     }
 }
