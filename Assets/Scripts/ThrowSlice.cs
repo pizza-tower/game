@@ -7,7 +7,7 @@ public class ThrowSlice : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Throw());
+        // StartCoroutine(Throw());
     }
 
     // Update is called once per frame
@@ -19,7 +19,6 @@ public class ThrowSlice : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         GameObject AnchorOne = GameObject.FindWithTag("1");
-        
         Vector3 base_pos = AnchorOne.transform.position;
         Vector3 spawn_pos = base_pos;
         spawn_pos.y += 20; 

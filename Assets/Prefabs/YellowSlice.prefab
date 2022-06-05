@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3724214205824884905}
   - component: {fileID: 3984804707150807610}
   - component: {fileID: -5240428235344326057}
+  - component: {fileID: 7032576653946029493}
   m_Layer: 0
   m_Name: YellowSlice
   m_TagString: 0
@@ -109,6 +110,20 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2931822907250721148}
   m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4068373912626513877, guid: 247560f04b2ad0a43a857ff2913e361c, type: 3}
+--- !u!64 &7032576653946029493
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931822907250721148}
+  m_Material: {fileID: 13400000, guid: 003a727a6eeac464fb12ea8270f298ee, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4

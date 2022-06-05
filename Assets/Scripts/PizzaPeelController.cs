@@ -31,15 +31,16 @@ public class PizzaPeelController : MonoBehaviour
         if(Input.GetAxis(inputName) == 1)
         {
             GetComponent<HingeJoint>().useMotor = true;
+
         }
         else
         {
              GetComponent<HingeJoint>().useMotor = false;
         }
         if(GameObject.FindWithTag("0"))
-        {
+            {
             StartCoroutine(Throw());
-        }
+            }
 
         
     }
@@ -47,7 +48,7 @@ public class PizzaPeelController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         GameObject newSlice = GameObject.FindWithTag("0"); //new spawn slice, tag 0
-        int newTag = TagIndex%5 + 1;
+        int newTag = TagIndex%6 + 1;
         newSlice.tag = newTag.ToString();
         GameObject Anchor = GameObject.FindWithTag(Anchors[(TagIndex%6)]);
         Vector3 Anchor_pos = Anchor.transform.position;
