@@ -4,57 +4,27 @@ using UnityEngine;
 
 public class PizzaPeelController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private int TagIndex = 0;
-    string[] Anchors = new string[] {"AnchorOne", "AnchorTwo", "AnchorThree", "AnchorFour", "AnchorFive", "AnchorSix"};
-    public string inputName; //name of the axis
-
+    //public string inputName;
     void Start()
     {
-        StartCoroutine(TagIndexIncrement());
-    }
-    IEnumerator TagIndexIncrement()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(1);
-            TagIndex += 1;
-        }
         
     }
-    
 
     // Update is called once per frame
     void Update()
     {
         //control the flipper with space bar
-        if(Input.GetAxis(inputName) == 1)
+        if(Input.GetKeyDown("space"))
         {
             GetComponent<HingeJoint>().useMotor = true;
+            //Refresh the spawner and generate a new slice
+            ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
         }
-        else
+        if(Input.GetKeyUp("space"))
         {
-             GetComponent<HingeJoint>().useMotor = false;
+            GetComponent<HingeJoint>().useMotor = false;
         }
-        if(GameObject.FindWithTag("0"))
-        {
-            StartCoroutine(Throw());
-        }
-
         
-    }
-    IEnumerator Throw()
-    {
-        yield return new WaitForSeconds(1);
-        GameObject newSlice = GameObject.FindWithTag("0"); //new spawn slice, tag 0
-        int newTag = TagIndex%5 + 1;
-        newSlice.tag = newTag.ToString();
-        GameObject Anchor = GameObject.FindWithTag(Anchors[(TagIndex%6)]);
-        Vector3 Anchor_pos = Anchor.transform.position;
-        Vector3 Drop_pos = Anchor_pos;
-        Drop_pos.y += 7; 
-        newSlice.transform.position = Drop_pos;
-        newSlice.transform.rotation = Anchor.transform.rotation;
-        
+       
     }
 }
