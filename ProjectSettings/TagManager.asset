@@ -17,6 +17,9 @@ TagManager:
   - AnchorFour
   - AnchorFive
   - AnchorSix
+  - Plate
+  - Spawner
+  - Peel
   layers:
   - Default
   - TransparentFX
