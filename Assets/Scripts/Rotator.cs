@@ -25,4 +25,5 @@ public class Rotator : MonoBehaviour
         spawn_pos.y += 20; 
         transform.position = spawn_pos;
     }
+
 }

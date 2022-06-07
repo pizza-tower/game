@@ -6,9 +6,16 @@ public class Wobble : MonoBehaviour
 {
     public int slices;
     int IntegerTag;
+    PhysicMaterial frictionControl;
     // Start is called before the first frame update
     void Start()
-    {
+    {          
+        for (int i = 6; i <= 11; i++) {
+                if (i != gameObject.layer) {
+                    Physics.IgnoreLayerCollision(gameObject.layer, i);
+
+                }
+            }
         
         slices = 0;
         if (tag == "AnchorOne") {
@@ -29,6 +36,7 @@ public class Wobble : MonoBehaviour
         else if (tag == "AnchorSix") {
             IntegerTag = 6;
         }
+        frictionControl = GetComponent<MeshCollider>().material;
         
     }
 
@@ -38,8 +46,13 @@ public class Wobble : MonoBehaviour
         if (slices >= 6 && slices < 9) {
             // wobble = GetComponent<Animation>();
             // wobble.Play();
-            GameObject[] slices = GameObject.FindGameObjectsWithTag(IntegerTag.ToString());
             Animation wobble = GetComponent<Animation>();
+            for (int i = 6; i <= 11; i++) {
+                if (i != gameObject.layer) {
+                    Physics.IgnoreLayerCollision(gameObject.layer, i);
+
+                }
+            }
             wobble.Play("Wobble");
 
             // print(slices);
@@ -47,11 +60,17 @@ public class Wobble : MonoBehaviour
 
         }
         else if (slices >= 9) {
-            // GameObject[] slices = FindGameObjectsWithTag(tag);
+            GameObject[] slices = GameObject.FindGameObjectsWithTag(IntegerTag.ToString());
+            foreach (GameObject slice in slices) {
+                if (slice != gameObject) {
+                    slice.GetComponent<Rigidbody>().mass = 1;
+                }
+            }
         }
         
     }
     public void AddSlice() {
         slices += 1;
     }
+
 }

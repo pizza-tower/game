@@ -18,7 +18,7 @@ public class PizzaPeelController : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(1);
-            TagIndex += 1;
+            // TagIndex += 1;
         }
         
     }
@@ -50,12 +50,15 @@ public class PizzaPeelController : MonoBehaviour
         GameObject newSlice = GameObject.FindWithTag("0"); //new spawn slice, tag 0
         int newTag = TagIndex%6 + 1;
         newSlice.tag = newTag.ToString();
+        newSlice.layer = newTag + 5;
         GameObject Anchor = GameObject.FindWithTag(Anchors[(TagIndex%6)]);
         Vector3 Anchor_pos = Anchor.transform.position;
+        newSlice.transform.parent = Anchor.transform;
         Vector3 Drop_pos = Anchor_pos;
         Drop_pos.y += 7; 
         newSlice.transform.position = Drop_pos;
         newSlice.transform.rotation = Anchor.transform.rotation;
+        // newSlice.GetComponent<Rigidbody>().isKinematic = true;
         Anchor.GetComponent<Wobble>().AddSlice();
         
     }
