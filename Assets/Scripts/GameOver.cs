@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
     public Text pointsText;
+
     public void setup(int score){
         gameObject.SetActive(true);
         pointsText.text = score.ToString() + " POINTS";
