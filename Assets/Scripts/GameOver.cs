@@ -5,26 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    public bool onoff = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Text pointsText;
+    public void setup(int score){
+        gameObject.SetActive(true);
+        pointsText.text = score.ToString() + " POINTS";
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void RestartButton(){
+        SceneManager.LoadScene("Game");
     }
 
-    public void Toggle() {
-        onoff = !onoff;
-        // show or hide game over section
-    }
-
-    public void Restart() {
-        SceneManagemer.LoadScene("SampleScene")
+    public void ExitButton(){
+        SceneManager.LoadScene("MainMenu");
     }
 }
+
+// In the controller.cs file create an object of GameOver 
+// Create a function GameOver(){GameOver.setup(points)}
+// On the Unity Engine Drag and Drop the components in settings to connect different scripts. 
