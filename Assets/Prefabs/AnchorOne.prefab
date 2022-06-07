@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 4103633181487893674}
   - component: {fileID: 1614899961665778921}
   - component: {fileID: 3933977353190654887}
-  m_Layer: 0
+  - component: {fileID: 772021454}
+  m_Layer: 6
   m_Name: AnchorOne
   m_TagString: AnchorOne
   m_Icon: {fileID: 0}
@@ -36,7 +37,7 @@ Transform:
   - {fileID: 7028902255839726520}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.3}
 --- !u!33 &4228193512959266581
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -130,6 +131,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slices: 0
+--- !u!111 &772021454
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453039063498430986}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 69270bde930ad4dc0945c79d9e86ccb3, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 69270bde930ad4dc0945c79d9e86ccb3, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &2127573155597327078
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +158,7 @@ GameObject:
   - component: {fileID: 7028902255839726520}
   - component: {fileID: 4660861139998296154}
   - component: {fileID: 673537646576787827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TagOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
