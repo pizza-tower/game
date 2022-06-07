@@ -18,7 +18,7 @@ public class PizzaPeelController : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(1);
-            // TagIndex += 1;
+            TagIndex += 1;
         }
         
     }
