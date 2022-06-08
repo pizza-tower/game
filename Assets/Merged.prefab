@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1170862030964192175}
   m_Layer: 0
   m_Name: Merged
-  m_TagString: MergedSlice
+  m_TagString: MergeBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
