@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5219426870485956292}
   - component: {fileID: 4653887729778197329}
   - component: {fileID: 5885754543198623894}
+  - component: {fileID: 2927808028147210640}
   m_Layer: 0
   m_Name: PizzaSlice
   m_TagString: 0
@@ -112,3 +113,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputName: PizzaPeelFlip
+--- !u!64 &2927808028147210640
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6012267457532532497}
+  m_Material: {fileID: 13400000, guid: cf7ab03b55af844d38d23bc5664079fa, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4068373912626513877, guid: 247560f04b2ad0a43a857ff2913e361c, type: 3}

@@ -43,6 +43,7 @@ public class PizzaParabola : MonoBehaviour
         {
             EndPoint = (GameObject.FindWithTag("AnchorSix")).transform.position;
         }
+        EndPoint.y+= .2f;
         
         if(Input.GetAxis(inputName) == 1)
         {
