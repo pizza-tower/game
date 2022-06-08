@@ -23,7 +23,8 @@ public class PizzaParabola : MonoBehaviour
     {
         AnchorToFind = GameObject.FindWithTag(ListToAdd);
         List = AnchorToFind.GetComponent<SliceList>();
-        List.IncrementCount();
+        List.SList.Add(gameObject);
+        //List.IncrementCount();
     }
     void StopRotation()
     {
@@ -33,7 +34,7 @@ public class PizzaParabola : MonoBehaviour
     {
         
         EndPoint = (GameObject.FindWithTag(ListToAdd)).transform.position;
-        float Count = List.SliceCount;
+        float Count = List.SList.Count;
         EndPoint.y += 0.15f *  Count;
             
     }
