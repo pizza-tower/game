@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StackControl : MonoBehaviour
 {
-    bool isMoving = true;
+    //bool isMoving = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,7 @@ public class StackControl : MonoBehaviour
     }
 
         void OnCollisionEnter(Collision col) {
-        if (col.gameObject.tag == "1" || col.gameObject.tag == "AnchorOne") {
+        if (col.gameObject.tag == "R_1" || col.gameObject.tag == "Y_1"  || col.gameObject.tag == "AnchorOne" ) {
             // isMoving = false;
             // print("happening");
             wait();

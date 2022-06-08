@@ -4,12 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  - 6
   - 0
   - AnchorOne
   - AnchorTwo
@@ -17,6 +11,21 @@ TagManager:
   - AnchorFour
   - AnchorFive
   - AnchorSix
+  - Spawner
+  - Peel
+  - Plate
+  - R_1
+  - R_2
+  - R_3
+  - R_4
+  - R_5
+  - R_6
+  - Y_1
+  - Y_2
+  - Y_3
+  - Y_4
+  - Y_5
+  - Y_6
   layers:
   - Default
   - TransparentFX

@@ -186,6 +186,8 @@ GameObject:
   - component: {fileID: 3325460305631904317}
   - component: {fileID: 52959970721593982}
   - component: {fileID: 1470743434}
+  - component: {fileID: 6357227145146338468}
+  - component: {fileID: -2764438579506671060}
   m_Layer: 7
   m_Name: AnchorTwo
   m_TagString: AnchorTwo
@@ -302,3 +304,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slices: 0
+--- !u!114 &6357227145146338468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197082862231131293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42344f998bdb3a3499bccb6051c373e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SliceCount: 0
+--- !u!111 &-2764438579506671060
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197082862231131293}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 69270bde930ad4dc0945c79d9e86ccb3, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 69270bde930ad4dc0945c79d9e86ccb3, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0

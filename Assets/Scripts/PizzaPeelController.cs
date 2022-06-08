@@ -4,62 +4,30 @@ using UnityEngine;
 
 public class PizzaPeelController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private int TagIndex = 0;
-    string[] Anchors = new string[] {"AnchorOne", "AnchorTwo", "AnchorThree", "AnchorFour", "AnchorFive", "AnchorSix"};
-    public string inputName; //name of the axis
-
+    //public string inputName;
     void Start()
     {
-        StartCoroutine(TagIndexIncrement());
-    }
-    IEnumerator TagIndexIncrement()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(1);
-            TagIndex += 1;
-        }
         
     }
-    
 
     // Update is called once per frame
     void Update()
     {
+        bool KeyDown = Input.GetKeyDown(KeyCode.Space);
+        bool KeyHold = Input.GetKey(KeyCode.Space);
+        bool KeyUp = Input.GetKeyUp(KeyCode.Space); 
         //control the flipper with space bar
-        if(Input.GetAxis(inputName) == 1)
+        if(KeyDown && KeyHold && !KeyUp)
         {
             GetComponent<HingeJoint>().useMotor = true;
-
+            //Refresh the spawner and generate a new slice
+            ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
         }
-        else
+        if(Input.GetKeyUp(KeyCode.Space))
         {
-             GetComponent<HingeJoint>().useMotor = false;
+            GetComponent<HingeJoint>().useMotor = false;
         }
-        if(GameObject.FindWithTag("0"))
-            {
-            StartCoroutine(Throw());
-            }
-
         
-    }
-    IEnumerator Throw()
-    {
-        yield return new WaitForSeconds(1);
-        GameObject newSlice = GameObject.FindWithTag("0"); //new spawn slice, tag 0
-        int newTag = TagIndex%6 + 1;
-        newSlice.tag = newTag.ToString();
-        newSlice.layer = newTag + 5;
-        GameObject Anchor = GameObject.FindWithTag(Anchors[(TagIndex%6)]);
-        Vector3 Anchor_pos = Anchor.transform.position;
-        newSlice.transform.parent = Anchor.transform;
-        Vector3 Drop_pos = Anchor_pos;
-        Drop_pos.y += 7; 
-        newSlice.transform.position = Drop_pos;
-        newSlice.transform.rotation = Anchor.transform.rotation;
-        // newSlice.GetComponent<Rigidbody>().isKinematic = true;
-        Anchor.GetComponent<Wobble>().AddSlice();
-        
+       
     }
 }
