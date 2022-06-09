@@ -47,6 +47,8 @@
                                 Destroy(SList[SList.Count-k]);   
                             }                
                             SList.RemoveRange(SList.Count-n,n);
+                            Score.EarnScore();
+                            Debug.Log("we earn score +" + Score.CurrentScore);
                         }                         
             }
     

@@ -13,10 +13,9 @@ public class PizzaParabola : MonoBehaviour
     private GameObject AnchorToFind;
     private SliceList List;
     bool IsPlaced = false;
-    //string p = "Peel";
     void Start()
     {
-        StartPoint = (GameObject.FindWithTag("Peel")).transform.position;
+        StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
     }
     // Update is called once per frame
     void AddToList()
@@ -24,7 +23,6 @@ public class PizzaParabola : MonoBehaviour
         AnchorToFind = GameObject.FindWithTag(ListToAdd);       
         List = AnchorToFind.GetComponent<SliceList>();
         List.SList.Add(gameObject);
-        //List.IncrementCount();
         
     }
     void StopRotation()
