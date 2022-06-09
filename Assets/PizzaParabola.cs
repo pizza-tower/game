@@ -25,7 +25,7 @@ public class PizzaParabola : MonoBehaviour
         List = AnchorToFind.GetComponent<SliceList>();
         List.SList.Add(gameObject);
         //List.IncrementCount();
-        FuseSlice.mVertFuse(List.SList);
+        
     }
     void StopRotation()
     {
@@ -91,6 +91,7 @@ public class PizzaParabola : MonoBehaviour
             {
                 IsThrowing = 0;
                 IsPlaced = true;
+                FuseSlice.mVertFuse(List.SList);
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 2f);
         }  
