@@ -4,10 +4,11 @@
 
         public class FuseSlice : MonoBehaviour
         {  
+            public GameObject ui_handler;
             // Start is called before the first frame update
             void Start()
             {
-        
+                ui_handler = GameObject.Find("UIHandler");
             }
 
             // Update is called once per frame
@@ -47,6 +48,7 @@
                                 Destroy(SList[SList.Count-k]);   
                             }                
                             SList.RemoveRange(SList.Count-n,n);
+                            
                             Score.EarnScore();
                             Debug.Log("we earn score +" + Score.CurrentScore);
                         }                         
