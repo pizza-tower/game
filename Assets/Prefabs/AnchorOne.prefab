@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 4228193512959266581}
   - component: {fileID: 2110350739302562783}
   - component: {fileID: 4103633181487893674}
-  - component: {fileID: 1614899961665778921}
   - component: {fileID: 3933977353190654887}
-  - component: {fileID: 772021454}
   - component: {fileID: 5757268301697491634}
   m_Layer: 6
   m_Name: AnchorOne
@@ -103,22 +101,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4068373912626513877, guid: 247560f04b2ad0a43a857ff2913e361c, type: 3}
---- !u!54 &1614899961665778921
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453039063498430986}
-  serializedVersion: 2
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 1
 --- !u!114 &3933977353190654887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,22 +114,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slices: 0
---- !u!111 &772021454
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453039063498430986}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 69270bde930ad4dc0945c79d9e86ccb3, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 69270bde930ad4dc0945c79d9e86ccb3, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &5757268301697491634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42344f998bdb3a3499bccb6051c373e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SList: []
 --- !u!1 &2127573155597327078
 GameObject:
   m_ObjectHideFlags: 0

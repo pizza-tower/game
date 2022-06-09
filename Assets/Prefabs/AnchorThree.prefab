@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3556933096526405299}
   - component: {fileID: 2268313694439644932}
   - component: {fileID: 5135162547262476330}
-  - component: {fileID: 5104854964326223522}
   - component: {fileID: 2268313692593983522}
   m_Layer: 8
   m_Name: AnchorThree
@@ -129,22 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SList: []
---- !u!111 &5104854964326223522
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1145690894858307603}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 69270bde930ad4dc0945c79d9e86ccb3, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 69270bde930ad4dc0945c79d9e86ccb3, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &2268313692593983522
 MonoBehaviour:
   m_ObjectHideFlags: 0

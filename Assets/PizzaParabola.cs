@@ -23,6 +23,7 @@ public class PizzaParabola : MonoBehaviour
         AnchorToFind = GameObject.FindWithTag(ListToAdd);       
         List = AnchorToFind.GetComponent<SliceList>();
         List.SList.Add(gameObject);
+        AnchorToFind.GetComponent<Wobble>().AddSlice();
         
     }
     void StopRotation()

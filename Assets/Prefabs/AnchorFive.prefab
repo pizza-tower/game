@@ -186,7 +186,6 @@ GameObject:
   - component: {fileID: 526403881564930864}
   - component: {fileID: 2983706279930970759}
   - component: {fileID: 8165353117330804137}
-  - component: {fileID: 8127586446884475681}
   - component: {fileID: 2983706279600354973}
   m_Layer: 10
   m_Name: AnchorFive
@@ -301,22 +300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SList: []
---- !u!111 &8127586446884475681
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4176144760818636176}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 69270bde930ad4dc0945c79d9e86ccb3, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 69270bde930ad4dc0945c79d9e86ccb3, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &2983706279600354973
 MonoBehaviour:
   m_ObjectHideFlags: 0

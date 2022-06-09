@@ -47,6 +47,7 @@ public class Wobble : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (slices >= 6 && slices < 9) {
             // wobble = GetComponent<Animation>();
             // wobble.Play();
@@ -65,11 +66,8 @@ public class Wobble : MonoBehaviour
 
         }
         else if (slices >= 9) {
-            GameObject[] slices = GameObject.FindGameObjectsWithTag(IntegerTag.ToString());
-            foreach (GameObject slice in slices) {
-                if (slice != gameObject) {
-                    slice.GetComponent<Rigidbody>().mass = 1;
-                }
+            foreach (GameObject slice in GetComponent<SliceList>().SList) {
+                continue;
             }
         }
         
@@ -78,19 +76,24 @@ public class Wobble : MonoBehaviour
     void FixedUpdate() {
         if (wobbling) {
             if (!backward) {
-                Vector3 newpos = transform.position;
-                newpos.x += .002f;
-                transform.position = newpos;
-                if (transform.position.x >= orig_pos.x + .02f) {
-                    backward = true;
+                foreach (GameObject slice in GetComponent<SliceList>().SList) {
+                    Vector3 newpos = slice.transform.position;
+                    newpos.x += .002f;
+                    slice.transform.position = newpos;
+                    if (slice.transform.position.x >= orig_pos.x + .03f) {
+                        backward = true;
+                    }
                 }
+
             }
             else {
-                Vector3 newpos = transform.position;
-                newpos.x -= .002f;
-                transform.position = newpos;
-                if (transform.position.x <= orig_pos.x - .02f) {
-                    backward = false;
+                foreach (GameObject slice in GetComponent<SliceList>().SList) {
+                    Vector3 newpos = slice.transform.position;
+                    newpos.x -= .002f;
+                    slice.transform.position = newpos;
+                    if (slice.transform.position.x <= orig_pos.x - .03f) {
+                        backward = false;
+                    }
                 }
             }
 
