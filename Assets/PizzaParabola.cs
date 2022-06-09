@@ -21,10 +21,11 @@ public class PizzaParabola : MonoBehaviour
     // Update is called once per frame
     void AddToList()
     {
-        AnchorToFind = GameObject.FindWithTag(ListToAdd);
+        AnchorToFind = GameObject.FindWithTag(ListToAdd);       
         List = AnchorToFind.GetComponent<SliceList>();
         List.SList.Add(gameObject);
         //List.IncrementCount();
+        FuseSlice.mVertFuse(List.SList);
     }
     void StopRotation()
     {
@@ -92,6 +93,7 @@ public class PizzaParabola : MonoBehaviour
                 IsPlaced = true;
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 2f);
-        }
+        }  
+
     }
 }
