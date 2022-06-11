@@ -5,10 +5,10 @@ using UnityEngine;
 public class Wobble : MonoBehaviour
 {
     public int slices;
-    int IntegerTag;
     PhysicMaterial frictionControl;
     bool wobbling = false;
     bool backward = false;
+    bool falling = false;
     Vector3 orig_pos;
     // Start is called before the first frame update
     void Start()
@@ -22,24 +22,6 @@ public class Wobble : MonoBehaviour
             }
         
         slices = 0;
-        if (tag == "AnchorOne") {
-            IntegerTag = 1;
-        } 
-        else if (tag == "AnchorTwo") {
-            IntegerTag = 2;
-        }
-        else if (tag == "AnchorThree") {
-            IntegerTag = 3;
-        } 
-        else if (tag == "AnchorFour") {
-            IntegerTag = 4;
-        }
-        else if (tag == "AnchorFive") {
-            IntegerTag = 5;
-        } 
-        else if (tag == "AnchorSix") {
-            IntegerTag = 6;
-        }
         frictionControl = GetComponent<MeshCollider>().material;
         
     }
@@ -47,7 +29,7 @@ public class Wobble : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        slices = GetComponent<SliceList>().SList.Count;
         if (slices >= 6 && slices < 9) {
             // wobble = GetComponent<Animation>();
             // wobble.Play();
@@ -66,9 +48,8 @@ public class Wobble : MonoBehaviour
 
         }
         else if (slices >= 9) {
-            foreach (GameObject slice in GetComponent<SliceList>().SList) {
-                continue;
-            }
+            falling = true;
+            wobbling = false;
         }
         
     }
@@ -99,9 +80,20 @@ public class Wobble : MonoBehaviour
 
 
         }
+        else if (falling) {
+            print("falling");
+            foreach (GameObject slice in GetComponent<SliceList>().SList) {
+                // slice.GetComponent<MeshCollider>().isTrigger = true;
+                Vector3 newpos = slice.transform.position;
+                newpos.y -= .02f;
+                slice.transform.position = newpos;
+            }
+        }
     }
+
     public void AddSlice() {
         slices += 1;
     }
+
 
 }
