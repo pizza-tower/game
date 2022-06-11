@@ -19,6 +19,7 @@ public class NewSliceSpawn : MonoBehaviour
     {
         if(NeedsNewSlice == 1)
         {
+            NeedsNewSlice = 0;
             StartCoroutine(NewSliceCheck());
             IsRed = Random.Range(0,2);
         }
@@ -42,7 +43,6 @@ public class NewSliceSpawn : MonoBehaviour
     }
     IEnumerator NewSliceCheck()
     {
-        NeedsNewSlice = 0;
         yield return new WaitForSeconds(NewSliceSpawnSeconds);
         spawnSlice();
     }
