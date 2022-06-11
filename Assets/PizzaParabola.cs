@@ -23,7 +23,6 @@ public class PizzaParabola : MonoBehaviour
         AnchorToFind = GameObject.FindWithTag(ListToAdd);       
         List = AnchorToFind.GetComponent<SliceList>();
         List.SList.Add(gameObject);
-        AnchorToFind.GetComponent<Wobble>().AddSlice();
         
     }
     void StopRotation()
@@ -96,6 +95,14 @@ public class PizzaParabola : MonoBehaviour
                 IsPlaced = true;
                 FuseSlice.mVertFuse(List.SList);
                 FuseSlice.mHorizontalFuse();
+                if (List.SList.Count >= 6) {
+                    AnchorToFind.GetComponent<Wobble>().startWobble();
+                }
+                if (List.SList.Count >= 9) {
+                    AnchorToFind.GetComponent<Wobble>().startFall();
+
+                }
+
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 2f);
         }  
