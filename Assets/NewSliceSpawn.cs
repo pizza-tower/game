@@ -9,6 +9,11 @@ public class NewSliceSpawn : MonoBehaviour
     public int NeedsNewSlice = 1;
     public int NewSliceSpawnSeconds;
     public int IsRed = 0;
+    public int Level = 0;
+
+    private int[] sliceSeq = {0,0,0};
+    private int indexOfSlice = 0;
+    
     void Start()
     {
         
@@ -21,9 +26,16 @@ public class NewSliceSpawn : MonoBehaviour
         {
             NeedsNewSlice = 0;
             StartCoroutine(NewSliceCheck());
-            IsRed = Random.Range(0,2);
+
+            if(Level == 0){
+                IsRed = sliceSeq[indexOfSlice];
+                indexOfSlice += 1;
+            }else {
+                IsRed = Random.Range(0,2);
+            }
         }
     }
+
     public void spawnSlice() 
     {
         //spawn a new slice at spawner
@@ -37,10 +49,8 @@ public class NewSliceSpawn : MonoBehaviour
             GameObject NewSlice = Instantiate(YellowPrefab) as GameObject;
             NewSlice.transform.position = transform.position;
         }
-        
-        
-    
     }
+    
     IEnumerator NewSliceCheck()
     {
         yield return new WaitForSeconds(NewSliceSpawnSeconds);
