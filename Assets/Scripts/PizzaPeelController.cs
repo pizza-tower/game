@@ -20,8 +20,7 @@ public class PizzaPeelController : MonoBehaviour
         if(KeyDown && KeyHold && !KeyUp)
         {
             GetComponent<HingeJoint>().useMotor = true;
-            //Refresh the spawner and generate a new slice
-            ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
+            
         }
         if(Input.GetKeyUp(KeyCode.Space))
         {

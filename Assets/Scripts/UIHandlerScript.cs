@@ -23,6 +23,8 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     public Text scoreText;
     public Text levelText;
     public GameObject floatingTextPrefab;
+    public Text Instruction;
+
     private int score = 0;
     private int score_required = 1;
     private int level = 1;

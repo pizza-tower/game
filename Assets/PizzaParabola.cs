@@ -23,7 +23,6 @@ public class PizzaParabola : MonoBehaviour
         AnchorToFind = GameObject.FindWithTag(ListToAdd);       
         List = AnchorToFind.GetComponent<SliceList>();
         List.SList.Add(gameObject);
-        AnchorToFind.GetComponent<Wobble>().AddSlice();
         
     }
     void StopRotation()
@@ -44,12 +43,14 @@ public class PizzaParabola : MonoBehaviour
         {
             return;
         }
+        
 
         bool KeyDown = Input.GetKeyDown(KeyCode.Space);
         bool KeyHold = Input.GetKey(KeyCode.Space);
         bool KeyUp = Input.GetKeyUp(KeyCode.Space); 
         
         string Tag = gameObject.tag;
+
         if(tag == "R_1" || tag == "Y_1")
         {
             ListToAdd = "AnchorOne";
@@ -75,13 +76,15 @@ public class PizzaParabola : MonoBehaviour
             ListToAdd = "AnchorSix";
         }
          
-        
-        if(KeyDown == true && KeyHold == true && KeyUp == false)
+        //only throw the slice space key is pressed down and there is no slice in the air
+        if(KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
         {
             AddToList();
             ThrowSlice();
             StopRotation();
-            IsThrowing = 1; 
+            IsThrowing = 1;
+            //Refresh the spawner and generate a new slice
+            ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
         }
         if(IsThrowing == 1)
         {
@@ -91,6 +94,15 @@ public class PizzaParabola : MonoBehaviour
                 IsThrowing = 0;
                 IsPlaced = true;
                 FuseSlice.mVertFuse(List.SList);
+                FuseSlice.mHorizontalFuse();
+                if (List.SList.Count >= 6) {
+                    AnchorToFind.GetComponent<Wobble>().startWobble();
+                }
+                if (List.SList.Count >= 9) {
+                    AnchorToFind.GetComponent<Wobble>().startFall();
+
+                }
+
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 2f);
         }  
