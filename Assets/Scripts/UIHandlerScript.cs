@@ -11,6 +11,10 @@ public interface IPizzaTowerUIMessageTarget : IEventSystemHandler
     void SetScoreRequired(int s);
     void IncrementScore(int s);
     void SetLevel(int l);
+    public void ShowPopupText(string text, Vector3 position);
+
+    //Popup text functions
+
 }
 
 public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
@@ -18,6 +22,7 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
 
     public Text scoreText;
     public Text levelText;
+    public GameObject floatingTextPrefab;
     public Text Instruction;
 
     private int score = 0;
@@ -54,5 +59,13 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     {
         level = l;
         UpdateLevelText();
+    }
+
+    public void ShowPopupText(string text, Vector3 position)
+    {
+        GameObject prefab = Instantiate(floatingTextPrefab, position, Quaternion.identity);
+        prefab.transform.Rotate(30f, 40f, 0f);
+        prefab.GetComponentInChildren<TextMesh>().text = text;
+        Destroy(prefab, 1f);
     }
 }
