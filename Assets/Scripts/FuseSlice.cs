@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class FuseSlice : MonoBehaviour
 {
     public GameObject ui_handler;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +48,7 @@ public class FuseSlice : MonoBehaviour
         return true;
     }
 
-    public static void mVertFuse(List<GameObject> SList)
+    public static void mVertFuse(List<GameObject> SList, int Level)
     {
         int n = GlobalData.verticalFusionHeight;
 
@@ -61,7 +60,7 @@ public class FuseSlice : MonoBehaviour
             {
                 Destroy(SList[SList.Count - k]);
             }
-            if(GlobalData.isFirstFusionOver==false)
+            if(GlobalData.isFirstFusionOver==false && Level==0)
             {
                 Debug.Log("This is the first fusion");
                 GameObject ui_handler = GameObject.Find("UIHandler");
@@ -93,7 +92,7 @@ public class FuseSlice : MonoBehaviour
     if same, then destroy the slices and shift all the slices down by one level which are above the min height.
 
     */
-    public static void mHorizontalFuse()
+    public static void mHorizontalFuse(int Level)
     {
         List<List<GameObject>> allLists = SliceList.globalList;
         //int minHeight = SliceList.globalList.Min(y=>y.Count);

@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine. SceneManagement;
 
 public class PizzaParabola : MonoBehaviour
 {
+    private int Level;
     // Start is called before the first frame update
     protected float Animation = 0;
     Vector3 StartPoint;
@@ -14,9 +16,12 @@ public class PizzaParabola : MonoBehaviour
     private GameObject AnchorToFind;
     private SliceList List;
     bool IsPlaced = false;
+
     void Start()
     {
         StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
+        Level=SceneManager.GetActiveScene().buildIndex;
+        Debug.Log("Level : " + Level);
     }
     // Update is called once per frame
     void AddToList()
@@ -66,7 +71,7 @@ public class PizzaParabola : MonoBehaviour
         //set text to press space now
         //pause game until space is pressed
 
-        if (GlobalData.level == 0 && GlobalData.isFirstSlice == false && GlobalData.isFirstFusionOver==false)
+        if (Level==0 && GlobalData.isFirstSlice == false && GlobalData.isFirstFusionOver==false)
         {
 
             if(isRotationToBeStopped(tag))
@@ -112,7 +117,7 @@ public class PizzaParabola : MonoBehaviour
         if (KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
         {
             Debug.Log("Space is pressed");
-            if(GlobalData.isFirstFusionOver==false)
+            if(GlobalData.isFirstFusionOver==false && Level==0)
             {
                 GameObject ui_handler = GameObject.Find("UIHandler");
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
@@ -133,8 +138,8 @@ public class PizzaParabola : MonoBehaviour
             {
                 IsThrowing = 0;
                 IsPlaced = true;
-                FuseSlice.mVertFuse(List.SList);
-                FuseSlice.mHorizontalFuse();
+                FuseSlice.mVertFuse(List.SList,Level);
+                FuseSlice.mHorizontalFuse(Level);
                 if (List.SList.Count >= 6) {
                     AnchorToFind.GetComponent<Wobble>().startWobble();
                 }
@@ -148,7 +153,7 @@ public class PizzaParabola : MonoBehaviour
          
         }
 
-        if(IsPlaced == true && GlobalData.isFirstFusionOver == false)
+        if(IsPlaced == true && GlobalData.isFirstFusionOver == false && Level==0)
         {
             GameObject ui_handler = GameObject.Find("UIHandler");
             ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("The pizza slice rotates! Stay put, and Wait for my instruction to throw!"));
