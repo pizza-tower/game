@@ -10,6 +10,7 @@ public interface IPizzaTowerUIMessageTarget : IEventSystemHandler
     void SetScore(int s);
     void SetScoreRequired(int s);
     void IncrementScore(int s);
+    void SetTutorialInstruction(string text);
     void SetLevel(int l);
 }
 
@@ -22,7 +23,6 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
 
     private int score = 0;
     private int score_required = 1;
-    private int level = 1;
 
     private void UpdateScoreText()
     {
@@ -30,7 +30,7 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     }
     private void UpdateLevelText()
     {
-        levelText.text = "Level\n" + level.ToString();
+        levelText.text = "Level\n" + GlobalData.level.ToString();
     }
 
     public void SetScore(int s)
@@ -52,7 +52,12 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
 
     public void SetLevel(int l)
     {
-        level = l;
+        GlobalData.level = l;
         UpdateLevelText();
+    }
+
+    public void SetTutorialInstruction(string instruction)
+    {
+        Instruction.text = instruction;
     }
 }

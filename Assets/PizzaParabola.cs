@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PizzaParabola : MonoBehaviour
 {
@@ -29,6 +30,12 @@ public class PizzaParabola : MonoBehaviour
     {
         GetComponent<PizzaRotation>().StopRotate = 1;
     }
+
+    void ResumeRotation()
+    {
+        GetComponent<PizzaRotation>().StopRotate = 0;
+    }
+
     void ThrowSlice()
     {
         
@@ -41,6 +48,8 @@ public class PizzaParabola : MonoBehaviour
     {
         if(IsPlaced)
         {
+            GlobalData.isFirstSlice = false;
+            Debug.Log("First SLice done");
             return;
         }
         
@@ -49,9 +58,30 @@ public class PizzaParabola : MonoBehaviour
         bool KeyHold = Input.GetKey(KeyCode.Space);
         bool KeyUp = Input.GetKeyUp(KeyCode.Space); 
         
-        string Tag = gameObject.tag;
+        string tag = gameObject.tag;
 
-        if(tag == "R_1" || tag == "Y_1")
+        // if level is 0, and not first slice
+        //get prev tag 
+        //stop rotation based on previous slice tag
+        //set text to press space now
+        //pause game until space is pressed
+
+        if (GlobalData.level == 0 && GlobalData.isFirstSlice == false && GlobalData.isFirstFusionOver==false)
+        {
+
+            if(isRotationToBeStopped(tag))
+            {
+                StopRotation();
+                Debug.Log("Rotation stopped");
+                GameObject ui_handler = GameObject.Find("UIHandler");
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Press SPACE BAR NOW!!  Will the slices fuse? Lets see!"));
+            }
+
+
+        }
+
+
+        if (tag == "R_1" || tag == "Y_1")
         {
             ListToAdd = "AnchorOne";
         }
@@ -75,13 +105,23 @@ public class PizzaParabola : MonoBehaviour
         {
             ListToAdd = "AnchorSix";
         }
-         
+
+
+
         //only throw the slice space key is pressed down and there is no slice in the air
-        if(KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
+        if (KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
         {
+            Debug.Log("Space is pressed");
+            if(GlobalData.isFirstFusionOver==false)
+            {
+                GameObject ui_handler = GameObject.Find("UIHandler");
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
+            }
             AddToList();
             ThrowSlice();
             StopRotation();
+            GlobalData.previousSlice = ListToAdd;
+            Debug.Log("Here" + GlobalData.previousSlice);
             IsThrowing = 1;
             //Refresh the spawner and generate a new slice
             ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
@@ -105,7 +145,54 @@ public class PizzaParabola : MonoBehaviour
 
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 2f);
-        }  
+         
+        }
+
+        if(IsPlaced == true && GlobalData.isFirstFusionOver == false)
+        {
+            GameObject ui_handler = GameObject.Find("UIHandler");
+            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("The pizza slice rotates! Stay put, and Wait for my instruction to throw!"));
+        }
+        //else
+        //{
+        //    GameObject ui_handler = GameObject.Find("UIHandler");
+        //    ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction(""));
+
+        //}
+
+    }
+
+
+    bool isRotationToBeStopped(string tag)
+    {
+        string lastAnchor = GlobalData.previousSlice;
+        Debug.Log("Last Anchor:" + lastAnchor);
+        Debug.Log("Tag:" + tag);
+        if(lastAnchor == "AnchorOne" && (tag== "R_1"|| tag == "Y_1"))
+        {
+            return true;
+        }else if(lastAnchor == "AnchorTwo" && (tag == "R_2" || tag == "Y_2"))
+        {
+            return true;
+        }
+        else if (lastAnchor == "AnchorThree" && (tag == "R_3" || tag == "Y_3"))
+        {
+            return true;
+        }
+        else if (lastAnchor == "AnchorFour" && (tag == "R_4" || tag == "Y_4"))
+        {
+            return true;
+        }
+        else if (lastAnchor == "AnchorFive" && (tag == "R_5" || tag == "Y_5"))
+        {
+            return true;
+        }
+        else if (lastAnchor == "AnchorSix" && (tag == "R_6" || tag == "Y_6"))
+        {
+            return true;
+        }
+
+        return false;
 
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class FuseSlice : MonoBehaviour
 {
@@ -60,11 +61,26 @@ public class FuseSlice : MonoBehaviour
             {
                 Destroy(SList[SList.Count - k]);
             }
+            if(GlobalData.isFirstFusionOver==false)
+            {
+                Debug.Log("This is the first fusion");
+                GameObject ui_handler = GameObject.Find("UIHandler");
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Well done! You fused 3 slices and scored! Good luck!"));
+                
+            }
+            GlobalData.isFirstFusionOver = true;
             SList.RemoveRange(SList.Count - n, n);
 
             Score.EarnScore();
             Debug.Log("we earn score +" + Score.CurrentScore);
         }
+    }
+
+    IEnumerator Example()
+    {
+        print(Time.time);
+        yield return new WaitForSeconds(5);
+        print(Time.time);
     }
 
     /* Logic for horizontal fusion:

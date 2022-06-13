@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class NewSliceSpawn : MonoBehaviour
 {
@@ -27,12 +28,20 @@ public class NewSliceSpawn : MonoBehaviour
             NeedsNewSlice = 0;
             StartCoroutine(NewSliceCheck());
 
-            if(Level == 0){
+            if(Level == 0 && GlobalData.isFirstFusionOver==false){
+                
                 IsRed = sliceSeq[indexOfSlice];
                 indexOfSlice += 1;
             }else {
                 IsRed = Random.Range(0,2);
             }
+
+            if(GlobalData.isFirstFusionOver == true)
+            {
+                GameObject ui_handler = GameObject.Find("UIHandler");
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Throw at the right moment! Remember that same colored slices fuses and scores!"));
+            }
+
         }
     }
 
@@ -43,11 +52,13 @@ public class NewSliceSpawn : MonoBehaviour
         {
             GameObject NewSlice = Instantiate(RedPrefab) as GameObject;
             NewSlice.transform.position = transform.position;
+            //GetComponent<PizzaRotation>().StopRotate = 0;
         }
         else 
         {
             GameObject NewSlice = Instantiate(YellowPrefab) as GameObject;
             NewSlice.transform.position = transform.position;
+            //GetComponent<PizzaRotation>().StopRotate = 0;
         }
     }
     
