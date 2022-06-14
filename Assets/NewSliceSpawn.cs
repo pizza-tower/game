@@ -31,12 +31,9 @@ public class NewSliceSpawn : MonoBehaviour
             StartCoroutine(NewSliceCheck());
 
             if(Level == 0 && GlobalData.isFirstFusionOver==false){
-                Debug.Log("Before 33 : " + indexOfSlice);
                 IsRed = sliceSeq[indexOfSlice];
                 indexOfSlice += 1;
-                Debug.Log("After 33 : " + indexOfSlice);
             }else {
-                Debug.Log("level==0 else  : " + indexOfSlice);
                 IsRed = Random.Range(0,2);
             }
 
@@ -50,8 +47,6 @@ public class NewSliceSpawn : MonoBehaviour
                     Level++;
                     SceneManager. LoadScene(Level);
                 }    
-                
-                
             }
 
         }
