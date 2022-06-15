@@ -41,7 +41,7 @@ public class GameOver : MonoBehaviour
         if(GlobalData.gameover){
             RestartSameLevel();
         }else{
-            if(Score.CurrentScore >= 5){
+            if(Score.CurrentScore >= 30){
                 StartNextLevel();
             }
         } 
