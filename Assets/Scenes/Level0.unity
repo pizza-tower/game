@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 214394194}
   - component: {fileID: 214394193}
   - component: {fileID: 214394197}
+  - component: {fileID: 214394198}
   m_Layer: 0
   m_Name: Plate
   m_TagString: Plate
@@ -425,6 +426,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreToPass: 30
+--- !u!114 &214394198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214394192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c24fb259ae0419f949d3cda71b32f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &301810342
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 2127644179}
   levelText: {fileID: 840003135}
+  floatingTextPrefab: {fileID: 0}
   Instruction: {fileID: 1295668420}
 --- !u!1 &840003133
 GameObject:
@@ -807,7 +821,6 @@ MonoBehaviour:
   NeedsNewSlice: 1
   NewSliceSpawnSeconds: 2
   IsRed: 0
-  Level: 0
 --- !u!1 &1651530516
 GameObject:
   m_ObjectHideFlags: 0

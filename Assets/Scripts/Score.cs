@@ -20,6 +20,8 @@ public class Score : MonoBehaviour
         pos.y = 0;
         pos.z = 0;
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.ShowPopupText("Test\n+5!", pos));
+
+        // GetComponent<GameOver>().Exit();
     }
     void Start()
     {

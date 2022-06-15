@@ -23,6 +23,7 @@ public class Wobble : MonoBehaviour
         
         slices = 0;
         frictionControl = GetComponent<MeshCollider>().material;
+        falling = false;
         
     }
 
@@ -53,11 +54,15 @@ public class Wobble : MonoBehaviour
         // }
         
     }
+    public bool getStatus(){
+        return falling;
+    }
     public void startWobble() {
         wobbling = true;
     }
     public void startFall() {
         falling = true;
+        GlobalData.gameover = true;
     }
 
     void FixedUpdate() {

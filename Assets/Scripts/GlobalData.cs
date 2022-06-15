@@ -10,6 +10,7 @@ public class GlobalData : MonoBehaviour
     public static bool isFirstSlice = true;
     public static string previousSlice="AnchorOne";
     public static bool isFirstFusionOver = false;
+    public static bool gameover = false;
 
     // Start is called before the first frame update
     void Start()
