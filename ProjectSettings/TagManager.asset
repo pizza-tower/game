@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - 0
+  - AnchorOne
+  - AnchorTwo
+  - AnchorThree
+  - AnchorFour
+  - AnchorFive
+  - AnchorSix
+  - Spawner
+  - Peel
+  - Plate
+  - R_1
+  - R_2
+  - R_3
+  - R_4
+  - R_5
+  - R_6
+  - Y_1
+  - Y_2
+  - Y_3
+  - Y_4
+  - Y_5
+  - Y_6
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - stack1
+  - stack2
+  - stack3
+  - stack4
+  - stack5
+  - stack6
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
