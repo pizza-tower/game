@@ -8,27 +8,58 @@ public class Navigation : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject menu;
+    int totalscenes;
+
     void Start()
     {
+        totalscenes = SceneManager.sceneCountInBuildSettings;
+        menu.SetActive(false);
     }
     public void GoBack() {
-        print(GlobalData.level);
-        if (GlobalData.level > 0) {
-            GlobalData.level--;
+        int level = SceneManager.GetActiveScene().buildIndex;
+        if (level > 0) {
+            level--;
             menu.SetActive(false);
-            SceneManager.LoadScene(GlobalData.level);
+            ResetVariables();
+            GlobalData.level--;
+            SceneManager.LoadScene(level);
 
         }
     }
 
-    void StartNextLevel() {
-        if(GlobalData.level + 1 < SceneManager.sceneCount) {
+    public void StartNextLevel() {
+        int level = SceneManager.GetActiveScene().buildIndex;
+        print(level);
+        print("total:");
+        print(SceneManager.sceneCount);
+        if(level  + 1 < totalscenes) {
+            level++;
+            menu.SetActive(false);
+            ResetVariables();
             GlobalData.level++;
-            SceneManager.LoadScene(GlobalData.level);
+            SceneManager.LoadScene(level);
         }
         else {
             menu.SetActive(true);
+            
         }
+    }
+
+    void ResetVariables() {
+        GlobalData.isFirstSlice = true;
+        GlobalData.previousSlice="AnchorOne";
+        GlobalData.isFirstFusionOver = false;
+        GlobalData.gameover = false;
+        Score.CurrentScore = 0;
+    }
+
+    public void RestartLevel() {
+        int level = SceneManager.GetActiveScene().buildIndex;
+        print("restart");
+        ResetVariables();
+        menu.SetActive(false);
+        SceneManager.LoadScene(level);
+
     }
 
 
@@ -38,9 +69,12 @@ public class Navigation : MonoBehaviour
         // if(GlobalData.gameover){
         //     RestartSameLevel();
         // }else{
-        if(Score.CurrentScore >= 5){
-            StartNextLevel();
+        if (GlobalData.gameover) {
+            menu.SetActive(true);
         }
+        if(Score.CurrentScore >= 30){
+            StartNextLevel();
+             }
         } 
     // }
 }

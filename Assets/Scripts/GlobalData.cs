@@ -9,16 +9,20 @@ public class GlobalData : MonoBehaviour
 
     public static int verticalFusionHeight=3;
     public static int level;
-    public static bool isFirstSlice = true;
-    public static string previousSlice="AnchorOne";
-    public static bool isFirstFusionOver = false;
+    public static bool isFirstSlice;
+    public static string previousSlice;
+    public static bool isFirstFusionOver;
+    public static bool gameover;
 
     // Start is called before the first frame update
     void Start()
     {
        level = SceneManager.GetActiveScene().buildIndex;
-       print("level from here ");
-       print(level);
+        isFirstSlice = true;
+        previousSlice="AnchorOne";
+        isFirstFusionOver = false;
+        gameover = false;
+
     }
 
     // Update is called once per frame
