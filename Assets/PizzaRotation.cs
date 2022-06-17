@@ -9,6 +9,10 @@ public class PizzaRotation : MonoBehaviour
     string[] YellowTags = new string[] {"Y_1", "Y_2", "Y_3", "Y_4", "Y_5", "Y_6"};
     public int IsRotating = 1;
     public int StopRotate = 0;
+<<<<<<< HEAD
+=======
+    public int hardcoded = 5;
+>>>>>>> origin/Thomas-new
     [SerializeField] private Material myMaterial;
     public int IsRed;
     // Start is called before the first frame update
@@ -20,7 +24,11 @@ public class PizzaRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
         if(IsRotating == 1  && StopRotate == 0)
+=======
+        if(IsRotating == 1  && StopRotate == 0 && hardcoded != 5)
+>>>>>>> origin/Thomas-new
         {
             StartCoroutine(Rotate());
         }

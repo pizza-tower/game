@@ -9,7 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Level0.unity
     guid: 9a289842310768749b05302b72af9db8
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/Basic_Prototype 1.unity
+=======
+    path: Assets/Scenes/Pod3.unity
+>>>>>>> origin/Thomas-new
     guid: a00dac11d89ef456aaa0c0eceac4aeac
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 8ad56faf1d8c949b6b8040b39744458a,

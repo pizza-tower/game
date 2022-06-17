@@ -6,10 +6,17 @@ using UnityEngine.EventSystems;
 public class Score : MonoBehaviour
 {
     public static int CurrentScore = 0;
+<<<<<<< HEAD
     public int ScoreToPass = 30;
 
     // Start is called before the first frame update
 
+=======
+    public int ScoreToPass = 30;
+
+    // Start is called before the first frame update
+
+>>>>>>> origin/Thomas-new
     public static void EarnScore()
     {
         CurrentScore += 5;

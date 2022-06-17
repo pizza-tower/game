@@ -30,6 +30,12 @@ public class Wobble : MonoBehaviour
     void Update()
     {
         slices = GetComponent<SliceList>().SList.Count;
+<<<<<<< HEAD
+=======
+        if (slices < 6) {
+            wobbling = false;
+        }
+>>>>>>> origin/Thomas-new
         // if (slices >= 6 && slices < 9) {
         //     // wobble = GetComponent<Animation>();
         //     // wobble.Play();
