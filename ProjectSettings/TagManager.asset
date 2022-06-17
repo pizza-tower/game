@@ -26,6 +26,7 @@ TagManager:
   - Y_4
   - Y_5
   - Y_6
+  - Menu
   layers:
   - Default
   - TransparentFX
