@@ -9,16 +9,26 @@ public class FreeFall : MonoBehaviour
     protected float Animation = 0;
     Vector3 StartPoint;
     Vector3 EndPoint;
-    private float IsThrowing = 0;
+    private float IsFalling = 0;
     private string ListToAdd = "AnchorOne";
     private GameObject AnchorToFind;
     private SliceList List;
     bool IsPlaced = false;
-
+    public int WaitTimeBeforeFreeFall; 
     void Start()
     {
-        StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
+        StartPoint = transform.position;
+        StartCoroutine(StartFreeFall());
     }
+    IEnumerator StartFreeFall()
+    {
+        yield return new WaitForSeconds(WaitTimeBeforeFreeFall);
+        IsFalling = 1;
+        AddToList();
+        ThrowSlice();
+
+    }
+
     // Update is called once per frame
     void AddToList()
     {
@@ -27,16 +37,6 @@ public class FreeFall : MonoBehaviour
         List.SList.Add(gameObject);
 
     }
-    void StopRotation()
-    {
-        GetComponent<PizzaRotation>().StopRotate = 1;
-    }
-
-    void ResumeRotation()
-    {
-        GetComponent<PizzaRotation>().StopRotate = 0;
-    }
-
     void ThrowSlice()
     {
 
@@ -88,26 +88,13 @@ public class FreeFall : MonoBehaviour
 
 
 
-        //only throw the slice space key is pressed down and there is no slice in the air
-        if (KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
-        {
-            Debug.Log("Space is pressed");
-         
-            AddToList();
-            ThrowSlice();
-            StopRotation();
-            GlobalData.previousSlice = ListToAdd;
-            Debug.Log("Here" + GlobalData.previousSlice);
-            IsThrowing = 1;
-            //Refresh the spawner and generate a new slice
-            ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
-        }
-        if (IsThrowing == 1)
+        
+        if (IsFalling == 1)
         {
             Animation += Time.deltaTime;
             if (Animation >= 2.0f)
             {
-                IsThrowing = 0;
+                IsFalling = 0;
                 IsPlaced = true;
                 FuseSlice.mVertFuse(List.SList, Level);
                 FuseSlice.mHorizontalFuse(Level);
@@ -122,7 +109,7 @@ public class FreeFall : MonoBehaviour
                 }
 
             }
-            transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 2f);
+            transform.position = MathParabola.Parabola(StartPoint, EndPoint, 1f, Animation / 2f);
 
         }
 
@@ -131,37 +118,5 @@ public class FreeFall : MonoBehaviour
     }
 
 
-    bool isRotationToBeStopped(string tag)
-    {
-        string lastAnchor = GlobalData.previousSlice;
-        Debug.Log("Last Anchor:" + lastAnchor);
-        Debug.Log("Tag:" + tag);
-        if (lastAnchor == "AnchorOne" && (tag == "R_1" || tag == "Y_1"))
-        {
-            return true;
-        }
-        else if (lastAnchor == "AnchorTwo" && (tag == "R_2" || tag == "Y_2"))
-        {
-            return true;
-        }
-        else if (lastAnchor == "AnchorThree" && (tag == "R_3" || tag == "Y_3"))
-        {
-            return true;
-        }
-        else if (lastAnchor == "AnchorFour" && (tag == "R_4" || tag == "Y_4"))
-        {
-            return true;
-        }
-        else if (lastAnchor == "AnchorFive" && (tag == "R_5" || tag == "Y_5"))
-        {
-            return true;
-        }
-        else if (lastAnchor == "AnchorSix" && (tag == "R_6" || tag == "Y_6"))
-        {
-            return true;
-        }
-
-        return false;
-
-    }
+    
 }

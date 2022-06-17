@@ -1285,6 +1285,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 2030799447456672595, guid: f1ec7ca554348491d8ea423bf71545e4,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030799447456672595, guid: f1ec7ca554348491d8ea423bf71545e4,
+        type: 3}
       propertyPath: YellowPrefab
       value: 
       objectReference: {fileID: 1893511629282058283, guid: b27894daacaac4b14aaaa6306e375bde,
@@ -1292,7 +1297,7 @@ PrefabInstance:
     - target: {fileID: 2030799447456672595, guid: f1ec7ca554348491d8ea423bf71545e4,
         type: 3}
       propertyPath: NewSliceSpawnSeconds
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8635773656617038171, guid: f1ec7ca554348491d8ea423bf71545e4,
         type: 3}
