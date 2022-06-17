@@ -101,10 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsRotating: 1
   StopRotate: 0
-<<<<<<< HEAD
-=======
   hardcoded: 1
->>>>>>> origin/Thomas-new
   myMaterial: {fileID: 2100000, guid: 5263a35ed6ab62e4c8fcc113b91c70f6, type: 2}
   IsRed: 0
 --- !u!114 &2099898578540705346

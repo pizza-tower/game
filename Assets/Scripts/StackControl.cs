@@ -6,16 +6,10 @@ public class StackControl : MonoBehaviour
 {
     //bool isMoving = true;
     // Start is called before the first frame update
-<<<<<<< HEAD
-    void Start()
-    {
-        
-=======
     
     void Start()
     {
        
->>>>>>> origin/Thomas-new
     }
 
     // Update is called once per frame
