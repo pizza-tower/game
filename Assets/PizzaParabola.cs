@@ -20,8 +20,7 @@ public class PizzaParabola : MonoBehaviour
     void Start()
     {
         StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
-        Level=SceneManager.GetActiveScene().buildIndex;
-        Debug.Log("Level : " + Level);
+      
     }
     // Update is called once per frame
     void AddToList()
@@ -53,8 +52,6 @@ public class PizzaParabola : MonoBehaviour
     {
         if(IsPlaced)
         {
-            GlobalData.isFirstSlice = false;
-            Debug.Log("First SLice done");
             return;
         }
         
@@ -65,25 +62,6 @@ public class PizzaParabola : MonoBehaviour
         
         string tag = gameObject.tag;
 
-        // if level is 0, and not first slice
-        //get prev tag 
-        //stop rotation based on previous slice tag
-        //set text to press space now
-        //pause game until space is pressed
-
-        if (Level==0 && GlobalData.isFirstSlice == false && GlobalData.isFirstFusionOver==false)
-        {
-
-            if(isRotationToBeStopped(tag))
-            {
-                StopRotation();
-                Debug.Log("Rotation stopped");
-                GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Press SPACE BAR NOW!!  Will the slices fuse? Lets see!"));
-            }
-
-
-        }
 
 
         if (tag == "R_1" || tag == "Y_1")
@@ -117,16 +95,10 @@ public class PizzaParabola : MonoBehaviour
         if (KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
         {
             Debug.Log("Space is pressed");
-            if(GlobalData.isFirstFusionOver==false && Level==0)
-            {
-                GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
-            }
             AddToList();
             ThrowSlice();
             StopRotation();
             GlobalData.previousSlice = ListToAdd;
-            Debug.Log("Here" + GlobalData.previousSlice);
             IsThrowing = 1;
             //Refresh the spawner and generate a new slice
             ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
@@ -153,51 +125,6 @@ public class PizzaParabola : MonoBehaviour
          
         }
 
-        if(IsPlaced == true && GlobalData.isFirstFusionOver == false && Level==0)
-        {
-            GameObject ui_handler = GameObject.Find("UIHandler");
-            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("The pizza slice rotates! Stay put, and Wait for my instruction to throw!"));
-        }
-        //else
-        //{
-        //    GameObject ui_handler = GameObject.Find("UIHandler");
-        //    ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction(""));
-
-        //}
-
     }
 
-
-    bool isRotationToBeStopped(string tag)
-    {
-        string lastAnchor = GlobalData.previousSlice;
-        Debug.Log("Last Anchor:" + lastAnchor);
-        Debug.Log("Tag:" + tag);
-        if(lastAnchor == "AnchorOne" && (tag== "R_1"|| tag == "Y_1"))
-        {
-            return true;
-        }else if(lastAnchor == "AnchorTwo" && (tag == "R_2" || tag == "Y_2"))
-        {
-            return true;
-        }
-        else if (lastAnchor == "AnchorThree" && (tag == "R_3" || tag == "Y_3"))
-        {
-            return true;
-        }
-        else if (lastAnchor == "AnchorFour" && (tag == "R_4" || tag == "Y_4"))
-        {
-            return true;
-        }
-        else if (lastAnchor == "AnchorFive" && (tag == "R_5" || tag == "Y_5"))
-        {
-            return true;
-        }
-        else if (lastAnchor == "AnchorSix" && (tag == "R_6" || tag == "Y_6"))
-        {
-            return true;
-        }
-
-        return false;
-
-    }
 }
