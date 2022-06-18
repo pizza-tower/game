@@ -53,6 +53,7 @@ public class RandomDropSpawn : MonoBehaviour
             DropPoint.y += 5;
             NewSlice.transform.position = DropPoint;
             NewSlice.transform.rotation = (GameObject.FindWithTag(Anchors[SpawnIndex])).transform.rotation;
+            NewSlice.tag = YellowTags[SpawnIndex];
         }
         
         

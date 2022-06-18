@@ -54,11 +54,6 @@ public class FreeFall : MonoBehaviour
             return;
         }
 
-
-        bool KeyDown = Input.GetKeyDown(KeyCode.Space);
-        bool KeyHold = Input.GetKey(KeyCode.Space);
-        bool KeyUp = Input.GetKeyUp(KeyCode.Space);
-
         string tag = gameObject.tag;
 
         if (tag == "R_1" || tag == "Y_1")
@@ -98,15 +93,6 @@ public class FreeFall : MonoBehaviour
                 IsPlaced = true;
                 FuseSlice.mVertFuse(List.SList, Level);
                 FuseSlice.mHorizontalFuse(Level);
-                if (List.SList.Count >= 6)
-                {
-                    AnchorToFind.GetComponent<Wobble>().startWobble();
-                }
-                if (List.SList.Count >= 9)
-                {
-                    AnchorToFind.GetComponent<Wobble>().startFall();
-
-                }
 
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 1f, Animation / 2f);
