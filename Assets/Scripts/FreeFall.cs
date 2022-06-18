@@ -49,8 +49,6 @@ public class FreeFall : MonoBehaviour
     {
         if (IsPlaced)
         {
-            GlobalData.isFirstSlice = false;
-            Debug.Log("First SLice done");
             return;
         }
 

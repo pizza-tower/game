@@ -11,13 +11,14 @@ public class NewSliceSpawn : MonoBehaviour
     public int NeedsNewSlice = 1;
     public int NewSliceSpawnSeconds;
     public int IsRed = 0;
+    private int Level;
 
-
-
+    private int[] sliceSeq = {0,0,0,1};
+    private int indexOfSlice = 0;
     
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class NewSliceSpawn : MonoBehaviour
         {
             NeedsNewSlice = 0;
             StartCoroutine(NewSliceCheck());
-
+            IsRed = Random.Range(0,2);
         }
     }
 
