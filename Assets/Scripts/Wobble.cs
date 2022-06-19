@@ -104,6 +104,7 @@ public class Wobble : MonoBehaviour
         if (falling) {
             wobbling = false;
             print("falling");
+            StartCoroutine(EndLevel());
             foreach (GameObject slice in GetComponent<SliceList>().SList) {
                 // slice.GetComponent<MeshCollider>().isTrigger = true;
                 Vector3 newpos = slice.transform.position;
@@ -111,6 +112,13 @@ public class Wobble : MonoBehaviour
                 slice.transform.position = newpos;
             }
         }
+    }
+
+    IEnumerator EndLevel() {
+        yield return new WaitForSeconds(1);
+        GlobalData.gameover = true;
+        print("happening");
+
     }
 
     public void AddSlice() {

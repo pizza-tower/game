@@ -21,7 +21,7 @@ public class PizzaParabola : MonoBehaviour
     {
         StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
         Level=SceneManager.GetActiveScene().buildIndex;
-        Debug.Log("Level : " + Level);
+        // Debug.Log("Level : " + Level);
     }
     // Update is called once per frame
     void AddToList()
@@ -54,7 +54,7 @@ public class PizzaParabola : MonoBehaviour
         if(IsPlaced)
         {
             GlobalData.isFirstSlice = false;
-            Debug.Log("First SLice done");
+            // Debug.Log("First SLice done");
             return;
         }
         
