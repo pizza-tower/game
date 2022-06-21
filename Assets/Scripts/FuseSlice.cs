@@ -16,6 +16,19 @@ public class FuseSlice : MonoBehaviour
         
     }
 
+    public void Bomb(List<GameObject> SList, int DestroyHeight)
+    {
+        if(SList.Count > 0)
+        {
+            int k = 1;
+            for (; k <= DestroyHeight && SList.Count - k == 0; k++)
+            {
+                Destroy(SList[SList.Count - k]);
+            }
+            SList.RemoveRange(SList.Count - k, k);
+        }
+    }
+
     private static bool mCheckTopNSlices(List<GameObject> SList)
     {
         int n = GlobalData.verticalFusionHeight;
