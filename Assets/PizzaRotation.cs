@@ -11,6 +11,7 @@ public class PizzaRotation : MonoBehaviour
     public int StopRotate = 0;
     [SerializeField] private Material myMaterial;
     public int IsRed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +29,17 @@ public class PizzaRotation : MonoBehaviour
     IEnumerator Rotate()
     {
         IsRotating = 0;
-        TagIndex += 1;
-        transform.Rotate(0, 60, 0);
+        int Randomize = ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).Randomize;
+
+        if(Randomize == 1){
+            int displacement = Random.Range(1, 7);
+            TagIndex += displacement;
+            transform.Rotate(0, displacement*60, 0);
+        }else {
+            TagIndex += 1;
+            transform.Rotate(0, 60, 0);
+        }
+
         if(IsRed == 1)
         {
             gameObject.tag = RedTags[(TagIndex%6)];

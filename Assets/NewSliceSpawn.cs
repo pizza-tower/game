@@ -10,6 +10,8 @@ public class NewSliceSpawn : MonoBehaviour
     public GameObject RedPrefab;
     public int NeedsNewSlice = 1;
     public int NewSliceSpawnSeconds;
+    public int Randomize=0;
+
     public int IsRed = 0;
     private int Level;
 
