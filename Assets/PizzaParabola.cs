@@ -138,7 +138,8 @@ public class PizzaParabola : MonoBehaviour
             {
                 IsThrowing = 0;
                 IsPlaced = true;
-                FuseSlice.mVertFuse(List.SList,Level);
+                // FuseSlice.mVertFuse(List.SList,Level);
+                FuseSlice.Bomb(List.SList, 2);
                 FuseSlice.mHorizontalFuse(Level);
                 if (List.SList.Count >= 6) {
                     AnchorToFind.GetComponent<Wobble>().startWobble();
