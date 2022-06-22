@@ -10,6 +10,8 @@ public class PizzaRotation : MonoBehaviour
     public int IsRotating = 1;
     public int StopRotate = 0;
     [SerializeField] private Material myMaterial;
+    public int hardcoded = 5;
+
     public int IsRed;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,7 @@ public class PizzaRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsRotating == 1  && StopRotate == 0)
+        if(IsRotating == 1  && StopRotate == 0 && hardcoded != 5)
         {
             StartCoroutine(Rotate());
         }

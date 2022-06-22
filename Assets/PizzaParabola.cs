@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine. SceneManagement;
+using UnityEngine.Analytics;
 
 public class PizzaParabola : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class PizzaParabola : MonoBehaviour
     private GameObject AnchorToFind;
     private SliceList List;
     bool IsPlaced = false;
+    public GameObject YellowPrefab;
+    public GameObject RedPrefab;
+
+    public int space_press_times=0;
 
     void Start()
     {
@@ -117,6 +122,11 @@ public class PizzaParabola : MonoBehaviour
         if (KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
         {
             Debug.Log("Space is pressed");
+
+            //Thomas
+            space_press_times++;
+            AnalyticsResult analyticsResult = Analytics.CustomEvent("The player press " + space_press_times);
+
             if(GlobalData.isFirstFusionOver==false && Level==0)
             {
                 GameObject ui_handler = GameObject.Find("UIHandler");

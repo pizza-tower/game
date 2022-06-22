@@ -102,6 +102,7 @@ MonoBehaviour:
   IsRotating: 1
   StopRotate: 0
   myMaterial: {fileID: 2100000, guid: d54d2e641cd0baa40a2f5dc3a6045314, type: 2}
+  hardcoded: 1
   IsRed: 1
 --- !u!114 &954568603763426914
 MonoBehaviour:
@@ -115,6 +116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c895675442c5e0344a341e1f1cb88d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  YellowPrefab: {fileID: 0}
+  RedPrefab: {fileID: 0}
+  space_press_times: 0
 --- !u!114 &97950635274499139
 MonoBehaviour:
   m_ObjectHideFlags: 0
