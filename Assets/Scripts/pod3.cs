@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class pod3 : MonoBehaviour
 {
@@ -16,17 +17,12 @@ public class pod3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool KeyDown = Input.GetKeyDown(KeyCode.B);
-        bool KeyHold = Input.GetKey(KeyCode.B);
-        bool KeyUp = Input.GetKeyUp(KeyCode.B); 
-        if (KeyDown == true )
-        {
-                Debug.Log("B hit");
-                mDropBomb();
-        }
+       
     }
 
 
+//This function checks the heights of all 6 stacks
+//destroys top 3 or all (whichever is higher) slices from top of the tallest stack
  public static void mDropBomb()
     {
         List<List<GameObject>> allLists = SliceList.globalList;
