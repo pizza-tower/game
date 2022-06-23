@@ -6,15 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class NewSliceSpawn : MonoBehaviour
 {
-    public GameObject YellowPrefab;
-    public GameObject RedPrefab;
+    public GameObject Slice;
+    public GameObject Bomb;
+    public GameObject ColorChanger;
+
     public int NeedsNewSlice = 1;
     public int NewSliceSpawnSeconds;
-    public int IsRed = 0;
-    private int Level;
+    int SpawnRed;
 
-    private int[] sliceSeq = {0,0,0,1};
-    private int indexOfSlice = 0;
+
     
     void Start()
     {
@@ -28,24 +28,19 @@ public class NewSliceSpawn : MonoBehaviour
         {
             NeedsNewSlice = 0;
             StartCoroutine(NewSliceCheck());
-            IsRed = Random.Range(0,2);
+            SpawnRed = Random.Range(0,2);
         }
     }
 
     public void spawnSlice() 
     {
         //spawn a new slice at spawner
-        if(IsRed == 1)
+        GameObject NewSlice = Instantiate(Slice) as GameObject;
+        NewSlice.transform.position = transform.position;
+        if(SpawnRed == 1)
         {
-            GameObject NewSlice = Instantiate(RedPrefab) as GameObject;
-            NewSlice.transform.position = transform.position;
-            //GetComponent<PizzaRotation>().StopRotate = 0;
-        }
-        else 
-        {
-            GameObject NewSlice = Instantiate(YellowPrefab) as GameObject;
-            NewSlice.transform.position = transform.position;
-            //GetComponent<PizzaRotation>().StopRotate = 0;
+            Debug.Log("WTF");
+            NewSlice.GetComponent<PizzaRotation>().IsRed = 1;            
         }
     }
     

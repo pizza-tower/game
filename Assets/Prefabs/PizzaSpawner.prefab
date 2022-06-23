@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9058975296924882169}
+  - component: {fileID: -7537824417854505916}
+  - component: {fileID: -8328463203399058828}
   m_Layer: 0
   m_Name: PizzaSpawner
   m_TagString: Spawner
@@ -31,3 +33,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7537824417854505916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058975296924882170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8bfcd71a6b3df41b75f58b49b2ec12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8328463203399058828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058975296924882170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e4a9076be87994d98da5c58bd8404b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
+  Bomb: {fileID: 5756864356215992658, guid: 4b6c9360fd456ae4fb2db897a95e5e91, type: 3}
+  ColorChanger: {fileID: 6023514827888255650, guid: 45d21feccaadce64ebcc688e9b200338,
+    type: 3}
+  NeedsNewSlice: 1
+  NewSliceSpawnSeconds: 2
+  SpawnRed: 0

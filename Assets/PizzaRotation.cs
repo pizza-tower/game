@@ -9,7 +9,6 @@ public class PizzaRotation : MonoBehaviour
     string[] YellowTags = new string[] {"Y_1", "Y_2", "Y_3", "Y_4", "Y_5", "Y_6"};
     public int IsRotating = 1;
     public int StopRotate = 0;
-    [SerializeField] private Material myMaterial;
     public int IsRed;
     // Start is called before the first frame update
     void Start()
@@ -33,10 +32,28 @@ public class PizzaRotation : MonoBehaviour
         if(IsRed == 1)
         {
             gameObject.tag = RedTags[(TagIndex%6)];
+            gameObject.GetComponent<Materials>().ToRed();
+            if(gameObject.tag == "R_4" || gameObject.tag == "R_5" || gameObject.tag == "R_6" )
+            {
+                GlobalData.GoTransparent = 1;
+            }
+            else 
+            {
+                GlobalData.GoTransparent = 0;
+            }
         } 
         else 
         {
             gameObject.tag = YellowTags[(TagIndex%6)];
+            gameObject.GetComponent<Materials>().ToYellow();
+            if(gameObject.tag == "Y_4" || gameObject.tag == "Y_5" || gameObject.tag == "Y_6" )
+            {
+                GlobalData.GoTransparent = 1;
+            }
+            else 
+            {
+                GlobalData.GoTransparent = 0;
+            }
         }
 
         
