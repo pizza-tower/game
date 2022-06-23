@@ -70,8 +70,9 @@ public class FuseSlice : MonoBehaviour
             GlobalData.isFirstFusionOver = true;
             SList.RemoveRange(SList.Count - n, n);
 
-            Score.EarnScore();
-            Debug.Log("we earn score +" + Score.CurrentScore);
+            //No score for vertical fusion, hence commenting it out.
+            //Score.EarnScore();
+            //Debug.Log("we earn score +" + Score.CurrentScore);
         }
     }
 
@@ -112,6 +113,7 @@ public class FuseSlice : MonoBehaviour
         //found the minimum tower height
         //for now check if all the slices at that height are same, if yes, fuse and disappear
         bool sameColor = false;
+        bool halfPizza = false;
         if (minHeight != 0)
         {
             if (
@@ -148,10 +150,31 @@ public class FuseSlice : MonoBehaviour
                         break;
                     }
                 }
+
+                /* Adding logic to detect if a half & half pizza is made
+                3 adjacents slices to be of same color. Possible combinations
+                are handled in the if else conditions.
+                TODO: since the colors are being stored in a vairable, it is now 
+                possible to remove the upper if condition and directly check if all the colors
+                are the same.
+                */
+                var color1 = allLists[0][minHeight - 1].GetComponent<MeshRenderer>().material.color;
+                var color2 = allLists[1][minHeight - 1].GetComponent<MeshRenderer>().material.color;
+                var color3 = allLists[2][minHeight - 1].GetComponent<MeshRenderer>().material.color;
+                var color4 = allLists[3][minHeight - 1].GetComponent<MeshRenderer>().material.color;
+                var color5 = allLists[4][minHeight - 1].GetComponent<MeshRenderer>().material.color;
+                var color6 = allLists[5][minHeight - 1].GetComponent<MeshRenderer>().material.color;
+
+                if(color1 == color2 && color2 == color3 && color4==color5 && color5 == color6 && color1!=color4){
+                    halfPizza= true;
+                }else if(color2 == color3 && color3 == color4 && color5==color6 && color6 == color1 && color2!=color5){
+                    halfPizza = true;
+                }else if(color3 == color4 && color4 == color5 && color6==color1 && color1 == color2 && color3!=color6){
+                    halfPizza = true;}
             }
         }
 
-    if (sameColor)
+    if (sameColor || halfPizza)
         {
             foreach (List<GameObject> anchorList in allLists)
             {
