@@ -30,12 +30,8 @@ public class NewSliceSpawnLevel0 : MonoBehaviour
             NeedsNewSlice = 0;
             StartCoroutine(NewSliceCheck());
 
-            if(Level == 0 && GlobalData.isFirstFusionOver==false){
-                IsRed = sliceSeq[indexOfSlice];
-                indexOfSlice += 1;
-            }else {
-                IsRed = Random.Range(0,2);
-            }
+            IsRed = sliceSeq[indexOfSlice];
+            indexOfSlice += 1;
 
             if(GlobalData.isFirstFusionOver == true)
             {
