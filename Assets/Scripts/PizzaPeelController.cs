@@ -10,7 +10,6 @@ public class PizzaPeelController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         bool KeyDown = Input.GetKeyDown(KeyCode.Space);
