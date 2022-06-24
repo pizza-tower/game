@@ -8,12 +8,12 @@ public class GlobalData : MonoBehaviour
 {    
 
     public static int verticalFusionHeight=3;
-    public static int level;
-    public static bool isFirstSlice;
-    public static string previousSlice;
-    public static bool isFirstFusionOver;
+    public static int level = 0;
+    public static bool isFirstSlice = true;
+    public static string previousSlice="AnchorOne";
+    public static bool isFirstFusionOver = false;
     public static bool gameover;
-
+    public static int GoTransparent = 0;
     // Start is called before the first frame update
     void Start()
     {

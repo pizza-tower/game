@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9058975296924882170
+--- !u!1 &8635773656617038171
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,59 +8,57 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9058975296924882169}
-  - component: {fileID: -7537824417854505916}
-  - component: {fileID: -8328463203399058828}
+  - component: {fileID: 1645382218878270476}
+  - component: {fileID: 2838511791279823281}
+  - component: {fileID: 2030799447456672595}
   m_Layer: 0
-  m_Name: PizzaSpawner
-  m_TagString: Spawner
+  m_Name: RandomDropSpawner
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9058975296924882169
+--- !u!4 &1645382218878270476
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9058975296924882170}
+  m_GameObject: {fileID: 8635773656617038171}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.55, y: 3.47, z: 2.11}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7537824417854505916
+--- !u!114 &2838511791279823281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9058975296924882170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b8bfcd71a6b3df41b75f58b49b2ec12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-8328463203399058828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9058975296924882170}
+  m_GameObject: {fileID: 8635773656617038171}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6e4a9076be87994d98da5c58bd8404b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
-  Bomb: {fileID: 5756864356215992658, guid: 4b6c9360fd456ae4fb2db897a95e5e91, type: 3}
-  ColorChanger: {fileID: 6023514827888255650, guid: 45d21feccaadce64ebcc688e9b200338,
-    type: 3}
+  YellowPrefab: {fileID: 0}
+  RedPrefab: {fileID: 0}
   NeedsNewSlice: 1
-  NewSliceSpawnSeconds: 2
-  SpawnRed: 0
+  NewSliceSpawnSeconds: 0
+  IsRed: 0
+--- !u!114 &2030799447456672595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8635773656617038171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fed0ef1923c544f4b484c11e0b0d472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

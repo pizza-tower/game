@@ -150,6 +150,7 @@ public class FuseSlice : MonoBehaviour
                 possible to remove the upper if condition and directly check if all the colors
                 are the same.
                 */
+                
                 var color1 = allLists[0][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color2 = allLists[1][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color3 = allLists[2][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
