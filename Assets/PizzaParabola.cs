@@ -146,7 +146,8 @@ public class PizzaParabola : MonoBehaviour
         {
             List.SList[List.SList.Count - 1].GetComponent<Materials>().FlipColor();
         }
-        
+        FuseSlice.mHorizontalFuse();
+        FuseSlice.mVertFuse(List.SList);
         
         Destroy(gameObject);
     }

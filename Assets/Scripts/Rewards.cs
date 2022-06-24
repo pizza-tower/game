@@ -6,7 +6,7 @@ public class Rewards : MonoBehaviour
 {
     // Start is called before the first frame update
     GameObject SliceOnPeel;
-    public static int RewardsCurrency = 0; 
+    public static int RewardsCurrency = 2; 
     void Start()
     {
         
