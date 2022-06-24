@@ -24,7 +24,7 @@ public class NewSliceSpawn : MonoBehaviour
         {
             NeedsNewSlice = 0;
             StartCoroutine(NewSliceCheck());
-            SpawnRed = Random.Range(0,2);
+            
         }
     }
 
@@ -33,11 +33,12 @@ public class NewSliceSpawn : MonoBehaviour
         //spawn a new slice at spawner
         GameObject NewSlice = Instantiate(Slice) as GameObject;
         NewSlice.transform.position = transform.position;
+        SpawnRed = Random.Range(0,2);
         if(SpawnRed == 1)
         {
-            NewSlice.GetComponent<PizzaRotation>().IsRed = 1;            
+            NewSlice.GetComponent<PizzaRotation>().IsRed = 1;
         }
-        else
+        else if(SpawnRed == 0)
         {
             NewSlice.GetComponent<PizzaRotation>().IsRed = 0;   
         }

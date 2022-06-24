@@ -53,15 +53,18 @@ public class PizzaParabola : MonoBehaviour
         }
         AnchorToFind = GameObject.FindWithTag(ListToAdd);       
         List = AnchorToFind.GetComponent<SliceList>();
-        List.SList.Add(gameObject);
+        //only add the gameobject to the list when it is a slice
+        if(IsBomb == false && IsColorChanger == false)
+        {
+            List.SList.Add(gameObject);
+        }
+        
+        
         
     }
     void AssignTag()
     {
-        if(IsBomb|| IsColorChanger)
-        {
-            return;
-        }
+ 
         if(GetComponent<PizzaRotation>().TagInInt == 0)
         {
             if(GetComponent<PizzaRotation>().IsRed == 1)
@@ -131,11 +134,21 @@ public class PizzaParabola : MonoBehaviour
     }
     void Bomb()
     {
-
+        IsBomb = false;
+        FuseSlice.BombFuse(List.SList);
+        
+        Destroy(gameObject);
     }
     void ChangeColor()
     {
-
+        IsColorChanger = false;
+        if(List.SList.Count >= 1)
+        {
+            List.SList[List.SList.Count - 1].GetComponent<Materials>().FlipColor();
+        }
+        
+        
+        Destroy(gameObject);
     }
     void StopRotation()
     {
@@ -147,7 +160,7 @@ public class PizzaParabola : MonoBehaviour
         
         EndPoint = (GameObject.FindWithTag(ListToAdd)).transform.position;
         float Count = List.SList.Count;
-        EndPoint.y += 0.15f *  Count;
+        EndPoint.y += 0.15f * Count;
             
     }
     void Update()
@@ -177,10 +190,25 @@ public class PizzaParabola : MonoBehaviour
             Animation += Time.deltaTime;
             if(Animation >= 2.0f)
             {
+                
                 IsThrowing = 0;
                 IsPlaced = true;
+                if(IsBomb)
+                {
+                    Bomb();
+                    return;
+                }
+                //If it is a color changer, change the color
+                if(IsColorChanger)
+                {
+                    ChangeColor();
+                    return;
+                }
+                //once the throw animation is completed, check the fuse
                 FuseSlice.mHorizontalFuse();
                 FuseSlice.mVertFuse(List.SList);
+                //if it is a bomb, do bomb
+                
                 if (List.SList.Count >= 6) {
                     AnchorToFind.GetComponent<Wobble>().startWobble();
                 }

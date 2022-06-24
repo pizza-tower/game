@@ -64,6 +64,19 @@ public class FuseSlice : MonoBehaviour
         }
     }
 
+    /*Bomb will fuse all slice in that SList
+    */
+    public static void BombFuse(List<GameObject> SList)
+    {
+        int n = SList.Count;
+        for (int k = 0; k < SList.Count; k++)
+        {
+            Destroy(SList[k]);
+        }
+        SList.RemoveRange(0, n);
+        //Destroy(GameObject.FindWithTag("0"));
+        Debug.Log("boom");
+    }
     IEnumerator Example()
     {
         print(Time.time);
@@ -180,6 +193,7 @@ public class FuseSlice : MonoBehaviour
 
             }
             Score.EarnScore();
+            Rewards.EarnCurrency();
         }
     }
 }
