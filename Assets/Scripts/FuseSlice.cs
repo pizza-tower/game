@@ -31,16 +31,12 @@ public class FuseSlice : MonoBehaviour
         //else return true
 
         var color =
-            SList[SList.Count - 1].GetComponent<MeshRenderer>().material.color;
+            SList[SList.Count - 1].GetComponent<PizzaRotation>().IsRed;
         for (int i = 1; i <= n; i++)
         {
             //There exists a slice in top n slices that is not of desired color
             if (
-                SList[SList.Count - i]
-                    .GetComponent<MeshRenderer>()
-                    .material
-                    .color !=
-                color
+                SList[SList.Count - i].GetComponent<PizzaRotation>().IsRed !=color
             ) return false;
         }
 
@@ -128,17 +124,13 @@ public class FuseSlice : MonoBehaviour
 
                 var givenColor =
                     allLists[0][minHeight - 1]
-                        .GetComponent<MeshRenderer>()
-                        .material
-                        .color;
+                        .GetComponent<PizzaRotation>().IsRed;
                 for (int i = 1; i < 6; i++)
                 {
                     if (
                         givenColor ==
                         allLists[i][minHeight - 1]
-                            .GetComponent<MeshRenderer>()
-                            .material
-                            .color
+                            .GetComponent<PizzaRotation>().IsRed
                     )
                     {
                         sameColor = true;
@@ -158,12 +150,12 @@ public class FuseSlice : MonoBehaviour
                 possible to remove the upper if condition and directly check if all the colors
                 are the same.
                 */
-                var color1 = allLists[0][minHeight - 1].GetComponent<MeshRenderer>().material.color;
-                var color2 = allLists[1][minHeight - 1].GetComponent<MeshRenderer>().material.color;
-                var color3 = allLists[2][minHeight - 1].GetComponent<MeshRenderer>().material.color;
-                var color4 = allLists[3][minHeight - 1].GetComponent<MeshRenderer>().material.color;
-                var color5 = allLists[4][minHeight - 1].GetComponent<MeshRenderer>().material.color;
-                var color6 = allLists[5][minHeight - 1].GetComponent<MeshRenderer>().material.color;
+                var color1 = allLists[0][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                var color2 = allLists[1][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                var color3 = allLists[2][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                var color4 = allLists[3][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                var color5 = allLists[4][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                var color6 = allLists[5][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
 
                 if(color1 == color2 && color2 == color3 && color4==color5 && color5 == color6 && color1!=color4){
                     halfPizza= true;
