@@ -44,7 +44,7 @@ public class FuseSlice : MonoBehaviour
         return true;
     }
 
-    public static void mVertFuse(List<GameObject> SList, int Level)
+    public static void mVertFuse(List<GameObject> SList)
     {
         int n = GlobalData.verticalFusionHeight;
 
@@ -56,14 +56,6 @@ public class FuseSlice : MonoBehaviour
             {
                 Destroy(SList[SList.Count - k]);
             }
-            if(GlobalData.isFirstFusionOver==false && Level==0)
-            {
-                Debug.Log("This is the first fusion");
-                GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Well done! You fused 3 slices and scored! Good luck!"));
-                
-            }
-            GlobalData.isFirstFusionOver = true;
             SList.RemoveRange(SList.Count - n, n);
 
             //No score for vertical fusion, hence commenting it out.
@@ -89,7 +81,7 @@ public class FuseSlice : MonoBehaviour
     if same, then destroy the slices and shift all the slices down by one level which are above the min height.
 
     */
-    public static void mHorizontalFuse(int Level)
+    public static void mHorizontalFuse()
     {
         List<List<GameObject>> allLists = SliceList.globalList;
         //int minHeight = SliceList.globalList.Min(y=>y.Count);
