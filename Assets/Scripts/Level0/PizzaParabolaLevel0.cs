@@ -81,6 +81,18 @@ public class PizzaParabolaLevel0 : MonoBehaviour
                 GameObject ui_handler = GameObject.Find("UIHandler");
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Press SPACE BAR NOW!!  Will the slices fuse? Lets see!"));
             }
+        }
+
+        if (GlobalData.isFirstSlice == false && GlobalData.isFirstFusionOver == true && GlobalData.isFirstHorizontalFusionOver == false)
+        {
+
+            if (isRotationToBeStoppedForHorizontalFusion(tag))
+            {
+                StopRotation();
+                Debug.Log("Rotation stopped");
+                GameObject ui_handler = GameObject.Find("UIHandler");
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Press SPACE BAR NOW!! Lets see if we can make the similar colored slices at the same level disappear!"));
+            }
 
 
         }
@@ -118,6 +130,11 @@ public class PizzaParabolaLevel0 : MonoBehaviour
         {
             Debug.Log("Space is pressed");
             if(GlobalData.isFirstFusionOver==false)
+            {
+                GameObject ui_handler = GameObject.Find("UIHandler");
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
+            }
+            if (GlobalData.isFirstHorizontalFusionOver == false)
             {
                 GameObject ui_handler = GameObject.Find("UIHandler");
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
@@ -193,6 +210,40 @@ public class PizzaParabolaLevel0 : MonoBehaviour
             return true;
         }
         else if (lastAnchor == "AnchorSix" && (tag == "R_6" || tag == "Y_6"))
+        {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    bool isRotationToBeStoppedForHorizontalFusion(string tag)
+    {
+        string lastAnchor = GlobalData.previousSlice;
+        Debug.Log("Last Anchor:" + lastAnchor);
+        Debug.Log("Tag:" + tag);
+        if (lastAnchor == "AnchorOne" && (tag == "R_2" || tag == "Y_2"||tag == "R_6" || tag == "Y_6"))
+        {
+            return true;
+        }
+        else if (lastAnchor == "AnchorTwo" && (tag == "R_3" || tag == "Y_3"|| tag == "R_1" || tag == "Y_1"))
+        {
+            return true;
+        }
+        else if (lastAnchor == "AnchorThree" && (tag == "R_4" || tag == "Y_4"|| tag == "R_2" || tag == "Y_2"))
+        {
+            return true;
+        }
+        else if (lastAnchor == "AnchorFour" && (tag == "R_5" || tag == "Y_5"|| tag == "R_3" || tag == "Y_3"))
+        {
+            return true;
+        }
+        else if (lastAnchor == "AnchorFive" && (tag == "R_6" || tag == "Y_6" || tag == "R_4" || tag == "Y_4"))
+        {
+            return true;
+        }
+        else if (lastAnchor == "AnchorSix" && (tag == "R_1" || tag == "Y_1"||tag == "R_5" || tag == "Y_5"))
         {
             return true;
         }
