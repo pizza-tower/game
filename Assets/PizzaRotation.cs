@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PizzaRotation : MonoBehaviour
 {
-    private int TagIndex = 0;
-    string[] RedTags = new string[] {"R_1", "R_2", "R_3", "R_4", "R_5", "R_6"};
-    string[] YellowTags = new string[] {"Y_1", "Y_2", "Y_3", "Y_4", "Y_5", "Y_6"};
     public int IsRotating = 1;
     public int StopRotate = 0;
     public int IsRed;
+    public int TagInInt;
     // Start is called before the first frame update
     void Start()
     {
+        //tag in integer, corresponding to the Tag R_1 R_2...
+        TagInInt = Random.Range(0,6);
+        //random spawn initial direction
+        float InitialRotation = (float)TagInInt * (float)60.0;
+        transform.Rotate(0, InitialRotation, 0);
         
     }
 
@@ -27,37 +30,28 @@ public class PizzaRotation : MonoBehaviour
     IEnumerator Rotate()
     {
         IsRotating = 0;
-        TagIndex += 1;
-        transform.Rotate(0, 60, 0);
         if(IsRed == 1)
         {
-            gameObject.tag = RedTags[(TagIndex%6)];
             gameObject.GetComponent<Materials>().ToRed();
-            if(gameObject.tag == "R_4" || gameObject.tag == "R_5" || gameObject.tag == "R_6" )
-            {
-                GlobalData.GoTransparent = 1;
-            }
-            else 
-            {
-                GlobalData.GoTransparent = 0;
-            }
+
         } 
         else 
         {
-            gameObject.tag = YellowTags[(TagIndex%6)];
             gameObject.GetComponent<Materials>().ToYellow();
-            if(gameObject.tag == "Y_4" || gameObject.tag == "Y_5" || gameObject.tag == "Y_6" )
-            {
-                GlobalData.GoTransparent = 1;
-            }
-            else 
-            {
-                GlobalData.GoTransparent = 0;
-            }
         }
-
         
-        yield return new WaitForSeconds(1);
+        if(TagInInt ==  2|| TagInInt == 3|| TagInInt ==  4)
+        {
+            GlobalData.GoTransparent = 1;
+        }
+        else 
+        {
+            GlobalData.GoTransparent = 0;
+        }
+        transform.Rotate(0, 60, 0);
+        TagInInt += 1;
+        TagInInt = TagInInt % 6;
+        yield return new WaitForSeconds((float)0.8);
         IsRotating = 1;
     }
 }

@@ -16,7 +16,8 @@ public class PizzaParabola : MonoBehaviour
     private GameObject AnchorToFind;
     private SliceList List;
     bool IsPlaced = false;
-
+    public bool IsBomb = false;
+    public bool IsColorChanger = false;
     void Start()
     {
         StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
@@ -25,45 +26,7 @@ public class PizzaParabola : MonoBehaviour
     // Update is called once per frame
     void AddToList()
     {
-        AnchorToFind = GameObject.FindWithTag(ListToAdd);       
-        List = AnchorToFind.GetComponent<SliceList>();
-        List.SList.Add(gameObject);
-        
-    }
-    void StopRotation()
-    {
-        GetComponent<PizzaRotation>().StopRotate = 1;
-    }
-
-    void ResumeRotation()
-    {
-        GetComponent<PizzaRotation>().StopRotate = 0;
-    }
-
-    void ThrowSlice()
-    {
-        
-        EndPoint = (GameObject.FindWithTag(ListToAdd)).transform.position;
-        float Count = List.SList.Count;
-        EndPoint.y += 0.15f *  Count;
-            
-    }
-    void Update()
-    {
-        if(IsPlaced)
-        {
-            return;
-        }
-        
-
-        bool KeyDown = Input.GetKeyDown(KeyCode.Space);
-        bool KeyHold = Input.GetKey(KeyCode.Space);
-        bool KeyUp = Input.GetKeyUp(KeyCode.Space); 
-        
         string tag = gameObject.tag;
-
-
-
         if (tag == "R_1" || tag == "Y_1")
         {
             ListToAdd = "AnchorOne";
@@ -88,17 +51,123 @@ public class PizzaParabola : MonoBehaviour
         {
             ListToAdd = "AnchorSix";
         }
+        AnchorToFind = GameObject.FindWithTag(ListToAdd);       
+        List = AnchorToFind.GetComponent<SliceList>();
+        List.SList.Add(gameObject);
+        
+    }
+    void AssignTag()
+    {
+        if(IsBomb|| IsColorChanger)
+        {
+            return;
+        }
+        if(GetComponent<PizzaRotation>().TagInInt == 0)
+        {
+            if(GetComponent<PizzaRotation>().IsRed == 1)
+            {
+                gameObject.tag = "R_1";
+            }
+            else 
+            {
+                gameObject.tag = "Y_1";
+            }
+        }
+        else if (GetComponent<PizzaRotation>().TagInInt == 1)
+        {
+            if(GetComponent<PizzaRotation>().IsRed == 1)
+            {
+                gameObject.tag = "R_2";
+            }
+            else 
+            {
+                gameObject.tag = "Y_2";
+            }
+        }
+        else if (GetComponent<PizzaRotation>().TagInInt == 2)
+        {
+            if(GetComponent<PizzaRotation>().IsRed == 1)
+            {
+                gameObject.tag = "R_3";
+            }
+            else 
+            {
+                gameObject.tag = "Y_3";
+            }
+        }
+        else if (GetComponent<PizzaRotation>().TagInInt == 3)
+        {
+            if(GetComponent<PizzaRotation>().IsRed == 1)
+            {
+                gameObject.tag = "R_4";
+            }
+            else 
+            {
+                gameObject.tag = "Y_4";
+            }
+        }
+        else if (GetComponent<PizzaRotation>().TagInInt == 4)
+        {
+            if(GetComponent<PizzaRotation>().IsRed == 1)
+            {
+                gameObject.tag = "R_5";
+            }
+            else 
+            {
+                gameObject.tag = "Y_5";
+            }
+        }
+        else if (GetComponent<PizzaRotation>().TagInInt == 5)
+        {
+            if(GetComponent<PizzaRotation>().IsRed == 1)
+            {
+                gameObject.tag = "R_6";
+            }
+            else 
+            {
+                gameObject.tag = "Y_6";
+            }
+        }
+    }
+    void Bomb()
+    {
 
+    }
+    void ChangeColor()
+    {
 
+    }
+    void StopRotation()
+    {
+        GetComponent<PizzaRotation>().StopRotate = 1;
+    }
 
+    void ThrowSlice()
+    {
+        
+        EndPoint = (GameObject.FindWithTag(ListToAdd)).transform.position;
+        float Count = List.SList.Count;
+        EndPoint.y += 0.15f *  Count;
+            
+    }
+    void Update()
+    {
+        if(IsPlaced)
+        {
+            return;
+        }
+        
+        bool KeyDown = Input.GetKeyDown(KeyCode.Space);
+        bool KeyHold = Input.GetKey(KeyCode.Space);
+        bool KeyUp = Input.GetKeyUp(KeyCode.Space); 
         //only throw the slice space key is pressed down and there is no slice in the air
         if (KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
         {
             Debug.Log("Space is pressed");
+            AssignTag();
             AddToList();
             ThrowSlice();
             StopRotation();
-            GlobalData.previousSlice = ListToAdd;
             IsThrowing = 1;
             //Refresh the spawner and generate a new slice
             ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;

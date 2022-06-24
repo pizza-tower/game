@@ -7,15 +7,11 @@ using UnityEngine.SceneManagement;
 public class NewSliceSpawn : MonoBehaviour
 {
     public GameObject Slice;
-    public GameObject Bomb;
-    public GameObject ColorChanger;
 
     public int NeedsNewSlice = 1;
     public int NewSliceSpawnSeconds;
     int SpawnRed;
 
-
-    
     void Start()
     {
         
@@ -39,8 +35,11 @@ public class NewSliceSpawn : MonoBehaviour
         NewSlice.transform.position = transform.position;
         if(SpawnRed == 1)
         {
-            Debug.Log("WTF");
             NewSlice.GetComponent<PizzaRotation>().IsRed = 1;            
+        }
+        else
+        {
+            NewSlice.GetComponent<PizzaRotation>().IsRed = 0;   
         }
     }
     
