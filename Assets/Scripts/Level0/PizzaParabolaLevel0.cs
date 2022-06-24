@@ -170,11 +170,12 @@ public class PizzaParabolaLevel0 : MonoBehaviour
          
         }
 
-        if(IsPlaced == true && GlobalData.isFirstFusionOver == false)
+        if(IsPlaced == true && (GlobalData.isFirstFusionOver == false|| GlobalData.isFirstHorizontalFusionOver==false))
         {
             GameObject ui_handler = GameObject.Find("UIHandler");
             ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("The pizza slice rotates! Stay put, and Wait for my instruction to throw!"));
         }
+
         //else
         //{
         //    GameObject ui_handler = GameObject.Find("UIHandler");
@@ -223,27 +224,27 @@ public class PizzaParabolaLevel0 : MonoBehaviour
         string lastAnchor = GlobalData.previousSlice;
         Debug.Log("Last Anchor:" + lastAnchor);
         Debug.Log("Tag:" + tag);
-        if (lastAnchor == "AnchorOne" && (tag == "R_2" || tag == "Y_2"||tag == "R_6" || tag == "Y_6"))
+        if (lastAnchor == "AnchorOne" && (tag == "R_2" || tag == "Y_2"))
         {
             return true;
         }
-        else if (lastAnchor == "AnchorTwo" && (tag == "R_3" || tag == "Y_3"|| tag == "R_1" || tag == "Y_1"))
+        else if (lastAnchor == "AnchorTwo" && (tag == "R_3" || tag == "Y_3"))
         {
             return true;
         }
-        else if (lastAnchor == "AnchorThree" && (tag == "R_4" || tag == "Y_4"|| tag == "R_2" || tag == "Y_2"))
+        else if (lastAnchor == "AnchorThree" && (tag == "R_4" || tag == "Y_4"))
         {
             return true;
         }
-        else if (lastAnchor == "AnchorFour" && (tag == "R_5" || tag == "Y_5"|| tag == "R_3" || tag == "Y_3"))
+        else if (lastAnchor == "AnchorFour" && (tag == "R_5" || tag == "Y_5"))
         {
             return true;
         }
-        else if (lastAnchor == "AnchorFive" && (tag == "R_6" || tag == "Y_6" || tag == "R_4" || tag == "Y_4"))
+        else if (lastAnchor == "AnchorFive" && (tag == "R_6" || tag == "Y_6"))
         {
             return true;
         }
-        else if (lastAnchor == "AnchorSix" && (tag == "R_1" || tag == "Y_1"||tag == "R_5" || tag == "Y_5"))
+        else if (lastAnchor == "AnchorSix" && (tag == "R_1" || tag == "Y_1"))
         {
             return true;
         }
