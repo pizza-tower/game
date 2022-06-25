@@ -12,6 +12,7 @@ public class GlobalData : MonoBehaviour
     public static bool isFirstSlice;
     public static string previousSlice;
     public static bool isFirstFusionOver;
+    public static bool isFirstHorizontalFusionOver;
     public static bool gameover;
 
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class GlobalData : MonoBehaviour
         isFirstSlice = true;
         previousSlice="AnchorOne";
         isFirstFusionOver = false;
+        isFirstHorizontalFusionOver = false;
         gameover = false;
 
     }

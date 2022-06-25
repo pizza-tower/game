@@ -64,8 +64,7 @@ public class FuseSliceLevel0 : MonoBehaviour
             {
                 Debug.Log("This is the first fusion");
                 GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Well done! You fused 3 slices and scored! Good luck!"));
-                
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Well done! You fused 3 slices and made it disappear!"));
             }
             GlobalData.isFirstFusionOver = true;
             SList.RemoveRange(SList.Count - n, n);
@@ -171,6 +170,13 @@ public class FuseSliceLevel0 : MonoBehaviour
                 anchorList.RemoveAt(minHeight - 1);
             }
             Score.EarnScore();
+            if (GlobalData.isFirstHorizontalFusionOver == false)
+            {
+                Debug.Log("This is the first horizontal fusion");
+                GameObject ui_handler = GameObject.Find("UIHandler");
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Well done! You fused 6 slices and scored! Good luck!"));
+            }
+            GlobalData.isFirstHorizontalFusionOver = true;
         }
     }
 }
