@@ -12,7 +12,8 @@ public class PizzaParabola : MonoBehaviour
     Vector3 StartPoint;
     Vector3 EndPoint;
     private float IsThrowing = 0;
-    private string ListToAdd = "AnchorOne";
+    private int TargetList = 0;
+    private string TargetAnchor = "";
     private GameObject AnchorToFind;
     private SliceList List;
     bool IsPlaced = false;
@@ -29,34 +30,38 @@ public class PizzaParabola : MonoBehaviour
         string tag = gameObject.tag;
         if (tag == "R_1" || tag == "Y_1")
         {
-            ListToAdd = "AnchorOne";
+            TargetList = 0;
+            TargetAnchor = "AnchorOne";
         }
         else if (tag == "R_2" || tag == "Y_2")
         {
-            ListToAdd = "AnchorTwo";
+            TargetList = 1;
+            TargetAnchor = "AnchorTwo";
         }
         else if (tag == "R_3" || tag == "Y_3")
         {
-            ListToAdd = "AnchorThree";
+            TargetList = 2;
+            TargetAnchor = "AnchorThree";
         }
         else if (tag == "R_4" || tag == "Y_4")
         {
-            ListToAdd = "AnchorFour";
+            TargetList = 3;
+            TargetAnchor = "AnchorFour";
         }
         else if (tag == "R_5" || tag == "Y_5")
         {
-            ListToAdd = "AnchorFive";
+            TargetList = 4;
+            TargetAnchor = "AnchorFive";
         }
         else if (tag == "R_6" || tag == "Y_6")
         {
-            ListToAdd = "AnchorSix";
+            TargetList = 5;
+            TargetAnchor = "AnchorSix";
         }
-        AnchorToFind = GameObject.FindWithTag(ListToAdd);       
-        List = AnchorToFind.GetComponent<SliceList>();
         //only add the gameobject to the list when it is a slice
         if(IsBomb == false && IsColorChanger == false)
         {
-            List.SList.Add(gameObject);
+            GlobalData.globalList[TargetList].Add(gameObject);
         }
         
         
@@ -135,19 +140,19 @@ public class PizzaParabola : MonoBehaviour
     void Bomb()
     {
         IsBomb = false;
-        FuseSlice.BombFuse(List.SList);
+        FuseSlice.BombFuse(GlobalData.globalList[TargetList]);
         
         Destroy(gameObject);
     }
     void ChangeColor()
     {
         IsColorChanger = false;
-        if(List.SList.Count >= 1)
+        if(GlobalData.globalList[TargetList].Count >= 1)
         {
-            List.SList[List.SList.Count - 1].GetComponent<Materials>().FlipColor();
+            GlobalData.globalList[TargetList][GlobalData.globalList[TargetList].Count - 1].GetComponent<Materials>().FlipColor();
         }
         FuseSlice.mHorizontalFuse();
-        FuseSlice.mVertFuse(List.SList);
+        FuseSlice.mVertFuse(GlobalData.globalList[TargetList]);
         
         Destroy(gameObject);
     }
@@ -159,8 +164,8 @@ public class PizzaParabola : MonoBehaviour
     void ThrowSlice()
     {
         
-        EndPoint = (GameObject.FindWithTag(ListToAdd)).transform.position;
-        float Count = List.SList.Count;
+        EndPoint = (GameObject.FindWithTag(TargetAnchor)).transform.position;
+        float Count = GlobalData.globalList[TargetList].Count;
         EndPoint.y += 0.15f * Count;
             
     }
@@ -207,14 +212,14 @@ public class PizzaParabola : MonoBehaviour
                 }
                 //once the throw animation is completed, check the fuse
                 FuseSlice.mHorizontalFuse();
-                FuseSlice.mVertFuse(List.SList);
+                FuseSlice.mVertFuse(GlobalData.globalList[TargetList]);
                 //if it is a bomb, do bomb
                 
-                if (List.SList.Count >= 6) {
-                    AnchorToFind.GetComponent<Wobble>().startWobble();
+                if (GlobalData.globalList[TargetList].Count >= 6) {
+                    GameObject.FindWithTag(TargetAnchor).GetComponent<Wobble>().startWobble();
                 }
-                if (List.SList.Count >= 9) {
-                    AnchorToFind.GetComponent<Wobble>().startFall();
+                if (GlobalData.globalList[TargetList].Count >= 9) {
+                    GameObject.FindWithTag(TargetAnchor).GetComponent<Wobble>().startFall();
 
                 }
 
