@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -809,7 +809,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9058975297391031567}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1640787738
+--- !u!114 &1640787742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -818,12 +818,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1640787737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f0997915f5145ee9c28cba8e96fc6a, type: 3}
+  m_Script: {fileID: 11500000, guid: b6e4a9076be87994d98da5c58bd8404b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YellowPrefab: {fileID: 1200139886719818967, guid: 22b04707d1d134e59a4b162c2ab47b8a,
+  YellowPrefab: {fileID: 1200139886719818967, guid: 804edb7f0cd33bc458d755ce6266a2ea,
     type: 3}
-  RedPrefab: {fileID: 53156342897913079, guid: 3615d719e6d934d56b5d93345d79ccd5, type: 3}
+  RedPrefab: {fileID: 53156342897913079, guid: 69136596ca5ccca4e9b0ddf13b067eaa, type: 3}
   NeedsNewSlice: 1
   NewSliceSpawnSeconds: 2
   IsRed: 0
