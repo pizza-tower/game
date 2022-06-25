@@ -6,7 +6,7 @@ using UnityEngine.Analytics;
 
 public class Score : MonoBehaviour
 {
-    public static int CurrentScore = 0;
+    public static int CurrentScore;
     public int ScoreToPass = 30;
 
     // Start is called before the first frame update
@@ -25,6 +25,7 @@ public class Score : MonoBehaviour
     }
     void Start()
     {
+        CurrentScore = 0;
         GameObject ui_handler = GameObject.Find("UIHandler");
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetScoreRequired(30));
     }
