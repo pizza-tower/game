@@ -194,6 +194,15 @@ public class FuseSlice : MonoBehaviour
             }
             Score.EarnScore();
             Rewards.EarnCurrency();
+            if(sameColor)
+            {
+                GlobalData.isHorizontalFuse = true;
+            }
+            else if(halfPizza)
+            {
+                GlobalData.isHorizontalHalfFuse = true;
+            }
+            
         }
     }
 }

@@ -18,10 +18,14 @@ public class PizzaParabola : MonoBehaviour
     bool IsPlaced = false;
     public bool IsBomb = false;
     public bool IsColorChanger = false;
+    AnimationOnFuse animator;
+    AnimationOnHalfFuse halfFuseAnimator;
     void Start()
     {
         StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
-      
+        animator = FindObjectOfType<AnimationOnFuse>();
+        halfFuseAnimator = FindObjectOfType<AnimationOnHalfFuse>();
+
     }
     // Update is called once per frame
     void AddToList()
@@ -220,7 +224,21 @@ public class PizzaParabola : MonoBehaviour
 
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 2f);
-         
+            //do Animation on Horizontal fuse
+            if (GlobalData.isHorizontalFuse)
+            {
+                Debug.Log("Horizontal Fusion Happened");
+                Vector3 temp = new Vector3(0.0f, 0.0f, 0.0f);
+                animator.animate(temp);
+                GlobalData.isHorizontalFuse = false;
+            }else if(GlobalData.isHorizontalHalfFuse)
+            {
+                Debug.Log("Half Horizontal Fusion Happened");
+                Vector3 temp = new Vector3(0.0f, 0.0f, 0.0f);
+                halfFuseAnimator.animate(temp);
+                GlobalData.isHorizontalHalfFuse= false;
+            }
+
         }
 
     }
