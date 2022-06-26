@@ -6,15 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class NewSliceSpawnLevel0 : MonoBehaviour
 {
-    public GameObject YellowPrefab;
-    public GameObject RedPrefab;
+    public GameObject Slice;
+
     public int NeedsNewSlice = 1;
     public int NewSliceSpawnSeconds;
-    public int IsRed = 0;
-    private int Level;
+    int SpawnRed;
 
     private int[] sliceSeq = {0,0,0,1};
     private int indexOfSlice = 0;
+    public int Level;
     
     void Start()
     {
@@ -30,9 +30,6 @@ public class NewSliceSpawnLevel0 : MonoBehaviour
             NeedsNewSlice = 0;
             StartCoroutine(NewSliceCheck());
 
-            IsRed = sliceSeq[indexOfSlice];
-            indexOfSlice += 1;
-
             if(GlobalData.isFirstFusionOver == true)
             {
                     Debug.Log("After first fusion : ");
@@ -41,7 +38,7 @@ public class NewSliceSpawnLevel0 : MonoBehaviour
                     (x, y) => x.SetTutorialInstruction("Throw at the right moment! Remember that same colored slices fuses and scores!"));
                     Level++;
                     
-                    SceneManager.LoadScene(Level);
+                    // SceneManager.LoadScene(Level);
             }
         }
     }
@@ -49,17 +46,17 @@ public class NewSliceSpawnLevel0 : MonoBehaviour
     public void spawnSlice() 
     {
         //spawn a new slice at spawner
-        if(IsRed == 1)
+        GameObject NewSlice = Instantiate(Slice) as GameObject;
+        NewSlice.transform.position = transform.position;
+        SpawnRed = sliceSeq[indexOfSlice];
+        indexOfSlice += 1;
+        if(SpawnRed == 1)
         {
-            GameObject NewSlice = Instantiate(RedPrefab) as GameObject;
-            NewSlice.transform.position = transform.position;
-            //GetComponent<PizzaRotation>().StopRotate = 0;
+            NewSlice.GetComponent<PizzaRotationLevel0>().IsRed = 1;
         }
-        else 
+        else if(SpawnRed == 0)
         {
-            GameObject NewSlice = Instantiate(YellowPrefab) as GameObject;
-            NewSlice.transform.position = transform.position;
-            //GetComponent<PizzaRotation>().StopRotate = 0;
+            NewSlice.GetComponent<PizzaRotationLevel0>().IsRed = 0;   
         }
     }
     
