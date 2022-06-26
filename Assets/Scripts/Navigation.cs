@@ -74,7 +74,7 @@ public class Navigation : MonoBehaviour
         }
         if(Score.CurrentScore >= 30){
             StartNextLevel();
-             }
-        } 
+        }
+    } 
     // }
 }

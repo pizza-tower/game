@@ -35,7 +35,7 @@ public class RandomDropSpawn : MonoBehaviour
     public void spawnSlice() 
     {
         int SpawnIndex = Random.Range(0, 6);
-        Debug.Log("The index is" + SpawnIndex);
+        // Debug.Log("The index is" + SpawnIndex);
         //spawn a new slice at spawner
         if(IsRed == 1)
         {

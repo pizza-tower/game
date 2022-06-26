@@ -15,6 +15,12 @@ public class GlobalData : MonoBehaviour
     public static bool gameover;
     public static int GoTransparent = 0;
     public static List<List<GameObject>> globalList = new List<List<GameObject>>();
+        public static bool KeyDown=false;
+    public static bool KeyHold=false;
+    public static bool KeyUp=false;
+
+    public static bool countDownInProcess = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +33,7 @@ public class GlobalData : MonoBehaviour
         {
             globalList.Add(new List<GameObject>());
         }
-        Debug.Log("get global list count" + globalList.Count);
+        // Debug.Log("get global list count" + globalList.Count);
     }
 
     // Update is called once per frame
