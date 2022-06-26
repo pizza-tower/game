@@ -75,7 +75,7 @@ public class FuseSlice : MonoBehaviour
         }
         SList.RemoveRange(0, n);
         //Destroy(GameObject.FindWithTag("0"));
-        Debug.Log("boom");
+        // Debug.Log("boom");
     }
     IEnumerator Example()
     {

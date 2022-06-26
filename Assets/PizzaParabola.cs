@@ -176,13 +176,13 @@ public class PizzaParabola : MonoBehaviour
             return;
         }
         
-        bool KeyDown = Input.GetKeyDown(KeyCode.Space);
-        bool KeyHold = Input.GetKey(KeyCode.Space);
-        bool KeyUp = Input.GetKeyUp(KeyCode.Space); 
+        bool KeyDown = Input.GetKeyDown(KeyCode.Space) || GlobalData.KeyDown;
+        bool KeyHold = Input.GetKey(KeyCode.Space) || GlobalData.KeyHold;
+        bool KeyUp = Input.GetKeyUp(KeyCode.Space) || GlobalData.KeyUp; 
         //only throw the slice space key is pressed down and there is no slice in the air
         if (KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
         {
-            Debug.Log("Space is pressed");
+            // Debug.Log("Space is pressed");
             AssignTag();
             AddToList();
             ThrowSlice();
