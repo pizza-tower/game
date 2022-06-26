@@ -38,6 +38,10 @@ public class FuseSlice : MonoBehaviour
             if (
                 SList[SList.Count - i].GetComponent<PizzaRotation>().IsRed !=color
             ) return false;
+
+            //Brown slice cannot be fused with other slices
+            if (SList[SList.Count - i].GetComponent<PizzaRotation>().IsBrown == 1)
+             return false;
         }
 
         //All top n slices are of desired color
@@ -51,7 +55,7 @@ public class FuseSlice : MonoBehaviour
         //Check if top n slices in have same color as the latest slice
         if (mCheckTopNSlices(SList))
         {
-            Debug.Log("Slices were same colored");
+            //Debug.Log("Slices were same colored");
             for (int k = 1; k <= n; k++)
             {
                 Destroy(SList[SList.Count - k]);
@@ -115,6 +119,7 @@ public class FuseSlice : MonoBehaviour
         //for now check if all the slices at that height are same, if yes, fuse and disappear
         bool sameColor = false;
         bool halfPizza = false;
+        bool brownSlice = false;
         if (minHeight != 0)
         {
             if (
@@ -139,6 +144,13 @@ public class FuseSlice : MonoBehaviour
                     )
                     {
                         sameColor = true;
+                    }
+                    //Brown slices cannot be horizontally fused
+                    else if(allLists[i][minHeight - 1].GetComponent<PizzaRotation>().IsBrown==1)
+                    {
+                        brownSlice = true;
+                        sameColor = false;
+                        break;
                     }
                     else
                     {
@@ -172,7 +184,7 @@ public class FuseSlice : MonoBehaviour
             }
         }
 
-    if (sameColor || halfPizza)
+    if ((sameColor || halfPizza) && brownSlice != true)
         {
             foreach (List<GameObject> anchorList in allLists)
             {

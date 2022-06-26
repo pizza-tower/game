@@ -7,7 +7,7 @@ public class PizzaRotation : MonoBehaviour
     public int IsRotating = 1;
     public int StopRotate = 0;
     public int IsRed;
-    //public int IsBrown=0;
+    public int IsBrown=0;
     public int TagInInt;
     private bool AssignMaterial = false;
     public bool hardcoded = false;
@@ -31,7 +31,11 @@ public class PizzaRotation : MonoBehaviour
     {
         if(AssignMaterial == false)
         {
-            if(IsRed == 1)
+             if(IsBrown == 1)
+            {
+                gameObject.GetComponent<Materials>().ToBrown();
+            }
+            else if(IsRed == 1)
             {
                 gameObject.GetComponent<Materials>().ToRed();
             }
@@ -39,10 +43,7 @@ public class PizzaRotation : MonoBehaviour
             {
                 gameObject.GetComponent<Materials>().ToYellow();   
             }
-            // if(IsBrown == 1)
-            // {
-            //     gameObject.GetComponent<Materials>().ToBrown();
-            // }
+           
             AssignMaterial = true;
         }
         if(IsRotating == 1  && StopRotate == 0 && hardcoded!=true)
