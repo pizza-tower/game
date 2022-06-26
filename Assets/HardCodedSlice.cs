@@ -26,20 +26,36 @@ public class HardCodedSlice : MonoBehaviour
         // }
     //Debug.Log("Hopeful");
         //Fixed hardcoded stacks for now. Need to randomize them later.
-        AnchorToFind = GameObject.FindWithTag("AnchorOne");
-            List = AnchorToFind.GetComponent<SliceList>();
-            List.SList.Add(GameObject.Find("stack1_slice1"));
-            List.SList.Add(GameObject.Find("stack1_slice2"));
-            List.SList.Add(GameObject.Find("stack1_slice3"));
-            List.SList.Add(GameObject.Find("stack1_slice4"));
+
+        // StackOne = GlobalData.globalList[0];
+        // StackTwo = GlobalData.globalList[1];
+        // StackThree = GlobalData.globalList[2];
+
+
+        GlobalData.globalList[0].Add(GameObject.Find("stack1_slice1"));
+        GlobalData.globalList[0].Add(GameObject.Find("stack1_slice2"));
+        GlobalData.globalList[0].Add(GameObject.Find("stack1_slice3"));
+        GlobalData.globalList[0].Add(GameObject.Find("stack1_slice4"));
+
+        GlobalData.globalList[1].Add(GameObject.Find("stack2_slice1"));
+        GlobalData.globalList[1].Add(GameObject.Find("stack2_slice2"));
+        GlobalData.globalList[1].Add(GameObject.Find("stack2_slice3"));
+        GlobalData.globalList[1].Add(GameObject.Find("stack2_slice4"));
+
+        // AnchorToFind = GameObject.FindWithTag("AnchorOne");
+        //     List = AnchorToFind.GetComponent<SliceList>();
+        //     List.SList.Add(GameObject.Find("stack1_slice1"));
+        //     List.SList.Add(GameObject.Find("stack1_slice2"));
+        //     List.SList.Add(GameObject.Find("stack1_slice3"));
+        //     List.SList.Add(GameObject.Find("stack1_slice4"));
           
 
-        AnchorToFind = GameObject.FindWithTag("AnchorTwo");
-            List = AnchorToFind.GetComponent<SliceList>();
-            List.SList.Add(GameObject.Find("stack2_slice1"));
-            List.SList.Add(GameObject.Find("stack2_slice2"));
-            List.SList.Add(GameObject.Find("stack2_slice3"));
-            List.SList.Add(GameObject.Find("stack2_slice4"));
+        // AnchorToFind = GameObject.FindWithTag("AnchorTwo");
+        //     List = AnchorToFind.GetComponent<SliceList>();
+        //     List.SList.Add(GameObject.Find("stack2_slice1"));
+        //     List.SList.Add(GameObject.Find("stack2_slice2"));
+        //     List.SList.Add(GameObject.Find("stack2_slice3"));
+        //     List.SList.Add(GameObject.Find("stack2_slice4"));
           
 
     }

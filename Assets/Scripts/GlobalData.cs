@@ -18,6 +18,7 @@ public class GlobalData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("inside global");
        level = SceneManager.GetActiveScene().buildIndex;
         isFirstSlice = true;
         previousSlice="AnchorOne";
