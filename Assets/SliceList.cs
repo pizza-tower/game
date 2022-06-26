@@ -7,8 +7,19 @@ public class SliceList : MonoBehaviour
     public List<GameObject> SList = new List<GameObject>();
     public static List<List<GameObject>> globalList = new List<List<GameObject>>();
     
-    //public float SliceCount = 0;
-
+    public int GetSliceCount()
+    {
+        return SList.Count;
+    }
+    public GameObject GetMiniHeightSlice(int minHeight)
+    {
+        if(SList.Count < 1)
+        {
+            return null;
+        }
+        return SList[minHeight- 1];
+        
+    }
     // Start is called before the first frame update
     void Start()
     {

@@ -103,6 +103,7 @@ MonoBehaviour:
   IsRotating: 1
   StopRotate: 0
   IsRed: 0
+  TagInInt: 0
 --- !u!114 &7177997025272590011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c895675442c5e0344a341e1f1cb88d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBomb: 0
+  IsColorChanger: 0
 --- !u!114 &8068740519241374874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,3 +161,5 @@ MonoBehaviour:
   - {fileID: 2100000, guid: d54d2e641cd0baa40a2f5dc3a6045314, type: 2}
   - {fileID: 2100000, guid: 1882fa555b0ee1c488b86636cf7625ef, type: 2}
   - {fileID: 2100000, guid: e227b1ccc451c50469071aa9bc28f9fc, type: 2}
+  - {fileID: 2100000, guid: 48c9f052432f74a429a7f67d17b40b8d, type: 2}
+  - {fileID: 2100000, guid: 9df5d4c06418f9e429eb061bb7b58836, type: 2}

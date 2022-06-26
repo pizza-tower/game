@@ -31,16 +31,12 @@ public class FuseSlice : MonoBehaviour
         //else return true
 
         var color =
-            SList[SList.Count - 1].GetComponent<MeshRenderer>().material.color;
+            SList[SList.Count - 1].GetComponent<PizzaRotation>().IsRed;
         for (int i = 1; i <= n; i++)
         {
             //There exists a slice in top n slices that is not of desired color
             if (
-                SList[SList.Count - i]
-                    .GetComponent<MeshRenderer>()
-                    .material
-                    .color !=
-                color
+                SList[SList.Count - i].GetComponent<PizzaRotation>().IsRed !=color
             ) return false;
         }
 
@@ -48,7 +44,7 @@ public class FuseSlice : MonoBehaviour
         return true;
     }
 
-    public static void mVertFuse(List<GameObject> SList, int Level)
+    public static void mVertFuse(List<GameObject> SList)
     {
         int n = GlobalData.verticalFusionHeight;
 
@@ -60,21 +56,27 @@ public class FuseSlice : MonoBehaviour
             {
                 Destroy(SList[SList.Count - k]);
             }
-            if(GlobalData.isFirstFusionOver==false && Level==0)
-            {
-                Debug.Log("This is the first fusion");
-                GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Well done! You fused 3 slices and scored! Good luck!"));
-                
-            }
-            GlobalData.isFirstFusionOver = true;
             SList.RemoveRange(SList.Count - n, n);
 
-            Score.EarnScore();
-            Debug.Log("we earn score +" + Score.CurrentScore);
+            //No score for vertical fusion, hence commenting it out.
+            //Score.EarnScore();
+            //Debug.Log("we earn score +" + Score.CurrentScore);
         }
     }
 
+    /*Bomb will fuse all slice in that SList
+    */
+    public static void BombFuse(List<GameObject> SList)
+    {
+        int n = SList.Count;
+        for (int k = 0; k < SList.Count; k++)
+        {
+            Destroy(SList[k]);
+        }
+        SList.RemoveRange(0, n);
+        //Destroy(GameObject.FindWithTag("0"));
+        Debug.Log("boom");
+    }
     IEnumerator Example()
     {
         print(Time.time);
@@ -92,9 +94,9 @@ public class FuseSlice : MonoBehaviour
     if same, then destroy the slices and shift all the slices down by one level which are above the min height.
 
     */
-    public static void mHorizontalFuse(int Level)
+    public static void mHorizontalFuse()
     {
-        List<List<GameObject>> allLists = SliceList.globalList;
+        List<List<GameObject>> allLists = GlobalData.globalList;
         //int minHeight = SliceList.globalList.Min(y=>y.Count);
         int minHeight = 9999;
 
@@ -112,6 +114,7 @@ public class FuseSlice : MonoBehaviour
         //found the minimum tower height
         //for now check if all the slices at that height are same, if yes, fuse and disappear
         bool sameColor = false;
+        bool halfPizza = false;
         if (minHeight != 0)
         {
             if (
@@ -126,17 +129,13 @@ public class FuseSlice : MonoBehaviour
 
                 var givenColor =
                     allLists[0][minHeight - 1]
-                        .GetComponent<MeshRenderer>()
-                        .material
-                        .color;
+                        .GetComponent<PizzaRotation>().IsRed;
                 for (int i = 1; i < 6; i++)
                 {
                     if (
                         givenColor ==
                         allLists[i][minHeight - 1]
-                            .GetComponent<MeshRenderer>()
-                            .material
-                            .color
+                            .GetComponent<PizzaRotation>().IsRed
                     )
                     {
                         sameColor = true;
@@ -148,10 +147,45 @@ public class FuseSlice : MonoBehaviour
                         break;
                     }
                 }
+
+                /* Adding logic to detect if a half & half pizza is made
+                3 adjacents slices to be of same color. Possible combinations
+                are handled in the if else conditions.
+                TODO: since the colors are being stored in a vairable, it is now 
+                possible to remove the upper if condition and directly check if all the colors
+                are the same.
+                */
+                
+                
+                var color1 = allLists[0][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                var color2 = allLists[1][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                var color3 = allLists[2][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                var color4 = allLists[3][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                var color5 = allLists[4][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                var color6 = allLists[5][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                
+
+                /*
+                var color1 = GameObject.FindWithTag("AnchorOne").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                var color2 = GameObject.FindWithTag("AnchorTwo").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                var color3 = GameObject.FindWithTag("AnchorThree").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                var color4 = GameObject.FindWithTag("AnchorFour").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                var color5 = GameObject.FindWithTag("AnchorFive").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                var color6 = GameObject.FindWithTag("AnchorSix").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                */
+                if(color1 == color2 && color2 == color3 && color4==color5 && color5 == color6 && color1!=color4){
+                    halfPizza= true;
+                    Debug.Log("case 1");
+                }else if(color2 == color3 && color3 == color4 && color5==color6 && color6 == color1 && color2!=color5){
+                    halfPizza = true;
+                    Debug.Log("case 2");
+                }else if(color3 == color4 && color4 == color5 && color6==color1 && color1 == color2 && color3!=color6){
+                    halfPizza = true;
+                    Debug.Log("case 3");}
             }
         }
 
-    if (sameColor)
+    if (sameColor || halfPizza)
         {
             foreach (List<GameObject> anchorList in allLists)
             {
@@ -172,6 +206,7 @@ public class FuseSlice : MonoBehaviour
 
             }
             Score.EarnScore();
+            Rewards.EarnCurrency();
         }
     }
 }

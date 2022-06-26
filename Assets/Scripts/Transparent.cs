@@ -11,9 +11,14 @@ public class Transparent : MonoBehaviour
     List<GameObject> StackThree;
     void Start()
     {
-        StackOne = GameObject.FindWithTag("AnchorOne").GetComponent<SliceList>().SList;
-        StackTwo = GameObject.FindWithTag("AnchorTwo").GetComponent<SliceList>().SList;
-        StackThree = GameObject.FindWithTag("AnchorThree").GetComponent<SliceList>().SList;
+        StartCoroutine(GetStack());
+    }
+    IEnumerator GetStack()
+    {
+        yield return new WaitForSeconds(1);
+        StackOne = GlobalData.globalList[0];
+        StackTwo = GlobalData.globalList[1];
+        StackThree = GlobalData.globalList[2];
     }
     void BackToNormal()
     {
