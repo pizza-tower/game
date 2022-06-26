@@ -14,6 +14,7 @@ public class GlobalData : MonoBehaviour
     public static bool isFirstFusionOver = false;
     public static bool gameover;
     public static int GoTransparent = 0;
+    public static List<List<GameObject>> globalList = new List<List<GameObject>>();
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,11 @@ public class GlobalData : MonoBehaviour
         previousSlice="AnchorOne";
         isFirstFusionOver = false;
         gameover = false;
-
+        for(int i = 0; i < 6; i++)
+        {
+            globalList.Add(new List<GameObject>());
+        }
+        Debug.Log("get global list count" + globalList.Count);
     }
 
     // Update is called once per frame

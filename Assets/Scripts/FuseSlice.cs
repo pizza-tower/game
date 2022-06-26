@@ -100,7 +100,7 @@ public class FuseSlice : MonoBehaviour
     */
     public static void mHorizontalFuse()
     {
-        List<List<GameObject>> allLists = SliceList.globalList;
+        List<List<GameObject>> allLists = GlobalData.globalList;
         //int minHeight = SliceList.globalList.Min(y=>y.Count);
         int minHeight = 9999;
 
@@ -168,19 +168,32 @@ public class FuseSlice : MonoBehaviour
                 are the same.
                 */
                 
+                
                 var color1 = allLists[0][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color2 = allLists[1][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color3 = allLists[2][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color4 = allLists[3][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color5 = allLists[4][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color6 = allLists[5][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
+                
 
+                /*
+                var color1 = GameObject.FindWithTag("AnchorOne").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                var color2 = GameObject.FindWithTag("AnchorTwo").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                var color3 = GameObject.FindWithTag("AnchorThree").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                var color4 = GameObject.FindWithTag("AnchorFour").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                var color5 = GameObject.FindWithTag("AnchorFive").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                var color6 = GameObject.FindWithTag("AnchorSix").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
+                */
                 if(color1 == color2 && color2 == color3 && color4==color5 && color5 == color6 && color1!=color4){
                     halfPizza= true;
+                    Debug.Log("case 1");
                 }else if(color2 == color3 && color3 == color4 && color5==color6 && color6 == color1 && color2!=color5){
                     halfPizza = true;
+                    Debug.Log("case 2");
                 }else if(color3 == color4 && color4 == color5 && color6==color1 && color1 == color2 && color3!=color6){
-                    halfPizza = true;}
+                    halfPizza = true;
+                    Debug.Log("case 3");}
             }
         }
 
