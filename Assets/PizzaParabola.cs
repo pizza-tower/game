@@ -63,7 +63,7 @@ public class PizzaParabola : MonoBehaviour
         
         
     }
-    void AssignTag()
+     public void AssignTag()
     {
  
         if(GetComponent<PizzaRotation>().TagInInt == 0)
@@ -163,7 +163,7 @@ public class PizzaParabola : MonoBehaviour
         EndPoint = (GameObject.FindWithTag(ListToAdd)).transform.position;
         float Count = List.SList.Count;
         EndPoint.y += 0.15f * Count;
-            
+        //Debug.Log($"Position: {EndPoint}");    
     }
     void Update()
     {
@@ -194,10 +194,13 @@ public class PizzaParabola : MonoBehaviour
 
             AddToList();
             ThrowSlice();
+
             StopRotation();
             IsThrowing = 1;
             //Refresh the spawner and generate a new slice
             ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
+
+
         }
         if(IsThrowing == 1)
         {
