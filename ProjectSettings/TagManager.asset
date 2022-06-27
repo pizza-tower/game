@@ -27,6 +27,8 @@ TagManager:
   - Y_5
   - Y_6
   - Menu
+  - RewardButton
+  - hardcoded
   layers:
   - Default
   - TransparentFX

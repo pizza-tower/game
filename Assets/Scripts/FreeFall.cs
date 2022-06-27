@@ -89,8 +89,8 @@ public class FreeFall : MonoBehaviour
             {
                 IsFalling = 0;
                 IsPlaced = true;
-                FuseSlice.mVertFuse(List.SList, Level);
-                FuseSlice.mHorizontalFuse(Level);
+                FuseSlice.mVertFuse(List.SList);
+                FuseSlice.mHorizontalFuse();
 
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 1f, Animation / 2f);
