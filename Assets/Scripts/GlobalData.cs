@@ -21,7 +21,7 @@ public class GlobalData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
-       level = SceneManager.GetActiveScene().buildIndex;
+        level = SceneManager.GetActiveScene().buildIndex;
         totalscenes = SceneManager.sceneCountInBuildSettings;
         isFirstSlice = true;
         previousSlice="AnchorOne";
