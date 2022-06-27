@@ -6,35 +6,34 @@ using Random = System.Random;
 
 public class PizzaAutoFlipperLevelController : MonoBehaviour
 {
-
     private bool isFlipActive = false;
-    private int count = 0;
     private Random rd;
+
+    private int count = 0;
 
     //public string inputName;
     void Start()
     {
-        rd = new Random();
         StartCoroutine(CountDownTimerToFlip());
     }
-
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 
-        if (isFlipActive)
-        {
-            Debug.Log("Flip Active");
-            StartCoroutine(CountDownTimerToFlip());
+        if (isFlipActive){
+            // Debug.Log("Flip Active");
             GlobalData.KeyDown = true;
             GlobalData.KeyHold = true;
             GlobalData.KeyUp = false;
-        }
-        else
-        {
+            // Debug.Log("Key Down" + GlobalData.KeyDown);
+            // Debug.Log("Key Hold" + GlobalData.KeyHold);
+            // Debug.Log("Key Up" + GlobalData.KeyUp);
+        }else{
             GlobalData.KeyDown = Input.GetKeyDown(KeyCode.Space);
             GlobalData.KeyHold = Input.GetKey(KeyCode.Space);
             GlobalData.KeyUp = Input.GetKeyUp(KeyCode.Space);
+            // Debug.Log("Key Down" + GlobalData.KeyDown);
+            // Debug.Log("Key Hold" + GlobalData.KeyHold);
+            // Debug.Log("Key Up" + GlobalData.KeyUp);
         }
 
         //control the flipper with space bar
@@ -42,15 +41,11 @@ public class PizzaAutoFlipperLevelController : MonoBehaviour
         {
             GetComponent<HingeJoint>().useMotor = true;
         }
-        if (isFlipActive)
-        {
+
+        if (isFlipActive){
             isFlipActive = false;
-            //GlobalData.KeyUp = true;
-            StartCoroutine(CountDownTimerToFlip());
             StartCoroutine(wait());
-        }
-        else
-        {
+        }else{
             GlobalData.KeyUp = Input.GetKeyUp(KeyCode.Space);
         }
 
@@ -60,73 +55,58 @@ public class PizzaAutoFlipperLevelController : MonoBehaviour
         }
     }
 
-    IEnumerator wait()
-    {
-        Debug.Log("Start wait");
+    IEnumerator wait(){
         yield return new WaitForSeconds(1f);
-        Debug.Log("End and set useMotor to false");
         GetComponent<HingeJoint>().useMotor = false;
-
+        GlobalData.countDownInProcess = false;
+        StartCoroutine(CountDownTimerToFlip());
     }
-    IEnumerator CountDownTimerToFlip()
-    {
-        bool waiting = true;
-        float timer = getTime(count);
-
-        while (waiting)
-        {
-            yield return new WaitForSeconds(0.1f);
-            timer -= 1f;
-            if (timer == 0)
-            {
-                waiting = false;
-                count++;
-                Debug.Log("Count value: " + count);
-                //this value is used to generate the time gap before the auto flip happens
+    IEnumerator CountDownTimerToFlip(){
+        if(!GlobalData.countDownInProcess){
+            bool waiting = true;
+            float timer = getTime(Score.CurrentScore);
+            Debug.Log("CountDown and Score "+timer+" "+Score.CurrentScore);
+            GlobalData.countDownInProcess = true;
+            while (waiting){
+                yield return new WaitForSeconds(0.1f);
+                timer -= 1f;
+                Debug.Log("score "+timer);
+                if (timer == 0){
+                    waiting = false;
+                }
             }
+                isFlipActive = true;
         }
-        isFlipActive = true;
     }
 
     //Randomizing time value
     //Decreasing time period as the game progresses - measured by count value
-    int getTime(int count)
-    {
+    int getTime(int score){
+        count++;
         int time = 0;
-        switch (count)
-        {
-            case int n when (n >= 400):
-                Console.WriteLine($"Count In 30 or above: {n}");
-                time = rd.Next(40, 45);
+        switch (score){
+            case int n when (n > 30):
+                time = 20;
                 break;
-
-            case int n when (n < 400 && n >= 250):
-                time = rd.Next(40, 50);
-                // Console.WriteLine($"Count In between 30 and 50: {n}");
+            case int n when (n > 25 && n <= 30):
+                time = 25;
                 break;
-
-            case int n when (n < 250 && n >= 200):
-                time = rd.Next(50, 60);
+            case int n when (n >20 && n <= 25):
+                time = 30;
                 break;
-            case int n when (n < 200 && n >= 100):
-                time = rd.Next(60, 70);
+            case int n when (n > 15 && n <= 20):
+                time = 35;
                 break;
-            case int n when (n < 100 && n >= 75):
-                time = rd.Next(70, 80);
+            case int n when (n > 10 && n <= 15):
+                time = 40;
                 break;
-            case int n when (n < 75 && n >= 40):
-                time = rd.Next(80, 90);
+            case int n when (n > 5 && n <= 10):
+                time = 45;
                 break;
-            case int n when (n < 40 && n >= 10):
-                time = rd.Next(90, 100);
-                Console.WriteLine($"Count In between 5 and 3: {n}");
-                break;
-            case int n when (n < 10):
-                time = rd.Next(100, 120);
-                Console.WriteLine($"less than 3: {n}");
+            case int n when (n <= 5):
+                time = 50;
                 break;
         }
-
         return time;
     }
 }

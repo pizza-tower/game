@@ -13,6 +13,7 @@ public class GlobalData : MonoBehaviour
     public static bool KeyDown=false;
     public static bool KeyHold=false;
     public static bool KeyUp=false;
+    public static bool countDownInProcess=false;
 
     // Start is called before the first frame update
     void Start()
