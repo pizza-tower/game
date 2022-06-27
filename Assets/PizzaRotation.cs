@@ -4,60 +4,66 @@ using UnityEngine;
 
 public class PizzaRotation : MonoBehaviour
 {
-    private int TagIndex = 0;
-    string[] RedTags = new string[] {"R_1", "R_2", "R_3", "R_4", "R_5", "R_6"};
-    string[] YellowTags = new string[] {"Y_1", "Y_2", "Y_3", "Y_4", "Y_5", "Y_6"};
     public int IsRotating = 1;
     public int StopRotate = 0;
     public int IsRed;
+    public int TagInInt;
+    private bool AssignMaterial = false;
     // Start is called before the first frame update
     void Start()
     {
+        //tag in integer, corresponding to the Tag R_1 R_2...
+        TagInInt = Random.Range(0,6);
+        //random spawn initial direction
+        float InitialRotation = (float)TagInInt * (float)60.0;
+        transform.Rotate(0, InitialRotation, 0);
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(AssignMaterial == false)
+        {
+            if(IsRed == 1)
+            {
+                gameObject.GetComponent<Materials>().ToRed();
+            }
+            else 
+            {
+                gameObject.GetComponent<Materials>().ToYellow();   
+            }
+            AssignMaterial = true;
+        }
         if(IsRotating == 1  && StopRotate == 0)
         {
             StartCoroutine(Rotate());
+        }
+        if(StopRotate == 1)
+        {
+            IsRotating = 0;
         }
     }
     IEnumerator Rotate()
     {
         IsRotating = 0;
-        TagIndex += 1;
-        transform.Rotate(0, 60, 0);
-        if(IsRed == 1)
+        if(TagInInt ==  2|| TagInInt == 3|| TagInInt ==  4)
         {
-            gameObject.tag = RedTags[(TagIndex%6)];
-            gameObject.GetComponent<Materials>().ToRed();
-            if(gameObject.tag == "R_4" || gameObject.tag == "R_5" || gameObject.tag == "R_6" )
+            if(GetComponent<PizzaParabola>().IsBomb == false && GetComponent<PizzaParabola>().IsColorChanger == false)
             {
                 GlobalData.GoTransparent = 1;
             }
-            else 
-            {
-                GlobalData.GoTransparent = 0;
-            }
-        } 
+                
+        }
         else 
         {
-            gameObject.tag = YellowTags[(TagIndex%6)];
-            gameObject.GetComponent<Materials>().ToYellow();
-            if(gameObject.tag == "Y_4" || gameObject.tag == "Y_5" || gameObject.tag == "Y_6" )
-            {
-                GlobalData.GoTransparent = 1;
-            }
-            else 
-            {
-                GlobalData.GoTransparent = 0;
-            }
+            GlobalData.GoTransparent = 0;
         }
-
         
-        yield return new WaitForSeconds(1);
+        transform.Rotate(0, 60, 0);
+        TagInInt += 1;
+        TagInInt = TagInInt % 6;
+        yield return new WaitForSeconds((float)0.6);
         IsRotating = 1;
     }
 }
