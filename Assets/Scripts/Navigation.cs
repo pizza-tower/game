@@ -53,6 +53,8 @@ public class Navigation : MonoBehaviour
         GlobalData.isFirstFusionOver = false;
         GlobalData.gameover = false;
         Score.CurrentScore = 0;
+        GlobalData.nHorizontalFusions = 0;
+        GlobalData.nVerticalFusions = 0;
         ClearnGlobalList();
     }
 
