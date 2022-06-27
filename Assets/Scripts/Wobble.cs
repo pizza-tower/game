@@ -5,6 +5,7 @@ using UnityEngine;
 public class Wobble : MonoBehaviour
 {
     public int slices;
+    public int Anchor;
     PhysicMaterial frictionControl;
     bool wobbling = false;
     bool backward = false;
@@ -29,7 +30,7 @@ public class Wobble : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        slices = GetComponent<SliceList>().SList.Count;
+        slices = GlobalData.globalList[Anchor].Count;
         if (slices < 6) {
             wobbling = false;
         }
@@ -72,7 +73,7 @@ public class Wobble : MonoBehaviour
                 if (transform.position.x >= orig_pos.x + .04f) {
                     backward = true;
                 }
-                foreach (GameObject slice in GetComponent<SliceList>().SList) {
+                foreach (GameObject slice in GlobalData.globalList[Anchor]) {
                     Vector3 newpos = slice.transform.position;
                     newpos.x += .007f;
                     slice.transform.position = newpos;
@@ -89,7 +90,7 @@ public class Wobble : MonoBehaviour
                     if (transform.position.x <= orig_pos.x - .04f) {
                         backward = false;
                     }
-                foreach (GameObject slice in GetComponent<SliceList>().SList) {
+                foreach (GameObject slice in GlobalData.globalList[Anchor]) {
                     Vector3 newpos = slice.transform.position;
                     newpos.x -= .007f;
                     slice.transform.position = newpos;
@@ -103,9 +104,8 @@ public class Wobble : MonoBehaviour
         }
         if (falling) {
             wobbling = false;
-            print("falling");
             StartCoroutine(EndLevel());
-            foreach (GameObject slice in GetComponent<SliceList>().SList) {
+            foreach (GameObject slice in GlobalData.globalList[Anchor]) {
                 // slice.GetComponent<MeshCollider>().isTrigger = true;
                 Vector3 newpos = slice.transform.position;
                 newpos.y -= .05f;
@@ -117,7 +117,6 @@ public class Wobble : MonoBehaviour
     IEnumerator EndLevel() {
         yield return new WaitForSeconds(1);
         GlobalData.gameover = true;
-        print("happening");
 
     }
 
