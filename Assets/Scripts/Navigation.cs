@@ -16,6 +16,7 @@ public class Navigation : MonoBehaviour
         {
             GlobalData.globalList.Add(new List<GameObject>());
         }
+        Debug.Log("fuck");
     }
     void Start()
     {
@@ -61,7 +62,7 @@ public class Navigation : MonoBehaviour
         Score.CurrentScore = 0;
         GlobalData.nHorizontalFusions = 0;
         GlobalData.nVerticalFusions = 0;
-        ClearnGlobalList();
+        //CleanGlobalList();
     }
 
     public void RestartLevel() {

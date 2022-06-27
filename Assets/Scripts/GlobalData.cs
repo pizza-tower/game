@@ -14,7 +14,7 @@ public class GlobalData : MonoBehaviour
     public static bool isFirstFusionOver = false;
     public static bool gameover;
     public static int GoTransparent = 0;
-    public static List<List<GameObject>> globalList = new List<List<GameObject>>();
+    public static List<List<GameObject>> globalList;
     public static int totalscenes;
     public static int nHorizontalFusions = 0;
     public static int nVerticalFusions = 0;
@@ -27,6 +27,7 @@ public class GlobalData : MonoBehaviour
         previousSlice="AnchorOne";
         isFirstFusionOver = false;
         gameover = false;
+        globalList = new List<List<GameObject>>();
         for(int i = 0; i < 6; i++)
         {
             globalList.Add(new List<GameObject>());

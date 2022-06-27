@@ -15,7 +15,7 @@ public class Transparent : MonoBehaviour
     }
     IEnumerator GetStack()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1);
         StackOne = GlobalData.globalList[0];
         StackTwo = GlobalData.globalList[1];
         StackThree = GlobalData.globalList[2];

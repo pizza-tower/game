@@ -694,7 +694,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Level
 
-    1'
+    3'
 --- !u!222 &496816382
 CanvasRenderer:
   m_ObjectHideFlags: 0
