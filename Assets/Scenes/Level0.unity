@@ -160,7 +160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &82091915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,7 +639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 2127644179}
   levelText: {fileID: 840003135}
-  floatingTextPrefab: {fileID: 1275908600}
+  floatingTextPrefab: {fileID: 0}
   Instruction: {fileID: 1295668420}
 --- !u!1 &840003133
 GameObject:
@@ -1226,12 +1226,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53b77ad867d51684ea7afc1bec7b2c7a, type: 3}
---- !u!1 &1275908600 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7987349156076225966, guid: 53b77ad867d51684ea7afc1bec7b2c7a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1275908599}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1295668418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,7 +1581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1651530517
 MonoBehaviour:
   m_ObjectHideFlags: 0
