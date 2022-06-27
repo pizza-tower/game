@@ -15,10 +15,12 @@ public class GlobalData : MonoBehaviour
     public static bool gameover;
     public static int GoTransparent = 0;
     public static List<List<GameObject>> globalList = new List<List<GameObject>>();
+    public static int totalscenes;
     // Start is called before the first frame update
     void Start()
-    {
+    {        
        level = SceneManager.GetActiveScene().buildIndex;
+        totalscenes = SceneManager.sceneCountInBuildSettings;
         isFirstSlice = true;
         previousSlice="AnchorOne";
         isFirstFusionOver = false;

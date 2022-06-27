@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Analytics;
 
 public class Score : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Score : MonoBehaviour
         pos.y = 0;
         pos.z = 0;
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.ShowPopupText("Test\n+5!", pos));
+        AnalyticsResult analyticsResult = Analytics.CustomEvent("Get the score" + CurrentScore);
     }
     void Start()
     {
