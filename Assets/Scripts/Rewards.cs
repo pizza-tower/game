@@ -17,6 +17,7 @@ public class Rewards : MonoBehaviour
     }
     public void LaunchBomb()
     {
+        //Debug.Log($"Rewards Currency {RewardsCurrency}");
         if(RewardsCurrency < 1)
         {
             return;

@@ -17,8 +17,7 @@ public class GlobalData : MonoBehaviour
     public static List<List<GameObject>> globalList = new List<List<GameObject>>();
     // Start is called before the first frame update
     void Start()
-    {
-        Debug.Log("inside global");
+    {        
        level = SceneManager.GetActiveScene().buildIndex;
         isFirstSlice = true;
         previousSlice="AnchorOne";

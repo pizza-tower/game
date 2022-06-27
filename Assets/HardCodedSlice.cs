@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HardCodedSlice : MonoBehaviour
-{
-
-    //public GameObject YellowPrefab;
+{    
     private GameObject AnchorToFind;
     private string ListToAdd = "AnchorOne";
     private SliceList List;
@@ -24,46 +22,21 @@ public class HardCodedSlice : MonoBehaviour
         //     List = AnchorToFind.GetComponent<SliceList>();
         //     List.SList.Add(gameObject);            
         // }
-    //Debug.Log("Hopeful");
+    
         //Fixed hardcoded stacks for now. Need to randomize them later.
-
-        // StackOne = GlobalData.globalList[0];
-        // StackTwo = GlobalData.globalList[1];
-        // StackThree = GlobalData.globalList[2];
-
-
         GlobalData.globalList[0].Add(GameObject.Find("stack1_slice1"));
         GlobalData.globalList[0].Add(GameObject.Find("stack1_slice2"));
         GlobalData.globalList[0].Add(GameObject.Find("stack1_slice3"));
         GlobalData.globalList[0].Add(GameObject.Find("stack1_slice4"));
+        GlobalData.globalList[0].Add(GameObject.Find("stack1_slice5"));
 
         GlobalData.globalList[1].Add(GameObject.Find("stack2_slice1"));
         GlobalData.globalList[1].Add(GameObject.Find("stack2_slice2"));
         GlobalData.globalList[1].Add(GameObject.Find("stack2_slice3"));
         GlobalData.globalList[1].Add(GameObject.Find("stack2_slice4"));
-
-        // AnchorToFind = GameObject.FindWithTag("AnchorOne");
-        //     List = AnchorToFind.GetComponent<SliceList>();
-        //     List.SList.Add(GameObject.Find("stack1_slice1"));
-        //     List.SList.Add(GameObject.Find("stack1_slice2"));
-        //     List.SList.Add(GameObject.Find("stack1_slice3"));
-        //     List.SList.Add(GameObject.Find("stack1_slice4"));
-          
-
-        // AnchorToFind = GameObject.FindWithTag("AnchorTwo");
-        //     List = AnchorToFind.GetComponent<SliceList>();
-        //     List.SList.Add(GameObject.Find("stack2_slice1"));
-        //     List.SList.Add(GameObject.Find("stack2_slice2"));
-        //     List.SList.Add(GameObject.Find("stack2_slice3"));
-        //     List.SList.Add(GameObject.Find("stack2_slice4"));
-          
+        GlobalData.globalList[1].Add(GameObject.Find("stack2_slice5"));
 
     }
-
-
-
-
-
 
     // Update is called once per frame
     void Update()

@@ -10,8 +10,7 @@ public class Transparent : MonoBehaviour
     List<GameObject> StackTwo;
     List<GameObject> StackThree;
     void Start()
-    {
-        Debug.Log("inside transparent");
+    {        
         StackOne = GlobalData.globalList[0];
         StackTwo = GlobalData.globalList[1];
         StackThree = GlobalData.globalList[2];
