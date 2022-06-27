@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 public class FuseSlice : MonoBehaviour
 {
     public GameObject ui_handler;
-    public int nVerticalFusions = 0;
-    public int nHorizontalFusions = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -63,8 +62,8 @@ public class FuseSlice : MonoBehaviour
             for (int k = 1; k <= n; k++)
             {
                 Destroy(SList[SList.Count - k]);
-                nVerticalFusions++;
-                AnalyticsResult vertFusionAnalytics = Analytics.CustomEvent("VerticalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"VerticalFusions", nVerticalFusions}});
+                GlobalData.nVerticalFusions++;
+                AnalyticsResult vertFusionAnalytics = Analytics.CustomEvent("VerticalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"VerticalFusions", GlobalData.nVerticalFusions}});
             }
             SList.RemoveRange(SList.Count - n, n);
 
@@ -207,8 +206,9 @@ public class FuseSlice : MonoBehaviour
             foreach (List<GameObject> anchorList in allLists)
             {
                 Destroy(anchorList[minHeight - 1]);
-                nHorizontalFusions++;
-                AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"HorizontalFusions", nHorizontalFusions}});
+                
+                GlobalData.nHorizontalFusions++;
+                AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"HorizontalFusions", GlobalData.nHorizontalFusions}});
 
                 if(anchorList.Count>=minHeight){
                     
