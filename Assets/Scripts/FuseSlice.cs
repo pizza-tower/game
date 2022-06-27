@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class FuseSlice : MonoBehaviour
 {
     public GameObject ui_handler;
+    public int nVerticalFusions = 0;
+    public int nHorizontalFusions = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +63,8 @@ public class FuseSlice : MonoBehaviour
             for (int k = 1; k <= n; k++)
             {
                 Destroy(SList[SList.Count - k]);
+                nVerticalFusions++;
+                AnalyticsResult vertFusionAnalytics = Analytics.CustomEvent("VerticalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"VerticalFusions", nVerticalFusions}});
             }
             SList.RemoveRange(SList.Count - n, n);
 
@@ -168,14 +174,13 @@ public class FuseSlice : MonoBehaviour
                 are the same.
                 */
                 
-                
+
                 var color1 = allLists[0][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color2 = allLists[1][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color3 = allLists[2][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color4 = allLists[3][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color5 = allLists[4][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color6 = allLists[5][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
-                
 
                 /*
                 var color1 = GameObject.FindWithTag("AnchorOne").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
@@ -202,6 +207,9 @@ public class FuseSlice : MonoBehaviour
             foreach (List<GameObject> anchorList in allLists)
             {
                 Destroy(anchorList[minHeight - 1]);
+                nHorizontalFusions++;
+                AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"HorizontalFusions", nHorizontalFusions}});
+
                 if(anchorList.Count>=minHeight){
                     
 
