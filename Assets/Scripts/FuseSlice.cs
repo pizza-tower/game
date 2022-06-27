@@ -218,7 +218,7 @@ public class FuseSlice : MonoBehaviour
 
                     for (int i = minHeight; i < anchorList.Count; i++){
                         Vector3 slicePosition = anchorList[i].transform.position;
-                        slicePosition.y = slicePosition.y - 0.18f;
+                        slicePosition.y = slicePosition.y - 0.2f;
                         //var newEndPoint = anchorList[minHeight].transform.position.y - 0.15;
                         //Vector3 newVector = new Vector3(oldPosition.x, oldPosition.y - 15f, oldPosition.z);
                         //anchorList[minHeight].transform.TransformPoint(newVector); //= Vector3.MoveTowards(oldPosition, newVector, Time.deltaTime * 1);
