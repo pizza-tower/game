@@ -11,6 +11,11 @@ public class Transparent : MonoBehaviour
     List<GameObject> StackThree;
     void Start()
     {        
+        StartCoroutine(GetStack());
+    }
+    IEnumerator GetStack()
+    {
+        yield return new WaitForSeconds(0.2f);
         StackOne = GlobalData.globalList[0];
         StackTwo = GlobalData.globalList[1];
         StackThree = GlobalData.globalList[2];
