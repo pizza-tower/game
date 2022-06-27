@@ -167,7 +167,7 @@ public class PizzaParabola : MonoBehaviour
         
         EndPoint = (GameObject.FindWithTag(TargetAnchor)).transform.position;
         float Count = GlobalData.globalList[TargetList].Count;
-        EndPoint.y += 0.15f * Count;
+        EndPoint.y += 0.2f * Count;
         //Debug.Log($"Position: {EndPoint}");    
     }
     void Update()
