@@ -39,11 +39,11 @@ public class NewSliceSpawn : MonoBehaviour
         AnalyticsResult analyticsResult = Analytics.CustomEvent(
             "SlicesThrown",
             new Dictionary<string, object> {
-                { "Level", "Tutorial" },
+                { "Level", SceneManager.GetActiveScene().name },
                 { "Slice", SpawnRed }
             }
         );
-        Debug.Log("analyticsResult: " + analyticsResult);
+        Debug.Log("analyticsResult (SlicesThrown): " + analyticsResult);
         Analytics.FlushEvents();
 
         if(SpawnRed == 1)
