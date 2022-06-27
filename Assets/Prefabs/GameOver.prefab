@@ -392,7 +392,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1439277529257246894, guid: fdcd6c2ce5e7c45e3807faabea8d4cdc,
+      - m_Target: {fileID: 6883081368905185296, guid: fdcd6c2ce5e7c45e3807faabea8d4cdc,
           type: 3}
         m_TargetAssemblyTypeName: Navigation, Assembly-CSharp
         m_MethodName: GoBack
@@ -919,7 +919,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1439277529257246894, guid: fdcd6c2ce5e7c45e3807faabea8d4cdc,
+      - m_Target: {fileID: 6883081368905185296, guid: fdcd6c2ce5e7c45e3807faabea8d4cdc,
           type: 3}
         m_TargetAssemblyTypeName: Navigation, Assembly-CSharp
         m_MethodName: StartNextLevel
@@ -950,7 +950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &607004398892809748
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1372,7 +1372,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1439277529257246894, guid: fdcd6c2ce5e7c45e3807faabea8d4cdc,
+      - m_Target: {fileID: 6883081368905185296, guid: fdcd6c2ce5e7c45e3807faabea8d4cdc,
           type: 3}
         m_TargetAssemblyTypeName: Navigation, Assembly-CSharp
         m_MethodName: RestartLevel

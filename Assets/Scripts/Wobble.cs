@@ -104,7 +104,6 @@ public class Wobble : MonoBehaviour
         }
         if (falling) {
             wobbling = false;
-            print("falling");
             StartCoroutine(EndLevel());
             foreach (GameObject slice in GlobalData.globalList[Anchor]) {
                 // slice.GetComponent<MeshCollider>().isTrigger = true;
@@ -118,7 +117,6 @@ public class Wobble : MonoBehaviour
     IEnumerator EndLevel() {
         yield return new WaitForSeconds(1);
         GlobalData.gameover = true;
-        print("happening");
 
     }
 

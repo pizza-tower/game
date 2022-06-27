@@ -52,8 +52,10 @@ public class Materials : MonoBehaviour
     {
         if(GetComponent<PizzaRotation>().IsRed == 1 || GetComponent<PizzaRotation>().IsBrown == 1)
         {
+            //Brown, Red slices will be turned yellow when colorchanger slice is thrown.
             ToYellow();
             GetComponent<PizzaRotation>().IsRed = 0;
+            GetComponent<PizzaRotation>().IsBrown = 0;
             if(gameObject.tag == "R_1" || gameObject.tag == "B_1")
             {
                 gameObject.tag = "Y_1";

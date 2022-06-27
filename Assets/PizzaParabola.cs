@@ -185,12 +185,7 @@ public class PizzaParabola : MonoBehaviour
         {
             Debug.Log("Space is pressed");
             AssignTag();
-
-
-            // //Thomas
-            // space_press_times++;
-            // AnalyticsResult analyticsResult = Analytics.CustomEvent("The player press " + space_press_times);
-
+            
             // if(GlobalData.isFirstFusionOver==false && Level==0)
             // {
             //     GameObject ui_handler = GameObject.Find("UIHandler");
