@@ -10,7 +10,12 @@ public class Transparent : MonoBehaviour
     List<GameObject> StackTwo;
     List<GameObject> StackThree;
     void Start()
+    {        
+        StartCoroutine(GetStack());
+    }
+    IEnumerator GetStack()
     {
+        yield return new WaitForSeconds(1);
         StackOne = GlobalData.globalList[0];
         StackTwo = GlobalData.globalList[1];
         StackThree = GlobalData.globalList[2];
@@ -20,7 +25,12 @@ public class Transparent : MonoBehaviour
         IsTransparent = 0;
         for(int i = 0; i < StackOne.Count; i++)
         {
-            if(StackOne[i].GetComponent<PizzaRotation>().IsRed == 1)
+            //For brown slice
+            if(StackOne[i].GetComponent<PizzaRotation>().IsBrown == 1)
+            {
+                StackOne[i].GetComponent<Materials>().ToBrown();
+            }
+            else if(StackOne[i].GetComponent<PizzaRotation>().IsRed == 1)
             {
                 StackOne[i].GetComponent<Materials>().ToRed();
             }
@@ -31,7 +41,12 @@ public class Transparent : MonoBehaviour
         }
         for(int i = 0; i < StackTwo.Count; i++)
         {
-            if(StackTwo[i].GetComponent<PizzaRotation>().IsRed == 1)
+            //For brown slice
+            if(StackTwo[i].GetComponent<PizzaRotation>().IsBrown == 1)
+            {
+                StackTwo[i].GetComponent<Materials>().ToBrown();
+            }
+            else if(StackTwo[i].GetComponent<PizzaRotation>().IsRed == 1)
             {
                 StackTwo[i].GetComponent<Materials>().ToRed();
             }
@@ -42,7 +57,12 @@ public class Transparent : MonoBehaviour
         }
         for(int i = 0; i < StackThree.Count; i++)
         {
-            if(StackThree[i].GetComponent<PizzaRotation>().IsRed == 1)
+            //For brown slice
+            if(StackThree[i].GetComponent<PizzaRotation>().IsBrown == 1)
+            {
+                StackThree[i].GetComponent<Materials>().ToBrown();
+            }
+            else if(StackThree[i].GetComponent<PizzaRotation>().IsRed == 1)
             {
                 StackThree[i].GetComponent<Materials>().ToRed();
             }
@@ -60,7 +80,12 @@ public class Transparent : MonoBehaviour
         {
             for(int i = 0; i < StackOne.Count; i++)
             {
-                if(StackOne[i].GetComponent<PizzaRotation>().IsRed == 1)
+                //For brown slice
+                if(StackOne[i].GetComponent<PizzaRotation>().IsBrown == 1)
+                {
+                    StackOne[i].GetComponent<Materials>().ToBrownTransparent();
+                }
+                else if(StackOne[i].GetComponent<PizzaRotation>().IsRed == 1)
                 {
                     StackOne[i].GetComponent<Materials>().ToRedTransparent();
                 }
@@ -75,7 +100,12 @@ public class Transparent : MonoBehaviour
         {
             for(int i = 0; i < StackTwo.Count; i++)
             {
-                if(StackTwo[i].GetComponent<PizzaRotation>().IsRed == 1)
+                //For brown slice
+                if(StackTwo[i].GetComponent<PizzaRotation>().IsBrown == 1)
+                {
+                    StackTwo[i].GetComponent<Materials>().ToBrownTransparent();
+                }
+                else if(StackTwo[i].GetComponent<PizzaRotation>().IsRed == 1)
                 {
                     StackTwo[i].GetComponent<Materials>().ToRedTransparent();
                 }
@@ -89,7 +119,12 @@ public class Transparent : MonoBehaviour
         {
             for(int i = 0; i < StackThree.Count; i++)
             {
-                if(StackThree[i].GetComponent<PizzaRotation>().IsRed == 1)
+                //For brown slice
+                if(StackThree[i].GetComponent<PizzaRotation>().IsBrown == 1)
+                {
+                    StackThree[i].GetComponent<Materials>().ToBrownTransparent();
+                }
+                else if(StackThree[i].GetComponent<PizzaRotation>().IsRed == 1)
                 {
                     StackThree[i].GetComponent<Materials>().ToRedTransparent();
                 }

@@ -8,22 +8,32 @@ public class Navigation : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject menu;
-    int totalscenes;
-
+    bool instantiated = false;
+    void CleanGlobalList()
+    {
+        GlobalData.globalList = new List<List<GameObject>>();
+        for(int i = 0; i < 6; i++)
+        {
+            GlobalData.globalList.Add(new List<GameObject>());
+        }
+        Debug.Log("fuck");
+    }
     void Start()
     {
-        totalscenes = SceneManager.sceneCountInBuildSettings;
-        menu.SetActive(false);
+    }
+    public void BackToMenu()
+    {
+        GlobalData.level = 0;
+        ResetVariables();
+        SceneManager.LoadScene(0);
     }
     public void GoBack() {
         int level = SceneManager.GetActiveScene().buildIndex;
         if (level > 0) {
             level--;
-            menu.SetActive(false);
             ResetVariables();
             GlobalData.level--;
             SceneManager.LoadScene(level);
-
         }
     }
 
@@ -32,15 +42,14 @@ public class Navigation : MonoBehaviour
         print(level);
         print("total:");
         print(SceneManager.sceneCount);
-        if(level  + 1 < totalscenes) {
+        if(level <= GlobalData.totalscenes) {
             level++;
-            menu.SetActive(false);
             ResetVariables();
             GlobalData.level++;
             SceneManager.LoadScene(level);
         }
-        else {
-            menu.SetActive(true);
+        else if(instantiated == false){
+            Instantiate(menu);
             
         }
     }
@@ -51,13 +60,15 @@ public class Navigation : MonoBehaviour
         GlobalData.isFirstFusionOver = false;
         GlobalData.gameover = false;
         Score.CurrentScore = 0;
+        GlobalData.nHorizontalFusions = 0;
+        GlobalData.nVerticalFusions = 0;
+        //CleanGlobalList();
     }
 
     public void RestartLevel() {
         int level = SceneManager.GetActiveScene().buildIndex;
         print("restart");
         ResetVariables();
-        menu.SetActive(false);
         SceneManager.LoadScene(level);
 
     }
@@ -69,8 +80,9 @@ public class Navigation : MonoBehaviour
         // if(GlobalData.gameover){
         //     RestartSameLevel();
         // }else{
-        if (GlobalData.gameover) {
-            menu.SetActive(true);
+        if (GlobalData.gameover && instantiated == false) {
+            Instantiate(menu);
+            instantiated = true;
         }
         if(Score.CurrentScore >= 30){
             StartNextLevel();

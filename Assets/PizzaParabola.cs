@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine. SceneManagement;
+using UnityEngine.Analytics;
 
 public class PizzaParabola : MonoBehaviour
 {
@@ -67,7 +68,7 @@ public class PizzaParabola : MonoBehaviour
         
         
     }
-    void AssignTag()
+     public void AssignTag()
     {
  
         if(GetComponent<PizzaRotation>().TagInInt == 0)
@@ -166,8 +167,8 @@ public class PizzaParabola : MonoBehaviour
         
         EndPoint = (GameObject.FindWithTag(TargetAnchor)).transform.position;
         float Count = GlobalData.globalList[TargetList].Count;
-        EndPoint.y += 0.15f * Count;
-            
+        EndPoint.y += 0.2f * Count;
+        //Debug.Log($"Position: {EndPoint}");    
     }
     void Update()
     {
@@ -184,17 +185,27 @@ public class PizzaParabola : MonoBehaviour
         {
             Debug.Log("Space is pressed");
             AssignTag();
+            
+            // if(GlobalData.isFirstFusionOver==false && Level==0)
+            // {
+            //     GameObject ui_handler = GameObject.Find("UIHandler");
+            //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
+            // }
+
             AddToList();
             ThrowSlice();
+
             StopRotation();
             IsThrowing = 1;
             //Refresh the spawner and generate a new slice
             ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
+
+
         }
         if(IsThrowing == 1)
         {
             Animation += Time.deltaTime;
-            if(Animation >= 2.0f)
+            if(Animation >= 1.3f)
             {
                 
                 IsThrowing = 0;
@@ -224,7 +235,7 @@ public class PizzaParabola : MonoBehaviour
                 }
 
             }
-            transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 2f);
+            transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 1.3f);
          
         }
 
