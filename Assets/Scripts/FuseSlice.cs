@@ -217,8 +217,12 @@ public class FuseSlice : MonoBehaviour
                 anchorList.RemoveAt(minHeight - 1);
 
             }
+            if(sameColor)
+            {
+                Rewards.EarnCurrency();
+            }
             Score.EarnScore();
-            Rewards.EarnCurrency();
+            
         }
     }
 }

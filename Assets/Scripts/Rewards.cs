@@ -15,6 +15,13 @@ public class Rewards : MonoBehaviour
     public static void EarnCurrency()
     {
         RewardsCurrency += 1;
+        ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(1));
+        GameObject ui_handler = GameObject.Find("UIHandler");
+        Vector3 pos;
+        pos.x = 0;
+        pos.y = 1;
+        pos.z = 0;
+        ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.ShowPopupText("Gold+1 !", pos));
     }
     public void LaunchBomb()
     {

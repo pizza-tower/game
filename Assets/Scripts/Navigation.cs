@@ -9,7 +9,14 @@ public class Navigation : MonoBehaviour
     // Start is called before the first frame update
     public GameObject menu;
     bool instantiated = false;
-
+    void ClearnGlobalList()
+    {
+        GlobalData.globalList = new List<List<GameObject>>();
+        for(int i = 0; i < 6; i++)
+        {
+            GlobalData.globalList.Add(new List<GameObject>());
+        }
+    }
     void Start()
     {
     }
@@ -20,7 +27,6 @@ public class Navigation : MonoBehaviour
             ResetVariables();
             GlobalData.level--;
             SceneManager.LoadScene(level);
-
         }
     }
 
@@ -47,6 +53,7 @@ public class Navigation : MonoBehaviour
         GlobalData.isFirstFusionOver = false;
         GlobalData.gameover = false;
         Score.CurrentScore = 0;
+        ClearnGlobalList();
     }
 
     public void RestartLevel() {

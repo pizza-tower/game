@@ -10,7 +10,7 @@ public class NewSliceSpawn : MonoBehaviour
     public GameObject Slice;
 
     public int NeedsNewSlice = 1;
-    public int NewSliceSpawnSeconds;
+    public float NewSliceSpawnSeconds;
     int SpawnRed;
 
     void Start()
