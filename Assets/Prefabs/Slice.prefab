@@ -104,6 +104,7 @@ MonoBehaviour:
   StopRotate: 0
   IsRed: 0
   TagInInt: 0
+  hardcoded: 0
 --- !u!114 &7177997025272590011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,3 +164,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e227b1ccc451c50469071aa9bc28f9fc, type: 2}
   - {fileID: 2100000, guid: 48c9f052432f74a429a7f67d17b40b8d, type: 2}
   - {fileID: 2100000, guid: 9df5d4c06418f9e429eb061bb7b58836, type: 2}
+  - {fileID: 2100000, guid: 875bc419c4949b148a01e6d6198ecd56, type: 2}
