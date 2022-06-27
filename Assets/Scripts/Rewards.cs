@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Rewards : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Rewards : MonoBehaviour
             return;
         }
         RewardsCurrency -= 1;
+        ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
         SliceOnPeel = GameObject.FindWithTag("0");
         SliceOnPeel.GetComponent<PizzaParabola>().IsBomb = true;
         SliceOnPeel.GetComponent<Materials>().ToBomb();
@@ -33,6 +35,7 @@ public class Rewards : MonoBehaviour
             return;
         }
         RewardsCurrency -= 1;
+        ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
         SliceOnPeel = GameObject.FindWithTag("0");
         SliceOnPeel.GetComponent<PizzaParabola>().IsColorChanger = true;
         SliceOnPeel.GetComponent<Materials>().ToRainbow();

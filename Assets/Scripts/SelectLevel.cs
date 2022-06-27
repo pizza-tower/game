@@ -8,6 +8,7 @@ public class SelectLevel : MonoBehaviour
     private void LoadLevel(int l)
     {
         Debug.Log("Clicked level button " + l.ToString());
+        SceneManager.LoadScene("Level" + l.ToString());
     }
 
     public void L0()
