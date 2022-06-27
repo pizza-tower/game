@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class FuseSlice : MonoBehaviour
 {
     public GameObject ui_handler;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +63,8 @@ public class FuseSlice : MonoBehaviour
                 Destroy(SList[SList.Count - k]);
                 GlobalData.nVerticalFusions++;
                 AnalyticsResult vertFusionAnalytics = Analytics.CustomEvent("VerticalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"VerticalFusions", GlobalData.nVerticalFusions}});
+
+
             }
             SList.RemoveRange(SList.Count - n, n);
 
@@ -206,9 +207,11 @@ public class FuseSlice : MonoBehaviour
             foreach (List<GameObject> anchorList in allLists)
             {
                 Destroy(anchorList[minHeight - 1]);
+
                 
                 GlobalData.nHorizontalFusions++;
                 AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"HorizontalFusions", GlobalData.nHorizontalFusions}});
+
 
                 if(anchorList.Count>=minHeight){
                     
