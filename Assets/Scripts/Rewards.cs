@@ -31,6 +31,7 @@ public class Rewards : MonoBehaviour
             return;
         }
         RewardsCurrency -= 1;
+        GlobalData.LevelRewardConsume++;
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
         SliceOnPeel = GameObject.FindWithTag("0");
         SliceOnPeel.GetComponent<PizzaParabola>().IsBomb = true;
@@ -43,6 +44,7 @@ public class Rewards : MonoBehaviour
             return;
         }
         RewardsCurrency -= 1;
+        GlobalData.LevelRewardConsume++;
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
         SliceOnPeel = GameObject.FindWithTag("0");
         SliceOnPeel.GetComponent<PizzaParabola>().IsColorChanger = true;
