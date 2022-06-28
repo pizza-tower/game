@@ -167,7 +167,7 @@ public class PizzaParabola : MonoBehaviour
         
         EndPoint = (GameObject.FindWithTag(TargetAnchor)).transform.position;
         float Count = GlobalData.globalList[TargetList].Count;
-        EndPoint.y += 0.15f * Count;
+        EndPoint.y += 0.2f * Count;
         //Debug.Log($"Position: {EndPoint}");    
     }
     void Update()
@@ -205,7 +205,7 @@ public class PizzaParabola : MonoBehaviour
         if(IsThrowing == 1)
         {
             Animation += Time.deltaTime;
-            if(Animation >= 2.0f)
+            if(Animation >= 1.3f)
             {
                 
                 IsThrowing = 0;
@@ -235,7 +235,7 @@ public class PizzaParabola : MonoBehaviour
                 }
 
             }
-            transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 2f);
+            transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 1.3f);
          
         }
 

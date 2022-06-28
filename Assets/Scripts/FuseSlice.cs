@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class FuseSlice : MonoBehaviour
 {
@@ -59,6 +61,10 @@ public class FuseSlice : MonoBehaviour
             for (int k = 1; k <= n; k++)
             {
                 Destroy(SList[SList.Count - k]);
+                GlobalData.nVerticalFusions++;
+                AnalyticsResult vertFusionAnalytics = Analytics.CustomEvent("VerticalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"VerticalFusions", GlobalData.nVerticalFusions}});
+
+
             }
             SList.RemoveRange(SList.Count - n, n);
 
@@ -168,14 +174,13 @@ public class FuseSlice : MonoBehaviour
                 are the same.
                 */
                 
-                
+
                 var color1 = allLists[0][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color2 = allLists[1][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color3 = allLists[2][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color4 = allLists[3][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color5 = allLists[4][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
                 var color6 = allLists[5][minHeight - 1].GetComponent<PizzaRotation>().IsRed;
-                
 
                 /*
                 var color1 = GameObject.FindWithTag("AnchorOne").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
@@ -202,12 +207,18 @@ public class FuseSlice : MonoBehaviour
             foreach (List<GameObject> anchorList in allLists)
             {
                 Destroy(anchorList[minHeight - 1]);
+
+                
+                GlobalData.nHorizontalFusions++;
+                AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"HorizontalFusions", GlobalData.nHorizontalFusions}});
+
+
                 if(anchorList.Count>=minHeight){
                     
 
                     for (int i = minHeight; i < anchorList.Count; i++){
                         Vector3 slicePosition = anchorList[i].transform.position;
-                        slicePosition.y = slicePosition.y - 0.18f;
+                        slicePosition.y = slicePosition.y - 0.2f;
                         //var newEndPoint = anchorList[minHeight].transform.position.y - 0.15;
                         //Vector3 newVector = new Vector3(oldPosition.x, oldPosition.y - 15f, oldPosition.z);
                         //anchorList[minHeight].transform.TransformPoint(newVector); //= Vector3.MoveTowards(oldPosition, newVector, Time.deltaTime * 1);
@@ -217,8 +228,12 @@ public class FuseSlice : MonoBehaviour
                 anchorList.RemoveAt(minHeight - 1);
 
             }
+            if(sameColor)
+            {
+                Rewards.EarnCurrency();
+            }
             Score.EarnScore();
-            Rewards.EarnCurrency();
+            
         }
     }
 }

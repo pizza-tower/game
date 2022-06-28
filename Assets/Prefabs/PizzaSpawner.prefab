@@ -58,9 +58,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
-  Bomb: {fileID: 5756864356215992658, guid: 4b6c9360fd456ae4fb2db897a95e5e91, type: 3}
-  ColorChanger: {fileID: 6023514827888255650, guid: 45d21feccaadce64ebcc688e9b200338,
-    type: 3}
   NeedsNewSlice: 1
-  NewSliceSpawnSeconds: 2
-  SpawnRed: 0
+  NewSliceSpawnSeconds: 1.3
