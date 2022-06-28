@@ -24,17 +24,17 @@ public class HardCodedSlice : MonoBehaviour
         // }
     
         //Fixed hardcoded stacks for now. Need to randomize them later.
-        GlobalData.globalList[0].Add(GameObject.Find("stack1_slice1"));
-        GlobalData.globalList[0].Add(GameObject.Find("stack1_slice2"));
-        GlobalData.globalList[0].Add(GameObject.Find("stack1_slice3"));
-        GlobalData.globalList[0].Add(GameObject.Find("stack1_slice4"));
-        GlobalData.globalList[0].Add(GameObject.Find("stack1_slice5"));
+        GlobalData.globalList[3].Add(GameObject.Find("stack1_slice1"));
+        GlobalData.globalList[3].Add(GameObject.Find("stack1_slice2"));
+        GlobalData.globalList[3].Add(GameObject.Find("stack1_slice3"));
+        GlobalData.globalList[3].Add(GameObject.Find("stack1_slice4"));
+        GlobalData.globalList[3].Add(GameObject.Find("stack1_slice5"));
 
-        GlobalData.globalList[1].Add(GameObject.Find("stack2_slice1"));
-        GlobalData.globalList[1].Add(GameObject.Find("stack2_slice2"));
-        GlobalData.globalList[1].Add(GameObject.Find("stack2_slice3"));
-        GlobalData.globalList[1].Add(GameObject.Find("stack2_slice4"));
-        GlobalData.globalList[1].Add(GameObject.Find("stack2_slice5"));
+        GlobalData.globalList[4].Add(GameObject.Find("stack2_slice1"));
+        GlobalData.globalList[4].Add(GameObject.Find("stack2_slice2"));
+        GlobalData.globalList[4].Add(GameObject.Find("stack2_slice3"));
+        GlobalData.globalList[4].Add(GameObject.Find("stack2_slice4"));
+        GlobalData.globalList[4].Add(GameObject.Find("stack2_slice5"));
 
     }
 

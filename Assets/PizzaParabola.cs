@@ -27,7 +27,7 @@ public class PizzaParabola : MonoBehaviour
     }
     // Update is called once per frame
     void AddToList()
-    {
+    {        
         string tag = gameObject.tag;
         if (tag == "R_1" || tag == "Y_1")
         {
