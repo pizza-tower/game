@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 
 public class Score : MonoBehaviour
 {
-    public static int CurrentScore = 0;
-    public int ScoreToPass = 30;
+    public static int CurrentScore = 15;
+    public int ScoreToPass = 45;
 
     // Start is called before the first frame update
 
