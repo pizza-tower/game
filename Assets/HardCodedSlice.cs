@@ -7,6 +7,7 @@ public class HardCodedSlice : MonoBehaviour
     private GameObject AnchorToFind;
     private string ListToAdd = "AnchorOne";
     private SliceList List;
+    public int Level;
     // Start is called before the first frame update
     void Start()
     {       
@@ -24,6 +25,20 @@ public class HardCodedSlice : MonoBehaviour
         // }
     
         //Fixed hardcoded stacks for now. Need to randomize them later.
+        if(Level==2){
+        GlobalData.globalList[2].Add(GameObject.Find("stack1_slice1"));
+        GlobalData.globalList[2].Add(GameObject.Find("stack1_slice2"));
+        GlobalData.globalList[2].Add(GameObject.Find("stack1_slice3"));
+        GlobalData.globalList[2].Add(GameObject.Find("stack1_slice4"));
+        GlobalData.globalList[2].Add(GameObject.Find("stack1_slice5"));
+
+        GlobalData.globalList[5].Add(GameObject.Find("stack2_slice1"));
+        GlobalData.globalList[5].Add(GameObject.Find("stack2_slice2"));
+        GlobalData.globalList[5].Add(GameObject.Find("stack2_slice3"));
+        GlobalData.globalList[5].Add(GameObject.Find("stack2_slice4"));
+        GlobalData.globalList[5].Add(GameObject.Find("stack2_slice5"));
+        }
+        else{
         GlobalData.globalList[3].Add(GameObject.Find("stack1_slice1"));
         GlobalData.globalList[3].Add(GameObject.Find("stack1_slice2"));
         GlobalData.globalList[3].Add(GameObject.Find("stack1_slice3"));
@@ -35,6 +50,7 @@ public class HardCodedSlice : MonoBehaviour
         GlobalData.globalList[4].Add(GameObject.Find("stack2_slice3"));
         GlobalData.globalList[4].Add(GameObject.Find("stack2_slice4"));
         GlobalData.globalList[4].Add(GameObject.Find("stack2_slice5"));
+        }
 
     }
 
