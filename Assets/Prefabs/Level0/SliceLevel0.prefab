@@ -162,4 +162,6 @@ MonoBehaviour:
   IsRotating: 1
   StopRotate: 0
   IsRed: 0
+  IsBrown: 0
   TagInInt: 0
+  hardcoded: 0
