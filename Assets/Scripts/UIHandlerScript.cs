@@ -14,6 +14,8 @@ public interface IPizzaTowerUIMessageTarget : IEventSystemHandler
     void SetLevel(int l);
     void SetGold(int g);
     void IncrementGold(int g);
+    void SetFlowInstruction(string text);
+
     public void ShowPopupText(string text, Vector3 position);
 
     //Popup text functions
@@ -28,6 +30,7 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     public Text goldText;
     public GameObject floatingTextPrefab;
     public Text Instruction;
+    public Text FlowInstruction;
 
     private int score = 0;
     private int score_required = 1;
@@ -71,6 +74,10 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     public void SetTutorialInstruction(string instruction)
     {
         Instruction.text = instruction;
+    }
+
+    public void SetFlowInstruction(string inst){
+        FlowInstruction.text = inst;
     }
     public void ShowPopupText(string text, Vector3 position)
     {

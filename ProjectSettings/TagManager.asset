@@ -29,6 +29,7 @@ TagManager:
   - Menu
   - RewardButton
   - hardcoded
+  - flowui
   layers:
   - Default
   - TransparentFX
