@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class FuseSliceLevel0 : MonoBehaviour
 {
@@ -30,7 +32,7 @@ public class FuseSliceLevel0 : MonoBehaviour
         //if any slice of the top 'n' slices is not of desired color, return false
         //else return true
 
-        var color =
+         var color =
             SList[SList.Count - 1].GetComponent<PizzaRotationLevel0>().IsRed;
         for (int i = 1; i <= n; i++)
         {
@@ -38,6 +40,10 @@ public class FuseSliceLevel0 : MonoBehaviour
             if (
                 SList[SList.Count - i].GetComponent<PizzaRotationLevel0>().IsRed !=color
             ) return false;
+
+            //Brown slice cannot be fused with other slices
+            if (SList[SList.Count - i].GetComponent<PizzaRotationLevel0>().IsBrown == 1)
+             return false;
         }
 
         //All top n slices are of desired color
@@ -51,20 +57,24 @@ public class FuseSliceLevel0 : MonoBehaviour
         //Check if top n slices in have same color as the latest slice
         if (mCheckTopNSlices(SList))
         {
-            Debug.Log("Slices were same colored");
+            //Debug.Log("Slices were same colored");
             for (int k = 1; k <= n; k++)
             {
                 Destroy(SList[SList.Count - k]);
-            }
-            if(GlobalData.isFirstFusionOver==false)
-            {
-                Debug.Log("This is the first fusion");
-                GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Well done! You fused 3 slices and made it disappear!"));
-            }
-            GlobalData.isFirstFusionOver = true;
-            SList.RemoveRange(SList.Count - n, n);
+                GlobalData.nVerticalFusions++;
+                AnalyticsResult vertFusionAnalytics = Analytics.CustomEvent("VerticalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"VerticalFusions", GlobalData.nVerticalFusions}});
 
+
+            }
+            // if(GlobalData.isFirstFusionOver==false)
+            // {
+            //     Debug.Log("This is the first fusion");
+            //     GameObject ui_handler = GameObject.Find("UIHandler");
+            //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Well done! You fused 3 slices and made it disappear!"));
+            // }
+            // GlobalData.isFirstFusionOver = true;
+            SList.RemoveRange(SList.Count - n, n);
+            GlobalData.isFirstFusionOver = true;
             //No score for vertical fusion, hence commenting it out.
             //Score.EarnScore();
             //Debug.Log("we earn score +" + Score.CurrentScore);
@@ -122,6 +132,7 @@ public class FuseSliceLevel0 : MonoBehaviour
         //for now check if all the slices at that height are same, if yes, fuse and disappear
         bool sameColor = false;
         bool halfPizza = false;
+        bool brownSlice = false;
         if (minHeight != 0)
         {
             if (
@@ -147,6 +158,13 @@ public class FuseSliceLevel0 : MonoBehaviour
                     {
                         sameColor = true;
                     }
+                    //Brown slices cannot be horizontally fused
+                    else if(allLists[i][minHeight - 1].GetComponent<PizzaRotation>().IsBrown==1)
+                    {
+                        brownSlice = true;
+                        sameColor = false;
+                        break;
+                    }
                     else
                     {
                         sameColor = false;
@@ -163,6 +181,7 @@ public class FuseSliceLevel0 : MonoBehaviour
                 are the same.
                 */
                 
+
                 var color1 = allLists[0][minHeight - 1].GetComponent<PizzaRotationLevel0>().IsRed;
                 var color2 = allLists[1][minHeight - 1].GetComponent<PizzaRotationLevel0>().IsRed;
                 var color3 = allLists[2][minHeight - 1].GetComponent<PizzaRotationLevel0>().IsRed;
@@ -180,24 +199,33 @@ public class FuseSliceLevel0 : MonoBehaviour
                 */
                 if(color1 == color2 && color2 == color3 && color4==color5 && color5 == color6 && color1!=color4){
                     halfPizza= true;
+                    Debug.Log("case 1");
                 }else if(color2 == color3 && color3 == color4 && color5==color6 && color6 == color1 && color2!=color5){
                     halfPizza = true;
+                    Debug.Log("case 2");
                 }else if(color3 == color4 && color4 == color5 && color6==color1 && color1 == color2 && color3!=color6){
-                    halfPizza = true;}
+                    halfPizza = true;
+                    Debug.Log("case 3");}
             }
         }
 
-    if (sameColor || halfPizza)
+    if ((sameColor || halfPizza) && brownSlice != true)
         {
             foreach (List<GameObject> anchorList in allLists)
             {
                 Destroy(anchorList[minHeight - 1]);
+
+                
+                GlobalData.nHorizontalFusions++;
+                AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"HorizontalFusions", GlobalData.nHorizontalFusions}});
+
+
                 if(anchorList.Count>=minHeight){
                     
 
                     for (int i = minHeight; i < anchorList.Count; i++){
                         Vector3 slicePosition = anchorList[i].transform.position;
-                        slicePosition.y = slicePosition.y - 0.18f;
+                        slicePosition.y = slicePosition.y - 0.2f;
                         //var newEndPoint = anchorList[minHeight].transform.position.y - 0.15;
                         //Vector3 newVector = new Vector3(oldPosition.x, oldPosition.y - 15f, oldPosition.z);
                         //anchorList[minHeight].transform.TransformPoint(newVector); //= Vector3.MoveTowards(oldPosition, newVector, Time.deltaTime * 1);
@@ -207,15 +235,18 @@ public class FuseSliceLevel0 : MonoBehaviour
                 anchorList.RemoveAt(minHeight - 1);
 
             }
-            Score.EarnScore();
-            Rewards.EarnCurrency();
-            if (GlobalData.isFirstHorizontalFusionOver == false)
+            if(sameColor)
             {
-                Debug.Log("This is the first horizontal fusion");
-                GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Well done! You fused 6 slices and scored! Good luck!"));
+                Rewards.EarnCurrency();
+                // if (GlobalData.isFirstHorizontalFusionOver == false){
+                //     Debug.Log("This is the first horizontal fusion");
+                //     GameObject ui_handler = GameObject.Find("UIHandler");
+                //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Well done! You fused 6 slices and scored! Good luck!"));
+                // }
+                // GlobalData.isFirstHorizontalFusionOver = true;
             }
-            GlobalData.isFirstHorizontalFusionOver = true;
+            Score.EarnScore();
+
         }
     }
 }

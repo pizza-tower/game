@@ -1,8 +1,10 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine. SceneManagement;
+using UnityEngine.Analytics;
 
 public class PizzaParabolaLevel0 : MonoBehaviour
 {
@@ -19,6 +21,11 @@ public class PizzaParabolaLevel0 : MonoBehaviour
     bool IsPlaced = false;  
     public bool IsBomb = false;
     public bool IsColorChanger = false;
+
+    public bool GetIsPlaced(){
+        return IsPlaced;
+    }
+
     void Start()
     {
         StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
@@ -67,33 +74,30 @@ public class PizzaParabolaLevel0 : MonoBehaviour
 
 
     }
-    void AssignTag()
+    public void AssignTag()
     {
         string tag = gameObject.tag;  
-        if (GlobalData.isFirstSlice == false && GlobalData.isFirstFusionOver==false)
-        {
-            if(isRotationToBeStopped(tag))
-            {
-                StopRotation();
-                Debug.Log("Rotation stopped");
-                GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Press SPACE BAR NOW!!  Will the slices fuse? Lets see!"));
-            }
-        }
+        // if (GlobalData.isFirstSlice == false && GlobalData.isFirstFusionOver==false)
+        // {
+        //     if(isRotationToBeStopped(tag))
+        //     {
+        //         StopRotation();
+        //         Debug.Log("Rotation stopped");
+        //         // GameObject ui_handler = GameObject.Find("UIHandler");
+        //         // ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Press SPACE BAR NOW!!  Will the slices fuse? Lets see!"));
+        //     }
+        // }
+        // if (GlobalData.isFirstSlice == false && GlobalData.isFirstFusionOver == true && GlobalData.isFirstHorizontalFusionOver == false)
+        // {
+        //     if (isRotationToBeStoppedForHorizontalFusion(tag))
+        //     {
+        //         StopRotation();
+        //         Debug.Log("Rotation stopped");
+        //         // GameObject ui_handler = GameObject.Find("UIHandler");
+        //         // ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Press SPACE BAR NOW!! Lets see if we can make the similar colored slices at the same level disappear!"));
+        //     }
+        // }
 
-        if (GlobalData.isFirstSlice == false && GlobalData.isFirstFusionOver == true && GlobalData.isFirstHorizontalFusionOver == false)
-        {
-
-            if (isRotationToBeStoppedForHorizontalFusion(tag))
-            {
-                StopRotation();
-                Debug.Log("Rotation stopped");
-                GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Press SPACE BAR NOW!! Lets see if we can make the similar colored slices at the same level disappear!"));
-            }
-
-
-        }
         if(GetComponent<PizzaRotationLevel0>().TagInInt == 0)
         {
             if(GetComponent<PizzaRotationLevel0>().IsRed == 1)
@@ -173,7 +177,7 @@ public class PizzaParabolaLevel0 : MonoBehaviour
         IsColorChanger = false;
         if(GlobalData.globalList[TargetList].Count >= 1)
         {
-            GlobalData.globalList[TargetList][GlobalData.globalList[TargetList].Count - 1].GetComponent<Materials>().FlipColor();
+            GlobalData.globalList[TargetList][GlobalData.globalList[TargetList].Count - 1].GetComponent<MaterialsLevel0>().FlipColor();
         }
         FuseSliceLevel0.mHorizontalFuse();
         FuseSliceLevel0.mVertFuse(GlobalData.globalList[TargetList]);
@@ -195,8 +199,8 @@ public class PizzaParabolaLevel0 : MonoBehaviour
         
         EndPoint = (GameObject.FindWithTag(TargetAnchor)).transform.position;
         float Count = GlobalData.globalList[TargetList].Count;
-        EndPoint.y += 0.15f * Count;
-            
+        EndPoint.y += 0.2f * Count;
+        //Debug.Log($"Position: {EndPoint}"); 
     }
     void Update()
     {
@@ -215,18 +219,19 @@ public class PizzaParabolaLevel0 : MonoBehaviour
         {
             Debug.Log("Space is pressed");
             AssignTag();
-            if(GlobalData.isFirstFusionOver==false)
-            {
-                GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
-            }
-            if (GlobalData.isFirstHorizontalFusionOver == false)
-            {
-                GameObject ui_handler = GameObject.Find("UIHandler");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
-            }
+            // if(GlobalData.isFirstFusionOver==false)
+            // {
+            //     GameObject ui_handler = GameObject.Find("UIHandler");
+            //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
+            // }
+            // if (GlobalData.isFirstHorizontalFusionOver == false)
+            // {
+            //     GameObject ui_handler = GameObject.Find("UIHandler");
+            //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
+            // }
             AddToList();
             ThrowSlice();
+
             StopRotation();
             GlobalData.previousSlice = gameObject.tag;
             Debug.Log("Here" + GlobalData.previousSlice);
@@ -237,7 +242,7 @@ public class PizzaParabolaLevel0 : MonoBehaviour
         if(IsThrowing == 1)
         {
             Animation += Time.deltaTime;
-            if(Animation >= 2.0f)
+            if(Animation >= 1.3f)
             {
 
                 IsThrowing = 0;
@@ -258,6 +263,7 @@ public class PizzaParabolaLevel0 : MonoBehaviour
                 FuseSliceLevel0.mVertFuse(GlobalData.globalList[TargetList]);
                 //if it is a bomb, do bomb
                 
+                
                 if (GlobalData.globalList[TargetList].Count >= 6) {
                     GameObject.FindWithTag(TargetAnchor).GetComponent<Wobble>().startWobble();
                 }
@@ -267,15 +273,15 @@ public class PizzaParabolaLevel0 : MonoBehaviour
                 }
 
             }
-            transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 2f);
+            transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 1.3f);
          
         }
 
-        if(IsPlaced == true && (GlobalData.isFirstFusionOver == false|| GlobalData.isFirstHorizontalFusionOver==false))
-        {
-            GameObject ui_handler = GameObject.Find("UIHandler");
-            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("The pizza slice rotates! Stay put, and Wait for my instruction to throw!"));
-        }
+        // if(IsPlaced == true && (GlobalData.isFirstFusionOver == false|| GlobalData.isFirstHorizontalFusionOver==false))
+        // {
+        //     GameObject ui_handler = GameObject.Find("UIHandler");
+        //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("The pizza slice rotates! Stay put, and Wait for my instruction to throw!"));
+        // }
 
         //else
         //{
@@ -317,8 +323,7 @@ public class PizzaParabolaLevel0 : MonoBehaviour
         }
 
         return false;
-
-    }
+}
 
     bool isRotationToBeStoppedForHorizontalFusion(string tag)
     {
@@ -349,8 +354,6 @@ public class PizzaParabolaLevel0 : MonoBehaviour
         {
             return true;
         }
-
         return false;
-
     }
 }
