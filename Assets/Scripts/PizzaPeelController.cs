@@ -17,7 +17,7 @@ public class PizzaPeelController : MonoBehaviour
         bool KeyUp = Input.GetKeyUp(KeyCode.Space); 
 	bool KeyUpMobile = Input.GetKeyUp(KeyCode.Tap);
         //control the flipper with space bar
-        if(KeyDown && KeyHold && !KeyUp)
+        if(KeyDown && KeyHold && !KeyUp || KeyUpMobile)
         {
             GetComponent<HingeJoint>().useMotor = true;
             
