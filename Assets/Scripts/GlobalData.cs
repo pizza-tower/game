@@ -25,6 +25,7 @@ public class GlobalData : MonoBehaviour
     {        
         level = SceneManager.GetActiveScene().buildIndex;
         totalscenes = SceneManager.sceneCountInBuildSettings;
+        print(totalscenes);
         isFirstSlice = true;
         previousSlice="AnchorOne";
         isFirstFusionOver = false;
