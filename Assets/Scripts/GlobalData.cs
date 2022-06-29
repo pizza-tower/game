@@ -19,6 +19,7 @@ public class GlobalData : MonoBehaviour
     public static int totalscenes;
     public static int nHorizontalFusions = 0;
     public static int nVerticalFusions = 0;
+    public static int LevelRewardConsume = 0;
     // Start is called before the first frame update
     void Start()
     {        
