@@ -203,6 +203,7 @@ public class TutorialHandler : MonoBehaviour
 
                 if(stage == 7){
                     pressSpace = false;
+                    Destroy(pizzaSpawnerComponent.GetSpawnedSlice());
                     pizzaSpawner.SetActive(false);
                     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                         x.SetFlowInstruction("(Press Enter to Continue)");
