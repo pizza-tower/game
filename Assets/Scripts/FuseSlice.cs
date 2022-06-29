@@ -143,7 +143,13 @@ public class FuseSlice : MonoBehaviour
                         .GetComponent<PizzaRotation>().IsRed;
                 for (int i = 1; i < 6; i++)
                 {
-                    if (
+                    if(allLists[i][minHeight - 1].GetComponent<PizzaRotation>().IsBrown==1)
+                    {
+                        brownSlice = true;
+                        sameColor = false;
+                        break;
+                    }
+                    else if (
                         givenColor ==
                         allLists[i][minHeight - 1]
                             .GetComponent<PizzaRotation>().IsRed
@@ -152,12 +158,7 @@ public class FuseSlice : MonoBehaviour
                         sameColor = true;
                     }
                     //Brown slices cannot be horizontally fused
-                    else if(allLists[i][minHeight - 1].GetComponent<PizzaRotation>().IsBrown==1)
-                    {
-                        brownSlice = true;
-                        sameColor = false;
-                        break;
-                    }
+                  
                     else
                     {
                         sameColor = false;
@@ -190,6 +191,8 @@ public class FuseSlice : MonoBehaviour
                 var color5 = GameObject.FindWithTag("AnchorFive").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
                 var color6 = GameObject.FindWithTag("AnchorSix").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
                 */
+                if(brownSlice!=true)
+                {
                 if(color1 == color2 && color2 == color3 && color4==color5 && color5 == color6 && color1!=color4){
                     halfPizza= true;
                     Debug.Log("case 1");
@@ -199,6 +202,7 @@ public class FuseSlice : MonoBehaviour
                 }else if(color3 == color4 && color4 == color5 && color6==color1 && color1 == color2 && color3!=color6){
                     halfPizza = true;
                     Debug.Log("case 3");}
+                }
             }
         }
 
