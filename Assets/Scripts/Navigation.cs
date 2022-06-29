@@ -93,7 +93,7 @@ public class Navigation : MonoBehaviour
             Instantiate(menu);
             instantiated = true;
         }
-        if(Score.CurrentScore >= 5){
+        if(Score.CurrentScore >= 30){
             StartNextLevel();
              }
         } 
