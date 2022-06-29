@@ -30,7 +30,7 @@ public class Navigation : MonoBehaviour
     }
     public void GoBack() {
         int level = SceneManager.GetActiveScene().buildIndex;
-        analyticsResult analyticsResult2 = Analytics.CustomEvent("Rewards Usage", new Dictionary<object, object> { { level, GlobalData.LevelRewardConsume } });
+        AnalyticsResult analyticsResult2 = Analytics.CustomEvent("RewardsUsage", new Dictionary<string, object> { { "Level",SceneManager.GetActiveScene().name}, {"RewardsUsage",GlobalData.LevelRewardConsume } });
         GlobalData.LevelRewardConsume = 0;
         if (level > 0) {
             level--;
@@ -47,7 +47,7 @@ public class Navigation : MonoBehaviour
         print("total:");
         print(SceneManager.sceneCount);
         AnalyticsResult analyticsResult1 = Analytics.CustomEvent("Level Win", new Dictionary<string, object> { { "level", level } });
-        analyticsResult analyticsResult2 = Analytics.CustomEvent("Rewards Usage", new Dictionary<object, object> { {level, GlobalData.LevelRewardConsume } });
+        AnalyticsResult analyticsResult2 = Analytics.CustomEvent("RewardsUsage", new Dictionary<string, object> { { "Level",SceneManager.GetActiveScene().name}, {"RewardsUsage",GlobalData.LevelRewardConsume } });
         GlobalData.LevelRewardConsume = 0;
         if (level <= GlobalData.totalscenes) {
             level++;
@@ -75,7 +75,7 @@ public class Navigation : MonoBehaviour
     public void RestartLevel() {
         int level = SceneManager.GetActiveScene().buildIndex;
         print("restart");
-        analyticsResult analyticsResult2 = Analytics.CustomEvent("Rewards Usage", new Dictionary<object, object> { { level, GlobalData.LevelRewardConsume } });
+        AnalyticsResult analyticsResult2 = Analytics.CustomEvent("RewardsUsage", new Dictionary<string, object> { { "Level",SceneManager.GetActiveScene().name}, {"RewardsUsage",GlobalData.LevelRewardConsume } });
         GlobalData.LevelRewardConsume = 0;
         ResetVariables();
         SceneManager.LoadScene(level);
@@ -90,7 +90,7 @@ public class Navigation : MonoBehaviour
         //     RestartSameLevel();
         // }else{
         if (GlobalData.gameover && instantiated == false) {
-            AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", level } });
+            AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", SceneManager.GetActiveScene().buildIndex} });
             Instantiate(menu);
             instantiated = true;
         }
