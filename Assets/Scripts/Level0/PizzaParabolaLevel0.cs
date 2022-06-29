@@ -242,9 +242,9 @@ public class PizzaParabolaLevel0 : MonoBehaviour
         if(IsThrowing == 1)
         {
             Animation += Time.deltaTime;
-            if(Animation >= 1.3f)
+            if(Animation > 1.3f)
             {
-
+                Animation = 1.3f
                 IsThrowing = 0;
                 IsPlaced = true;
                    if(IsBomb)
