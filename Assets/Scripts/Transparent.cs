@@ -9,6 +9,7 @@ public class Transparent : MonoBehaviour
     List<GameObject> StackOne;
     List<GameObject> StackTwo;
     List<GameObject> StackThree;
+    List<GameObject> StackSix;
     void Start()
     {        
         StartCoroutine(GetStack());
@@ -19,6 +20,7 @@ public class Transparent : MonoBehaviour
         StackOne = GlobalData.globalList[0];
         StackTwo = GlobalData.globalList[1];
         StackThree = GlobalData.globalList[2];
+        StackSix = GlobalData.globalList[5];
     }
     void BackToNormal()
     {
@@ -69,6 +71,22 @@ public class Transparent : MonoBehaviour
             else 
             {
                 StackThree[i].GetComponent<Materials>().ToYellow();
+            }
+        }
+        for (int i = 0; i < StackSix.Count; i++)
+        {
+            //For brown slice
+            if (StackSix[i].GetComponent<PizzaRotation>().IsBrown == 1)
+            {
+                StackSix[i].GetComponent<Materials>().ToBrown();
+            }
+            else if (StackSix[i].GetComponent<PizzaRotation>().IsRed == 1)
+            {
+                StackSix[i].GetComponent<Materials>().ToRed();
+            }
+            else
+            {
+                StackSix[i].GetComponent<Materials>().ToYellow();
             }
         }
     }
@@ -133,6 +151,25 @@ public class Transparent : MonoBehaviour
                     StackThree[i].GetComponent<Materials>().ToYellowTransparent();
                 }
             }        
+        }
+        if (StackSix.Count >= 4)
+        {
+            for (int i = 0; i < StackSix.Count; i++)
+            {
+                //For brown slice
+                if (StackSix[i].GetComponent<PizzaRotation>().IsBrown == 1)
+                {
+                    StackSix[i].GetComponent<Materials>().ToBrownTransparent();
+                }
+                else if (StackSix[i].GetComponent<PizzaRotation>().IsRed == 1)
+                {
+                    StackSix[i].GetComponent<Materials>().ToRedTransparent();
+                }
+                else
+                {
+                    StackSix[i].GetComponent<Materials>().ToYellowTransparent();
+                }
+            }
         }
 
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PizzaRotation : MonoBehaviour
+public class PizzaRotationLevel0 : MonoBehaviour
 {
     public int IsRotating = 1;
     public int StopRotate = 0;
@@ -21,8 +21,8 @@ public class PizzaRotation : MonoBehaviour
         //random spawn initial direction
         float InitialRotation = (float)TagInInt * (float)60.0;
         transform.Rotate(0, InitialRotation, 0);
-       }      
-      
+        }
+
     }
 
 
@@ -31,19 +31,19 @@ public class PizzaRotation : MonoBehaviour
     {
         if(AssignMaterial == false)
         {
-             if(IsBrown == 1)
+            if(IsBrown == 1)
             {
-                gameObject.GetComponent<Materials>().ToBrown();
+                gameObject.GetComponent<MaterialsLevel0>().ToBrown();
             }
             else if(IsRed == 1)
             {
-                gameObject.GetComponent<Materials>().ToRed();
+                gameObject.GetComponent<MaterialsLevel0>().ToRed();
             }
             else 
             {
-                gameObject.GetComponent<Materials>().ToYellow();   
+                gameObject.GetComponent<MaterialsLevel0>().ToYellow();   
             }
-           
+
             AssignMaterial = true;
         }
         if(IsRotating == 1  && StopRotate == 0 && hardcoded!=true)
@@ -59,13 +59,12 @@ public class PizzaRotation : MonoBehaviour
     IEnumerator Rotate()
     {
         IsRotating = 0;
-        if(TagInInt ==  2|| TagInInt == 3)
+        if(TagInInt ==  2|| TagInInt == 3|| TagInInt ==  4)
         {
-            if(GetComponent<PizzaParabola>().IsBomb == false && GetComponent<PizzaParabola>().IsColorChanger == false)
+            if(GetComponent<PizzaParabolaLevel0>().IsBomb == false && GetComponent<PizzaParabolaLevel0>().IsColorChanger == false)
             {
                 GlobalData.GoTransparent = 1;
-            }
-                
+            } 
         }
         else 
         {
@@ -75,7 +74,7 @@ public class PizzaRotation : MonoBehaviour
         transform.Rotate(0, 60, 0);
         TagInInt += 1;
         TagInInt = TagInInt % 6;
- 
+        
         yield return new WaitForSeconds((float)0.6);
         IsRotating = 1;
     }

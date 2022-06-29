@@ -17,7 +17,7 @@ public class Navigation : MonoBehaviour
         {
             GlobalData.globalList.Add(new List<GameObject>());
         }
-        Debug.Log("fuck");
+        
     }
     void Start()
     {

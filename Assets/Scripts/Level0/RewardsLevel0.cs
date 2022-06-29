@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class Rewards : MonoBehaviour
+public class RewardsLevel0 : MonoBehaviour
 {
     // Start is called before the first frame update
     GameObject SliceOnPeel;
@@ -16,7 +15,6 @@ public class Rewards : MonoBehaviour
     public static void EarnCurrency()
     {
         RewardsCurrency += 1;
-        EnableDisableButtons();
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(1));
         GameObject ui_handler = GameObject.Find("UIHandler");
         Vector3 pos;
@@ -33,12 +31,10 @@ public class Rewards : MonoBehaviour
             return;
         }
         RewardsCurrency -= 1;
-        EnableDisableButtons();
-        GlobalData.LevelRewardConsume++;
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
         SliceOnPeel = GameObject.FindWithTag("0");
-        SliceOnPeel.GetComponent<PizzaParabola>().IsBomb = true;
-        SliceOnPeel.GetComponent<Materials>().ToBomb();
+        SliceOnPeel.GetComponent<PizzaParabolaLevel0>().IsBomb = true;
+        SliceOnPeel.GetComponent<MaterialsLevel0>().ToBomb();
     }
     public void LaunchColorChanger()
     {
@@ -47,30 +43,11 @@ public class Rewards : MonoBehaviour
             return;
         }
         RewardsCurrency -= 1;
-        EnableDisableButtons();
-        GlobalData.LevelRewardConsume++;
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
         SliceOnPeel = GameObject.FindWithTag("0");
-        SliceOnPeel.GetComponent<PizzaParabola>().IsColorChanger = true;
-        SliceOnPeel.GetComponent<Materials>().ToRainbow();
+        SliceOnPeel.GetComponent<PizzaParabolaLevel0>().IsColorChanger = true;
+        SliceOnPeel.GetComponent<MaterialsLevel0>().ToRainbow();
     }
-
-    private static void EnableDisableButtons()
-    {
-        Button colorChangerButton = GameObject.Find("ColorChanger").GetComponent<Button>();
-        Button bombButton = GameObject.Find("Button").GetComponent<Button>();
-        if(RewardsCurrency<=0)
-        {
-            colorChangerButton.interactable=false;
-            bombButton.interactable=false;
-        }
-        else
-        {
-            colorChangerButton.interactable=true;
-            bombButton.interactable=true;
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {

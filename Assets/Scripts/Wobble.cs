@@ -29,10 +29,12 @@ public class Wobble : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        slices = GlobalData.globalList[Anchor].Count;
-        if (slices < 6) {
-            wobbling = false;
+    {   
+        if(GlobalData.globalList.Count > 0){
+            slices = GlobalData.globalList[Anchor].Count;
+            if (slices < 6) {
+                wobbling = false;
+            }
         }
         // if (slices >= 6 && slices < 9) {
         //     // wobble = GetComponent<Animation>();
