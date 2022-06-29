@@ -9,6 +9,7 @@ public class Navigation : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject menu;
+    public GameObject   winscreen;
     bool instantiated = false;
     void CleanGlobalList()
     {
@@ -17,7 +18,7 @@ public class Navigation : MonoBehaviour
         {
             GlobalData.globalList.Add(new List<GameObject>());
         }
-        Debug.Log("fuck");
+        
     }
     void Start()
     {
@@ -49,14 +50,15 @@ public class Navigation : MonoBehaviour
         AnalyticsResult analyticsResult1 = Analytics.CustomEvent("Level Win", new Dictionary<string, object> { { "level", level } });
         AnalyticsResult analyticsResult2 = Analytics.CustomEvent("RewardsUsage", new Dictionary<string, object> { { "Level",SceneManager.GetActiveScene().name}, {"RewardsUsage",GlobalData.LevelRewardConsume } });
         GlobalData.LevelRewardConsume = 0;
-        if (level <= GlobalData.totalscenes) {
+        if (level + 1 < GlobalData.totalscenes) {
             level++;
             ResetVariables();
             GlobalData.level++;
             SceneManager.LoadScene(level);
         }
         else if(instantiated == false){
-            Instantiate(menu);
+            Instantiate(winscreen);
+            instantiated = true;
             
         }
     }
@@ -86,9 +88,6 @@ public class Navigation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if(GlobalData.gameover){
-        //     RestartSameLevel();
-        // }else{
         if (GlobalData.gameover && instantiated == false) {
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", SceneManager.GetActiveScene().buildIndex} });
             Instantiate(menu);

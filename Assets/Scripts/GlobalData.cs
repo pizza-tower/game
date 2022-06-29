@@ -8,10 +8,11 @@ public class GlobalData : MonoBehaviour
 {    
 
     public static int verticalFusionHeight=3;
-    public static int level = 0;
-    public static bool isFirstSlice = true;
-    public static string previousSlice="AnchorOne";
+    public static int level;
+    public static bool isFirstSlice;
+    public static string previousSlice;
     public static bool isFirstFusionOver = false;
+    public static bool isFirstHorizontalFusionOver;
     public static bool gameover;
     public static int GoTransparent = 0;
     public static List<List<GameObject>> globalList;
@@ -24,9 +25,11 @@ public class GlobalData : MonoBehaviour
     {        
         level = SceneManager.GetActiveScene().buildIndex;
         totalscenes = SceneManager.sceneCountInBuildSettings;
+        print(totalscenes);
         isFirstSlice = true;
         previousSlice="AnchorOne";
         isFirstFusionOver = false;
+        isFirstHorizontalFusionOver = false;
         gameover = false;
         globalList = new List<List<GameObject>>();
         for(int i = 0; i < 6; i++)
@@ -46,6 +49,14 @@ public class GlobalData : MonoBehaviour
     void setIsFirstSlice(bool status)
     {
         isFirstSlice = status;
+    }
+
+    public static void ResetGlobalList(){
+        globalList = new List<List<GameObject>>();
+        for(int i = 0; i < 6; i++)
+        {
+            globalList.Add(new List<GameObject>());
+        }
     }
 
 }
