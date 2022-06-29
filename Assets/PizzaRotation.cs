@@ -59,7 +59,7 @@ public class PizzaRotation : MonoBehaviour
     IEnumerator Rotate()
     {
         IsRotating = 0;
-        if(TagInInt ==  2|| TagInInt == 3|| TagInInt ==  4)
+        if(TagInInt ==  2|| TagInInt == 3)
         {
             if(GetComponent<PizzaParabola>().IsBomb == false && GetComponent<PizzaParabola>().IsColorChanger == false)
             {
