@@ -62,7 +62,7 @@ public class TutorialHandler : MonoBehaviour
     void showPizzaSlice(){
 
         Debug.Log("Showing Pizza Slice..");
-        pizzaSpawnerComponent.NewSliceSpawnSeconds = 0;
+        pizzaSpawnerComponent.NewSliceSpawnSeconds = 1;
         pizzaSpawnerComponent.SpawnRed = 0;
         pizzaSpawner.SetActive(true);
         
@@ -74,7 +74,7 @@ public class TutorialHandler : MonoBehaviour
     void pressSpaceInst(){
         
         ui_flow.SetActive(false);
-        pizzaSpawnerComponent.NewSliceSpawnSeconds = 0;
+        pizzaSpawnerComponent.NewSliceSpawnSeconds = 1;
         pizzaSpawnerComponent.NeedsNewSlice = 0;
         Debug.Log("Press Space to throw the Pizza");
         // slicesTemp.Add(pizzaSpawner.GetComponent<NewSliceSpawnLevel0>().GetSpawnedSlice());
