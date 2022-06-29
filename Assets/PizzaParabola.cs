@@ -27,7 +27,7 @@ public class PizzaParabola : MonoBehaviour
     }
     // Update is called once per frame
     void AddToList()
-    {
+    {        
         string tag = gameObject.tag;
         if (tag == "R_1" || tag == "Y_1")
         {
@@ -167,7 +167,7 @@ public class PizzaParabola : MonoBehaviour
         
         EndPoint = (GameObject.FindWithTag(TargetAnchor)).transform.position;
         float Count = GlobalData.globalList[TargetList].Count;
-        EndPoint.y += 0.15f * Count;
+        EndPoint.y += 0.2f * Count;
         //Debug.Log($"Position: {EndPoint}");    
     }
     void Update()
