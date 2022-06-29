@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Rewards : MonoBehaviour
+public class RewardsLevel0 : MonoBehaviour
 {
     // Start is called before the first frame update
     GameObject SliceOnPeel;
@@ -31,11 +31,10 @@ public class Rewards : MonoBehaviour
             return;
         }
         RewardsCurrency -= 1;
-        GlobalData.LevelRewardConsume++;
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
         SliceOnPeel = GameObject.FindWithTag("0");
-        SliceOnPeel.GetComponent<PizzaParabola>().IsBomb = true;
-        SliceOnPeel.GetComponent<Materials>().ToBomb();
+        SliceOnPeel.GetComponent<PizzaParabolaLevel0>().IsBomb = true;
+        SliceOnPeel.GetComponent<MaterialsLevel0>().ToBomb();
     }
     public void LaunchColorChanger()
     {
@@ -44,11 +43,10 @@ public class Rewards : MonoBehaviour
             return;
         }
         RewardsCurrency -= 1;
-        GlobalData.LevelRewardConsume++;
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
         SliceOnPeel = GameObject.FindWithTag("0");
-        SliceOnPeel.GetComponent<PizzaParabola>().IsColorChanger = true;
-        SliceOnPeel.GetComponent<Materials>().ToRainbow();
+        SliceOnPeel.GetComponent<PizzaParabolaLevel0>().IsColorChanger = true;
+        SliceOnPeel.GetComponent<MaterialsLevel0>().ToRainbow();
     }
     // Update is called once per frame
     void Update()
