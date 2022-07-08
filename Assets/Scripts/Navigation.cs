@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
+using TMPro;
 
 public class Navigation : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject menu;
     public GameObject   winscreen;
+    public GameObject endlevelscreen;
     bool instantiated = false;
     void CleanGlobalList()
     {
@@ -56,11 +58,7 @@ public class Navigation : MonoBehaviour
             GlobalData.level++;
             SceneManager.LoadScene(level);
         }
-        else if(instantiated == false){
-            Instantiate(winscreen);
-            instantiated = true;
-            
-        }
+
     }
 
     void ResetVariables() {
@@ -93,8 +91,23 @@ public class Navigation : MonoBehaviour
             Instantiate(menu);
             instantiated = true;
         }
-        if(Score.CurrentScore >= 30){
-            StartNextLevel();
+        if(Score.CurrentScore >= 5){
+            int level = SceneManager.GetActiveScene().buildIndex;
+            if (level + 1 >= GlobalData.totalscenes) {
+                if(instantiated == false){
+                    Instantiate(winscreen);
+                    instantiated = true;
+                
+                }
+            }
+            else {
+                if (instantiated == false) {
+                    Instantiate(endlevelscreen);
+                    instantiated = true;
+                }
+            
+            }
+
              }
         } 
     // }
