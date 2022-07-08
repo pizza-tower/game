@@ -88,22 +88,31 @@ public class Navigation : MonoBehaviour
     {
         if (GlobalData.gameover && instantiated == false) {
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", SceneManager.GetActiveScene().buildIndex} });
-            Instantiate(menu);
+            GameObject popup = Instantiate(menu);
             instantiated = true;
+            Transform finalscore = popup.transform.GetChild(1);
+            TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+            scoretext.SetText("score: {0}", Score.CurrentScore);    
         }
-        if(Score.CurrentScore >= 5){
+        if(Score.CurrentScore >= 30){
             int level = SceneManager.GetActiveScene().buildIndex;
             if (level + 1 >= GlobalData.totalscenes) {
                 if(instantiated == false){
-                    Instantiate(winscreen);
+                    GameObject popup = Instantiate(winscreen);
                     instantiated = true;
+                    Transform finalscore = popup.transform.GetChild(1);
+                    TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+                    scoretext.SetText("score: {0}", Score.CurrentScore);    
                 
                 }
             }
             else {
                 if (instantiated == false) {
-                    Instantiate(endlevelscreen);
+                    GameObject popup = Instantiate(endlevelscreen);
                     instantiated = true;
+                    Transform finalscore = popup.transform.GetChild(1);
+                    TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+                    scoretext.SetText("score: {0}", Score.CurrentScore);                    
                 }
             
             }
