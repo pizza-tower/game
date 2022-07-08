@@ -43,8 +43,7 @@ public class FuseSlice : MonoBehaviour
         //if any slice of the top 'n' slices is not of desired color, return false
         //else return true
 
-        var color =
-            SList[SList.Count - 1].GetComponent<MeshRenderer>().material.color;
+        var color = SList[SList.Count - 1].GetComponent<MeshRenderer>().material.color;
         for (int i = 1; i <= n; i++)
         {
             //There exists a slice in top n slices that is not of desired color
@@ -58,7 +57,7 @@ public class FuseSlice : MonoBehaviour
         }
 
         //All top n slices are of desired color
-        return true;
+        return false;
     }
 
     public static void mVertFuse(List<GameObject> SList, int Level)
