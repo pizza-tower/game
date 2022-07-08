@@ -79,6 +79,12 @@ public class FuseSlice : MonoBehaviour
     public static void BombFuse(List<GameObject> SList)
     {
         int n = SList.Count;
+        if(n>0){
+            
+            AudioSource audioData;
+            audioData = GameObject.Find("AnchorOne").GetComponent<AudioSource>();
+            audioData.Play(0);
+        }
         for (int k = 0; k < SList.Count; k++)
         {
             Destroy(SList[k]);
@@ -235,8 +241,19 @@ public class FuseSlice : MonoBehaviour
             if(sameColor)
             {
                 Rewards.EarnCurrency();
+                //Same color pizza gold currency audio
+                AudioSource audioData;
+                audioData = GameObject.Find("AnchorTwo").GetComponent<AudioSource>();
+                audioData.Play(0);
             }
             Score.EarnScore();
+            //Complete half-n-half cheer audio
+            if(!sameColor)
+            {
+            AudioSource audioData;
+            audioData = GameObject.Find("Plate").GetComponent<AudioSource>();
+            audioData.Play(0);
+            }
             
         }
     }

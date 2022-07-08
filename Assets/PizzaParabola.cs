@@ -168,6 +168,12 @@ public class PizzaParabola : MonoBehaviour
         EndPoint = (GameObject.FindWithTag(TargetAnchor)).transform.position;
         float Count = GlobalData.globalList[TargetList].Count;
         EndPoint.y += 0.2f * Count;
+
+        //Pizza slice throw audio effect
+        AudioSource audioData;
+        audioData = GameObject.Find("PizzaPeel").GetComponent<AudioSource>();
+        audioData.Play(0);
+
         //Debug.Log($"Position: {EndPoint}");    
     }
     void Update()
@@ -226,6 +232,7 @@ public class PizzaParabola : MonoBehaviour
                 FuseSlice.mHorizontalFuse();
                 FuseSlice.mVertFuse(GlobalData.globalList[TargetList]);
                 //if it is a bomb, do bomb
+                
                 
                 if (GlobalData.globalList[TargetList].Count >= 6) {
                     GameObject.FindWithTag(TargetAnchor).GetComponent<Wobble>().startWobble();
