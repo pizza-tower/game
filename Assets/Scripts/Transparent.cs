@@ -6,172 +6,56 @@ public class Transparent : MonoBehaviour
 {
     int IsTransparent = 0;
     // Start is called before the first frame update
-    List<GameObject> StackOne;
-    List<GameObject> StackTwo;
-    List<GameObject> StackThree;
-    List<GameObject> StackSix;
-    void Start()
-    {        
-        StartCoroutine(GetStack());
-    }
-    IEnumerator GetStack()
-    {
-        yield return new WaitForSeconds(1);
-        StackOne = GlobalData.globalList[0];
-        StackTwo = GlobalData.globalList[1];
-        StackThree = GlobalData.globalList[2];
-        StackSix = GlobalData.globalList[5];
-    }
+    List<int> indexesToEdit = new() { 0, 1, 2, 5 };
     void BackToNormal()
     {
+        List<List<GameObject>> glist = GlobalData.globalList;
         IsTransparent = 0;
-        for(int i = 0; i < StackOne.Count; i++)
+        for(int i = 0; i < indexesToEdit.Count; i++)
         {
-            //For brown slice
-            if(StackOne[i].GetComponent<PizzaRotation>().IsBrown == 1)
+            for(int j = 0; j < glist[i].Count; j++)
             {
-                StackOne[i].GetComponent<Materials>().ToBrown();
-            }
-            else if(StackOne[i].GetComponent<PizzaRotation>().IsRed == 1)
-            {
-                StackOne[i].GetComponent<Materials>().ToRed();
-            }
-            else 
-            {
-                StackOne[i].GetComponent<Materials>().ToYellow();
-            }
-        }
-        for(int i = 0; i < StackTwo.Count; i++)
-        {
-            //For brown slice
-            if(StackTwo[i].GetComponent<PizzaRotation>().IsBrown == 1)
-            {
-                StackTwo[i].GetComponent<Materials>().ToBrown();
-            }
-            else if(StackTwo[i].GetComponent<PizzaRotation>().IsRed == 1)
-            {
-                StackTwo[i].GetComponent<Materials>().ToRed();
-            }
-            else 
-            {
-                StackTwo[i].GetComponent<Materials>().ToYellow();
-            }
-        }
-        for(int i = 0; i < StackThree.Count; i++)
-        {
-            //For brown slice
-            if(StackThree[i].GetComponent<PizzaRotation>().IsBrown == 1)
-            {
-                StackThree[i].GetComponent<Materials>().ToBrown();
-            }
-            else if(StackThree[i].GetComponent<PizzaRotation>().IsRed == 1)
-            {
-                StackThree[i].GetComponent<Materials>().ToRed();
-            }
-            else 
-            {
-                StackThree[i].GetComponent<Materials>().ToYellow();
-            }
-        }
-        for (int i = 0; i < StackSix.Count; i++)
-        {
-            //For brown slice
-            if (StackSix[i].GetComponent<PizzaRotation>().IsBrown == 1)
-            {
-                StackSix[i].GetComponent<Materials>().ToBrown();
-            }
-            else if (StackSix[i].GetComponent<PizzaRotation>().IsRed == 1)
-            {
-                StackSix[i].GetComponent<Materials>().ToRed();
-            }
-            else
-            {
-                StackSix[i].GetComponent<Materials>().ToYellow();
+                SliceColor c = glist[i][j].GetComponent<PizzaRotation>().mColor;
+                switch(c)
+                {
+                    case SliceColor.Red:
+                        glist[i][j].GetComponent<Materials>().ToRed();
+                        break;
+                    case SliceColor.Yellow:
+                        glist[i][j].GetComponent<Materials>().ToYellow();
+                        break;
+                    case SliceColor.Brown:
+                        glist[i][j].GetComponent<Materials>().ToBrown();
+                        break;
+                }
             }
         }
     }
     void ToTransparent()
     {
+        List<List<GameObject>> glist = GlobalData.globalList;
         IsTransparent = 1;
-        //only change the 1,2,3 stack, and only when the stack height >= 4;
-        if(StackOne.Count >= 4)
+        for (int i = 0; i < indexesToEdit.Count; i++)
         {
-            for(int i = 0; i < StackOne.Count; i++)
+            //Do not make transparent if stack height < 4;
+            if (glist[i].Count < 4) continue;
+            for (int j = 0; j < glist[i].Count; j++)
             {
-                //For brown slice
-                if(StackOne[i].GetComponent<PizzaRotation>().IsBrown == 1)
+                SliceColor c = glist[i][j].GetComponent<PizzaRotation>().mColor;
+                switch (c)
                 {
-                    StackOne[i].GetComponent<Materials>().ToBrownTransparent();
-                }
-                else if(StackOne[i].GetComponent<PizzaRotation>().IsRed == 1)
-                {
-                    StackOne[i].GetComponent<Materials>().ToRedTransparent();
-                }
-                else 
-                {
-                    StackOne[i].GetComponent<Materials>().ToYellowTransparent();
-                }
-            }        
-        }
-
-        if(StackTwo.Count >= 4)
-        {
-            for(int i = 0; i < StackTwo.Count; i++)
-            {
-                //For brown slice
-                if(StackTwo[i].GetComponent<PizzaRotation>().IsBrown == 1)
-                {
-                    StackTwo[i].GetComponent<Materials>().ToBrownTransparent();
-                }
-                else if(StackTwo[i].GetComponent<PizzaRotation>().IsRed == 1)
-                {
-                    StackTwo[i].GetComponent<Materials>().ToRedTransparent();
-                }
-                else 
-                {
-                    StackTwo[i].GetComponent<Materials>().ToYellowTransparent();
-                }
-            }        
-        }
-        if(StackThree.Count >= 4)
-        {
-            for(int i = 0; i < StackThree.Count; i++)
-            {
-                //For brown slice
-                if(StackThree[i].GetComponent<PizzaRotation>().IsBrown == 1)
-                {
-                    StackThree[i].GetComponent<Materials>().ToBrownTransparent();
-                }
-                else if(StackThree[i].GetComponent<PizzaRotation>().IsRed == 1)
-                {
-                    StackThree[i].GetComponent<Materials>().ToRedTransparent();
-                }
-                else 
-                {
-                    StackThree[i].GetComponent<Materials>().ToYellowTransparent();
-                }
-            }        
-        }
-        if (StackSix.Count >= 4)
-        {
-            for (int i = 0; i < StackSix.Count; i++)
-            {
-                //For brown slice
-                if (StackSix[i].GetComponent<PizzaRotation>().IsBrown == 1)
-                {
-                    StackSix[i].GetComponent<Materials>().ToBrownTransparent();
-                }
-                else if (StackSix[i].GetComponent<PizzaRotation>().IsRed == 1)
-                {
-                    StackSix[i].GetComponent<Materials>().ToRedTransparent();
-                }
-                else
-                {
-                    StackSix[i].GetComponent<Materials>().ToYellowTransparent();
+                    case SliceColor.Red:
+                        glist[i][j].GetComponent<Materials>().ToRedTransparent();
+                        break;
+                    case SliceColor.Yellow:
+                        glist[i][j].GetComponent<Materials>().ToYellowTransparent();
+                        break;
+                    case SliceColor.Brown:
+                        glist[i][j].GetComponent<Materials>().ToBrownTransparent();
+                        break;
                 }
             }
         }
-
     }
     // Update is called once per frame
     void Update()

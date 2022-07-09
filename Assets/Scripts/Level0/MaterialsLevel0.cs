@@ -50,69 +50,20 @@ public class MaterialsLevel0 : MonoBehaviour
     }
     public void FlipColor()
     {
-        if(GetComponent<PizzaRotationLevel0>().IsRed == 1)
+        SliceColor c = GetComponent<PizzaRotation>().mColor;
+        if (c == SliceColor.Red || c == SliceColor.Brown)
         {
             //Brown, Red slices will be turned yellow when colorchanger slice is thrown.
             ToYellow();
-            GetComponent<PizzaRotation>().IsRed = 0;
-            GetComponent<PizzaRotation>().IsBrown = 0;
-             if(gameObject.tag == "R_1" || gameObject.tag == "B_1")
-            {
-                gameObject.tag = "Y_1";
-            }
-            else if (gameObject.tag == "R_2" || gameObject.tag == "B_2")
-            {
-                gameObject.tag = "Y_2";
-            }
-            else if (gameObject.tag == "R_3" || gameObject.tag == "B_3")
-            {
-                gameObject.tag = "Y_3";
-            }
-            else if (gameObject.tag == "R_4" || gameObject.tag == "B_4")
-            {
-                gameObject.tag = "Y_4";
-            }
-            else if (gameObject.tag == "R_5" || gameObject.tag == "B_5")
-            {
-                gameObject.tag = "Y_5";
-            }
-            else if (gameObject.tag == "R_6" || gameObject.tag == "B_6")
-            {
-                gameObject.tag = "Y_6";
-            }
+            GetComponent<PizzaRotation>().mColor = SliceColor.Yellow;
         }
         // else if(GetComponent<PizzaRotation>().IsBrown != 1)
         else
         {
             //Yellow slice
-            GetComponent<PizzaRotationLevel0>().IsRed = 1;
             ToRed();
-            if(gameObject.tag == "Y_1")
-            {
-                gameObject.tag = "R_1";
-            }
-            else if (gameObject.tag == "Y_2")
-            {
-                gameObject.tag = "R_2";
-            }
-            else if (gameObject.tag == "Y_3")
-            {
-                gameObject.tag = "R_3";
-            }
-            else if (gameObject.tag == "Y_4")
-            {
-                gameObject.tag = "R_4";
-            }
-            else if (gameObject.tag == "Y_5")
-            {
-                gameObject.tag = "R_5";
-            }
-            else if (gameObject.tag == "Y_6")
-            {
-                gameObject.tag = "R_6";
-            }
+            GetComponent<PizzaRotation>().mColor = SliceColor.Red;
         }
-        //Destroy(GameObject.FindWithTag("0"));
     }
     // Update is called once per frame
     void Update()

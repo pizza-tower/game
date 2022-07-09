@@ -119,7 +119,7 @@ public class FuseSlice : MonoBehaviour
         for(int i = 0; i < 6; i++)
         {
             int r = CheckPizza(rotations[i]);
-            if(r != 0)
+            if(r != -1)
             {
                 //Fuse possible! No need to loop any further
                 for(int j = 0; j < 6; j++)
@@ -127,7 +127,7 @@ public class FuseSlice : MonoBehaviour
                     //Shift all slices down
                     for (int k = m; k < glist[j].Count; k++)
                     {
-                        glist[j][k].transform.Translate(0f, 0.2f, 0f);
+                        glist[j][k].transform.Translate(0f, -0.2f, 0f);
                     }
                     //Destroy the pizza slice part of fusing
                     Destroy(glist[j][m - 1]);
@@ -144,6 +144,17 @@ public class FuseSlice : MonoBehaviour
 
     public static int CheckPizza(List<SliceColor> pizza)
     {
-        return 0;
+        List<List<SliceColor>> combinations = GlobalData.ValidCombinations[GlobalData.level.ToString()];
+
+        for(int i = 0; i < combinations.Count; i++)
+        {
+            bool matches = true;
+            for(int j = 0; j < 6; j++)
+            {
+                matches = matches && (combinations[i][j] == pizza[j]);
+            }
+            if (matches) return i;
+        }
+        return -1;
     }
 }

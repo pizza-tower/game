@@ -48,11 +48,11 @@ public class NewSliceSpawn : MonoBehaviour
 
         if(SpawnRed == 1)
         {
-            NewSlice.GetComponent<PizzaRotation>().IsRed = 1;
+            NewSlice.GetComponent<PizzaRotation>().mColor = SliceColor.Red;
         }
         else if(SpawnRed == 0)
         {
-            NewSlice.GetComponent<PizzaRotation>().IsRed = 0;   
+            NewSlice.GetComponent<PizzaRotation>().mColor = SliceColor.Yellow;   
         }
     }
     
