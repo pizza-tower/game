@@ -15,19 +15,7 @@ public class Transparent : MonoBehaviour
         {
             for(int j = 0; j < glist[i].Count; j++)
             {
-                SliceColor c = glist[i][j].GetComponent<PizzaRotation>().mColor;
-                switch(c)
-                {
-                    case SliceColor.Red:
-                        glist[i][j].GetComponent<Materials>().ToRed();
-                        break;
-                    case SliceColor.Yellow:
-                        glist[i][j].GetComponent<Materials>().ToYellow();
-                        break;
-                    case SliceColor.Brown:
-                        glist[i][j].GetComponent<Materials>().ToBrown();
-                        break;
-                }
+                glist[i][j].GetComponent<PizzaRotation>().MaterialToNormal();
             }
         }
     }
@@ -41,19 +29,7 @@ public class Transparent : MonoBehaviour
             if (glist[i].Count < 4) continue;
             for (int j = 0; j < glist[i].Count; j++)
             {
-                SliceColor c = glist[i][j].GetComponent<PizzaRotation>().mColor;
-                switch (c)
-                {
-                    case SliceColor.Red:
-                        glist[i][j].GetComponent<Materials>().ToRedTransparent();
-                        break;
-                    case SliceColor.Yellow:
-                        glist[i][j].GetComponent<Materials>().ToYellowTransparent();
-                        break;
-                    case SliceColor.Brown:
-                        glist[i][j].GetComponent<Materials>().ToBrownTransparent();
-                        break;
-                }
+                glist[i][j].GetComponent<PizzaRotation>().MaterialToTransparent();
             }
         }
     }

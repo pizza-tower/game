@@ -82,4 +82,35 @@ public class PizzaRotation : MonoBehaviour
         yield return new WaitForSeconds((float)0.6);
         IsRotating = 1;
     }
+
+    public void MaterialToNormal()
+    {
+        switch(mColor)
+        {
+            case SliceColor.Red:
+                GetComponent<Materials>().ToRed();
+                break;
+            case SliceColor.Yellow:
+                GetComponent<Materials>().ToYellow();
+                break;
+            case SliceColor.Brown:
+                GetComponent<Materials>().ToBrown();
+                break;
+        }
+    }
+    public void MaterialToTransparent()
+    {
+        switch (mColor)
+        {
+            case SliceColor.Red:
+                GetComponent<Materials>().ToRedTransparent();
+                break;
+            case SliceColor.Yellow:
+                GetComponent<Materials>().ToYellowTransparent();
+                break;
+            case SliceColor.Brown:
+                GetComponent<Materials>().ToBrownTransparent();
+                break;
+        }
+    }
 }
