@@ -185,12 +185,6 @@ public class PizzaParabola : MonoBehaviour
         {
             Debug.Log("Space is pressed");
             AssignTag();
-            
-            // if(GlobalData.isFirstFusionOver==false && Level==0)
-            // {
-            //     GameObject ui_handler = GameObject.Find("UIHandler");
-            //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
-            // }
 
             AddToList();
             ThrowSlice();
@@ -199,8 +193,6 @@ public class PizzaParabola : MonoBehaviour
             IsThrowing = 1;
             //Refresh the spawner and generate a new slice
             ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
-
-
         }
         if(IsThrowing == 1)
         {
@@ -223,9 +215,27 @@ public class PizzaParabola : MonoBehaviour
                     return;
                 }
                 //once the throw animation is completed, check the fuse
-                FuseSlice.mHorizontalFuse();
-                FuseSlice.mVertFuse(GlobalData.globalList[TargetList]);
-                //if it is a bomb, do bomb
+                int verticalFuseHappened = 1;
+                while(verticalFuseHappened == 1)
+                {
+                    verticalFuseHappened = 0;
+                    int r;
+                    r = FuseSlice.mHorizontalFuse();
+                    if (r != 0)
+                    {
+                        // Score calc
+                    }
+                    for(int i = 0; i < 6; i++)
+                    {
+                        r = FuseSlice.mVertFuse(GlobalData.globalList[i]);
+                        if (r != 0)
+                        {
+                            verticalFuseHappened = 1;
+                        }
+                    }
+                    
+                }
+                
                 
                 if (GlobalData.globalList[TargetList].Count >= 6) {
                     GameObject.FindWithTag(TargetAnchor).GetComponent<Wobble>().startWobble();

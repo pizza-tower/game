@@ -6,8 +6,7 @@ public class PizzaRotation : MonoBehaviour
 {
     public int IsRotating = 1;
     public int StopRotate = 0;
-    public int IsRed;
-    public int IsBrown=0;
+    public SliceColor mColor = SliceColor.None;
     public int TagInInt;
     private bool AssignMaterial = false;
     public bool hardcoded = false;
@@ -31,17 +30,21 @@ public class PizzaRotation : MonoBehaviour
     {
         if(AssignMaterial == false)
         {
-             if(IsBrown == 1)
+             if(mColor == SliceColor.Brown)
             {
                 gameObject.GetComponent<Materials>().ToBrown();
             }
-            else if(IsRed == 1)
+            else if(mColor == SliceColor.Red)
             {
                 gameObject.GetComponent<Materials>().ToRed();
             }
-            else 
+            else if (mColor == SliceColor.Yellow)
             {
                 gameObject.GetComponent<Materials>().ToYellow();   
+            }
+            else
+            {
+                Debug.LogError("Invalid color code. Received: " + ((int)mColor).ToString());
             }
            
             AssignMaterial = true;
