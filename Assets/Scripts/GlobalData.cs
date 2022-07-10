@@ -21,6 +21,7 @@ public class GlobalData : MonoBehaviour
     public static int nVerticalFusions = 0;
     public static int LevelRewardConsume = 0;
 
+    public static Dictionary<string, List<SliceColor>> ValidSlices;
     public static Dictionary<string, List<List<SliceColor>>> ValidCombinations;
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,9 @@ public class GlobalData : MonoBehaviour
         }
         Debug.Log("get global list count" + globalList.Count);
 
+        //Setup valid slices that can be spawned for a level
+        ValidSlices = new();
+        ValidSlices.Add("Level1", new() { SliceColor.Red, SliceColor.Yellow });
 
         //Setup valid combinations in clickwise order
         SliceColor r = SliceColor.Red;

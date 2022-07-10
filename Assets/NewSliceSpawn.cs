@@ -34,26 +34,23 @@ public class NewSliceSpawn : MonoBehaviour
         //spawn a new slice at spawner
         GameObject NewSlice = Instantiate(Slice) as GameObject;
         NewSlice.transform.position = transform.position;
-        SpawnRed = Random.Range(0,2);
+
+        List<SliceColor> sColors = GlobalData.ValidSlices[SceneManager.GetActiveScene().name];
+        int n = sColors.Count;
+        int r = Random.Range(0, n);
+        SliceColor c = sColors[r];
+
         // Analytics tracking for Slices Thrown
         AnalyticsResult analyticsResult = Analytics.CustomEvent(
             "SlicesThrown",
             new Dictionary<string, object> {
                 { "Level", SceneManager.GetActiveScene().name },
-                { "Slice", SpawnRed }
+                { "Slice", (int)c }
             }
         );
-        Debug.Log("analyticsResult (SlicesThrown): " + analyticsResult);
         Analytics.FlushEvents();
 
-        if(SpawnRed == 1)
-        {
-            NewSlice.GetComponent<PizzaRotation>().mColor = SliceColor.Red;
-        }
-        else if(SpawnRed == 0)
-        {
-            NewSlice.GetComponent<PizzaRotation>().mColor = SliceColor.Yellow;   
-        }
+        NewSlice.GetComponent<PizzaRotation>().mColor = c;
     }
     
     IEnumerator NewSliceCheck()
