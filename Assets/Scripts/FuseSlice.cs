@@ -134,7 +134,14 @@ public class FuseSlice : MonoBehaviour
                     glist[j].RemoveAt(m - 1);
                 }
 
-                // TODO: Analytics, handle r => score, currency
+                GlobalData.nHorizontalFusions++;
+                AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", 
+                    new Dictionary<string, object> { 
+                        { "Level", SceneManager.GetActiveScene().name }, 
+                        { "HorizontalFusions", GlobalData.nHorizontalFusions } 
+                    });
+
+                HandleReward(r);
                 return r;
             }
         }
@@ -142,9 +149,14 @@ public class FuseSlice : MonoBehaviour
         return 0;
     }
 
+    /*
+     * Checks if a passed list of six slices is a valid pizza in the Global list of valid combinations for the current scene
+     * Returns the index into the list of valid combinations if there is a match
+     * Returns -1 if there is no match
+     */
     public static int CheckPizza(List<SliceColor> pizza)
     {
-        List<List<SliceColor>> combinations = GlobalData.ValidCombinations[GlobalData.level.ToString()];
+        List<List<SliceColor>> combinations = GlobalData.ValidCombinations[SceneManager.GetActiveScene().name];
 
         for(int i = 0; i < combinations.Count; i++)
         {
@@ -156,5 +168,10 @@ public class FuseSlice : MonoBehaviour
             if (matches) return i;
         }
         return -1;
+    }
+
+    /*TODO: Write this function to give score, update level requirements etc*/
+    public static void HandleReward(int fuseIndex) {
+        Debug.Log("Horizontal fusion acknowledged: Level: " + SceneManager.GetActiveScene().name + " Combination index: " + fuseIndex.ToString());
     }
 }

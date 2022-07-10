@@ -77,8 +77,8 @@ public class PizzaParabola : MonoBehaviour
         {
             GlobalData.globalList[TargetList][GlobalData.globalList[TargetList].Count - 1].GetComponent<Materials>().FlipColor();
         }
-        FuseSlice.mHorizontalFuse();
-        FuseSlice.mVertFuse(GlobalData.globalList[TargetList]);
+        //Check if changing color caused a fusion
+        FusionCheck();
         
         Destroy(gameObject);
     }
@@ -124,7 +124,6 @@ public class PizzaParabola : MonoBehaviour
             if(Animation >= 1.3f)
             {
                 Animation = 1.3f;
-                
                 IsThrowing = 0;
                 IsPlaced = true;
                 if(IsBomb)
@@ -139,27 +138,7 @@ public class PizzaParabola : MonoBehaviour
                     return;
                 }
                 //once the throw animation is completed, check the fuse
-                int verticalFuseHappened = 1;
-                while(verticalFuseHappened == 1)
-                {
-                    verticalFuseHappened = 0;
-                    int r;
-                    r = FuseSlice.mHorizontalFuse();
-                    if (r != 0)
-                    {
-                        // Score calc
-                    }
-                    for(int i = 0; i < 6; i++)
-                    {
-                        r = FuseSlice.mVertFuse(GlobalData.globalList[i]);
-                        if (r != 0)
-                        {
-                            verticalFuseHappened = 1;
-                        }
-                    }
-                    
-                }
-                
+                FusionCheck();
                 
                 if (GlobalData.globalList[TargetList].Count >= 6) {
                     GameObject.FindWithTag(TargetAnchor).GetComponent<Wobble>().startWobble();
@@ -174,6 +153,25 @@ public class PizzaParabola : MonoBehaviour
          
         }
 
+    }
+    void FusionCheck()
+    {
+        int verticalFuseHappened = 1;
+        while (verticalFuseHappened == 1)
+        {
+            verticalFuseHappened = 0;
+            int r;
+            FuseSlice.mHorizontalFuse();
+            for (int i = 0; i < 6; i++)
+            {
+                r = FuseSlice.mVertFuse(GlobalData.globalList[i]);
+                if (r != 0)
+                {
+                    verticalFuseHappened = 1;
+                }
+            }
+
+        }
     }
 
 }

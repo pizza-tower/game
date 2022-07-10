@@ -45,7 +45,7 @@ public class GlobalData : MonoBehaviour
         SliceColor r = SliceColor.Red;
         SliceColor y = SliceColor.Yellow;
         ValidCombinations = new();
-        ValidCombinations.Add("3", new() {
+        ValidCombinations.Add("Level1", new() {
             new() { r, r, r, r, r, r },
             new() { y, y, y, y, y, y },
             new() { r, r, r, y, y ,y }
