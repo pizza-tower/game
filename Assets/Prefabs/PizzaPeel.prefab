@@ -150,3 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15ab227db8f8234fba12c582668d6f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startTime: 0
+  lerpTime: 0
+  myAngles: []

@@ -8,15 +8,32 @@ public class PizzaPeelController : MonoBehaviour
 {
     //public string inputName;
     public float startTime;
+    [SerializeField] [Range(0F, 10F)] float lerpTime;
+    [SerializeField] Vector3[] myAngles;
 
+    int angleIndex;
+    int len;
+
+    float t = 0f;
     void Start()
     {
         startTime = Time.time;
+        len = myAngles.Length;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //automatically flip per second
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(myAngles[angleIndex]), lerpTime*Time.deltaTime);
+
+        t= Mathf.Lerp(t, 1f, lerpTime*Time.deltaTime);
+        if(t>0.9f)
+        {
+            t = 0f;
+            angleIndex += 1;
+            angleIndex %= 2;
+        }
         bool KeyDown = Input.GetKeyDown(KeyCode.Space);
         bool KeyHold = Input.GetKey(KeyCode.Space);
         bool KeyUp = Input.GetKeyUp(KeyCode.Space); 
