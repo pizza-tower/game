@@ -21,6 +21,7 @@ public class GlobalData : MonoBehaviour
     public static int nVerticalFusions = 0;
     public static int LevelRewardConsume = 0;
 
+    public static Dictionary<string, int> MaxSlices;
     public static Dictionary<string, List<SliceColor>> ValidSlices;
     public static Dictionary<string, List<List<SliceColor>>> ValidCombinations;
     // Start is called before the first frame update
@@ -40,6 +41,10 @@ public class GlobalData : MonoBehaviour
             globalList.Add(new List<GameObject>());
         }
         Debug.Log("get global list count" + globalList.Count);
+
+        //Setup number of slices per level
+        MaxSlices = new();
+        MaxSlices.Add("Level1", 60);
 
         //Setup valid slices that can be spawned for a level
         ValidSlices = new();
