@@ -14,8 +14,9 @@ public class FuseSliceLevel0 : MonoBehaviour
         ui_handler = GameObject.Find("UIHandler");
     }
 
-    void Update(){
-        
+    void Update()
+    {
+
     }
 
     private static bool mCheckTopNSlices(List<GameObject> SList)
@@ -32,18 +33,18 @@ public class FuseSliceLevel0 : MonoBehaviour
         //if any slice of the top 'n' slices is not of desired color, return false
         //else return true
 
-         var color =
-            SList[SList.Count - 1].GetComponent<PizzaRotationLevel0>().IsRed;
+        var color =
+           SList[SList.Count - 1].GetComponent<PizzaRotationLevel0>().IsRed;
         for (int i = 1; i <= n; i++)
         {
             //There exists a slice in top n slices that is not of desired color
             if (
-                SList[SList.Count - i].GetComponent<PizzaRotationLevel0>().IsRed !=color
+                SList[SList.Count - i].GetComponent<PizzaRotationLevel0>().IsRed != color
             ) return false;
 
             //Brown slice cannot be fused with other slices
             if (SList[SList.Count - i].GetComponent<PizzaRotationLevel0>().IsBrown == 1)
-             return false;
+                return false;
         }
 
         //All top n slices are of desired color
@@ -62,7 +63,7 @@ public class FuseSliceLevel0 : MonoBehaviour
             {
                 Destroy(SList[SList.Count - k]);
                 GlobalData.nVerticalFusions++;
-                AnalyticsResult vertFusionAnalytics = Analytics.CustomEvent("VerticalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"VerticalFusions", GlobalData.nVerticalFusions}});
+                AnalyticsResult vertFusionAnalytics = Analytics.CustomEvent("VerticalFusions", new Dictionary<string, object> { { "Level", SceneManager.GetActiveScene().name }, { "VerticalFusions", GlobalData.nVerticalFusions } });
 
 
             }
@@ -81,8 +82,8 @@ public class FuseSliceLevel0 : MonoBehaviour
         }
     }
 
- /*Bomb will fuse all slice in that SList
-    */
+    /*Bomb will fuse all slice in that SList
+       */
     public static void BombFuse(List<GameObject> SList)
     {
         int n = SList.Count;
@@ -136,7 +137,7 @@ public class FuseSliceLevel0 : MonoBehaviour
         if (minHeight != 0)
         {
             if (
-                allLists[0].Count >= minHeight && 
+                allLists[0].Count >= minHeight &&
                 allLists[1].Count >= minHeight &&
                 allLists[2].Count >= minHeight &&
                 allLists[3].Count >= minHeight &&
@@ -159,7 +160,7 @@ public class FuseSliceLevel0 : MonoBehaviour
                         sameColor = true;
                     }
                     //Brown slices cannot be horizontally fused
-                    else if(allLists[i][minHeight - 1].GetComponent<PizzaRotation>().IsBrown==1)
+                    else if (allLists[i][minHeight - 1].GetComponent<PizzaRotationLevel0>().IsBrown == 1)
                     {
                         brownSlice = true;
                         sameColor = false;
@@ -180,7 +181,7 @@ public class FuseSliceLevel0 : MonoBehaviour
                 possible to remove the upper if condition and directly check if all the colors
                 are the same.
                 */
-                
+
 
                 var color1 = allLists[0][minHeight - 1].GetComponent<PizzaRotationLevel0>().IsRed;
                 var color2 = allLists[1][minHeight - 1].GetComponent<PizzaRotationLevel0>().IsRed;
@@ -197,45 +198,53 @@ public class FuseSliceLevel0 : MonoBehaviour
                 var color5 = GameObject.FindWithTag("AnchorFive").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
                 var color6 = GameObject.FindWithTag("AnchorSix").GetComponent<SliceList>().GetMiniHeightSlice(minHeight).GetComponent<PizzaRotation>().IsRed;
                 */
-                if(color1 == color2 && color2 == color3 && color4==color5 && color5 == color6 && color1!=color4){
-                    halfPizza= true;
+                if (color1 == color2 && color2 == color3 && color4 == color5 && color5 == color6 && color1 != color4)
+                {
+                    halfPizza = true;
                     Debug.Log("case 1");
-                }else if(color2 == color3 && color3 == color4 && color5==color6 && color6 == color1 && color2!=color5){
+                }
+                else if (color2 == color3 && color3 == color4 && color5 == color6 && color6 == color1 && color2 != color5)
+                {
                     halfPizza = true;
                     Debug.Log("case 2");
-                }else if(color3 == color4 && color4 == color5 && color6==color1 && color1 == color2 && color3!=color6){
+                }
+                else if (color3 == color4 && color4 == color5 && color6 == color1 && color1 == color2 && color3 != color6)
+                {
                     halfPizza = true;
-                    Debug.Log("case 3");}
+                    Debug.Log("case 3");
+                }
             }
         }
 
-    if ((sameColor || halfPizza) && brownSlice != true)
+        if ((sameColor || halfPizza) && brownSlice != true)
         {
             foreach (List<GameObject> anchorList in allLists)
             {
                 Destroy(anchorList[minHeight - 1]);
 
-                
+
                 GlobalData.nHorizontalFusions++;
-                AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", new Dictionary<string, object>{{"Level", SceneManager.GetActiveScene().name}, {"HorizontalFusions", GlobalData.nHorizontalFusions}});
+                AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", new Dictionary<string, object> { { "Level", SceneManager.GetActiveScene().name }, { "HorizontalFusions", GlobalData.nHorizontalFusions } });
 
 
-                if(anchorList.Count>=minHeight){
-                    
+                if (anchorList.Count >= minHeight)
+                {
 
-                    for (int i = minHeight; i < anchorList.Count; i++){
+
+                    for (int i = minHeight; i < anchorList.Count; i++)
+                    {
                         Vector3 slicePosition = anchorList[i].transform.position;
                         slicePosition.y = slicePosition.y - 0.2f;
                         //var newEndPoint = anchorList[minHeight].transform.position.y - 0.15;
                         //Vector3 newVector = new Vector3(oldPosition.x, oldPosition.y - 15f, oldPosition.z);
                         //anchorList[minHeight].transform.TransformPoint(newVector); //= Vector3.MoveTowards(oldPosition, newVector, Time.deltaTime * 1);
                         anchorList[i].transform.position = slicePosition;
-                    }   
+                    }
                 }
                 anchorList.RemoveAt(minHeight - 1);
 
             }
-            if(sameColor)
+            if (sameColor)
             {
                 Rewards.EarnCurrency();
                 // if (GlobalData.isFirstHorizontalFusionOver == false){
