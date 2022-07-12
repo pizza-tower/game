@@ -99,7 +99,7 @@ public class PizzaParabola : MonoBehaviour
         audioData = GameObject.Find("PizzaPeel").GetComponent<AudioSource>();
         audioData.Play(0);
 
-        //Debug.Log($"Position: {EndPoint}");    
+        Debug.Log($"Position: {EndPoint}");    
     }
     void Update()
     {

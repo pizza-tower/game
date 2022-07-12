@@ -49,13 +49,42 @@ public class GlobalData : MonoBehaviour
         //Setup valid slices that can be spawned for a level
         ValidSlices = new();
         ValidSlices.Add("Level1", new() { SliceColor.Red, SliceColor.Yellow });
+        ValidSlices.Add("Level2", new() { SliceColor.Red, SliceColor.Yellow });
+        ValidSlices.Add("Level3", new() { SliceColor.Red, SliceColor.Yellow, SliceColor.Brown });
+        ValidSlices.Add("Level4", new() { SliceColor.Red, SliceColor.Yellow, SliceColor.Brown });
+        ValidSlices.Add("Level5", new() { SliceColor.Red, SliceColor.Yellow, SliceColor.Brown, SliceColor.DarkBrown, SliceColor.Green });
 
         //Setup valid combinations in clickwise order
         SliceColor r = SliceColor.Red;
         SliceColor y = SliceColor.Yellow;
         ValidCombinations = new();
+        //LEVEL1
         ValidCombinations.Add("Level1", new() {
             new() { r, r, r, r, r, r },
+            new() { y, y, y, y, y, y },
+            new() { r, r, r, y, y ,y }
+        });
+        //LEVEL2
+        ValidCombinations.Add("Level2", new() {
+            new() { r, r, y, y, y, y },
+            new() { y, y, y, y, y, y },
+            new() { r, r, r, r, r ,r }
+        });
+        //LEVEL3
+        ValidCombinations.Add("Level3", new() {
+            new() { r, r, r, y, y, y },
+            new() { r, y, y, y, y, y },
+            new() { r, r, r, y, y ,y }
+        });
+        //LEVEL4
+         ValidCombinations.Add("Level4", new() {
+            new() { r, r, r, r, y, y },
+            new() { r, r, y, y, y, y },
+            new() { r, y, r, y, r ,y }
+        });
+        //LEVEL5
+         ValidCombinations.Add("Level5", new() {
+            new() { r, r, r, r, y, y },
             new() { y, y, y, y, y, y },
             new() { r, r, r, y, y ,y }
         });
