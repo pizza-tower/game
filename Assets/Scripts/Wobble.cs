@@ -8,7 +8,7 @@ public class Wobble : MonoBehaviour
     PhysicMaterial frictionControl;
     bool wobbling = false;
     bool backward = false;
-    bool falling = false;
+    bool falling = true;
     Vector3 orig_pos;
     // Start is called before the first frame update
     void Start()
