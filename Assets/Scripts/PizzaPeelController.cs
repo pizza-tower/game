@@ -19,13 +19,16 @@ public class PizzaPeelController : MonoBehaviour
     int lenFlip;
     float tFlip = 0f;
     float tThrow = 0f;
-
-    int isThrowing = 0;
+    public int isThrowing = 0;
     void Start()
     {
         startTime = Time.time;
     }
-
+    public void Reset()
+    {
+        isThrowing = 0;
+        ThrowAngleIndex = 0;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -41,15 +44,21 @@ public class PizzaPeelController : MonoBehaviour
             if(tThrow>0.9f)
             {
                 tThrow = 0f;
-                isThrowing = 0;
+                ThrowAngleIndex += 1;
+                if(ThrowAngleIndex >= 3)
+                {
+                    ThrowAngleIndex = 3;
+                }
                 flipAngleIndex = 0;
                 tFlip = 0;
             }
             return;
         }
+        ThrowAngleIndex = 0;
         if(KeyDown && KeyHold && !KeyUp)
         {
             isThrowing = 1;
+            
             // Analytics tracking for time between thrown slices
             int timeElapsed = Mathf.RoundToInt(Time.time - startTime);
             Debug.Log(timeElapsed);

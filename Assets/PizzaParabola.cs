@@ -24,7 +24,7 @@ public class PizzaParabola : MonoBehaviour
     public bool IsColorChanger = false;
     void Start()
     {
-        StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
+
       
     }
     // Update is called once per frame
@@ -128,6 +128,7 @@ public class PizzaParabola : MonoBehaviour
                 IsPlaced = true;
                 //Refresh the spawner and generate a new slice
                 ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
+                ((GameObject.FindWithTag("Peel")).GetComponent<PizzaPeelController>()).Reset();
                 if(IsBomb)
                 {
                     Bomb();
@@ -152,7 +153,7 @@ public class PizzaParabola : MonoBehaviour
 
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 1.3f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(EndRotation), 3* Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(EndRotation), 6 * Time.deltaTime);
         }
 
     }
