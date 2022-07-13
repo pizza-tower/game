@@ -129,10 +129,6 @@ public class PizzaRotation : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d00ac69e08f3ece859c36a5a1353746191f42d87
     public void MaterialToNormal()
     {
         switch(mColor)
