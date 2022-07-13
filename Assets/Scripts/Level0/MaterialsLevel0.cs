@@ -50,13 +50,13 @@ public class MaterialsLevel0 : MonoBehaviour
     }
     public void FlipColor()
     {
-        if(GetComponent<PizzaRotationLevel0>().IsRed == 1)
+        if (GetComponent<PizzaRotationLevel0>().IsRed == 1)
         {
             //Brown, Red slices will be turned yellow when colorchanger slice is thrown.
             ToYellow();
-            GetComponent<PizzaRotation>().IsRed = 0;
-            GetComponent<PizzaRotation>().IsBrown = 0;
-             if(gameObject.tag == "R_1" || gameObject.tag == "B_1")
+            GetComponent<PizzaRotationLevel0>().IsRed = 0;
+            GetComponent<PizzaRotationLevel0>().IsBrown = 0;
+            if (gameObject.tag == "R_1" || gameObject.tag == "B_1")
             {
                 gameObject.tag = "Y_1";
             }
@@ -87,7 +87,7 @@ public class MaterialsLevel0 : MonoBehaviour
             //Yellow slice
             GetComponent<PizzaRotationLevel0>().IsRed = 1;
             ToRed();
-            if(gameObject.tag == "Y_1")
+            if (gameObject.tag == "Y_1")
             {
                 gameObject.tag = "R_1";
             }
@@ -117,6 +117,6 @@ public class MaterialsLevel0 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

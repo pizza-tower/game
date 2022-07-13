@@ -226,7 +226,7 @@ public class TutorialHandler : MonoBehaviour
                 }
 
                 if(stage == 10){
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene(3);
                 }
                 if(stage > 10){
                     WalkthroughDone = true;

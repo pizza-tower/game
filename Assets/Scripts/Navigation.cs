@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
+using TMPro;
 
 public class Navigation : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject menu;
+    public GameObject   winscreen;
+    public GameObject endlevelscreen;
     bool instantiated = false;
     void CleanGlobalList()
     {
@@ -49,16 +52,13 @@ public class Navigation : MonoBehaviour
         AnalyticsResult analyticsResult1 = Analytics.CustomEvent("Level Win", new Dictionary<string, object> { { "level", level } });
         AnalyticsResult analyticsResult2 = Analytics.CustomEvent("RewardsUsage", new Dictionary<string, object> { { "Level",SceneManager.GetActiveScene().name}, {"RewardsUsage",GlobalData.LevelRewardConsume } });
         GlobalData.LevelRewardConsume = 0;
-        if (level <= GlobalData.totalscenes) {
+        if (level + 1 < GlobalData.totalscenes) {
             level++;
             ResetVariables();
             GlobalData.level++;
             SceneManager.LoadScene(level);
         }
-        else if(instantiated == false){
-            Instantiate(menu);
-            
-        }
+
     }
 
     void ResetVariables() {
@@ -86,16 +86,37 @@ public class Navigation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if(GlobalData.gameover){
-        //     RestartSameLevel();
-        // }else{
         if (GlobalData.gameover && instantiated == false) {
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", SceneManager.GetActiveScene().buildIndex} });
-            Instantiate(menu);
+            GameObject popup = Instantiate(menu);
             instantiated = true;
+            Transform finalscore = popup.transform.GetChild(1);
+            TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+            scoretext.SetText("score: {0}", Score.CurrentScore);    
         }
         if(Score.CurrentScore >= 30){
-            StartNextLevel();
+            int level = SceneManager.GetActiveScene().buildIndex;
+            if (level + 1 >= GlobalData.totalscenes) {
+                if(instantiated == false){
+                    GameObject popup = Instantiate(winscreen);
+                    instantiated = true;
+                    Transform finalscore = popup.transform.GetChild(1);
+                    TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+                    scoretext.SetText("score: {0}", Score.CurrentScore);    
+                
+                }
+            }
+            else {
+                if (instantiated == false) {
+                    GameObject popup = Instantiate(endlevelscreen);
+                    instantiated = true;
+                    Transform finalscore = popup.transform.GetChild(1);
+                    TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+                    scoretext.SetText("score: {0}", Score.CurrentScore);                    
+                }
+            
+            }
+
              }
         } 
     // }

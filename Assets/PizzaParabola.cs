@@ -27,117 +27,42 @@ public class PizzaParabola : MonoBehaviour
     }
     // Update is called once per frame
     void AddToList()
-    {        
-        string tag = gameObject.tag;
-        if (tag == "R_1" || tag == "Y_1")
+    {
+        switch(GetComponent<PizzaRotation>().TagInInt)
         {
-            TargetList = 0;
-            TargetAnchor = "AnchorOne";
+            case 0:
+                TargetList = 0;
+                TargetAnchor = "AnchorOne";
+                break;
+            case 1:
+                TargetList = 1;
+                TargetAnchor = "AnchorTwo";
+                break;
+            case 2:
+                TargetList = 2;
+                TargetAnchor = "AnchorThree";
+                break;
+            case 3:
+                TargetList = 3;
+                TargetAnchor = "AnchorFour";
+                break;
+            case 4:
+                TargetList = 4;
+                TargetAnchor = "AnchorFive";
+                break;
+            case 5:
+                TargetList = 5;
+                TargetAnchor = "AnchorSix";
+                break;
         }
-        else if (tag == "R_2" || tag == "Y_2")
-        {
-            TargetList = 1;
-            TargetAnchor = "AnchorTwo";
-        }
-        else if (tag == "R_3" || tag == "Y_3")
-        {
-            TargetList = 2;
-            TargetAnchor = "AnchorThree";
-        }
-        else if (tag == "R_4" || tag == "Y_4")
-        {
-            TargetList = 3;
-            TargetAnchor = "AnchorFour";
-        }
-        else if (tag == "R_5" || tag == "Y_5")
-        {
-            TargetList = 4;
-            TargetAnchor = "AnchorFive";
-        }
-        else if (tag == "R_6" || tag == "Y_6")
-        {
-            TargetList = 5;
-            TargetAnchor = "AnchorSix";
-        }
+        
         //only add the gameobject to the list when it is a slice
         if(IsBomb == false && IsColorChanger == false)
         {
             GlobalData.globalList[TargetList].Add(gameObject);
-        }
-        
-        
-        
+        }    
     }
-     public void AssignTag()
-    {
- 
-        if(GetComponent<PizzaRotation>().TagInInt == 0)
-        {
-            if(GetComponent<PizzaRotation>().IsRed == 1)
-            {
-                gameObject.tag = "R_1";
-            }
-            else 
-            {
-                gameObject.tag = "Y_1";
-            }
-        }
-        else if (GetComponent<PizzaRotation>().TagInInt == 1)
-        {
-            if(GetComponent<PizzaRotation>().IsRed == 1)
-            {
-                gameObject.tag = "R_2";
-            }
-            else 
-            {
-                gameObject.tag = "Y_2";
-            }
-        }
-        else if (GetComponent<PizzaRotation>().TagInInt == 2)
-        {
-            if(GetComponent<PizzaRotation>().IsRed == 1)
-            {
-                gameObject.tag = "R_3";
-            }
-            else 
-            {
-                gameObject.tag = "Y_3";
-            }
-        }
-        else if (GetComponent<PizzaRotation>().TagInInt == 3)
-        {
-            if(GetComponent<PizzaRotation>().IsRed == 1)
-            {
-                gameObject.tag = "R_4";
-            }
-            else 
-            {
-                gameObject.tag = "Y_4";
-            }
-        }
-        else if (GetComponent<PizzaRotation>().TagInInt == 4)
-        {
-            if(GetComponent<PizzaRotation>().IsRed == 1)
-            {
-                gameObject.tag = "R_5";
-            }
-            else 
-            {
-                gameObject.tag = "Y_5";
-            }
-        }
-        else if (GetComponent<PizzaRotation>().TagInInt == 5)
-        {
-            if(GetComponent<PizzaRotation>().IsRed == 1)
-            {
-                gameObject.tag = "R_6";
-            }
-            else 
-            {
-                gameObject.tag = "Y_6";
-            }
-        }
-    }
+
     void Bomb()
     {
         IsBomb = false;
@@ -152,8 +77,8 @@ public class PizzaParabola : MonoBehaviour
         {
             GlobalData.globalList[TargetList][GlobalData.globalList[TargetList].Count - 1].GetComponent<Materials>().FlipColor();
         }
-        FuseSlice.mHorizontalFuse();
-        FuseSlice.mVertFuse(GlobalData.globalList[TargetList]);
+        //Check if changing color caused a fusion
+        FusionCheck();
         
         Destroy(gameObject);
     }
@@ -184,13 +109,6 @@ public class PizzaParabola : MonoBehaviour
         if (KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
         {
             Debug.Log("Space is pressed");
-            AssignTag();
-            
-            // if(GlobalData.isFirstFusionOver==false && Level==0)
-            // {
-            //     GameObject ui_handler = GameObject.Find("UIHandler");
-            //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetTutorialInstruction("Great going! You pressed the space bar!"));
-            // }
 
             AddToList();
             ThrowSlice();
@@ -199,8 +117,6 @@ public class PizzaParabola : MonoBehaviour
             IsThrowing = 1;
             //Refresh the spawner and generate a new slice
             ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
-
-
         }
         if(IsThrowing == 1)
         {
@@ -208,7 +124,6 @@ public class PizzaParabola : MonoBehaviour
             if(Animation >= 1.3f)
             {
                 Animation = 1.3f;
-                
                 IsThrowing = 0;
                 IsPlaced = true;
                 if(IsBomb)
@@ -223,9 +138,7 @@ public class PizzaParabola : MonoBehaviour
                     return;
                 }
                 //once the throw animation is completed, check the fuse
-                FuseSlice.mHorizontalFuse();
-                FuseSlice.mVertFuse(GlobalData.globalList[TargetList]);
-                //if it is a bomb, do bomb
+                FusionCheck();
                 
                 if (GlobalData.globalList[TargetList].Count >= 6) {
                     GameObject.FindWithTag(TargetAnchor).GetComponent<Wobble>().startWobble();
@@ -240,6 +153,25 @@ public class PizzaParabola : MonoBehaviour
          
         }
 
+    }
+    void FusionCheck()
+    {
+        int verticalFuseHappened = 1;
+        while (verticalFuseHappened == 1)
+        {
+            verticalFuseHappened = 0;
+            int r;
+            FuseSlice.mHorizontalFuse();
+            for (int i = 0; i < 6; i++)
+            {
+                r = FuseSlice.mVertFuse(GlobalData.globalList[i]);
+                if (r != 0)
+                {
+                    verticalFuseHappened = 1;
+                }
+            }
+
+        }
     }
 
 }
