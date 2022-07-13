@@ -51,7 +51,7 @@ public class FuseSlice : MonoBehaviour
         {
             GameObject.Find("smoke").GetComponentInChildren<ParticleSystem>().Play();
             // Reference: https://www.youtube.com/watch?v=jQivfs34Wb0
-            
+
             //Debug.Log("Slices were same colored");
             for (int k = 1; k <= n; k++)
             {
@@ -87,6 +87,8 @@ public class FuseSlice : MonoBehaviour
         SList.RemoveRange(0, n);
         //Destroy(GameObject.FindWithTag("0"));
         Debug.Log("boom");
+        GameObject.Find("flame").GetComponentInChildren<ParticleSystem>().Play();
+        // ReferenceEquals:https://www.youtube.com/watch?v=zJFcCngLP-Q
     }
 
     /* Logic for horizontal fusion:
