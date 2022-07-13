@@ -11,6 +11,20 @@ public class PizzaRotation : MonoBehaviour
     private bool AssignMaterial = false;
     public bool hardcoded = false;
 
+    [SerializeField] [Range(0f, 6f)] float lerpRotationTime;
+    [SerializeField] [Range(0f, 8f)] float lerpPositionTime;
+    [SerializeField] Vector3[] myAngles;
+    [SerializeField] Vector3[] myPositions;
+
+    int angleIndex;
+    int positionIndex; 
+    int CanChangeTag = 1;
+    int lenAng;
+    int lenPos;
+    float t1 = 0f;
+    float t2 = 0f;
+    int RotateCount = 0;
+    public int ReadyToThrow = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +34,8 @@ public class PizzaRotation : MonoBehaviour
         //random spawn initial direction
         float InitialRotation = (float)TagInInt * (float)60.0;
         transform.Rotate(0, InitialRotation, 0);
+        angleIndex = TagInInt * 3;
+        positionIndex = TagInInt * 3;
        }      
       
     }
@@ -59,38 +75,64 @@ public class PizzaRotation : MonoBehaviour
         }
         if(IsRotating == 1  && StopRotate == 0 && hardcoded!=true)
         {
-            StartCoroutine(Rotate());
-        }
-        if(StopRotate == 1)
-        {
-            IsRotating = 0;
-        }
+            //flip and rotate animation
+            
+            transform.position = Vector3.Lerp(transform.position, myPositions[positionIndex], lerpPositionTime * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(myAngles[angleIndex]), lerpRotationTime * Time.deltaTime);
 
-    }
-    IEnumerator Rotate()
-    {
-        IsRotating = 0;
+
+            t1= Mathf.Lerp(t1, 1.0f, lerpPositionTime * Time.deltaTime);
+            t2= Mathf.Lerp(t2, 1.0f, lerpRotationTime * Time.deltaTime);
+            if(t1>0.9f)
+            {
+                t1 = 0f;
+                positionIndex += 1;
+                positionIndex %= 18;
+            }
+            if(t2 > 0.45f && RotateCount == 1 && CanChangeTag == 1)
+            {
+                CanChangeTag = 0;
+                TagInInt += 1;
+                TagInInt %= 6;
+            }
+            if(t2>0.9f)
+            {
+                t2 = 0f;
+                angleIndex += 1;
+                angleIndex %= 18;
+                RotateCount += 1;
+            }
+            if(RotateCount >= 3)
+            {
+                RotateCount = 0;
+                CanChangeTag = 1;
+            }
+            
+            
+        }
+        
+        //go transparent for Stack 2 and Stack 3 when the back row stacks are high enough
         if(TagInInt ==  2|| TagInInt == 3)
         {
             if(GetComponent<PizzaParabola>().IsBomb == false && GetComponent<PizzaParabola>().IsColorChanger == false)
             {
                 GlobalData.GoTransparent = 1;
-            }
-                
+            }       
         }
         else 
         {
             GlobalData.GoTransparent = 0;
         }
-        
-        transform.Rotate(0, 60, 0);
-        TagInInt += 1;
-        TagInInt = TagInInt % 6;
- 
-        yield return new WaitForSeconds((float)0.6);
-        IsRotating = 1;
+        if(StopRotate == 1)
+        {
+            IsRotating = 0;
+        }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d00ac69e08f3ece859c36a5a1353746191f42d87
     public void MaterialToNormal()
     {
         switch(mColor)

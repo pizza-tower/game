@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
+using TMPro;
 
 public class Navigation : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject menu;
     public GameObject   winscreen;
+    public GameObject endlevelscreen;
     bool instantiated = false;
     void CleanGlobalList()
     {
@@ -56,11 +58,7 @@ public class Navigation : MonoBehaviour
             GlobalData.level++;
             SceneManager.LoadScene(level);
         }
-        else if(instantiated == false){
-            Instantiate(winscreen);
-            instantiated = true;
-            
-        }
+
     }
 
     void ResetVariables() {
@@ -90,11 +88,35 @@ public class Navigation : MonoBehaviour
     {
         if (GlobalData.gameover && instantiated == false) {
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", SceneManager.GetActiveScene().buildIndex} });
-            Instantiate(menu);
+            GameObject popup = Instantiate(menu);
             instantiated = true;
+            Transform finalscore = popup.transform.GetChild(1);
+            TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+            scoretext.SetText("score: {0}", Score.CurrentScore);    
         }
         if(Score.CurrentScore >= 30){
-            StartNextLevel();
+            int level = SceneManager.GetActiveScene().buildIndex;
+            if (level + 1 >= GlobalData.totalscenes) {
+                if(instantiated == false){
+                    GameObject popup = Instantiate(winscreen);
+                    instantiated = true;
+                    Transform finalscore = popup.transform.GetChild(1);
+                    TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+                    scoretext.SetText("score: {0}", Score.CurrentScore);    
+                
+                }
+            }
+            else {
+                if (instantiated == false) {
+                    GameObject popup = Instantiate(endlevelscreen);
+                    instantiated = true;
+                    Transform finalscore = popup.transform.GetChild(1);
+                    TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+                    scoretext.SetText("score: {0}", Score.CurrentScore);                    
+                }
+            
+            }
+
              }
         } 
     // }
