@@ -10,7 +10,6 @@ public class NewSliceSpawn : MonoBehaviour
     public GameObject Slice;
 
     public int NeedsNewSlice = 1;
-    public float NewSliceSpawnSeconds;
     int NumberSpawned = 0;
 
     void Start()
@@ -24,8 +23,7 @@ public class NewSliceSpawn : MonoBehaviour
         if(NeedsNewSlice == 1)
         {
             NeedsNewSlice = 0;
-            StartCoroutine(NewSliceCheck());
-            
+            spawnSlice();
         }
     }
 
@@ -49,15 +47,9 @@ public class NewSliceSpawn : MonoBehaviour
             }
         );
         Analytics.FlushEvents();
-
         NewSlice.GetComponent<PizzaRotation>().mColor = c;
         NumberSpawned++;
     }
     
-    IEnumerator NewSliceCheck()
-    {
-        yield return new WaitForSeconds(NewSliceSpawnSeconds);
-        spawnSlice();
-    }
 
 }

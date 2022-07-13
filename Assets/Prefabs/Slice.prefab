@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 395132945173162829}
   - component: {fileID: -627473813856031669}
   - component: {fileID: -3139062690639364059}
+  - component: {fileID: 1115475867115991577}
   m_Layer: 0
   m_Name: Slice
   m_TagString: 0
@@ -103,10 +104,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsRotating: 1
   StopRotate: 0
-  IsRed: 0
-  IsBrown: 0
+  mColor: -1
   TagInInt: 0
   hardcoded: 0
+  lerpRotationTime: 6
+  lerpPositionTime: 6
+  myAngles:
+  - {x: -2, y: 0, z: 0}
+  - {x: 0, y: 60, z: -5}
+  - {x: 0, y: 60, z: -5}
+  - {x: 0, y: 60, z: -5}
+  - {x: 0, y: 120, z: 2}
+  - {x: 0, y: 120, z: 2}
+  - {x: 0, y: 120, z: 2}
+  - {x: 5, y: 180, z: 0}
+  - {x: 5, y: 180, z: 0}
+  - {x: 5, y: 180, z: 0}
+  - {x: 3, y: 240, z: 3}
+  - {x: 3, y: 240, z: 3}
+  - {x: 3, y: 240, z: 3}
+  - {x: 0, y: 300, z: 3}
+  - {x: 0, y: 300, z: 3}
+  - {x: 0, y: 300, z: 3}
+  - {x: -2, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
+  myPositions:
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  ReadyToThrow: 0
 --- !u!114 &7177997025272590011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,3 +226,55 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &1115475867115991577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7934999755122050094}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd07ca63b1932249b0d47cb828e4eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lerpRotationTime: 6
+  lerpPositionTime: 6
+  myAngles:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 60, z: 0}
+  - {x: 0, y: 60, z: 0}
+  - {x: 0, y: 60, z: 0}
+  - {x: 0, y: 120, z: 0}
+  - {x: 0, y: 120, z: 0}
+  - {x: 0, y: 120, z: 0}
+  - {x: 0, y: 180, z: 0}
+  - {x: 0, y: 180, z: 0}
+  - {x: 0, y: 180, z: 0}
+  - {x: 0, y: 240, z: 0}
+  - {x: 0, y: 240, z: 0}
+  - {x: 0, y: 240, z: 0}
+  - {x: 0, y: 300, z: 0}
+  - {x: 0, y: 300, z: 0}
+  - {x: 0, y: 300, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  myPositions:
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: 0.3, z: 0}
