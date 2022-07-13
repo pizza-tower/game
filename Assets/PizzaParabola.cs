@@ -22,10 +22,11 @@ public class PizzaParabola : MonoBehaviour
     bool IsPlaced = false;
     public bool IsBomb = false;
     public bool IsColorChanger = false;
+    private int fusionIndex = -1;
+    AnimationOnFuse Animator;
+
     void Start()
     {
-
-      
     }
     // Update is called once per frame
     void AddToList()
@@ -161,20 +162,70 @@ public class PizzaParabola : MonoBehaviour
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 1.3f);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(EndRotation), 6 * Time.deltaTime);
+            animateOnFuse(EndPoint);
         }
+        
 
     }
+
+    void animateOnFuse(Vector3 sliceLandingPoint)
+    {
+        Debug.Log("Fusion Index: " + fusionIndex);
+        Animator = FindObjectOfType<AnimationOnFuse>();
+        Debug.Log(Animator);
+        if (GlobalData.isHorizontalFuse==true && fusionIndex!=-1)
+        {
+            string currentLevel = SceneManager.GetActiveScene().name;
+            Animator = FindObjectOfType<AnimationOnFuse>();
+            switch (currentLevel)
+            {
+                case "Level1":
+                    triggerLevelOneAnimation();
+                    break;
+            }
+
+            GlobalData.isHorizontalFuse = false;
+        }
+    }
+
+    void triggerLevelOneAnimation()
+    {
+        Vector3 start = transform.position;
+        start.y = transform.position.y + 9 * 0.2f;
+        switch (fusionIndex)
+        {
+            case 0:
+                Animator.animateOnAllRed(start);
+                break;
+            case 1:
+                Animator.animateOnAllYellow(start);
+                break;
+            case 2:
+                Animator.animateOnHalfHalf(start);
+                break;
+        }
+    }
+
+    void triggerLevelTwoAnimation()
+    {
+
+    }
+
+    void triggerLevelThreeAnimation()
+    {
+
+    }
+
     void FusionCheck()
     {
         int verticalFuseHappened = 1;
         while (verticalFuseHappened == 1)
         {
             verticalFuseHappened = 0;
-            int r;
-            FuseSlice.mHorizontalFuse();
+            fusionIndex= FuseSlice.mHorizontalFuse();
             for (int i = 0; i < 6; i++)
             {
-                r = FuseSlice.mVertFuse(GlobalData.globalList[i]);
+                int r = FuseSlice.mVertFuse(GlobalData.globalList[i]);
                 if (r != 0)
                 {
                     verticalFuseHappened = 1;

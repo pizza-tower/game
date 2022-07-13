@@ -20,7 +20,7 @@ public class GlobalData : MonoBehaviour
     public static int nHorizontalFusions = 0;
     public static int nVerticalFusions = 0;
     public static int LevelRewardConsume = 0;
-
+    public static bool isHorizontalFuse = false;
     public static Dictionary<string, int> MaxSlices;
     public static Dictionary<string, List<SliceColor>> ValidSlices;
     public static Dictionary<string, List<List<SliceColor>>> ValidCombinations;
@@ -58,36 +58,43 @@ public class GlobalData : MonoBehaviour
         SliceColor r = SliceColor.Red;
         SliceColor y = SliceColor.Yellow;
         ValidCombinations = new();
+
         //LEVEL1
         ValidCombinations.Add("Level1", new() {
+            //DO NOT CHANGE THE ORDER OF THESE 3 LISTS, otherwise Animation may not work correctly
             new() { r, r, r, r, r, r },
             new() { y, y, y, y, y, y },
             new() { r, r, r, y, y ,y }
         });
         //LEVEL2
         ValidCombinations.Add("Level2", new() {
+            //DO NOT CHANGE THE ORDER OF THESE 3 LISTS, otherwise Animation may not work correctly
             new() { r, r, y, y, y, y },
             new() { y, y, y, y, y, y },
             new() { r, r, r, r, r ,r }
         });
         //LEVEL3
         ValidCombinations.Add("Level3", new() {
+            //DO NOT CHANGE THE ORDER OF THESE 3 LISTS, otherwise Animation may not work correctly
             new() { r, r, r, y, y, y },
             new() { r, y, y, y, y, y },
             new() { r, r, r, y, y ,y }
         });
         //LEVEL4
          ValidCombinations.Add("Level4", new() {
-            new() { r, r, r, r, y, y },
+             //DO NOT CHANGE THE ORDER OF THESE 3 LISTS, otherwise Animation may not work correctly
+             new() { r, r, r, r, y, y },
             new() { r, r, y, y, y, y },
             new() { r, y, r, y, r ,y }
         });
         //LEVEL5
          ValidCombinations.Add("Level5", new() {
-            new() { r, r, r, r, y, y },
+            //DO NOT CHANGE THE ORDER OF THESE 3 LISTS, otherwise Animation may not work correctly
+             new() { r, r, r, r, y, y },
             new() { y, y, y, y, y, y },
             new() { r, r, r, y, y ,y }
         });
+
     }
 
     // Update is called once per frame
