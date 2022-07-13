@@ -58,6 +58,14 @@ public class PizzaRotation : MonoBehaviour
             {
                 gameObject.GetComponent<Materials>().ToYellow();   
             }
+            else if (mColor == SliceColor.DarkBrown)
+            {
+                gameObject.GetComponent<Materials>().ToDarkBrown();   
+            }
+            else if (mColor == SliceColor.Green)
+            {
+                gameObject.GetComponent<Materials>().ToGreen();   
+            }
             else
             {
                 Debug.LogError("Invalid color code. Received: " + ((int)mColor).ToString());
@@ -121,7 +129,10 @@ public class PizzaRotation : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> d00ac69e08f3ece859c36a5a1353746191f42d87
     public void MaterialToNormal()
     {
         switch(mColor)
@@ -134,6 +145,12 @@ public class PizzaRotation : MonoBehaviour
                 break;
             case SliceColor.Brown:
                 GetComponent<Materials>().ToBrown();
+                break;
+            case SliceColor.DarkBrown:
+                GetComponent<Materials>().ToDarkBrown();
+                break;
+            case SliceColor.Green:
+                GetComponent<Materials>().ToGreen();
                 break;
         }
     }
@@ -149,6 +166,12 @@ public class PizzaRotation : MonoBehaviour
                 break;
             case SliceColor.Brown:
                 GetComponent<Materials>().ToBrownTransparent();
+                break;
+            case SliceColor.DarkBrown:
+                GetComponent<Materials>().ToDarkBrownTransparent();
+                break;
+            case SliceColor.Green:
+                GetComponent<Materials>().ToGreenTransparent();
                 break;
         }
     }
