@@ -49,6 +49,9 @@ public class FuseSlice : MonoBehaviour
         //Check if top n slices in have same color as the latest slice
         if (mCheckTopNSlices(SList))
         {
+            GameObject.Find("smoke").GetComponentInChildren<ParticleSystem>().Play();
+            // Reference: https://www.youtube.com/watch?v=jQivfs34Wb0
+            
             //Debug.Log("Slices were same colored");
             for (int k = 1; k <= n; k++)
             {
