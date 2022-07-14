@@ -9,11 +9,26 @@ public class PizzaPeelController : MonoBehaviour
     //public string inputName;
     public float startTime;
 
+    [SerializeField] [Range(0f, 12f)] float lerpRotationTime;
+    [SerializeField] Vector3[] myFlipAngles;
+    [SerializeField] Vector3[] myThrowAngles;
+
+    public int throwIt = 0;
+    int flipAngleIndex; 
+    int ThrowAngleIndex = 0;
+    int lenFlip;
+    float tFlip = 0f;
+    float tThrow = 0f;
+    public int isThrowing = 0;
     void Start()
     {
         startTime = Time.time;
     }
-
+    public void Reset()
+    {
+        isThrowing = 0;
+        ThrowAngleIndex = 0;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -21,10 +36,29 @@ public class PizzaPeelController : MonoBehaviour
         bool KeyHold = Input.GetKey(KeyCode.Space);
         bool KeyUp = Input.GetKeyUp(KeyCode.Space); 
         //control the flipper with space bar
+
+        if(isThrowing == 1)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(myThrowAngles[ThrowAngleIndex]), lerpRotationTime * Time.deltaTime);
+            tThrow= Mathf.Lerp(tThrow, 1f, lerpRotationTime * Time.deltaTime);
+            if(tThrow>0.9f)
+            {
+                tThrow = 0f;
+                ThrowAngleIndex += 1;
+                if(ThrowAngleIndex >= 3)
+                {
+                    ThrowAngleIndex = 3;
+                }
+                flipAngleIndex = 0;
+                tFlip = 0;
+            }
+            return;
+        }
+        ThrowAngleIndex = 0;
         if(KeyDown && KeyHold && !KeyUp)
         {
-            GetComponent<HingeJoint>().useMotor = true;
-
+            isThrowing = 1;
+            
             // Analytics tracking for time between thrown slices
             int timeElapsed = Mathf.RoundToInt(Time.time - startTime);
             Debug.Log(timeElapsed);
@@ -38,12 +72,18 @@ public class PizzaPeelController : MonoBehaviour
             );
             Debug.Log("analyticsResult (IdleTime): " + analyticsResult);
             Analytics.FlushEvents();
-        }
-        if(Input.GetKeyUp(KeyCode.Space))
-        {
-            GetComponent<HingeJoint>().useMotor = false;
+
         }
         
-       
+        //normal flip animation, flip the peel to rotate the pizza slices
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(myFlipAngles[flipAngleIndex]), lerpRotationTime * Time.deltaTime);
+        tFlip= Mathf.Lerp(tFlip, 1f, lerpRotationTime * Time.deltaTime);
+        if(tFlip>0.9f)
+        {
+            tFlip = 0f;
+            flipAngleIndex += 1;
+            flipAngleIndex %= 3;
+        }
+    
     }
 }

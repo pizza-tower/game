@@ -12,6 +12,8 @@ public class PizzaParabola : MonoBehaviour
     protected float Animation = 0;
     Vector3 StartPoint;
     Vector3 EndPoint;
+    Vector3 StartRotation;
+    Vector3 EndRotation;
     private float IsThrowing = 0;
     private int TargetList = 0;
     private string TargetAnchor = "";
@@ -28,7 +30,7 @@ public class PizzaParabola : MonoBehaviour
 
     void Start()
     {
-        StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
+
       
     }
     // Update is called once per frame
@@ -92,14 +94,19 @@ public class PizzaParabola : MonoBehaviour
     {
         GetComponent<PizzaRotation>().StopRotate = 1;
     }
-
     void ThrowSlice()
     {
-        
         EndPoint = (GameObject.FindWithTag(TargetAnchor)).transform.position;
+        EndRotation.y += (float)GetComponent<PizzaRotation>().TagInInt * (float)60.0;
         float Count = GlobalData.globalList[TargetList].Count;
         EndPoint.y += 0.2f * Count;
-        //Debug.Log($"Position: {EndPoint}");    
+
+        //Pizza slice throw audio effect
+        AudioSource audioData;
+        audioData = GameObject.Find("PizzaPeel").GetComponent<AudioSource>();
+        audioData.Play(0);
+
+        Debug.Log($"Position: {EndPoint}");    
     }
     void Update()
     {
@@ -117,14 +124,13 @@ public class PizzaParabola : MonoBehaviour
         if (KeyDown == true && KeyHold == true && KeyUp == false && IsThrowing == 0)
         {
             Debug.Log("Space is pressed");
-
+            //StartRotation = transform.rotation;
             AddToList();
             ThrowSlice();
-
+            StartPoint = transform.position;
             StopRotation();
             IsThrowing = 1;
-            //Refresh the spawner and generate a new slice
-            ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
+            
         }
         if(IsThrowing == 1)
         {
@@ -134,6 +140,9 @@ public class PizzaParabola : MonoBehaviour
                 Animation = 1.3f;
                 IsThrowing = 0;
                 IsPlaced = true;
+                //Refresh the spawner and generate a new slice
+                ((GameObject.FindWithTag("Spawner")).GetComponent<NewSliceSpawn>()).NeedsNewSlice = 1;
+                ((GameObject.FindWithTag("Peel")).GetComponent<PizzaPeelController>()).Reset();
                 if(IsBomb)
                 {
                     Bomb();
@@ -148,6 +157,7 @@ public class PizzaParabola : MonoBehaviour
                 //once the throw animation is completed, check the fuse
                 FusionCheck();
                 
+                
                 if (GlobalData.globalList[TargetList].Count >= 6) {
                     GameObject.FindWithTag(TargetAnchor).GetComponent<Wobble>().startWobble();
                 }
@@ -158,7 +168,7 @@ public class PizzaParabola : MonoBehaviour
 
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 1.3f);
-         
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(EndRotation), 6 * Time.deltaTime);
         }
 
     }

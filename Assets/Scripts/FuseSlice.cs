@@ -73,6 +73,12 @@ public class FuseSlice : MonoBehaviour
     public static void BombFuse(List<GameObject> SList)
     {
         int n = SList.Count;
+        if(n>0){
+            
+            AudioSource audioData;
+            audioData = GameObject.Find("AnchorOne").GetComponent<AudioSource>();
+            audioData.Play(0);
+        }
         for (int k = 0; k < SList.Count; k++)
         {
             Destroy(SList[k]);
@@ -123,6 +129,12 @@ public class FuseSlice : MonoBehaviour
             int r = CheckPizza(rotations[i]);
             if(r != -1)
             {
+
+                //audio
+                AudioSource audioData;
+                audioData = GameObject.Find("Plate").GetComponent<AudioSource>();
+                audioData.Play(0);
+
                 //Fuse possible! No need to loop any further
                 for(int j = 0; j < 6; j++)
                 {
@@ -172,6 +184,7 @@ public class FuseSlice : MonoBehaviour
         return -1;
     }
 
+          
     /*TODO: Write this function to give score, update level requirements etc*/
     public static void HandleReward(int fuseIndex) {
         Debug.Log("Horizontal fusion acknowledged: Level: " + SceneManager.GetActiveScene().name + " Combination index: " + fuseIndex.ToString());

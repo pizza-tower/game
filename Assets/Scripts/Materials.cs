@@ -14,8 +14,9 @@ public class Materials : MonoBehaviour
         Rend.enabled = true;
         //be default the material is yellow
         //Rend.sharedMaterial = MaterialList[0];
-
     }
+
+    //TO COLOR
     public void ToYellow()
     {
         Rend.sharedMaterial = MaterialList[0];
@@ -24,6 +25,20 @@ public class Materials : MonoBehaviour
     {
         Rend.sharedMaterial = MaterialList[1];
     }
+    public void ToBrown()
+    {
+        Rend.sharedMaterial = MaterialList[6];
+    }
+    public void ToDarkBrown()
+    {
+        Rend.sharedMaterial = MaterialList[7];
+    }
+    public void ToGreen()
+    {
+        Rend.sharedMaterial = MaterialList[8];
+    }
+
+    //TO TRANSPARENT
     public void ToYellowTransparent()
     {
         Rend.sharedMaterial = MaterialList[2];
@@ -32,10 +47,20 @@ public class Materials : MonoBehaviour
     {
         Rend.sharedMaterial = MaterialList[3];
     }
-     public void ToBrownTransparent()
+    public void ToBrownTransparent()
     {
         Rend.sharedMaterial = MaterialList[3];
     }
+    public void ToDarkBrownTransparent()
+    {
+        Rend.sharedMaterial = MaterialList[3];
+    }
+    public void ToGreenTransparent()
+    {
+        Rend.sharedMaterial = MaterialList[3];
+    }
+
+
     public void ToBomb()
     {
         Rend.sharedMaterial = MaterialList[4];
@@ -44,10 +69,7 @@ public class Materials : MonoBehaviour
     {
         Rend.sharedMaterial = MaterialList[5];
     }
-    public void ToBrown()
-    {
-        Rend.sharedMaterial = MaterialList[6];
-    }
+  
     public void FlipColor()
     {
         SliceColor c = GetComponent<PizzaRotation>().mColor;
