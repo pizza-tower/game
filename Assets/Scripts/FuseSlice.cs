@@ -34,9 +34,10 @@ public class FuseSlice : MonoBehaviour
         SliceColor c1 = SList[SList.Count - 1].GetComponent<PizzaRotation>().mColor;
         SliceColor c2 = SList[SList.Count - 2].GetComponent<PizzaRotation>().mColor;
         SliceColor c3 = SList[SList.Count - 3].GetComponent<PizzaRotation>().mColor;
+        SliceColor c4 = SList[SList.Count - 4].GetComponent<PizzaRotation>().mColor;
         
         // If all slices are of the same color then return true
-        if (c1 == c2 && c1 == c3) return true;
+        if (c1 == c2 && c1 == c3 && c1 == c4) return true;
 
         // Not of same color
         return false;

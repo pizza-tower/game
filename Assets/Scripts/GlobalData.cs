@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GlobalData : MonoBehaviour
 {    
 
-    public static int verticalFusionHeight=3;
+    public static int verticalFusionHeight=4;
     public static int level;
     public static bool isFirstSlice;
     public static string previousSlice;
