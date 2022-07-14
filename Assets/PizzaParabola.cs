@@ -133,26 +133,26 @@ public class PizzaParabola : MonoBehaviour
         //if it is a random drop slice, escape the parabola part
         if(GetComponent<PizzaRotation>().IsRandomDrop)
         {
-            transform.position = Vector3.Lerp(StartPoint, EndPoint, FreeFallTime/3.0f);
+            transform.position = Vector3.Lerp(StartPoint, EndPoint, FreeFallTime/7.0f);
             FreeFallTime += Time.deltaTime;
             //ONLY ADD to the list when the slice is super close to the plate
             //At the begining ask for the next random spawn slice
-            if(FreeFallTime/3.0f > 0.1f && RequestedNewRandomDropSlice == false)
+            if(FreeFallTime/7.0f > 0.1f && RequestedNewRandomDropSlice == false)
             {
                 RequestedNewRandomDropSlice = true;
                 ((GameObject.FindWithTag("RandomSliceSpawner")).GetComponent<RandomDropSpawn>()).NeedsNewSlice = 1;
             }
             //When the random drop slice is close to the stack, add it to the list
-            if(FreeFallTime/3.0f > 0.98f && RandomDropSliceAddedToTheList == false)
+            if(FreeFallTime/7.0f > 0.98f && RandomDropSliceAddedToTheList == false)
             {
                 RandomDropSliceAddedToTheList = true;
                 ThrowSlice();
                 AddToList();
             }
             //when the random drop slice is landed on top of the stack, mark it as ISPlaced
-            if(FreeFallTime >= 3.0f)
+            if(FreeFallTime >= 7.0f)
             {
-                FreeFallTime = 3.0f;
+                FreeFallTime = 7.0f;
                 IsPlaced = true;
                 FuseSlice.mHorizontalFuse();
                 FuseSlice.mVertFuse(GlobalData.globalList[TargetList]);
