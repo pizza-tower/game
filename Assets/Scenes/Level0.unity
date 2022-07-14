@@ -266,7 +266,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 30
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 3
@@ -274,8 +274,8 @@ MonoBehaviour:
     m_Alignment: 7
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Press Space To Throw Pizza
 --- !u!222 &51125841
@@ -292,7 +292,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 759117608848490734}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &52892956
+--- !u!114 &52892963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 52892948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db16bcaa9c7b94b1fa7590a51852fcd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 93ea24cc2a0f80f41893f1df7635e6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ui_handler: {fileID: 0}
@@ -664,7 +664,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkthroughDone: 0
-  FirstSlice: 1
 --- !u!1001 &415365890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1409,7 +1408,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkthroughDone: 0
-  FirstSlice: 1
 --- !u!1 &920445400
 GameObject:
   m_ObjectHideFlags: 0
@@ -2747,7 +2745,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9058975297391031567}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1640787738
+--- !u!114 &1640787743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2756,26 +2754,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1640787737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f0997915f5145ee9c28cba8e96fc6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b8bfcd71a6b3df41b75f58b49b2ec12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Slice: {fileID: 7934999755122050094, guid: 2ebba3e2ed3bd4beca3b39dd2ad4701b, type: 3}
-  NeedsNewSlice: 1
-  NewSliceSpawnSeconds: 2
-  SpawnRed: 0
-  Level: 0
---- !u!114 &1640787741
+--- !u!114 &1640787744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640787737}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d4dbd82f35249bea7ab4b226e0cbb6, type: 3}
+  m_Script: {fileID: 11500000, guid: b6e4a9076be87994d98da5c58bd8404b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
+  NeedsNewSlice: 1
+  NewSliceSpawnSeconds: 1.3
 --- !u!1 &1687078401
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,7 +3270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 321, y: -71}
+  m_AnchoredPosition: {x: 321, y: -33}
   m_SizeDelta: {x: 1005.7747, y: 117.3183}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2010904352
@@ -3299,7 +3295,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 15
     m_FontStyle: 2
     m_BestFit: 0
     m_MinSize: 0

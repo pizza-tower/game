@@ -20,6 +20,12 @@ public class PizzaParabola : MonoBehaviour
     bool IsPlaced = false;
     public bool IsBomb = false;
     public bool IsColorChanger = false;
+
+    public bool GetIsPlaced()
+    {
+        return IsPlaced;
+    }
+
     void Start()
     {
         StartPoint = (GameObject.FindWithTag("Spawner")).transform.position;
@@ -99,6 +105,8 @@ public class PizzaParabola : MonoBehaviour
     {
         if(IsPlaced)
         {
+            GlobalData.isFirstSlice = false;
+            
             return;
         }
         

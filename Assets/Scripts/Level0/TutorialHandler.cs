@@ -1,3 +1,7 @@
+using System.Globalization;
+using System.ComponentModel;
+using System.Timers;
+using System;
 using System.Threading;
 
 using System.Collections;
@@ -10,39 +14,30 @@ public class TutorialHandler : MonoBehaviour
 {
 
     public bool WalkthroughDone = false;    
-    public bool FirstSlice = true;
 
     private GameObject ui_handler,ui_flow;
     private int stage = 1;
 
-    private int nStages = 7;
     private GameObject pizzaSpawner;
-    private NewSliceSpawnLevel0 pizzaSpawnerComponent;
+    private NewSliceSpawn pizzaSpawnerComponent;
     private float spawnerSpawnTime;
-    private List<GameObject> slicesTemp = new List<GameObject>();
 
-    private GameObject prevObj;
+    private GameObject CurrentVertSlice;
+    private int slicesCount = 0;
     private bool _pause = false;
     private bool pressSpace = false;
     private bool isPlaced = false;
     private bool blockSpace = false;
     private bool fuseCase = false;
-    private int VertCount = 0;
-
-    //For Vertical Fuse
-    private int slicesSize = 0;
+    private bool blockInput = false;
 
     void intro(){
-        
-        
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
             x.SetTutorialInstruction("Lets take a brief Walk through!");
         });
     }
 
     void showPeel(){
-        
-        
         Debug.Log("Showing Peel..");
 
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
@@ -55,41 +50,71 @@ public class TutorialHandler : MonoBehaviour
         Debug.Log("Showing Pan..");
 
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-            x.SetTutorialInstruction("Pan has 6 slots where pizza can be placed");
+            x.SetTutorialInstruction("Pan has 6 slots where pizzas can be placed");
         });
+        GlobalData.ValidSlices["Level0"] = new(){ SliceColor.Yellow };
     }
     
+    delegate void Function();
+    IEnumerator WaitFor(float seconds, Function toCall){
+        yield return new WaitForSeconds(seconds);
+        toCall();
+    }
+
     void showPizzaSlice(){
-
-        Debug.Log("Showing Pizza Slice..");
-        pizzaSpawnerComponent.NewSliceSpawnSeconds = 1;
-        pizzaSpawnerComponent.SpawnRed = 0;
+        pizzaSpawnerComponent.NewSliceSpawnSeconds = 0;
         pizzaSpawner.SetActive(true);
+        Debug.Log("Showing Pizza Slice..");
+
+        // blockInput = true;
+        // ui_flow.SetActive(false);
         
-        ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-            x.SetTutorialInstruction("Pizza Slice rotates until you hit space to throw the pizza");
-        });
+        // Time.timeScale = 0;
+        // while(!pizzaSpawner.activeSelf){
+        //     Debug.Log("Loading...");
+            StartCoroutine(WaitFor(0.3f, () => {
+                // ui_flow.SetActive(true);
+                Debug.Log("Waiting for Pizza Spawner to be active");
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
+                    x.SetTutorialInstruction("Pizza Slice rotates until you hit space to throw the pizza");
+                });
+                pressSpace = true;
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
+                    x.SetFlowInstruction("(Press Space to throw the Pizza)");
+                });
+            }));
+        // }
+
+        // For VerticalFuse verification in the next stage `verticalFuseCondition`
+        CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
+        if(CurrentVertSlice == null)
+            Debug.Log("CurrentVertSlice is null");
+        else
+            Debug.Log("CurrentVertSlice is not null");
+
+        Debug.Log("CurrentVertSlice: " + CurrentVertSlice.name);
+        // blockIn = false;
     }
 
-    void pressSpaceInst(){
+    // void pressSpaceInst(){
         
-        ui_flow.SetActive(false);
-        pizzaSpawnerComponent.NewSliceSpawnSeconds = 1;
-        pizzaSpawnerComponent.NeedsNewSlice = 0;
-        Debug.Log("Press Space to throw the Pizza");
-        // slicesTemp.Add(pizzaSpawner.GetComponent<NewSliceSpawnLevel0>().GetSpawnedSlice());
-        prevObj = pizzaSpawner.GetComponent<NewSliceSpawnLevel0>().GetSpawnedSlice();
-        slicesTemp.Add(prevObj);
-        pressSpace = true;
-        ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-            x.SetTutorialInstruction("Press Space to throw the Pizza");
-        });
-        slicesSize = slicesTemp.Count;
-    }
+    //     ui_flow.SetActive(false);
+    //     pizzaSpawnerComponent.NewSliceSpawnSeconds = 1;
+    //     // pizzaSpawnerComponent.NeedsNewSlice = 0;
+        
+    //     // For VerticalFuse verification in the next stage `verticalFuseCondition`
+    //     CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
+
+    //     pressSpace = true;
+    //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
+    //         x.SetTutorialInstruction("Press Space to throw the Pizza");
+    //     });
+
+    //     // Initialization for next stage
+    //     GlobalData.isFirstFusionOver = false;
+    // }
 
     void FuseMessage(int iMessageNumber){
-        
-        
         if(iMessageNumber == 0)
             ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                 x.SetTutorialInstruction("Lets Try Vertical Fuse!\n Try to make stack of three slices with no more than 5 slices!");
@@ -102,78 +127,123 @@ public class TutorialHandler : MonoBehaviour
     }
 
     public int CalculateSlices(){
-
         int size =0;
-
         foreach(List<GameObject> obj in GlobalData.globalList){
                 size += obj.Count;
         }
         return size;
     }
-    void verticalFuseCondition(int i){
-        
-        if(ui_flow.activeSelf == false){
-            ui_flow.SetActive(true);
-            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                x.SetFlowInstruction("(Press Space to throw the Pizza)");
-            });
+
+    void DestroySlices(){
+        foreach(List<GameObject> obj in GlobalData.globalList){
+            foreach(GameObject slice in obj){
+                Destroy(slice);
+            }
         }
+    }
+
+    void verticalFuseCondition(){
+        pizzaSpawnerComponent.NewSliceSpawnSeconds = spawnerSpawnTime;
+        
+        // Time.timeScale = 1;
+        // if(ui_flow.activeSelf == false){
+        //     ui_flow.SetActive(true);
+        //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
+        //         x.SetFlowInstruction("(Press Space to throw the Pizza)");
+        //     });
+        // }
+        FuseMessage(0);
 
         fuseCase = true;
         blockSpace = true;
 
-        // Debug.Log("Count:::: " + (prevObj == null));
-        GameObject currObj = pizzaSpawner.GetComponent<NewSliceSpawnLevel0>().GetSpawnedSlice();        
-        Debug.Log("sliceCount: " + GlobalData.isFirstFusionOver);
+        // isPlaced = 
+        
+        if(CurrentVertSlice != null){
+            isPlaced = CurrentVertSlice.GetComponent<PizzaParabola>().GetIsPlaced();
+            if(!isPlaced)
+                return;
+            
+            isPlaced = false;
+            Debug.Log("Slices Count: " + CalculateSlices());
+            Debug.Log("GlobalData.isFirstFusionOver: " + GlobalData.isFirstFusionOver);
 
-        // Debug.Log("VertCount: " + VertCount);
-        if(VertCount < 5 ){
+            if(CalculateSlices() <= 5){
 
-            if(GlobalData.isFirstFusionOver == false){
-                isPlaced = prevObj.GetComponent<PizzaParabolaLevel0>().GetIsPlaced();
-
-                // Debug.Log("SLice: " + prevObj.name + "   " + prevObj.tag);
-                if(isPlaced){
-                    if(VertCount == 0){
+                if(GlobalData.isFirstFusionOver == false){
+                        Debug.Log("First Fusion Over" + GlobalData.isFirstFusionOver);
                         FuseMessage(0);
-                    }
-                    currObj = pizzaSpawner.GetComponent<NewSliceSpawnLevel0>().GetSpawnedSlice();
-                    // Debug.Log(" Placedddddddd");
-                    isPlaced = currObj.GetComponent<PizzaParabolaLevel0>().GetIsPlaced();;
-                    prevObj = currObj;
-                    slicesTemp.Add(prevObj);
-                    slicesSize = CalculateSlices();
-                    VertCount++;
+                }else{
+                    Debug.Log("Fusion Over");
+                    stage++;
+                    _pause = true;
+                    fuseCase = false;
                 }
-
             }else{
-                fuseCase = false;
-                _pause = true;
-                stage++;
+                FuseMessage(1);
+                DestroySlices();
+                GlobalData.ResetGlobalList();
+                slicesCount = 0;
             }
-            
         }else{
-            for(int j=0;j<slicesTemp.Count-1;j++)
-                Destroy(slicesTemp[j]);
-
-            slicesTemp.Clear();
-            slicesTemp.Add(pizzaSpawner.GetComponent<NewSliceSpawnLevel0>().GetSpawnedSlice());
-            
-            GlobalData.ResetGlobalList();
-            FuseMessage(1);
-            VertCount = 0;
+            Debug.Log("CurrentVertSlice is null");
+            CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
+            return;
         }
-    }
+        
 
-    IEnumerator WaitFor(int seconds){
-        yield return new WaitForSeconds(seconds);
+        // GameObject vertSliceObject = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();        
+        
+        // Debug.Log("GlobalData.isFirstFusionOver: " + GlobalData.isFirstFusionOver);
+        // VertSlicesCount = CalculateSlices();
+        // Debug.Log("VertSlicesCount: " + VertSlicesCount);
+
+        // if(VertSlicesCount < 5 ){
+
+        //     if(GlobalData.isFirstFusionOver == false){
+        //         Debug.Log("FirstFusionNotOver");
+        //         isPlaced = vertSliceObject.GetComponent<PizzaParabola>().GetIsPlaced();
+
+        //         if(isPlaced){
+        //             if(VertSlicesCount == 0){
+        //                 FuseMessage(0);
+        //             }
+        //             Debug.Log("IsPlaced" + isPlaced);
+        //             vertSliceObject = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
+        //             isPlaced = currObj.GetComponent<PizzaParabola>().GetIsPlaced();;
+                    
+        //             vertSlices.Add(vertSliceObject);
+        //             VertSlicesCount += 1;
+        //         }
+        //     }else{
+        //         Debug.Log("FirstFusionOver");
+        //         fuseCase = false;
+        //         _pause = true;
+        //         stage++;
+        //     }
+        // }else{
+        //     // for(int j=0;j<vertSlices.Count-1;j++)
+        //     //     Destroy(vertSlices[j]);
+
+        //     // vertSlices.Clear();
+        //     // vertSlices.Add(pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice());
+            
+        //     Debug.Log("Destroying all slices" + CalculateSlices());
+        //     for(int j=0;j<GlobalData.globalList.Count;j++)
+        //         for(int i=0;i<GlobalData.globalList[j].Count;i++)
+        //             Destroy(GlobalData.globalList[j][i]);
+        //     GlobalData.ResetGlobalList();
+
+        //     FuseMessage(1);
+        //     VertSlicesCount = 0;
+        // }
     }
 
     private IEnumerator Walkthrough()
     {
 
         while (!_pause){
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.5f);
 
             if(!WalkthroughDone){
                 
@@ -191,17 +261,20 @@ public class TutorialHandler : MonoBehaviour
 
                 if(stage == 4){
                     showPizzaSlice();_pause = true;
+
+                    // For next stage
+                    pressSpace = true;
                 }
 
+                // if(stage == 5){
+                //     pressSpaceInst();_pause = true;
+                // }
+
                 if(stage == 5){
-                    pressSpaceInst();_pause = true;
+                    verticalFuseCondition();
                 }
 
                 if(stage == 6){
-                    verticalFuseCondition(0);
-                }
-
-                if(stage == 7){
                     pressSpace = false;
                     Destroy(pizzaSpawnerComponent.GetSpawnedSlice());
                     pizzaSpawner.SetActive(false);
@@ -213,19 +286,19 @@ public class TutorialHandler : MonoBehaviour
                     });
                 }
 
-                if(stage == 8){
+                if(stage == 7){
                     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                         x.SetTutorialInstruction("Aim: is to gain the total score needed to complete the level");
                     });
                 }
 
-                if(stage == 9){
+                if(stage == 8){
                     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                         x.SetTutorialInstruction("Cool Right! You are Ready!\n Press Enter to Start Level1");
                     });
                 }
 
-                if(stage == 10){
+                if(stage == 9){
                     SceneManager.LoadScene(3);
                 }
                 if(stage > 10){
@@ -239,11 +312,11 @@ public class TutorialHandler : MonoBehaviour
         ui_handler = GameObject.Find("UIHandler");
         ui_flow = GameObject.FindWithTag("flowui");
         pizzaSpawner = GameObject.FindWithTag("Spawner");
-        pizzaSpawnerComponent = pizzaSpawner.GetComponent<NewSliceSpawnLevel0>();
+        pizzaSpawnerComponent = pizzaSpawner.GetComponent<NewSliceSpawn>();
         spawnerSpawnTime = pizzaSpawnerComponent.NewSliceSpawnSeconds;
 
         pizzaSpawner.SetActive(false);
-        // pizzaSpawner.GetComponent<NewSliceSpawnLevel0>().NeedsNewSlice = 0;
+        // pizzaSpawner.GetComponent<NewSliceSpawn>().NeedsNewSlice = 0;
     }
 
     void Update()
@@ -252,7 +325,7 @@ public class TutorialHandler : MonoBehaviour
         StartCoroutine(Walkthrough());
         if (((!pressSpace && Input.GetKeyDown(KeyCode.Return)) 
         || (pressSpace &&  Input.GetKeyDown(KeyCode.Space))) 
-        && !fuseCase){
+        && !fuseCase && !blockInput){
             if(!fuseCase)stage++;
             _pause = false;
         }

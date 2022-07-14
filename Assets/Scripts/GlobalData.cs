@@ -44,10 +44,13 @@ public class GlobalData : MonoBehaviour
 
         //Setup number of slices per level
         MaxSlices = new();
+        MaxSlices.Add("Level0", 60);
         MaxSlices.Add("Level1", 60);
 
         //Setup valid slices that can be spawned for a level
         ValidSlices = new();
+        // TutorialHandler will change this value in Runtime for walkthrough purposes.
+        ValidSlices.Add("Level0", new() { SliceColor.Red, SliceColor.Yellow });
         ValidSlices.Add("Level1", new() { SliceColor.Red, SliceColor.Yellow });
 
         //Setup valid combinations in clickwise order
@@ -55,6 +58,11 @@ public class GlobalData : MonoBehaviour
         SliceColor y = SliceColor.Yellow;
         ValidCombinations = new();
         ValidCombinations.Add("Level1", new() {
+            new() { r, r, r, r, r, r },
+            new() { y, y, y, y, y, y },
+            new() { r, r, r, y, y ,y }
+        });
+        ValidCombinations.Add("Level0", new() {
             new() { r, r, r, r, r, r },
             new() { y, y, y, y, y, y },
             new() { r, r, r, y, y ,y }

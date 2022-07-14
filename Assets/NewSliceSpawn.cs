@@ -12,6 +12,11 @@ public class NewSliceSpawn : MonoBehaviour
     public int NeedsNewSlice = 1;
     public float NewSliceSpawnSeconds;
     int NumberSpawned = 0;
+    private GameObject SpawnedSlice;
+
+    public GameObject GetSpawnedSlice(){
+        return SpawnedSlice;
+    }
 
     void Start()
     {
@@ -34,7 +39,7 @@ public class NewSliceSpawn : MonoBehaviour
         //spawn a new slice at spawner
         GameObject NewSlice = Instantiate(Slice) as GameObject;
         NewSlice.transform.position = transform.position;
-
+        
         List<SliceColor> sColors = GlobalData.ValidSlices[SceneManager.GetActiveScene().name];
         int n = sColors.Count;
         int r = Random.Range(0, n);
@@ -52,6 +57,9 @@ public class NewSliceSpawn : MonoBehaviour
 
         NewSlice.GetComponent<PizzaRotation>().mColor = c;
         NumberSpawned++;
+
+        SpawnedSlice = NewSlice;
+        
     }
     
     IEnumerator NewSliceCheck()

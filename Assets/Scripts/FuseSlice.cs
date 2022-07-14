@@ -61,6 +61,8 @@ public class FuseSlice : MonoBehaviour
                     });
             }
             SList.RemoveRange(SList.Count - n, n);
+            Debug.Log("isFirstFusionOver: " + GlobalData.isFirstFusionOver);
+            GlobalData.isFirstFusionOver = true;
             return 1;
         }
         return 0;
