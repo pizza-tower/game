@@ -15,6 +15,7 @@ public interface IPizzaTowerUIMessageTarget : IEventSystemHandler
     void SetGold(int g);
     void IncrementGold(int g);
     void SetFlowInstruction(string text);
+    void setIntroInstruction(string text);
 
     public void ShowPopupText(string text, Vector3 position);
 
@@ -31,6 +32,7 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     public GameObject floatingTextPrefab;
     public Text Instruction;
     public Text FlowInstruction;
+    public Text IntroInstruction;
 
     private int score = 0;
     private int score_required = 1;
@@ -79,6 +81,11 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     public void SetFlowInstruction(string inst){
         FlowInstruction.text = inst;
     }
+
+    public void setIntroInstruction(string inst){
+        IntroInstruction.text = inst;
+    }
+    
     public void ShowPopupText(string text, Vector3 position)
     {
         GameObject prefab = Instantiate(floatingTextPrefab, position, Quaternion.identity);
