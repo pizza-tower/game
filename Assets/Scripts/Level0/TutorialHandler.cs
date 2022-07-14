@@ -212,9 +212,9 @@ public class TutorialHandler : MonoBehaviour
                 }
             }
 
+            // TODO : Peel and slice animation not synchronized
             if(stage == 3){
                 if(WalkthroughDone == false){
-                    
                     showPizzaSlice();_pause = true;
                 }
 
@@ -225,6 +225,8 @@ public class TutorialHandler : MonoBehaviour
             if(stage == 4){
                 verticalFuseCondition();
             }
+            
+            // TODO : Add Horizontal Fuse
 
             if(stage == 5){
                 pressSpace = false;
@@ -244,6 +246,7 @@ public class TutorialHandler : MonoBehaviour
                 _pause = true;
             }
 
+            // TODO : Add Animation/Video to better understand Power Ups
             if(stage == 6){
                 Objects[GameObjectNames.SCORE_UI].SetActive(true);
                 
