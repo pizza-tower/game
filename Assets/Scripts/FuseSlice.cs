@@ -9,9 +9,12 @@ public class FuseSlice : MonoBehaviour
 {
     public GameObject ui_handler;
     // Start is called before the first frame update
+
+    // public static Animator animator;
     void Start()
     {
         ui_handler = GameObject.Find("UIHandler");
+        // animator = GameObject.Find("AnchorOne").GetComponent<Animator>();
     }
 
     void Update(){
@@ -49,8 +52,11 @@ public class FuseSlice : MonoBehaviour
         //Check if top n slices in have same color as the latest slice
         if (mCheckTopNSlices(SList))
         {
-            GameObject.Find("smoke").GetComponentInChildren<ParticleSystem>().Play();
+            // GameObject.Find("smoke").GetComponentInChildren<ParticleSystem>().Play();
             // Reference: https://www.youtube.com/watch?v=jQivfs34Wb0
+            GameObject.Find("smoking").GetComponentInChildren<ParticleSystem>().Play();
+
+            // animator.SetTrigger("isSmoking");
 
             //Debug.Log("Slices were same colored");
             for (int k = 1; k <= n; k++)
@@ -87,7 +93,7 @@ public class FuseSlice : MonoBehaviour
         SList.RemoveRange(0, n);
         //Destroy(GameObject.FindWithTag("0"));
         Debug.Log("boom");
-        GameObject.Find("flame").GetComponentInChildren<ParticleSystem>().Play();
+        // GameObject.Find("flame").GetComponentInChildren<ParticleSystem>().Play();
         // ReferenceEquals:https://www.youtube.com/watch?v=zJFcCngLP-Q
     }
 
