@@ -254,7 +254,7 @@ public class FuseSliceLevel0 : MonoBehaviour
                 // }
                 // GlobalData.isFirstHorizontalFusionOver = true;
             }
-            Score.EarnScore();
+            // Score.EarnScore();
 
         }
     }
