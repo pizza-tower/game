@@ -81,7 +81,7 @@ public class AnimationOnFuse : MonoBehaviour
         Debug.Log("Ease Type" + easeType);
         Debug.Log("Target Position" + Level1Target_allRed_position);
         //float duration = Random.Range(minAnimDuration, maxAnimDuration);
-        doAnimate(Level1Target_allRed_position, pizza_allRed);
+        doAnimate(Level1Target_allRed_position, pizza_allRed, 3);
     }
 
     public void animateOnAllYellow(Vector3 sourcePosition)
@@ -96,7 +96,7 @@ public class AnimationOnFuse : MonoBehaviour
         Debug.Log("Ease Type" + easeType);
         Debug.Log("Target Position" + Level1Target_allYellow_position);
         //float duration = Random.Range(minAnimDuration, maxAnimDuration);
-        doAnimate(Level1Target_allYellow_position, pizza_allYellow);
+        doAnimate(Level1Target_allYellow_position, pizza_allYellow,5);
     }
     public void animateOnHalfHalf(Vector3 sourcePosition)
     {
@@ -110,14 +110,14 @@ public class AnimationOnFuse : MonoBehaviour
         Debug.Log("Ease Type" + easeType);
         Debug.Log("Target Position" + Level1Target_half_position);
         //float duration = Random.Range(minAnimDuration, maxAnimDuration);
-        doAnimate(Level1Target_half_position, pizza_half);
+        doAnimate(Level1Target_half_position, pizza_half,2);
     }
 
-    void doAnimate(Vector3 target, GameObject gameObject)
+    void doAnimate(Vector3 target, GameObject gameObject, int jumpPower)
     {
         Vector3 originalScale = gameObject.transform.localScale;
         Sequence s = DOTween.Sequence();
-        s.Append(gameObject.transform.DOJump(target, 5, 1, 3.5f, false));
+        s.Append(gameObject.transform.DOJump(target, jumpPower, 1, 3.5f, false));
         s.Join(gameObject.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 4f).SetDelay(1.5f));
         s.OnComplete(() => completeAnimation(gameObject, originalScale));
         s.Play();
