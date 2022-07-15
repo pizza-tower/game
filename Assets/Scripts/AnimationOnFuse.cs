@@ -3,28 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
-
+using UnityEngine.SceneManagement;
 
 public class AnimationOnFuse : MonoBehaviour
 {
-
+    //spawned prefab for animation
     [SerializeField] GameObject animatedPizzaPrefab_allRed;
     [SerializeField] GameObject animatedPizzaPrefab_allYellow;
     [SerializeField] GameObject animatedPizzaPrefab_half;
     [SerializeField] GameObject animatedPizzaPrefab_twoRed;
     [SerializeField] GameObject animatedPizzaPrefab_OneRed;
     [SerializeField] GameObject animatedPizzaPrefab_Star;
-    [SerializeField] GameObject animatedPizzaPrefab_TwoRed;
-    [SerializeField] GameObject animatedPizzaPrefab_TwoYellow;
 
-    [SerializeField] Transform Level1Target_allRed;
-    [SerializeField] Transform Level1Target_allYellow;
-    [SerializeField] Transform Level1Target_half;
-
-    [SerializeField] Transform Level2Target;
-    [SerializeField] Transform Level3Target;
-    [SerializeField] Transform Level4Target;
-    [SerializeField] Transform Level5Target;
+    //target location cheatsheet
+    [SerializeField] Transform Target_allRed;
+    [SerializeField] Transform Target_allYellow;
+    [SerializeField] Transform Target_half;
+    [SerializeField] Transform Target_twoRed;
+    [SerializeField] Transform Target_oneRed;
 
 
     [Space]
@@ -34,21 +30,65 @@ public class AnimationOnFuse : MonoBehaviour
 
     [SerializeField] Ease easeType;
 
-    private Vector3 Level1Target_allRed_position;
-    private Vector3 Level1Target_allYellow_position;
-    private Vector3 Level1Target_half_position;
+    private Vector3 Target_allRed_position;
+    private Vector3 Target_allYellow_position;
+    private Vector3 Target_half_position;
+    private Vector3 Target_twoRed_position;
+    private Vector3 Target_oneRed_position;
 
     private GameObject pizza_allRed;
     private GameObject pizza_allYellow;
     private GameObject pizza_half;
+    private GameObject pizza_twoRed;
+    private GameObject pizza_oneRed;
+    private string level;
 
 
     void Awake()
     {
-        Level1Target_allRed_position = Level1Target_allRed.position;
-        Level1Target_allYellow_position = Level1Target_allYellow.position;
-        Level1Target_half_position = Level1Target_half.position;
-        PreparePizza();
+        level = SceneManager.GetActiveScene().name;
+        Debug.Log("Level" + level);
+        if(level=="Level1")
+        {
+            Debug.Log("In Animation of" + level);
+            Target_allRed_position = Target_allRed.position;
+            Target_allYellow_position = Target_allYellow.position;
+            Target_half_position = Target_half.position;
+
+            pizza_allRed = Instantiate(animatedPizzaPrefab_allRed);
+            pizza_allYellow = Instantiate(animatedPizzaPrefab_allYellow);
+            pizza_half = Instantiate(animatedPizzaPrefab_half);
+
+            pizza_allRed.transform.parent = transform;
+            pizza_allYellow.transform.parent = transform;
+            pizza_half.transform.parent = transform;
+
+            pizza_allRed.SetActive(false);
+            pizza_allYellow.SetActive(false);
+            pizza_half.SetActive(false);
+
+            Debug.Log("In Preparation Stage : Animation");
+        }
+        else if (level=="Level2")
+        {
+            Debug.Log("In Animation of" + level);
+            Target_allRed_position = Target_allRed.position;
+            Target_allYellow_position = Target_allYellow.position;
+            Target_twoRed_position = Target_twoRed.position;
+
+            pizza_allRed = Instantiate(animatedPizzaPrefab_allRed);
+            pizza_allYellow = Instantiate(animatedPizzaPrefab_allYellow);
+            pizza_twoRed = Instantiate(animatedPizzaPrefab_twoRed);
+
+            pizza_allRed.transform.parent = transform;
+            pizza_allYellow.transform.parent = transform;
+            pizza_twoRed.transform.parent = transform;
+
+            pizza_allRed.SetActive(false);
+            pizza_allYellow.SetActive(false);
+            pizza_twoRed.SetActive(false);
+        }
+
     }
 
     void PreparePizza()
@@ -79,9 +119,9 @@ public class AnimationOnFuse : MonoBehaviour
 
         Debug.Log("Source Position" + sourcePosition);
         Debug.Log("Ease Type" + easeType);
-        Debug.Log("Target Position" + Level1Target_allRed_position);
+        Debug.Log("Target Position" + Target_allRed_position);
         //float duration = Random.Range(minAnimDuration, maxAnimDuration);
-        doAnimate(Level1Target_allRed_position, pizza_allRed, 3);
+        doAnimate(Target_allRed_position, pizza_allRed, 3);
     }
 
     public void animateOnAllYellow(Vector3 sourcePosition)
@@ -94,9 +134,9 @@ public class AnimationOnFuse : MonoBehaviour
 
         Debug.Log("Source Position" + sourcePosition);
         Debug.Log("Ease Type" + easeType);
-        Debug.Log("Target Position" + Level1Target_allYellow_position);
+        Debug.Log("Target Position" + Target_allYellow_position);
         //float duration = Random.Range(minAnimDuration, maxAnimDuration);
-        doAnimate(Level1Target_allYellow_position, pizza_allYellow,5);
+        doAnimate(Target_allYellow_position, pizza_allYellow,5);
     }
     public void animateOnHalfHalf(Vector3 sourcePosition)
     {
@@ -108,9 +148,41 @@ public class AnimationOnFuse : MonoBehaviour
 
         Debug.Log("Source Position" + sourcePosition);
         Debug.Log("Ease Type" + easeType);
-        Debug.Log("Target Position" + Level1Target_half_position);
+        Debug.Log("Target Position" + Target_half_position);
         //float duration = Random.Range(minAnimDuration, maxAnimDuration);
-        doAnimate(Level1Target_half_position, pizza_half,2);
+        if(level=="Level3")
+        {
+            //for level 3, only two pizza on cheatsheet ,higher jump throw is okay
+            doAnimate(Target_half_position, pizza_half, 5);
+        } else
+        {
+            doAnimate(Target_half_position, pizza_half, 2);
+        }
+    }
+
+    public void animateOnOneRed(Vector3 sourcePosition)
+    {
+        pizza_oneRed.SetActive(true);
+
+        //move pizza to the target cheatsheet pos
+        pizza_oneRed.transform.position = sourcePosition;
+        doAnimate(Target_oneRed_position, pizza_oneRed, 2);
+    }
+
+
+    public void animateOnTwoRed(Vector3 sourcePosition)
+    {
+        Debug.Log("Two red pizza" + pizza_twoRed);
+        pizza_twoRed.SetActive(true);
+
+        //move pizza to the target cheatsheet pos
+        pizza_twoRed.transform.position = sourcePosition;
+
+        Debug.Log("Source Position" + sourcePosition);
+        Debug.Log("Ease Type" + easeType);
+        Debug.Log("Target Position" + Target_twoRed_position);
+        //float duration = Random.Range(minAnimDuration, maxAnimDuration);
+        doAnimate(Target_twoRed_position, pizza_twoRed, 2);
     }
 
     void doAnimate(Vector3 target, GameObject gameObject, int jumpPower)

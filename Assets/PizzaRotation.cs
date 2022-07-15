@@ -10,7 +10,7 @@ public class PizzaRotation : MonoBehaviour
     public int TagInInt;
     private bool AssignMaterial = false;
     public bool hardcoded = false;
-
+    public bool IsRandomDrop = false;
     [SerializeField] [Range(0f, 6f)] float lerpRotationTime;
     [SerializeField] [Range(0f, 8f)] float lerpPositionTime;
     [SerializeField] Vector3[] myAngles;
@@ -73,7 +73,11 @@ public class PizzaRotation : MonoBehaviour
            
             AssignMaterial = true;
         }
-        if(IsRotating == 1  && StopRotate == 0 && hardcoded!=true)
+        if(IsRandomDrop)
+        {
+            return;
+        }
+        if(IsRotating == 1  && StopRotate == 0 && hardcoded!=true && IsRandomDrop == false)
         {
             //flip and rotate animation
             
