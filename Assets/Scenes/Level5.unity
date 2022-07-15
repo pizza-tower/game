@@ -4739,6 +4739,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PizzaPeel
       objectReference: {fileID: 0}
+    - target: {fileID: 1659850886184615598, guid: 9b1e97c42a7d66c4188e2519a78f387c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2002290147225881139, guid: 9b1e97c42a7d66c4188e2519a78f387c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2036516788431676436, guid: 9b1e97c42a7d66c4188e2519a78f387c,
         type: 3}
       propertyPath: m_RootOrder
