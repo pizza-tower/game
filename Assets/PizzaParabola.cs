@@ -26,6 +26,9 @@ public class PizzaParabola : MonoBehaviour
     bool RandomDropSliceAddedToTheList = false;
     bool SliceAddedToTheList = false;
     bool RequestedNewRandomDropSlice = false;
+    private int fusionIndex = -1;
+    AnimationOnFuse Animator;
+
     void Start()
     {
         if(GetComponent<PizzaRotation>().IsRandomDrop)
@@ -221,6 +224,7 @@ public class PizzaParabola : MonoBehaviour
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 1.3f);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(EndRotation), 6 * Time.deltaTime);
+            animateOnFuse(EndPoint);
         }
 
     }
@@ -232,7 +236,8 @@ public class PizzaParabola : MonoBehaviour
         {
             verticalFuseHappened = 0;
             int r;
-            if(FuseSlice.mHorizontalFuse() != -1)
+            fusionIndex = FuseSlice.mHorizontalFuse();
+            if (fusionIndex != -1)
             {
                 for (int i = 0; i < 6; i++)
                 {
@@ -243,10 +248,124 @@ public class PizzaParabola : MonoBehaviour
                     }
                 }
             }
-            
-            
-
         }
     }
+
+    void animateOnFuse(Vector3 sliceLandingPoint)
+    {
+        Debug.Log("Fusion Index: " + fusionIndex);
+        Animator = FindObjectOfType<AnimationOnFuse>();
+        Debug.Log(Animator);
+        if (GlobalData.isHorizontalFuse == true && fusionIndex != -1)
+        {
+            string currentLevel = SceneManager.GetActiveScene().name;
+            Animator = FindObjectOfType<AnimationOnFuse>();
+            switch (currentLevel)
+            {
+                case "Level1":
+                    triggerLevelOneAnimation();
+                    break;
+                case "Level2":
+                    triggerLevelTwoAnimation();
+                    break;
+                case "Level3":
+                    triggerLevelThreeAnimation();
+                    break;
+                case "Level4":
+                    triggerLevelFourAnimation();
+                    break;
+                case "Level5":
+                    triggerLevelFiveAnimation();
+                    break;
+            }
+
+            GlobalData.isHorizontalFuse = false;
+        }
+    }
+    void triggerLevelOneAnimation()
+    {
+        Vector3 start = transform.position;
+        start.y = transform.position.y + 9 * 0.2f;
+        switch (fusionIndex)
+        {
+            //SET as per pattern supported - check GlobalData
+            case 0:
+                Animator.animateOnHalfHalf(start);
+                break;
+        }
+    }
+
+    void triggerLevelTwoAnimation()
+    {
+        Vector3 start = transform.position;
+        start.y = transform.position.y + 9 * 0.2f;
+        switch (fusionIndex)
+        {
+            case 0:
+                Animator.animateOnTwoRed(start);
+                break;
+            case 1:
+                Animator.animateOnAllYellow(start);
+                break;
+            case 2:
+                Animator.animateOnAllRed(start);
+                break;
+        }
+    }
+
+    void triggerLevelThreeAnimation()
+    {
+        Vector3 start = transform.position;
+        start.y = transform.position.y + 9 * 0.2f;
+        switch (fusionIndex)
+        {
+            case 0:
+                Animator.animateOnHalfHalf(start);
+                break;
+            case 1:
+                Animator.animateOnOneRed(start);
+                break;
+            case 2:
+                Animator.animateOnAllYellow(start);
+                break;
+        }
+    }
+    void triggerLevelFourAnimation()
+    {
+        Vector3 start = transform.position;
+        start.y = transform.position.y + 9 * 0.2f;
+        switch (fusionIndex)
+        {
+            case 0:
+                Animator.animateOnOneBlueOneYellow(start);
+                break;
+            case 1:
+                Animator.animateOnOneBlueOneRed(start);
+                break;
+            case 2:
+                Animator.animateOnStar(start);
+                break;
+        }
+    }
+
+    void triggerLevelFiveAnimation()
+    {
+        Vector3 start = transform.position;
+        start.y = transform.position.y + 9 * 0.2f;
+        switch (fusionIndex)
+        {
+            case 0:
+                Animator.animateOnTwoYellow(start);
+                break;
+            case 1:
+                Animator.animateOnAllYellow(start);
+                break;
+            case 2:
+                Animator.animateOnHalfHalf(start);
+                break;
+        }
+    }
+
+
 
 }

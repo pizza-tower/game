@@ -111,6 +111,6 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
         int c = GameObject.Find("PizzaSpawner").GetComponent<NewSliceSpawn>().NumberSpawned;
         int v = m - c;
 
-        slicesText.text = "Slices Remaining\n" + v.ToString(); 
+        slicesText.text = "Slices Remaining\n" + v.ToString();
     }
 }

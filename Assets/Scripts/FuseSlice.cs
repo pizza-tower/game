@@ -145,7 +145,7 @@ public class FuseSlice : MonoBehaviour
                     Destroy(glist[j][m - 1]);
                     glist[j].RemoveAt(m - 1);
                 }
-
+                GlobalData.isHorizontalFuse = true;
                 GlobalData.nHorizontalFusions++;
                 AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", 
                     new Dictionary<string, object> { 
