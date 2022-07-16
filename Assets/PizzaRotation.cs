@@ -46,9 +46,9 @@ public class PizzaRotation : MonoBehaviour
     {
         if(AssignMaterial == false)
         {
-             if(mColor == SliceColor.Brown)
+             if(mColor == SliceColor.Blue)
             {
-                gameObject.GetComponent<Materials>().ToBrown();
+                gameObject.GetComponent<Materials>().ToBlue();
             }
             else if(mColor == SliceColor.Red)
             {
@@ -143,8 +143,8 @@ public class PizzaRotation : MonoBehaviour
             case SliceColor.Yellow:
                 GetComponent<Materials>().ToYellow();
                 break;
-            case SliceColor.Brown:
-                GetComponent<Materials>().ToBrown();
+            case SliceColor.Blue:
+                GetComponent<Materials>().ToBlue();
                 break;
             case SliceColor.DarkBrown:
                 GetComponent<Materials>().ToDarkBrown();
@@ -164,7 +164,7 @@ public class PizzaRotation : MonoBehaviour
             case SliceColor.Yellow:
                 GetComponent<Materials>().ToYellowTransparent();
                 break;
-            case SliceColor.Brown:
+            case SliceColor.Blue:
                 GetComponent<Materials>().ToBrownTransparent();
                 break;
             case SliceColor.DarkBrown:

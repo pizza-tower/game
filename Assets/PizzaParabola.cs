@@ -269,13 +269,8 @@ public class PizzaParabola : MonoBehaviour
         start.y = transform.position.y + 9 * 0.2f;
         switch (fusionIndex)
         {
+            //SET as per pattern supported - check GlobalData
             case 0:
-                Animator.animateOnAllRed(start);
-                break;
-            case 1:
-                Animator.animateOnAllYellow(start);
-                break;
-            case 2:
                 Animator.animateOnHalfHalf(start);
                 break;
         }
@@ -299,23 +294,6 @@ public class PizzaParabola : MonoBehaviour
         }
     }
 
-    void triggerLevelFiveAnimation()
-    {
-        Vector3 start = transform.position;
-        start.y = transform.position.y + 9 * 0.2f;
-        switch (fusionIndex)
-        {
-            case 0:
-                Animator.animateOnAllRed(start);
-                break;
-            case 1:
-                Animator.animateOnAllYellow(start);
-                break;
-            case 2:
-                Animator.animateOnTwoRed(start);
-                break;
-        }
-    }
     void triggerLevelThreeAnimation()
     {
         Vector3 start = transform.position;
@@ -340,13 +318,31 @@ public class PizzaParabola : MonoBehaviour
         switch (fusionIndex)
         {
             case 0:
-                Animator.animateOnAllRed(start);
+                Animator.animateOnOneBlueOneYellow(start);
                 break;
             case 1:
-                Animator.animateOnAllYellow(start);
+                Animator.animateOnOneBlueOneRed(start);
                 break;
             case 2:
-                Animator.animateOnTwoRed(start);
+                Animator.animateOnStar(start);
+                break;
+        }
+    }
+
+    void triggerLevelFiveAnimation()
+    {
+        Vector3 start = transform.position;
+        start.y = transform.position.y + 9 * 0.2f;
+        switch (fusionIndex)
+        {
+            case 0:
+                Animator.animateOnHalfHalf(start);
+                break;
+            case 1:
+                Animator.animateOnOneRed(start);
+                break;
+            case 2:
+                Animator.animateOnAllYellow(start);
                 break;
         }
     }
