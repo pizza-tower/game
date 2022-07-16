@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public interface IPizzaTowerUIMessageTarget : IEventSystemHandler
 {
@@ -28,6 +29,7 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     public Text scoreText;
     public Text levelText;
     public Text goldText;
+    public Text slicesText;
     public GameObject floatingTextPrefab;
     public Text Instruction;
     public Text FlowInstruction;
@@ -95,5 +97,20 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     {
         gold += g;
         UpdateGoldText();
+    }
+
+    private void Start()
+    {
+        int m = GlobalData.MaxSlices[SceneManager.GetActiveScene().name];
+        slicesText.text = "Slices Remaining\n" + m.ToString();
+    }
+
+    private void Update()
+    {
+        int m = GlobalData.MaxSlices[SceneManager.GetActiveScene().name];
+        int c = GameObject.Find("PizzaSpawner").GetComponent<NewSliceSpawn>().NumberSpawned;
+        int v = m - c;
+
+        slicesText.text = "Slices Remaining\n" + v.ToString(); 
     }
 }
