@@ -114,23 +114,19 @@ public class TutorialHandler : MonoBehaviour
     }
 
     void FuseMessage(int iMessageNumber){
+        Debug.Log("iMessage: " + iMessageNumber);
         if(iMessageNumber == 0)
             ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                 x.SetTutorialInstruction("Lets Try Vertical Fuse!\n Try to make stack of three slices with no more than 5 slices!");
             });
-
-        if(iMessageNumber == 1){
+        else if(iMessageNumber == 1){
             ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                 x.SetTutorialInstruction("Ops..Try Again! \nTry to stack three slices on same slot");
             });
-            instructionCount  = 2;
-        }
-
-        if(iMessageNumber == 2){
+        }else if(iMessageNumber == 2){
             ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                x.SetTutorialInstruction("Now try to stack three slices on different slots");
+                x.SetTutorialInstruction("Three Slices on the same slot will fuse");
             });
-            instructionCount  = 3;
         }
     }
 
@@ -173,6 +169,8 @@ public class TutorialHandler : MonoBehaviour
             isPlaced = false;
             Debug.Log("Slices Count: " + CalculateSlices());
             Debug.Log("GlobalData.isFirstFusionOver: " + GlobalData.isFirstFusionOver);
+            if(instructionCount == 1 && CalculateSlices() == 1)
+                instructionCount = 2;
 
             if(CalculateSlices() > 5){
                 instructionCount = 1;
@@ -182,6 +180,11 @@ public class TutorialHandler : MonoBehaviour
             }
         }
         CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
+    }
+
+
+    void horizontalFuse(){
+
     }
 
     private IEnumerator Walkthrough()
