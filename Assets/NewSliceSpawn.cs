@@ -8,7 +8,7 @@ using UnityEngine.Analytics;
 public class NewSliceSpawn : MonoBehaviour
 {
     public GameObject Slice;
-
+    float NewSliceSpawnSeconds;
     public int NeedsNewSlice = 1;
     int NumberSpawned = 0;
     private GameObject SpawnedSlice;
@@ -19,7 +19,7 @@ public class NewSliceSpawn : MonoBehaviour
 
     void Start()
     {
-        
+        NewSliceSpawnSeconds = 0f;
     }
 
     // Update is called once per frame
@@ -27,11 +27,22 @@ public class NewSliceSpawn : MonoBehaviour
     {
         if(NeedsNewSlice == 1)
         {
+            if(NumberSpawned >= GlobalData.MaxSlices[SceneManager.GetActiveScene().name])
+            {
+                NeedsNewSlice = 0;
+                // TODO: Trigger game over
+                return;
+            }
             NeedsNewSlice = 0;
-            spawnSlice();
+            StartCoroutine(Spawn());
         }
     }
-
+    IEnumerator Spawn()
+    {
+        yield return new WaitForSeconds(NewSliceSpawnSeconds);
+        NewSliceSpawnSeconds = 1.3f;
+        spawnSlice();
+    }
     public void spawnSlice() 
     {
         //spawn a new slice at spawner
