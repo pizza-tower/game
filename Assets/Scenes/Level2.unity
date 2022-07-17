@@ -156,6 +156,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Diagonal_lines_gold
       objectReference: {fileID: 0}
+    - target: {fileID: 6222723410487771367, guid: c1dfe2040472240d5b018dbe55ddb4ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7120445278234378903, guid: c1dfe2040472240d5b018dbe55ddb4ea,
         type: 3}
       propertyPath: m_RootOrder
@@ -1247,10 +1252,12 @@ MonoBehaviour:
   scoreText: {fileID: 2062733895}
   levelText: {fileID: 556240439}
   goldText: {fileID: 795303949}
+  slicesText: {fileID: 0}
   floatingTextPrefab: {fileID: 7987349156076225966, guid: 53b77ad867d51684ea7afc1bec7b2c7a,
     type: 3}
   Instruction: {fileID: 251544018}
   FlowInstruction: {fileID: 0}
+  IntroInstruction: {fileID: 0}
 --- !u!1001 &848035638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4467,3 +4474,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
   NeedsNewSlice: 1
+  NumberSpawned: 0

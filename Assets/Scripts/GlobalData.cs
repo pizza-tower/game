@@ -72,6 +72,8 @@ public class GlobalData : MonoBehaviour
         //Level 0
         ValidCombinations.Add("Level0", new() {
             new() { r, r, r, r, r, r },
+            new() { r, r, r, y, y, y },
+            new() { y, y, y, y, y, y }, 
         });
         //LEVEL1
         ValidCombinations.Add("Level1", new() {
@@ -81,31 +83,31 @@ public class GlobalData : MonoBehaviour
         ValidCombinations.Add("Level2", new() {
             new() { r, r, y, y, y, y },
             new() { y, y, y, y, y, y },
-            new() { r, r, r, r, r ,r }
+            new() { r, r, r, r, r, r }
         });
         //LEVEL3
         ValidCombinations.Add("Level3", new() {
             new() { r, r, r, y, y, y },
             new() { r, y, y, y, y, y },
-            new() { y, y, y, y, y ,y }
+            new() { y, y, y, y, y, y }
         });
         //LEVEL4
          ValidCombinations.Add("Level4", new() {
             new() { b, y, r, r, r, r },
             new() { y, r, y, y, y, b },
-            new() { r, y, r, y, r ,y }
+            new() { r, y, r, y, r, y }
         });
         //LEVEL5
          ValidCombinations.Add("Level5", new() {
             new() { r, r, r, r, y, y },
             new() { y, y, y, y, y, y },
-            new() { r, r, r, y, y ,y }
+            new() { r, r, r, y, y, y }
         });
         //LEVEL6
          ValidCombinations.Add("Level6", new() {
             new() { r, r, r, g, y, y },
             new() { y, y, y, y, r, d },
-            new() { r, r, r, y, y ,y }
+            new() { r, r, r, y, y, y }
         });
     }
 

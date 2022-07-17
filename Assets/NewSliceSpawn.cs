@@ -10,7 +10,7 @@ public class NewSliceSpawn : MonoBehaviour
     public GameObject Slice;
     float NewSliceSpawnSeconds;
     public int NeedsNewSlice = 1;
-    int NumberSpawned = 0;
+    public int NumberSpawned = 0;
     private GameObject SpawnedSlice;
 
     public GameObject GetSpawnedSlice(){
@@ -48,7 +48,7 @@ public class NewSliceSpawn : MonoBehaviour
         //spawn a new slice at spawner
         GameObject NewSlice = Instantiate(Slice) as GameObject;
         NewSlice.transform.position = transform.position;
-
+        NewSlice.name = "Slice" + NumberSpawned;
         List<SliceColor> sColors = GlobalData.ValidSlices[SceneManager.GetActiveScene().name];
         int n = sColors.Count;
         int r = Random.Range(0, n);

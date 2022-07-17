@@ -22,7 +22,7 @@ public class FuseSlice : MonoBehaviour
     {
         int n = GlobalData.verticalFusionHeight;
 
-        //Debug.Log("Inside check slices");
+        //Debug.Log("Inside check slices"); 
         //if the height of tower is shorter than n, return false
         if (n > SList.Count || SList.Count == 0)
         {
