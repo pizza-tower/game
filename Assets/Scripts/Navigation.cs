@@ -66,7 +66,6 @@ public class Navigation : MonoBehaviour
         GlobalData.previousSlice="AnchorOne";
         GlobalData.isFirstFusionOver = false;
         GlobalData.gameover = false;
-        Score.CurrentScore = 0;
         GlobalData.nHorizontalFusions = 0;
         GlobalData.nVerticalFusions = 0;
         //CleanGlobalList();
@@ -90,11 +89,11 @@ public class Navigation : MonoBehaviour
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", SceneManager.GetActiveScene().buildIndex} });
             GameObject popup = Instantiate(menu);
             instantiated = true;
-            Transform finalscore = popup.transform.GetChild(1);
+            /*Transform finalscore = popup.transform.GetChild(1);
             TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
-            scoretext.SetText("score: {0}", Score.CurrentScore);    
+            scoretext.SetText("score: {0}", Score.CurrentScore);*/
         }
-        if(Score.CurrentScore >= 30){
+        /*if(Score.CurrentScore >= 30){
             int level = SceneManager.GetActiveScene().buildIndex;
             if (level + 1 >= GlobalData.totalscenes) {
                 if(instantiated == false){
@@ -117,7 +116,6 @@ public class Navigation : MonoBehaviour
             
             }
 
-             }
-        } 
-    // }
+        }*/
+    }
 }

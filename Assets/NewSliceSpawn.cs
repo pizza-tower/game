@@ -10,7 +10,7 @@ public class NewSliceSpawn : MonoBehaviour
     public GameObject Slice;
     float NewSliceSpawnSeconds;
     public int NeedsNewSlice = 1;
-    int NumberSpawned = 0;
+    public int NumberSpawned = 0;
 
     void Start()
     {
@@ -22,6 +22,12 @@ public class NewSliceSpawn : MonoBehaviour
     {
         if(NeedsNewSlice == 1)
         {
+            if(NumberSpawned >= GlobalData.MaxSlices[SceneManager.GetActiveScene().name])
+            {
+                NeedsNewSlice = 0;
+                // TODO: Trigger game over
+                return;
+            }
             NeedsNewSlice = 0;
             StartCoroutine(Spawn());
         }
