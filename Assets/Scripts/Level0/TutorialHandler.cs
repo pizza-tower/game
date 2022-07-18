@@ -17,8 +17,8 @@ public class TutorialHandler : MonoBehaviour
     public GameObject Slice;
     bool WalkthroughDone = false;   
 
-    private GameObject ui_handler,ui_flow;
-    private int stage = 5;
+    private GameObject ui_handler, ui_flow;
+    private int stage = 0;
 
     private GameObject pizzaSpawner;
     private NewSliceSpawn pizzaSpawnerComponent;
@@ -35,6 +35,8 @@ public class TutorialHandler : MonoBehaviour
 
     // components
     private Dictionary<string, GameObject> Objects = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> ArrowObjects = new Dictionary<string, GameObject>();
+
 
     // Game object names
     class GameObjectNames {
@@ -53,6 +55,17 @@ public class TutorialHandler : MonoBehaviour
         public static readonly string SLICE = "Slice";
     };
 
+    class ArrowObjectNames
+    {
+        public static readonly string PLATE = "plate_arrow";
+        public static readonly string PEEL = "peel_arrow";
+        public static readonly string SCORE = "score_arrow";
+        public static readonly string HFUSE = "hfuse_arrow";
+        public static readonly string GOLD = "gold_arrow";
+        public static readonly string CHEAT = "cheat_arrow";
+        public static readonly string REWARDS = "rewards_arrow";
+    }
+
 
     void intro(){
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
@@ -60,8 +73,69 @@ public class TutorialHandler : MonoBehaviour
         });
     }
 
+    void DisableAllArrows()
+    {
+        foreach (KeyValuePair<string, GameObject> key in ArrowObjects)
+        {
+            ArrowObjects[key.Key].SetActive(false);
+        }
+    }
+
+    void FuseMessage(int iMessageNumber)
+    {
+
+        if (iMessageNumber == 0)
+            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => {
+                x.SetTutorialInstruction("Lets Try Vertical Fuse!\n Try to make stack of three slices with no more than 5 slices!");
+            });
+        else if (iMessageNumber == 1)
+        {
+            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => {
+                x.SetTutorialInstruction("Ops..Try Again! \nTry to stack three slices on same slot");
+            });
+        }
+        else if (iMessageNumber == 2)
+        {
+            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => {
+                x.SetTutorialInstruction("Three Slices on the same slot will fuse");
+            });
+        }
+    }
+
+    public int CalculateSlices()
+    {
+        int size = 0;
+        foreach (List<GameObject> obj in GlobalData.globalList)
+        {
+            size += obj.Count;
+        }
+        return size;
+    }
+
+    void DestroySlices()
+    {
+        foreach (List<GameObject> obj in GlobalData.globalList)
+        {
+            foreach (GameObject slice in obj)
+            {
+                Destroy(slice);
+            }
+        }
+        GlobalData.ResetGlobalList();
+    }
+
+    delegate void Function();
+    IEnumerator WaitFor(float seconds, Function toCall)
+    {
+        yield return new WaitForSeconds(seconds);
+        toCall();
+    }
+
     void showPeel(){
+        DisableAllArrows();
+        ArrowObjects[ArrowObjectNames.PEEL].SetActive(true);
         Objects[GameObjectNames.PIZZA_PEEL].SetActive(true);
+
         Debug.Log("Showing Peel..");
 
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
@@ -70,7 +144,10 @@ public class TutorialHandler : MonoBehaviour
     }
 
     void showPan(){
+        DisableAllArrows();
         Objects[GameObjectNames.PLATE].SetActive(true);
+        ArrowObjects[ArrowObjectNames.PLATE].SetActive(true);
+
         Debug.Log("Showing Pan..");
 
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
@@ -79,87 +156,54 @@ public class TutorialHandler : MonoBehaviour
         GlobalData.ValidSlices["Level0"] = new(){ SliceColor.Yellow };
     }
     
-    delegate void Function();
-    IEnumerator WaitFor(float seconds, Function toCall){
-            yield return new WaitForSeconds(seconds);
-            toCall();
-    }
 
-    void showPizzaSlice(){
+    void showPeelAndPizzaSlice()
+    {
 
-        pizzaSpawner.SetActive(true);
-        Debug.Log("Showing Pizza Slice..");
+        if(Objects[GameObjectNames.PIZZA_PEEL].activeSelf == false){
+            Objects[GameObjectNames.PIZZA_PEEL].SetActive(true);
+        }else {
+            DisableAllArrows();
+            pizzaSpawner.SetActive(true);
+            ArrowObjects[ArrowObjectNames.PEEL].SetActive(true);
+            //Destroy(pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice());
+            
+            Debug.Log("Showing Pizza Slice..");
 
-        StartCoroutine(WaitFor(0.5f, () => {
-            // ui_flow.SetActive(true);
-            if(CurrentVertSlice != null && CurrentVertSlice.activeSelf){
-                Debug.Log("Waiting for Pizza Spawner to be active");
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                    x.SetTutorialInstruction("Pizza Slice rotates until you hit space to throw the pizza");
-                });
-                pressSpace = true;
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                    x.SetFlowInstruction("(Press Space to throw the Pizza)");
-                });
-                WalkthroughDone = true;
-            }
+            StartCoroutine(WaitFor(0.5f, () => {
+                // ui_flow.SetActive(true);
+                if(CurrentVertSlice != null && CurrentVertSlice.activeSelf){
+                    Debug.Log("Waiting for Pizza Spawner to be active");
+                    ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
+                        x.SetTutorialInstruction("Pizza Slice rotates until you hit space to throw the pizza");
+                    });
+                    pressSpace = true;
+                    ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
+                        x.SetFlowInstruction("(Press Space to throw the Pizza)");
+                    });
+                    WalkthroughDone = true;
+                }
 
-            // For VerticalFuse verification in the next stage `verticalFuseCondition`
-            CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
-            if(CurrentVertSlice == null)
-                Debug.Log("CurrentVertSlice is null");
-            else
-                Debug.Log("CurrentVertSlice is not null");
-
-            Debug.Log("CurrentVertSlice: " + CurrentVertSlice.name);
-        }));
-
-    }
-
-    void FuseMessage(int iMessageNumber){
-
-        if(iMessageNumber == 0)
-            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                x.SetTutorialInstruction("Lets Try Vertical Fuse!\n Try to make stack of three slices with no more than 5 slices!");
-            });
-        else if(iMessageNumber == 1){
-            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                x.SetTutorialInstruction("Ops..Try Again! \nTry to stack three slices on same slot");
-            });
-        }else if(iMessageNumber == 2){
-            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                x.SetTutorialInstruction("Three Slices on the same slot will fuse");
-            });
+                // For VerticalFuse verification in the next stage `verticalFuseCondition`
+                CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
+                
+            }));
         }
-    }
 
-    public int CalculateSlices(){
-        int size =0;
-        foreach(List<GameObject> obj in GlobalData.globalList){
-                size += obj.Count;
-        }
-        return size;
-    }
-
-    void DestroySlices(){
-        foreach(List<GameObject> obj in GlobalData.globalList){
-            foreach(GameObject slice in obj){
-                Destroy(slice);
-            }
-        }
-        GlobalData.ResetGlobalList();
     }
 
     int instructionCount = 0;
     void verticalFuseCondition(){
-        
+        DisableAllArrows();
         GlobalData.ValidSlices["Level0"] = new(){ SliceColor.Yellow };
         fuseCase = true;
         FuseMessage(instructionCount);
         if(GlobalData.isFirstFusionOver){
+            DestroySlices();
             Debug.Log("Fusion Over");
             stage++;
             _pause = true;
+            CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
             return;
         }
 
@@ -205,13 +249,18 @@ public class TutorialHandler : MonoBehaviour
     bool isHInitDone = false;
     int instr = 0;
     void horizontalFuse(){
+        GlobalData.ValidSlices["Level0"] = new() { SliceColor.Red };
+        if (CurrentVertSlice == null || CurrentVertSlice.activeSelf == false)
+        {
+            CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
+            isHInitDone = true;
+        }
 
+        Debug.Log("Slice: " + CurrentVertSlice != null ? CurrentVertSlice.name: "null");
         fuseCase = true;
         
-
         HFuseMessage(instr);
-        GlobalData.ValidSlices["Level0"] = new(){ SliceColor.Red };
-
+        
         Objects[GameObjectNames.INTRO_UI].SetActive(false);
         Objects[GameObjectNames.PLATE].SetActive(true);
         Objects[GameObjectNames.INSTRUCTION_UI].SetActive(true);
@@ -220,13 +269,7 @@ public class TutorialHandler : MonoBehaviour
         Objects[GameObjectNames.PIZZA_PEEL].SetActive(true);
         pizzaSpawner.SetActive(true);
 
-        //if(isHInitDone == false){
-
-        //    DestroySlices();
-        //    isHInitDone = true;
-
-        //    TutorialHFuse.placeSlices(Slice);
-        //}else {
+        //Debug.Log("GlobalData.nHorizontalFusions: " + GlobalData.nHorizontalFusions);
         if (GlobalData.nHorizontalFusions > 0) { 
             stage++;
             _pause = true;
@@ -235,24 +278,26 @@ public class TutorialHandler : MonoBehaviour
             return;
         }
         TutorialHFuse.checkGlobalList(Slice);
-
+        //CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
 
         if (CurrentVertSlice != null){
 
             isPlaced = CurrentVertSlice.GetComponent<PizzaParabola>().GetIsPlaced();
-            if(!isPlaced)
-                return;
-
+            if (isPlaced)
+            {
+                //isPlaced = false;
+                Debug.Log("HFUSE CurrentVertSlice Name: " + CurrentVertSlice.name);
+                Debug.Log("GlobalData.nHorizontalFusions: " + GlobalData.nHorizontalFusions);
+                if (GlobalData.nHorizontalFusions == 0)
+                {
+                    //isHInitDone = false;
+                    instr = 1;
+                    ArrowObjects[ArrowObjectNames.HFUSE].SetActive(true);
+                }
                 
-            //isPlaced = false;
-            Debug.Log("HFUSE CurrentVertSlice Name: " + CurrentVertSlice.name);
-            Debug.Log("GlobalData.nHorizontalFusions: " + GlobalData.nHorizontalFusions);
-            if(GlobalData.nHorizontalFusions == 0){
-                //isHInitDone = false;
-                instr = 1;
             }
         }
-        CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
+        
         Debug.Log("CurrentVertSlice Name: " + (CurrentVertSlice != null ? CurrentVertSlice.name : "null"));
         //}
     }
@@ -278,24 +323,25 @@ public class TutorialHandler : MonoBehaviour
                 }
             }
 
-            if(stage == 2){
-                if(WalkthroughDone == false){
-                    WalkthroughDone = true;
+            //if(stage == 2){
+            //    if(WalkthroughDone == false){
+            //        WalkthroughDone = true;
                     
-                    Objects[GameObjectNames.PIZZA_PEEL].SetActive(true);
-                    showPeel();_pause = true;
-                }
-            }
+            //        Objects[GameObjectNames.PIZZA_PEEL].SetActive(true);
+            //        showPeel();_pause = true;
+            //    }
+            //}
+            if(stage == 2)stage++;
 
-            // TODO : Peel and slice animation not synchronized
-            if(stage == 3){
+             //TODO : Peel and slice animation not synchronized
+            if (stage == 3){
                 if(WalkthroughDone == false){
-                    showPizzaSlice();_pause = true;
+                    showPeelAndPizzaSlice();_pause = true;
                 }
 
                 // For next stage
                 pressSpace = true;
-                DestroySlices();
+                // DestroySlices();
             }
 
             if(stage == 4){
@@ -305,10 +351,12 @@ public class TutorialHandler : MonoBehaviour
             // TODO : Add Horizontal Fuse
 
             if(stage == 5){
+                _pause = false;
                 horizontalFuse();
             }
 
             if(stage == 6){
+                DisableAllArrows();
                 pressSpace = false;
                 pizzaSpawner.SetActive(false);
                 Objects[GameObjectNames.CHEAT_SHEET].SetActive(true);
@@ -320,6 +368,8 @@ public class TutorialHandler : MonoBehaviour
                 Objects[GameObjectNames.INSTRUCTION_UI].SetActive(false);
 
                 Objects[GameObjectNames.INTRO_UI].SetActive(true);
+
+                ArrowObjects[ArrowObjectNames.CHEAT].SetActive(true);
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                     x.setIntroInstruction("NOTE: Ways to make Horizontal Fuses");
                 });
@@ -329,7 +379,8 @@ public class TutorialHandler : MonoBehaviour
             // TODO : Add Animation/Video to better understand Power Ups
             if(stage == 7){
                 Objects[GameObjectNames.SCORE_UI].SetActive(true);
-                
+                DisableAllArrows();
+                ArrowObjects[ArrowObjectNames.SCORE].SetActive(true);
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                     x.setIntroInstruction("AIM: Gain the total SCORE needed to complete LEVEL");
                 });
@@ -337,6 +388,9 @@ public class TutorialHandler : MonoBehaviour
             }
 
             if(stage == 8){
+                DisableAllArrows();
+                ArrowObjects[ArrowObjectNames.GOLD].SetActive(true);
+
                 Objects[GameObjectNames.GOLD_UI].SetActive(true);
                 Objects[GameObjectNames.BUTTON].SetActive(true);
                 Objects[GameObjectNames.COLOR_CHANGER].SetActive(true);
@@ -347,27 +401,30 @@ public class TutorialHandler : MonoBehaviour
                 _pause = true;
             }
 
-            if(stage == 9){
-                // Objects[GameObjectNames.PIZZA_PEEL].SetActive(false);
-                
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                    x.setIntroInstruction("AIM: Gain the total score needed to complete the level");
-                });
-                _pause = true;
-            }
+            // if(stage == 9){
+            //     // Objects[GameObjectNames.PIZZA_PEEL].SetActive(false);
+            //     DisableAllArrows();
+            //     ArrowObjects[ArrowObjectNames.SCORE].SetActive(true);
 
-            if(stage == 10){
+            //     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
+            //         x.setIntroInstruction("AIM: Gain the total score needed to complete the level");
+            //     });
+            //     _pause = true;
+            // }
+
+            if(stage == 9){
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                     x.setIntroInstruction("Cool Right!\n Press Enter to Start Level1");
                 });
                 _pause = true;
             }
 
-            if(stage == 11){
+            if(stage == 10){
                 SceneManager.LoadScene(3);
             }
         }
     }
+
 
     void Start(){
         // Initialization
@@ -385,9 +442,19 @@ public class TutorialHandler : MonoBehaviour
         Objects.Add(GameObjectNames.INTRO_UI, GameObject.Find(GameObjectNames.INTRO_UI));
         Objects.Add(GameObjectNames.SLICE, GameObject.Find(GameObjectNames.SLICE));
 
+        ArrowObjects.Add(ArrowObjectNames.PLATE, GameObject.Find(ArrowObjectNames.PLATE));
+        ArrowObjects.Add(ArrowObjectNames.PEEL, GameObject.Find(ArrowObjectNames.PEEL));
+        ArrowObjects.Add(ArrowObjectNames.SCORE, GameObject.Find(ArrowObjectNames.SCORE));
+        ArrowObjects.Add(ArrowObjectNames.HFUSE, GameObject.Find(ArrowObjectNames.HFUSE));
+        ArrowObjects.Add(ArrowObjectNames.GOLD, GameObject.Find(ArrowObjectNames.GOLD));
+        ArrowObjects.Add(ArrowObjectNames.CHEAT, GameObject.Find(ArrowObjectNames.CHEAT));
+        ArrowObjects.Add(ArrowObjectNames.REWARDS, GameObject.Find(ArrowObjectNames.REWARDS));
+
         foreach(KeyValuePair<string, GameObject> key in Objects){
             Objects[key.Key].SetActive(false);
         }
+        
+        DisableAllArrows();
 
         Objects[GameObjectNames.INTRO_UI].SetActive(true);
         ui_handler = GameObject.Find("UIHandler");
