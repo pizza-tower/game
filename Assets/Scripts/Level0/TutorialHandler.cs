@@ -456,8 +456,6 @@ public class TutorialHandler : MonoBehaviour
             Objects[key.Key].SetActive(false);
         }
         
-        DisableAllArrows();
-
         Objects[GameObjectNames.INTRO_UI].SetActive(true);
         ui_handler = GameObject.Find("UIHandler");
         ui_flow = GameObject.FindWithTag("flowui");
@@ -467,6 +465,7 @@ public class TutorialHandler : MonoBehaviour
         pizzaSpawner.SetActive(false);
 
         DestroySlices();
+        DisableAllArrows();
         //
         TutorialHFuse.InitializeVars();
     }
