@@ -146,8 +146,10 @@ public class TutorialHandler : MonoBehaviour
     void showPan(){
         DisableAllArrows();
         Objects[GameObjectNames.PLATE].SetActive(true);
-        ArrowObjects[ArrowObjectNames.PLATE].SetActive(true);
-
+        // ArrowObjects[ArrowObjectNames.PLATE].SetActive(true);
+        ArrowObjects[ArrowObjectNames.PLATE].transform.position = new Vector3(-2.66078997f,-4.76942348f,1.46437407f);
+        ArrowObjects[ArrowObjectNames.PLATE].transform.rotation = Quaternion.Euler(59.2067375f,180f,180f);
+         ArrowObjects[ArrowObjectNames.PLATE].SetActive(true);
         Debug.Log("Showing Pan..");
 
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
@@ -305,7 +307,7 @@ public class TutorialHandler : MonoBehaviour
     private IEnumerator Walkthrough()
     {
 
-        Debug.Log("Slices Count: " + CalculateSlices() + " -> " + stage);
+        // Debug.Log("Slices Count: " + CalculateSlices() + " -> " + stage);
 
         while (!_pause){
             yield return new WaitForSeconds(0.5f);

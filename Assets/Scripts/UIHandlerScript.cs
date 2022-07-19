@@ -115,9 +115,12 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     private void Update()
     {
         int m = GlobalData.MaxSlices[SceneManager.GetActiveScene().name];
-        int c = GameObject.Find("PizzaSpawner").GetComponent<NewSliceSpawn>().NumberSpawned;
-        int v = m - c;
+        GameObject spawner = GameObject.Find("PizzaSpawner");
+        if(spawner != null && spawner.activeSelf) {
+            int c = spawner.GetComponent<NewSliceSpawn>().NumberSpawned;
+            int v = m - c;
 
-        slicesText.text = "Slices Remaining\n" + v.ToString(); 
+            slicesText.text = "Slices Remaining\n" + v.ToString(); 
+        }
     }
 }
