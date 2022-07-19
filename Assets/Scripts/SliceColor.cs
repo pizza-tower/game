@@ -6,5 +6,6 @@ public enum SliceColor
     Yellow = 2,
     Brown = 3,
     DarkBrown = 4,
-    Green = 5
+    Green = 5,
+    Orange = 6
 };
