@@ -65,6 +65,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Pattern
+    uniqueID: 3009772573
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
