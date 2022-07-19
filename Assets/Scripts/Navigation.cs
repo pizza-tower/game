@@ -12,6 +12,8 @@ public class Navigation : MonoBehaviour
     public GameObject menu;
     public GameObject   winscreen;
     public GameObject endlevelscreen;
+    GameObject plate;
+    Score score;
     bool instantiated = false;
     void CleanGlobalList()
     {
@@ -24,6 +26,9 @@ public class Navigation : MonoBehaviour
     }
     void Start()
     {
+        plate = GameObject.FindWithTag("Plate");
+        score = plate.GetComponent<Score>();
+
     }
     public void BackToMenu()
     {
@@ -89,9 +94,9 @@ public class Navigation : MonoBehaviour
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", SceneManager.GetActiveScene().buildIndex} });
             GameObject popup = Instantiate(menu);
             instantiated = true;
-            /*Transform finalscore = popup.transform.GetChild(1);
+            Transform finalscore = popup.transform.GetChild(1);
             TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
-            scoretext.SetText("score: {0}", Score.CurrentScore);*/
+            scoretext.SetText("score: {0}", score.GetScoreSummary().starsEarned);
         }
         /*if(Score.CurrentScore >= 30){
             int level = SceneManager.GetActiveScene().buildIndex;

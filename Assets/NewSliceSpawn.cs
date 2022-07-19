@@ -4,13 +4,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
+using TMPro;
 
 public class NewSliceSpawn : MonoBehaviour
 {
     public GameObject Slice;
+    public GameObject endlevelscreen;
     float NewSliceSpawnSeconds;
     public int NeedsNewSlice = 1;
     public int NumberSpawned = 0;
+    bool instantiated = false;
+
 
     void Start()
     {
@@ -26,6 +30,15 @@ public class NewSliceSpawn : MonoBehaviour
             {
                 NeedsNewSlice = 0;
                 // TODO: Trigger game over
+                if (instantiated == false) {
+                    GameObject popup = Instantiate(endlevelscreen);
+                    instantiated = true;
+                    Transform finalscore = popup.transform.GetChild(1);
+                    TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+                    GameObject plate = GameObject.FindWithTag("Plate");
+                    Score score =  plate.GetComponent<Score>();
+                    scoretext.SetText("score: {0}", score.GetScoreSummary().starsEarned);
+                }
                 return;
             }
             NeedsNewSlice = 0;
