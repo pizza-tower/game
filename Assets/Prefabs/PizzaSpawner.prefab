@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -7537824417854505916}
   - component: {fileID: -8328463203399058828}
   - component: {fileID: 4254413811220542014}
+  - component: {fileID: 2547822031124665990}
   m_Layer: 0
   m_Name: PizzaSpawner
   m_TagString: Spawner
@@ -60,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
   endlevelscreen: {fileID: 0}
+  winscreen: {fileID: 0}
   NeedsNewSlice: 1
   NumberSpawned: 0
 --- !u!114 &4254413811220542014
@@ -76,6 +78,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
   endlevelscreen: {fileID: 607004398892809744, guid: 9c2f7fed18b7c481fbe92bd630909ac2,
+    type: 3}
+  winscreen: {fileID: 0}
+  NeedsNewSlice: 1
+  NumberSpawned: 0
+--- !u!114 &2547822031124665990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9058975296924882170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e4a9076be87994d98da5c58bd8404b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
+  endlevelscreen: {fileID: 607004398892809744, guid: 9c2f7fed18b7c481fbe92bd630909ac2,
+    type: 3}
+  winscreen: {fileID: 607004398892809744, guid: 21add6ea334a640df84d34daa4c75912,
     type: 3}
   NeedsNewSlice: 1
   NumberSpawned: 0

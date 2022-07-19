@@ -102,6 +102,8 @@ public class Navigation : MonoBehaviour
             star3.SetActive(false);
             GameObject plate = GameObject.FindWithTag("Plate");
             Score score =  plate.GetComponent<Score>();
+            print("STARS");
+            print(score.GetScoreSummary().starsEarned);
             if (score.GetScoreSummary().starsEarned >= 1) {
                 star1.SetActive(true);
             }
