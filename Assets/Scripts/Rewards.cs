@@ -8,7 +8,8 @@ public class Rewards : MonoBehaviour
 {
     // Start is called before the first frame update
     GameObject SliceOnPeel;
-    public static int RewardsCurrency = 2; 
+    public static int RewardsCurrency = 2;
+    public GameObject ColorPickerUI;
     void Start()
     {
         
@@ -42,7 +43,7 @@ public class Rewards : MonoBehaviour
     }
     public void LaunchColorChanger()
     {
-        if(RewardsCurrency < 1)
+        /*if(RewardsCurrency < 1)
         {
             return;
         }
@@ -52,7 +53,9 @@ public class Rewards : MonoBehaviour
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
         SliceOnPeel = GameObject.FindWithTag("0");
         SliceOnPeel.GetComponent<PizzaParabola>().IsColorChanger = true;
-        SliceOnPeel.GetComponent<Materials>().ToRainbow();
+        SliceOnPeel.GetComponent<Materials>().ToRainbow();*/
+
+        ColorPickerUI.SetActive(!ColorPickerUI.activeSelf);
     }
 
     private static void EnableDisableButtons()
