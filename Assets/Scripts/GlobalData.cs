@@ -21,6 +21,9 @@ public class GlobalData : MonoBehaviour
     public static int nVerticalFusions = 0;
     public static int LevelRewardConsume = 0;
 
+    public static bool verticalFuse = false;
+    public static bool horizontalFuse = false;
+
     public static Dictionary<string, int> MaxSlices;
     public static Dictionary<string, List<SliceColor>> ValidSlices;
     public static Dictionary<string, List<List<SliceColor>>> ValidCombinations;

@@ -8,13 +8,12 @@ using UnityEngine.SceneManagement;
 public class FuseSlice : MonoBehaviour
 {
     public GameObject ui_handler;
+
     // Start is called before the first frame update
 
-    // public static Animator animator;
     void Start()
     {
         ui_handler = GameObject.Find("UIHandler");
-        // animator = GameObject.Find("AnchorOne").GetComponent<Animator>();
     }
 
     void Update(){
@@ -54,15 +53,19 @@ public class FuseSlice : MonoBehaviour
         {
             // GameObject.Find("smoke").GetComponentInChildren<ParticleSystem>().Play();
             // Reference: https://www.youtube.com/watch?v=jQivfs34Wb0
-            GameObject.Find("smoking").GetComponentInChildren<ParticleSystem>().Play();
+            
+            // Instantiate(smoking,0,0);
 
             // animator.SetTrigger("isSmoking");
 
             //Debug.Log("Slices were same colored");
+
+
             for (int k = 1; k <= n; k++)
             {
                 Destroy(SList[SList.Count - k]);
                 GlobalData.nVerticalFusions++;
+                GlobalData.verticalFuse = true;
                 AnalyticsResult vertFusionAnalytics = Analytics.CustomEvent("VerticalFusions", 
                     new Dictionary<string, object>{
                         {"Level", SceneManager.GetActiveScene().name}, 
@@ -158,6 +161,7 @@ public class FuseSlice : MonoBehaviour
                 }
 
                 GlobalData.nHorizontalFusions++;
+                GlobalData.horizontalFuse = true;
                 AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", 
                     new Dictionary<string, object> { 
                         { "Level", SceneManager.GetActiveScene().name }, 
