@@ -91,7 +91,7 @@ public class HardCodedSlice : MonoBehaviour
         GlobalData.globalList[1].Add(GameObject.Find("col2_slice2"));
         GlobalData.globalList[1].Add(GameObject.Find("col2_slice3"));
         GlobalData.globalList[1].Add(GameObject.Find("col2_slice4"));
-        GlobalData.globalList[1].Add(GameObject.Find("col2_slice5"));
+        //GlobalData.globalList[1].Add(GameObject.Find("col2_slice5"));
 
         GlobalData.globalList[2].Add(GameObject.Find("col3_slice1"));
         GlobalData.globalList[2].Add(GameObject.Find("col3_slice2"));
@@ -111,7 +111,7 @@ public class HardCodedSlice : MonoBehaviour
 
         GlobalData.globalList[5].Add(GameObject.Find("col6_slice1"));
         GlobalData.globalList[5].Add(GameObject.Find("col6_slice2"));
-        GlobalData.globalList[5].Add(GameObject.Find("col6_slice3"));        
+       // GlobalData.globalList[5].Add(GameObject.Find("col6_slice3"));        
      
         }
         else if(Level==5){
@@ -120,25 +120,25 @@ public class HardCodedSlice : MonoBehaviour
         GlobalData.globalList[0].Add(GameObject.Find("col1_slice2"));
         GlobalData.globalList[0].Add(GameObject.Find("col1_slice3"));
         GlobalData.globalList[0].Add(GameObject.Find("col1_slice4"));
-        GlobalData.globalList[0].Add(GameObject.Find("col1_slice5"));
+        //GlobalData.globalList[0].Add(GameObject.Find("col1_slice5"));
 
         GlobalData.globalList[1].Add(GameObject.Find("col2_slice1"));
         GlobalData.globalList[1].Add(GameObject.Find("col2_slice2"));
         GlobalData.globalList[1].Add(GameObject.Find("col2_slice3"));
         GlobalData.globalList[1].Add(GameObject.Find("col2_slice4"));
-        GlobalData.globalList[1].Add(GameObject.Find("col2_slice5"));
+        //GlobalData.globalList[1].Add(GameObject.Find("col2_slice5"));
 
         GlobalData.globalList[2].Add(GameObject.Find("col3_slice1"));
         GlobalData.globalList[2].Add(GameObject.Find("col3_slice2"));
         GlobalData.globalList[2].Add(GameObject.Find("col3_slice3"));
         GlobalData.globalList[2].Add(GameObject.Find("col3_slice4"));
-        GlobalData.globalList[2].Add(GameObject.Find("col3_slice5"));
+        //GlobalData.globalList[2].Add(GameObject.Find("col3_slice5"));
 
         GlobalData.globalList[3].Add(GameObject.Find("col4_slice1"));
         GlobalData.globalList[3].Add(GameObject.Find("col4_slice2"));
         GlobalData.globalList[3].Add(GameObject.Find("col4_slice3"));
         GlobalData.globalList[3].Add(GameObject.Find("col4_slice4"));
-        GlobalData.globalList[3].Add(GameObject.Find("col4_slice5"));
+        //GlobalData.globalList[3].Add(GameObject.Find("col4_slice5"));
 
         GlobalData.globalList[4].Add(GameObject.Find("col5_slice1"));
         GlobalData.globalList[4].Add(GameObject.Find("col5_slice2"));

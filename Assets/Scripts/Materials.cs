@@ -51,6 +51,10 @@ public class Materials : MonoBehaviour
     {
         Rend.sharedMaterial = MaterialList[3];
     }
+    public void ToBlueTransparent()
+    {
+        Rend.sharedMaterial = MaterialList[3];
+    }
     public void ToDarkBrownTransparent()
     {
         Rend.sharedMaterial = MaterialList[3];
