@@ -33,11 +33,23 @@ public class NewSliceSpawn : MonoBehaviour
                 if (instantiated == false) {
                     GameObject popup = Instantiate(endlevelscreen);
                     instantiated = true;
-                    Transform finalscore = popup.transform.GetChild(1);
-                    TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
+                    GameObject star1 = popup.transform.GetChild(1).gameObject;
+                    GameObject star2 = popup.transform.GetChild(2).gameObject;
+                    GameObject star3 = popup.transform.GetChild(3).gameObject;
+                    star1.SetActive(false);
+                    star2.SetActive(false);
+                    star3.SetActive(false);
                     GameObject plate = GameObject.FindWithTag("Plate");
                     Score score =  plate.GetComponent<Score>();
-                    scoretext.SetText("score: {0}", score.GetScoreSummary().starsEarned);
+                    if (score.GetScoreSummary().starsEarned >= 1) {
+                        star1.SetActive(true);
+                    }
+                    if (score.GetScoreSummary().starsEarned >= 2) {
+                        star2.SetActive(true);
+                    }
+                    if (score.GetScoreSummary().starsEarned >= 3) {
+                        star3.SetActive(true);
+                    }
                 }
                 return;
             }

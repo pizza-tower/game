@@ -10,7 +10,7 @@ public class Navigation : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject menu;
-    public GameObject   winscreen;
+    public GameObject winscreen;
     public GameObject endlevelscreen;
     GameObject plate;
     Score score;
@@ -94,9 +94,23 @@ public class Navigation : MonoBehaviour
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", SceneManager.GetActiveScene().buildIndex} });
             GameObject popup = Instantiate(menu);
             instantiated = true;
-            Transform finalscore = popup.transform.GetChild(1);
-            TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
-            scoretext.SetText("score: {0}", score.GetScoreSummary().starsEarned);
+            GameObject star1 = popup.transform.GetChild(1).gameObject;
+            GameObject star2 = popup.transform.GetChild(2).gameObject;
+            GameObject star3 = popup.transform.GetChild(3).gameObject;
+            star1.SetActive(false);
+            star2.SetActive(false);
+            star3.SetActive(false);
+            GameObject plate = GameObject.FindWithTag("Plate");
+            Score score =  plate.GetComponent<Score>();
+            if (score.GetScoreSummary().starsEarned >= 1) {
+                star1.SetActive(true);
+            }
+            if (score.GetScoreSummary().starsEarned >= 2) {
+                star2.SetActive(true);
+            }
+            if (score.GetScoreSummary().starsEarned >= 3) {
+                star3.SetActive(true);
+            }
         }
         /*if(Score.CurrentScore >= 30){
             int level = SceneManager.GetActiveScene().buildIndex;
