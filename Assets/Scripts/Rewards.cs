@@ -15,7 +15,7 @@ public class Rewards : MonoBehaviour
     }
     public static void EarnCurrency()
     {
-        RewardsCurrency += 1;
+        RewardsCurrency += 2;
         EnableDisableButtons();
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(1));
         GameObject ui_handler = GameObject.Find("UIHandler");
