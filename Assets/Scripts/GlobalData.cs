@@ -20,6 +20,7 @@ public class GlobalData : MonoBehaviour
     public static int nHorizontalFusions = 0;
     public static int nVerticalFusions = 0;
     public static int LevelRewardConsume = 0;
+    public static bool isHorizontalFuse = false;
 
     public static Dictionary<string, int> MaxSlices;
     public static Dictionary<string, List<SliceColor>> ValidSlices;
@@ -121,5 +122,4 @@ public class GlobalData : MonoBehaviour
             globalList.Add(new List<GameObject>());
         }
     }
-
 }

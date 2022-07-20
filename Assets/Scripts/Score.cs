@@ -15,18 +15,14 @@ public class Score : MonoBehaviour
 
     void Start()
     {
+        numVerticalFuses = 0;
+        numHorizontalFuses = 0;
+        numPowersUsed = 0;
         fusionsMade = new List<int>();
         for(int i = 0; i < GlobalData.ValidCombinations[SceneManager.GetActiveScene().name].Count; i++)
         {
             fusionsMade.Add(0);
         }
-    }
-
-    public void ModVals(int v, int h, int p)
-    {
-        numVerticalFuses += v;
-        numHorizontalFuses += h;
-        numPowersUsed += p;
     }
 
     public static ScoreSummary GetScoreSummary()
