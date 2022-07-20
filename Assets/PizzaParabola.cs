@@ -110,6 +110,9 @@ public class PizzaParabola : MonoBehaviour
     }
     void ThrowSlice()
     {
+        GameObject g = GameObject.FindWithTag("NS");
+        Debug.Log(g.tag);
+        g.tag = "0";
         AssignTarget();
         EndPoint = (GameObject.FindWithTag(TargetAnchor)).transform.position;
         EndRotation.y += (float)GetComponent<PizzaRotation>().TagInInt * (float)60.0;

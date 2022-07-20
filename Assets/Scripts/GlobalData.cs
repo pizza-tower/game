@@ -45,7 +45,7 @@ public class GlobalData : MonoBehaviour
 
         //Setup number of slices per level
         MaxSlices = new();
-        MaxSlices.Add("Level1", 5);
+        MaxSlices.Add("Level1", 60);
         MaxSlices.Add("Level2", 60);
         MaxSlices.Add("Level3", 60);
         MaxSlices.Add("Level4", 60);
@@ -97,7 +97,7 @@ public class GlobalData : MonoBehaviour
         });
         //LEVEL6
          ValidCombinations.Add("Level6", new() {
-            new() { r, r, r, g, y, y },
+            new() { r, r, r, g, r, r },
             new() { y, y, y, y, r, d },
             new() { r, r, r, y, y ,y }
         });
