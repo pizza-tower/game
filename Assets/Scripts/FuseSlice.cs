@@ -196,7 +196,7 @@ public class FuseSlice : MonoBehaviour
 
           
     /*TODO: Write this function to give score, update level requirements etc*/
-    public static  HandleReward(int fuseIndex) {
+    public static void HandleReward(int fuseIndex) {
         Debug.Log("Horizontal fusion acknowledged: Level: " + SceneManager.GetActiveScene().name + " Combination index: " + fuseIndex.ToString());
         Score.fusionsMade[fuseIndex]++;
         for(int i = 0; i < Score.fusionsMade.Count; i++)
