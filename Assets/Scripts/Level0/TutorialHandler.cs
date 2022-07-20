@@ -163,14 +163,14 @@ public class TutorialHandler : MonoBehaviour
     {
 
         if(Objects[GameObjectNames.PIZZA_PEEL].activeSelf == false){
-            GameObject.Find("PizzaPeelPivot").GetComponent<PizzaPeelController>().enabled = false;
+            // GameObject.Find("PizzaPeelPivot").GetComponent<PizzaPeelController>().enabled = false;
             Objects[GameObjectNames.PIZZA_PEEL].SetActive(true);
+            ArrowObjects[ArrowObjectNames.PEEL].SetActive(true);
+            pizzaSpawner.SetActive(true);
         }else {
             
             DisableAllArrows();
-            pizzaSpawner.SetActive(true);
-            ArrowObjects[ArrowObjectNames.PEEL].SetActive(true);
-            
+
             //Destroy(pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice());
             
             Debug.Log("Showing Pizza Slice..");
