@@ -632,6 +632,7 @@ MonoBehaviour:
   scoreText: {fileID: 50561627}
   levelText: {fileID: 163884245}
   goldText: {fileID: 900352497}
+  slicesText: {fileID: 0}
   floatingTextPrefab: {fileID: 7987349156076225966, guid: 53b77ad867d51684ea7afc1bec7b2c7a,
     type: 3}
   Instruction: {fileID: 51125840}
@@ -2747,23 +2748,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9058975297391031567}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1640787738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640787737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f0997915f5145ee9c28cba8e96fc6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Slice: {fileID: 7934999755122050094, guid: 2ebba3e2ed3bd4beca3b39dd2ad4701b, type: 3}
-  NeedsNewSlice: 1
-  NewSliceSpawnSeconds: 2
-  SpawnRed: 0
-  Level: 0
 --- !u!114 &1640787741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3985,4 +3969,5 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: -8328463203399058828, guid: 8992b3764d431c047a8691f1d9d8bc0f, type: 3}
     - {fileID: -7537824417854505916, guid: 8992b3764d431c047a8691f1d9d8bc0f, type: 3}
+    - {fileID: 4254413811220542014, guid: 8992b3764d431c047a8691f1d9d8bc0f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8992b3764d431c047a8691f1d9d8bc0f, type: 3}
