@@ -79,11 +79,21 @@ public class FuseSlice : MonoBehaviour
             audioData = GameObject.Find("AnchorOne").GetComponent<AudioSource>();
             audioData.Play(0);
         }
-        for (int k = 0; k < SList.Count; k++)
+        if(n > 3)
         {
-            Destroy(SList[k]);
+            Destroy(SList[n-1]);
+            Destroy(SList[n-2]);
+            Destroy(SList[n-3]);
+            SList.RemoveRange(n - 3, 3);
         }
-        SList.RemoveRange(0, n);
+        else
+        {
+            for (int k = 0; k < SList.Count; k++)
+            {
+                Destroy(SList[k]);
+            }
+            SList.RemoveRange(0, n);
+        }
         //Destroy(GameObject.FindWithTag("0"));
         Debug.Log("boom");
     }
