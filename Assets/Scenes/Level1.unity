@@ -173,7 +173,7 @@ MonoBehaviour:
     type: 3}
   Target_allRed: {fileID: 0}
   Target_allYellow: {fileID: 0}
-  Target_half: {fileID: 0}
+  Target_half: {fileID: 664003894}
   Target_twoRed: {fileID: 0}
   Target_oneRed: {fileID: 0}
   Target_oneBlueOneYellow: {fileID: 0}
