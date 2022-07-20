@@ -16,15 +16,16 @@ public class smoke_fuse : MonoBehaviour
     {
         if(GlobalData.verticalFuse)
         {
-            GameObject smoke_vfx = Instantiate(smoke,new Vector3(4,0,-12),Quaternion.identity);
+            GameObject smoke_vfx = Instantiate(smoke,new Vector3(4,-1,-12),Quaternion.Euler(new Vector3(90,-60,90)));
             smoke_vfx.transform.localScale = new Vector3(3,3,3);
+            smoke_vfx.GetComponent<Renderer>().material.color = Color.red;
             Destroy(smoke_vfx,1);
             GlobalData.verticalFuse = false;
         }
 
         if(GlobalData.horizontalFuse)
         {
-            GameObject smoke_vfx = Instantiate(smoke,new Vector3(4,0,-12),Quaternion.identity);
+            GameObject smoke_vfx = Instantiate(smoke,new Vector3(4,-1,-12),Quaternion.identity);
             smoke_vfx.transform.localScale = new Vector3(3,3,3);
             Destroy(smoke_vfx,1);
             GlobalData.horizontalFuse = false;
