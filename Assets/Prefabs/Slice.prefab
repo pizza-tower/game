@@ -106,7 +106,6 @@ MonoBehaviour:
   mColor: -1
   TagInInt: 0
   hardcoded: 0
-  IsRandomDrop: 0
   lerpRotationTime: 6
   lerpPositionTime: 6
   myAngles:
@@ -207,7 +206,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e227b1ccc451c50469071aa9bc28f9fc, type: 2}
   - {fileID: 2100000, guid: 48c9f052432f74a429a7f67d17b40b8d, type: 2}
   - {fileID: 2100000, guid: 9df5d4c06418f9e429eb061bb7b58836, type: 2}
-  - {fileID: 2100000, guid: 913feae3a1143664483c9da7ddaad19f, type: 2}
+  - {fileID: 2100000, guid: 875bc419c4949b148a01e6d6198ecd56, type: 2}
   - {fileID: 2100000, guid: 61afa68b8a6c7be4081590ef0eb92e81, type: 2}
   - {fileID: 2100000, guid: 8805412bc9fdf1943acab24890b60a97, type: 2}
 --- !u!114 &-3139062690639364059

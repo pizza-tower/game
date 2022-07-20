@@ -11,6 +11,7 @@ public class NewSliceSpawn : MonoBehaviour
     public GameObject Slice;
     public GameObject endlevelscreen;
     public GameObject winscreen;
+    public GameObject gameoverscreen;
     float NewSliceSpawnSeconds;
     public int NeedsNewSlice = 1;
     public int NumberSpawned = 0;
@@ -34,7 +35,7 @@ public class NewSliceSpawn : MonoBehaviour
 
                 int level = SceneManager.GetActiveScene().buildIndex;
                 if (instantiated == false && level + 1 < GlobalData.totalscenes ) {
-                    StartCoroutine(PopUp(endlevelscreen));
+                    StartCoroutine(PopUp(gameoverscreen));
          
                 }
                 

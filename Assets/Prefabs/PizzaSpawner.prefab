@@ -62,6 +62,7 @@ MonoBehaviour:
   Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
   endlevelscreen: {fileID: 0}
   winscreen: {fileID: 0}
+  gameoverscreen: {fileID: 0}
   NeedsNewSlice: 1
   NumberSpawned: 0
 --- !u!114 &4254413811220542014
@@ -80,6 +81,7 @@ MonoBehaviour:
   endlevelscreen: {fileID: 607004398892809744, guid: 9c2f7fed18b7c481fbe92bd630909ac2,
     type: 3}
   winscreen: {fileID: 0}
+  gameoverscreen: {fileID: 0}
   NeedsNewSlice: 1
   NumberSpawned: 0
 --- !u!114 &2547822031124665990
@@ -98,6 +100,8 @@ MonoBehaviour:
   endlevelscreen: {fileID: 607004398892809744, guid: 9c2f7fed18b7c481fbe92bd630909ac2,
     type: 3}
   winscreen: {fileID: 607004398892809744, guid: 21add6ea334a640df84d34daa4c75912,
+    type: 3}
+  gameoverscreen: {fileID: 607004398892809744, guid: ac840192b517f4daf9155b782d39914d,
     type: 3}
   NeedsNewSlice: 1
   NumberSpawned: 0

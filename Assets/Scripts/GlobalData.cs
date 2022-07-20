@@ -96,7 +96,7 @@ public class GlobalData : MonoBehaviour
         });
         //LEVEL6
          ValidCombinations.Add("Level6", new() {
-            new() { r, r, r, g, r, r },
+            new() { r, r, r, g, y, y },
             new() { y, y, y, y, r, d },
             new() { r, r, r, y, y ,y }
         });
