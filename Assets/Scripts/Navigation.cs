@@ -10,7 +10,7 @@ public class Navigation : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject menu;
-    public GameObject   winscreen;
+    public GameObject winscreen;
     public GameObject endlevelscreen;
     GameObject plate;
     Score score;

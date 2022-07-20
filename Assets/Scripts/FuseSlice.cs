@@ -77,11 +77,21 @@ public class FuseSlice : MonoBehaviour
             audioData = GameObject.Find("AnchorOne").GetComponent<AudioSource>();
             audioData.Play(0);
         }
-        for (int k = 0; k < SList.Count; k++)
+        if(n > 3)
         {
-            Destroy(SList[k]);
+            Destroy(SList[n-1]);
+            Destroy(SList[n-2]);
+            Destroy(SList[n-3]);
+            SList.RemoveRange(n - 3, 3);
         }
-        SList.RemoveRange(0, n);
+        else
+        {
+            for (int k = 0; k < SList.Count; k++)
+            {
+                Destroy(SList[k]);
+            }
+            SList.RemoveRange(0, n);
+        }
         //Destroy(GameObject.FindWithTag("0"));
         Debug.Log("boom");
     }
@@ -186,5 +196,12 @@ public class FuseSlice : MonoBehaviour
     /*TODO: Write this function to give score, update level requirements etc*/
     public static void HandleReward(int fuseIndex) {
         Debug.Log("Horizontal fusion acknowledged: Level: " + SceneManager.GetActiveScene().name + " Combination index: " + fuseIndex.ToString());
+        Score.fusionsMade[fuseIndex]++;
+        for(int i = 0; i < Score.fusionsMade.Count; i++)
+        {
+            if (Score.fusionsMade[i] == 0) return;
+        }
+        //TODO: You win!! CODE HERE
+        Debug.Log("YOU WIN");
     }
 }

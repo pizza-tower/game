@@ -97,6 +97,7 @@ public class NewSliceSpawn : MonoBehaviour
     {
         //spawn a new slice at spawner
         GameObject NewSlice = Instantiate(Slice) as GameObject;
+        NewSlice.tag = "NS";
         NewSlice.transform.position = transform.position;
 
         List<SliceColor> sColors = GlobalData.ValidSlices[SceneManager.GetActiveScene().name];

@@ -44,7 +44,7 @@ public class GlobalData : MonoBehaviour
 
         //Setup number of slices per level
         MaxSlices = new();
-        MaxSlices.Add("Level1", 5);
+        MaxSlices.Add("Level1", 60);
         MaxSlices.Add("Level2", 60);
         MaxSlices.Add("Level3", 60);
         MaxSlices.Add("Level4", 60);

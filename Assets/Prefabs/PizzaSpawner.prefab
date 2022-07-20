@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 9058975296924882169}
   - component: {fileID: -7537824417854505916}
   - component: {fileID: -8328463203399058828}
+  - component: {fileID: 4254413811220542014}
+  - component: {fileID: 2547822031124665990}
   m_Layer: 0
   m_Name: PizzaSpawner
   m_TagString: Spawner
@@ -58,6 +60,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
+  endlevelscreen: {fileID: 0}
+  winscreen: {fileID: 0}
   NeedsNewSlice: 1
   NewSliceSpawnSeconds: 1.3
   endlevelscreen: {fileID: 0}
