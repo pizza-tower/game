@@ -37,7 +37,7 @@ public class Rewards : MonoBehaviour
         EnableDisableButtons();
         GlobalData.LevelRewardConsume++;
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
-        SliceOnPeel = GameObject.FindWithTag("0");
+        SliceOnPeel = GameObject.FindWithTag("NS");
         SliceOnPeel.GetComponent<PizzaParabola>().IsBomb = true;
         SliceOnPeel.GetComponent<Materials>().ToBomb();
     }
