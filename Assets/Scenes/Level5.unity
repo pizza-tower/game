@@ -1825,7 +1825,7 @@ GameObject:
   - component: {fileID: 576018740}
   - component: {fileID: 576018739}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
