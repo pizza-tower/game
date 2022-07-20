@@ -163,11 +163,14 @@ public class TutorialHandler : MonoBehaviour
     {
 
         if(Objects[GameObjectNames.PIZZA_PEEL].activeSelf == false){
+            GameObject.Find("PizzaPeelPivot").GetComponent<PizzaPeelController>().enabled = false;
             Objects[GameObjectNames.PIZZA_PEEL].SetActive(true);
         }else {
+            
             DisableAllArrows();
             pizzaSpawner.SetActive(true);
             ArrowObjects[ArrowObjectNames.PEEL].SetActive(true);
+            
             //Destroy(pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice());
             
             Debug.Log("Showing Pizza Slice..");
@@ -196,6 +199,8 @@ public class TutorialHandler : MonoBehaviour
 
     int instructionCount = 0;
     void verticalFuseCondition(){
+        GameObject.Find("PizzaPeelPivot").GetComponent<PizzaPeelController>().enabled = true;
+
         DisableAllArrows();
         GlobalData.ValidSlices["Level0"] = new(){ SliceColor.Yellow };
         fuseCase = true;
@@ -293,7 +298,7 @@ public class TutorialHandler : MonoBehaviour
                 if (GlobalData.nHorizontalFusions == 0)
                 {
                     //isHInitDone = false;
-                    instr = 1;
+                    instr = 0;
                     ArrowObjects[ArrowObjectNames.HFUSE].SetActive(true);
                 }
                 
