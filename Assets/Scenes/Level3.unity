@@ -968,7 +968,7 @@ PrefabInstance:
     - target: {fileID: 6003097641126787918, guid: e76424a885d244c4f8408ebfa570ecb0,
         type: 3}
       propertyPath: mColor
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6003097641126787918, guid: e76424a885d244c4f8408ebfa570ecb0,
         type: 3}
@@ -1786,6 +1786,7 @@ MonoBehaviour:
   scoreText: {fileID: 123678913}
   levelText: {fileID: 496816381}
   goldText: {fileID: 1320952701}
+  slicesText: {fileID: 0}
   floatingTextPrefab: {fileID: 7987349156076225966, guid: 53b77ad867d51684ea7afc1bec7b2c7a,
     type: 3}
   Instruction: {fileID: 1231969763}
@@ -2622,7 +2623,7 @@ PrefabInstance:
     - target: {fileID: 6003097641126787918, guid: e76424a885d244c4f8408ebfa570ecb0,
         type: 3}
       propertyPath: mColor
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6003097641126787918, guid: e76424a885d244c4f8408ebfa570ecb0,
         type: 3}
@@ -5425,3 +5426,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
   NeedsNewSlice: 1
+  NumberSpawned: 0
