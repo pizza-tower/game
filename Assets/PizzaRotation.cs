@@ -165,8 +165,7 @@ public class PizzaRotation : MonoBehaviour
                 GetComponent<Materials>().ToYellowTransparent();
                 break;
             case SliceColor.Blue:
-                //GetComponent<Materials>().ToBrownTransparent();
-                GetComponent<Materials>().ToBlueTransparent();
+                GetComponent<Materials>().ToBrownTransparent();
                 break;
             case SliceColor.DarkBrown:
                 GetComponent<Materials>().ToDarkBrownTransparent();

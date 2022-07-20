@@ -13,9 +13,9 @@ public class Transparent : MonoBehaviour
         IsTransparent = 0;
         for(int i = 0; i < indexesToEdit.Count; i++)
         {
-            for(int j = 0; j < glist[indexesToEdit[i]].Count; j++)
+            for(int j = 0; j < glist[i].Count; j++)
             {
-                glist[indexesToEdit[i]][j].GetComponent<PizzaRotation>().MaterialToNormal();
+                glist[i][j].GetComponent<PizzaRotation>().MaterialToNormal();
             }
         }
     }
@@ -27,9 +27,9 @@ public class Transparent : MonoBehaviour
         {
             //Do not make transparent if stack height < 4;
             if (glist[i].Count < 4) continue;
-            for (int j = 0; j < glist[indexesToEdit[i]].Count; j++)
+            for (int j = 0; j < glist[i].Count; j++)
             {
-                glist[indexesToEdit[i]][j].GetComponent<PizzaRotation>().MaterialToTransparent();
+                glist[i][j].GetComponent<PizzaRotation>().MaterialToTransparent();
             }
         }
     }
