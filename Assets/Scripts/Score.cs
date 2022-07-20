@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Score : MonoBehaviour
     public static int numVerticalFuses = 0;
     public static int numHorizontalFuses = 0;
     public static int numPowersUsed = 0;
+    public static List<int> fusionsMade;
 
     // Start is called before the first frame update
 
@@ -27,9 +29,11 @@ public class Score : MonoBehaviour
     }*/
     void Start()
     {
-        // CurrentScore = 0;
-        // GameObject ui_handler = GameObject.Find("UIHandler");
-        // ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.SetScoreRequired(30));
+        fusionsMade = new List<int>();
+        for(int i = 0; i < GlobalData.ValidCombinations[SceneManager.GetActiveScene().name].Count; i++)
+        {
+            fusionsMade.Add(0);
+        }
     }
 
     public void ModVals(int v, int h, int p)
