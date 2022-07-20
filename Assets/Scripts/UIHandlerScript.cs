@@ -44,11 +44,11 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     }
     private void UpdateLevelText()
     {
-        levelText.text = "Level\n" + GlobalData.level.ToString();
+        levelText.text = "Level " + GlobalData.level.ToString();
     }
     private void UpdateGoldText()
     {
-        goldText.text = "Gold\n" + gold.ToString();
+        goldText.text = "x " + gold.ToString();
     }
 
     public void SetScore(int s)
