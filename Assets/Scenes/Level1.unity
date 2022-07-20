@@ -2911,5 +2911,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
+  endlevelscreen: {fileID: 0}
   NeedsNewSlice: 1
   NumberSpawned: 0
