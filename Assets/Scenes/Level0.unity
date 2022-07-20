@@ -290,28 +290,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8328463203399058828, guid: 8992b3764d431c047a8691f1d9d8bc0f, type: 3}
+    - {fileID: 4254413811220542014, guid: 8992b3764d431c047a8691f1d9d8bc0f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8992b3764d431c047a8691f1d9d8bc0f, type: 3}
---- !u!1 &4721470 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9058975296924882170, guid: 8992b3764d431c047a8691f1d9d8bc0f,
-    type: 3}
-  m_PrefabInstance: {fileID: 4721469}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4721471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4721470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e4a9076be87994d98da5c58bd8404b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
-  NeedsNewSlice: 1
-  NumberSpawned: 0
 --- !u!1 &50561625
 GameObject:
   m_ObjectHideFlags: 0
@@ -4873,6 +4853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d350bfcb7c7e454eb20b0ff0eacfadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColorPickerUI: {fileID: 0}
 --- !u!114 &1001474739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5279,6 +5260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d350bfcb7c7e454eb20b0ff0eacfadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColorPickerUI: {fileID: 0}
 --- !u!114 &1048841170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7052,6 +7034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d350bfcb7c7e454eb20b0ff0eacfadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColorPickerUI: {fileID: 0}
 --- !u!114 &1385302936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7334,6 +7317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d350bfcb7c7e454eb20b0ff0eacfadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColorPickerUI: {fileID: 0}
 --- !u!114 &1432085203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8188,6 +8172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
+  endlevelscreen: {fileID: 0}
+  winscreen: {fileID: 0}
   NeedsNewSlice: 1
   NumberSpawned: 0
 --- !u!1 &1687078401
@@ -9500,6 +9486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d350bfcb7c7e454eb20b0ff0eacfadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColorPickerUI: {fileID: 0}
 --- !u!114 &1954338051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10064,6 +10051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d350bfcb7c7e454eb20b0ff0eacfadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColorPickerUI: {fileID: 0}
 --- !u!114 &2029028111
 MonoBehaviour:
   m_ObjectHideFlags: 0
