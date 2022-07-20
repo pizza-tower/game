@@ -603,7 +603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -169.76, y: -53.44}
+  m_AnchoredPosition: {x: -169.76, y: -53.43994}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &185867654
@@ -2674,7 +2674,7 @@ GameObject:
   - component: {fileID: 1180037620}
   - component: {fileID: 1180037619}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

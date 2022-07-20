@@ -33,19 +33,23 @@ public class SelectColorUI : MonoBehaviour
         button.GetComponent<Button>().onClick.RemoveAllListeners();
         button.GetComponent<Button>().onClick.AddListener(() =>
         {
+            /*
             if (Rewards.RewardsCurrency < 1)
             {
                 ColorPickerUI.SetActive(false);
                 return;
             }
-            Rewards.RewardsCurrency--;
+            */
+            //Rewards.RewardsCurrency--;
             GlobalData.LevelRewardConsume++;
             Score.numPowersUsed++;
-            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
+            //ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
             GameObject SliceOnPeel = GameObject.FindWithTag("NS");
             //SliceOnPeel.GetComponent<PizzaParabola>().IsColorChanger = true;
             ChangeSliceColor(SliceOnPeel, c);
             ColorPickerUI.SetActive(false);
+            GameObject.Find("ColorChanger").GetComponent<Button>().interactable=false;
+            
         });
     }
 
