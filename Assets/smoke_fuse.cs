@@ -18,7 +18,20 @@ public class smoke_fuse : MonoBehaviour
         {
             GameObject smoke_vfx = Instantiate(smoke,new Vector3(4,-1,-12),Quaternion.Euler(new Vector3(90,-60,90)));
             smoke_vfx.transform.localScale = new Vector3(3,3,3);
-            smoke_vfx.GetComponent<Renderer>().material.color = Color.red;
+            if(GlobalData.level == 0){
+                smoke_vfx.GetComponent<Renderer>().material.color = Color.red;
+            }else if(GlobalData.level == 1){
+                smoke_vfx.GetComponent<Renderer>().material.color = Color.blue;
+            }else if(GlobalData.level == 2){
+                smoke_vfx.GetComponent<Renderer>().material.color = Color.yellow;
+            }else if(GlobalData.level == 3){
+                smoke_vfx.GetComponent<Renderer>().material.color = Color.red;
+            }else if(GlobalData.level == 4){
+                smoke_vfx.GetComponent<Renderer>().material.color = Color.green;
+            }else{
+                smoke_vfx.GetComponent<Renderer>().material.color = Color.red;
+            }
+            
             Destroy(smoke_vfx,1);
             GlobalData.verticalFuse = false;
         }
