@@ -13,22 +13,11 @@ public class Score : MonoBehaviour
     public static int numPowersUsed = 0;
     public static List<int> fusionsMade;
 
-    // Start is called before the first frame update
-
-    /* public static void EarnScore()
-    {
-        CurrentScore += 5;
-        GameObject ui_handler = GameObject.Find("UIHandler");
-        ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.IncrementScore(5));
-        Vector3 pos;
-        pos.x = 0;
-        pos.y = 0;
-        pos.z = 0;
-        ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => x.ShowPopupText("Scores+5!", pos));
-        AnalyticsResult analyticsResult = Analytics.CustomEvent("Get the score" + CurrentScore);
-    }*/
     void Start()
     {
+        numVerticalFuses = 0;
+        numHorizontalFuses = 0;
+        numPowersUsed = 0;
         fusionsMade = new List<int>();
         for(int i = 0; i < GlobalData.ValidCombinations[SceneManager.GetActiveScene().name].Count; i++)
         {
@@ -36,20 +25,13 @@ public class Score : MonoBehaviour
         }
     }
 
-    public void ModVals(int v, int h, int p)
-    {
-        numVerticalFuses += v;
-        numHorizontalFuses += h;
-        numPowersUsed += p;
-    }
-
-    public ScoreSummary GetScoreSummary()
+    public static ScoreSummary GetScoreSummary()
     {
         ScoreSummary s =  new();
         s.numVerticalFusions = numVerticalFuses;
         s.numHorizontalFusions = numHorizontalFuses;
         s.numPowersUsed = numPowersUsed;
-        s.numSlicesLeft = GameObject.Find("PizzaSpawner").GetComponent<NewSliceSpawn>().NumberSpawned;
+        s.numSlicesLeft = GlobalData.MaxSlices[SceneManager.GetActiveScene().name] - GameObject.Find("PizzaSpawner").GetComponent<NewSliceSpawn>().NumberSpawned + 1;
 
         s.scoreVerticalFusions = s.numVerticalFusions * 5;
         s.scoreHorizontalFusions = s.numHorizontalFusions * 20;

@@ -9,16 +9,7 @@ using TMPro;
 
 public class FuseSlice : MonoBehaviour
 {
-    public GameObject ui_handler;
-    // Start is called before the first frame update
-    void Start()
-    {
-        ui_handler = GameObject.Find("UIHandler");
-    }
-
-    void Update(){
-        
-    }
+    public GameObject completeScreen;
 
     private static bool mCheckTopNSlices(List<GameObject> SList)
     {
@@ -55,13 +46,9 @@ public class FuseSlice : MonoBehaviour
             for (int k = 1; k <= n; k++)
             {
                 Destroy(SList[SList.Count - k]);
-                GlobalData.nVerticalFusions++;
-                AnalyticsResult vertFusionAnalytics = Analytics.CustomEvent("VerticalFusions", 
-                    new Dictionary<string, object>{
-                        {"Level", SceneManager.GetActiveScene().name}, 
-                        {"VerticalFusions", GlobalData.nVerticalFusions}
-                    });
             }
+            GlobalData.nVerticalFusions++;
+            Score.numVerticalFuses++;
             SList.RemoveRange(SList.Count - n, n);
             return 1;
         }
@@ -159,11 +146,7 @@ public class FuseSlice : MonoBehaviour
                 }
                 GlobalData.isHorizontalFuse = true;
                 GlobalData.nHorizontalFusions++;
-                AnalyticsResult horizontalFusionAnalytics = Analytics.CustomEvent("HorizontalFusions", 
-                    new Dictionary<string, object> { 
-                        { "Level", SceneManager.GetActiveScene().name }, 
-                        { "HorizontalFusions", GlobalData.nHorizontalFusions } 
-                    });
+                Score.numHorizontalFuses++;
 
                 HandleReward(r);
                 return r;
@@ -205,12 +188,55 @@ public class FuseSlice : MonoBehaviour
         }
         //TODO: You win!! CODE HERE
         Debug.Log("YOU WIN");
+        ShowLevelComplete();
+    }
 
-    //     if (instantiated == false) {
-    //         // GameObject endlevelscreen = GameObject.FindWithTag("Plate");
-    //         // StartCoroutine(PopUp(endlevelscreen));
-    //   }         
-        
+
+    public static void ShowLevelComplete()
+    {
+        GameObject popup = Instantiate(GameObject.Find("PizzaSpawner").GetComponent<FuseSlice>().completeScreen);
+        int level = SceneManager.GetActiveScene().buildIndex;
+        if (level + 1 >= GlobalData.totalscenes)
+        {
+            popup.transform.GetChild(13).gameObject.SetActive(false);
+        }
+        GameObject star1 = popup.transform.GetChild(1).gameObject;
+        GameObject star2 = popup.transform.GetChild(2).gameObject;
+        GameObject star3 = popup.transform.GetChild(3).gameObject;
+        GameObject plate = GameObject.FindWithTag("Plate");
+        ScoreSummary s = Score.GetScoreSummary();
+        Debug.Log("S: " + s.scorePowersUsed);
+        if (s.starsEarned >= 1)
+        {
+            star1.SetActive(true);
+        }
+        if (s.starsEarned >= 2)
+        {
+            star2.SetActive(true);
+        }
+        if (s.starsEarned >= 3)
+        {
+            star3.SetActive(true);
+        }
+        Transform vertscore = popup.transform.GetChild(4);
+        TextMeshProUGUI verttext = vertscore.gameObject.GetComponent<TextMeshProUGUI>();
+        verttext.SetText(string.Format("# Vertical Fusions = {0} x 5 = {1} points", s.numVerticalFusions, s.scoreVerticalFusions));
+
+        Transform horscore = popup.transform.GetChild(5);
+        TextMeshProUGUI hortext = horscore.gameObject.GetComponent<TextMeshProUGUI>();
+        hortext.SetText(string.Format("# Horizontal Fusions = {0} x 20 = {1} points", s.numHorizontalFusions, s.scoreHorizontalFusions));
+
+        Transform powscore = popup.transform.GetChild(6);
+        TextMeshProUGUI powtext = powscore.gameObject.GetComponent<TextMeshProUGUI>();
+        powtext.SetText(string.Format("# Powers Used = {0} x 5 = {1} points", s.numPowersUsed, s.scorePowersUsed));
+
+        Transform slicescore = popup.transform.GetChild(7);
+        TextMeshProUGUI slicetext = slicescore.gameObject.GetComponent<TextMeshProUGUI>();
+        slicetext.SetText(string.Format("# Slices Left = {0} x 1 = {1} points", s.numSlicesLeft, s.scoreSlicesLeft));
+
+        Transform totalscore = popup.transform.GetChild(8);
+        TextMeshProUGUI totaltext = totalscore.gameObject.GetComponent<TextMeshProUGUI>();
+        totaltext.SetText(string.Format("Total Score = {0} points", s.scoreTotal));
 
     }
 

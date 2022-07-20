@@ -101,37 +101,37 @@ public class Navigation : MonoBehaviour
             GameObject star2 = popup.transform.GetChild(2).gameObject;
             GameObject star3 = popup.transform.GetChild(3).gameObject;
             GameObject plate = GameObject.FindWithTag("Plate");
-            Score score =  plate.GetComponent<Score>();
+            ScoreSummary s = Score.GetScoreSummary();
             print("STARS");
-            print(score.GetScoreSummary().starsEarned);
-            if (score.GetScoreSummary().starsEarned >= 1) {
+            print(s.starsEarned);
+            if (s.starsEarned >= 1) {
                 star1.SetActive(true);
             }
-            if (score.GetScoreSummary().starsEarned >= 2) {
+            if (s.starsEarned >= 2) {
                 star2.SetActive(true);
             }
-            if (score.GetScoreSummary().starsEarned >= 3) {
+            if (s.starsEarned >= 3) {
                 star3.SetActive(true);
             }
             Transform vertscore = popup.transform.GetChild(4);
             TextMeshProUGUI verttext = vertscore.gameObject.GetComponent<TextMeshProUGUI>();
-            verttext.SetText("# Vertical Fusions = {} x 5 = {} points", score.GetScoreSummary().numVerticalFusions, score.GetScoreSummary().scoreVerticalFusions);    
+            verttext.SetText("# Vertical Fusions = {} x 5 = {} points", s.numVerticalFusions, s.scoreVerticalFusions);    
 
             Transform horscore = popup.transform.GetChild(5);
             TextMeshProUGUI hortext = horscore.gameObject.GetComponent<TextMeshProUGUI>();
-            hortext.SetText("# Horizontal Fusions = {} x 20 = {} points", score.GetScoreSummary().numHorizontalFusions, score.GetScoreSummary().scoreHorizontalFusions);    
+            hortext.SetText("# Horizontal Fusions = {} x 20 = {} points", s.numHorizontalFusions, s.scoreHorizontalFusions);    
 
             Transform powscore = popup.transform.GetChild(6);
             TextMeshProUGUI powtext = powscore.gameObject.GetComponent<TextMeshProUGUI>();
-            powtext.SetText("# Powers Used = {} x 5 = {} points", score.GetScoreSummary().numPowersUsed, score.GetScoreSummary().scorePowersUsed);    
+            powtext.SetText("# Powers Used = {} x 5 = {} points", s.numPowersUsed, s.scorePowersUsed);    
 
             Transform slicescore = popup.transform.GetChild(7);
             TextMeshProUGUI slicetext = slicescore.gameObject.GetComponent<TextMeshProUGUI>();
-            slicetext.SetText("# Slices Left = {} x 5 = {} points", score.GetScoreSummary().numSlicesLeft, score.GetScoreSummary().scoreSlicesLeft);    
+            slicetext.SetText("# Slices Left = {} x 5 = {} points", s.numSlicesLeft, s.scoreSlicesLeft);    
 
             Transform totalscore = popup.transform.GetChild(8);
             TextMeshProUGUI totaltext = totalscore.gameObject.GetComponent<TextMeshProUGUI>();
-            totaltext.SetText("Total Score = {} points", score.GetScoreSummary().scoreTotal);    
+            totaltext.SetText("Total Score = {} points", s.scoreTotal);    
         }
         /*if(Score.CurrentScore >= 30){
             int level = SceneManager.GetActiveScene().buildIndex;
