@@ -10,8 +10,6 @@ public class Navigation : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject menu;
-    public GameObject winscreen;
-    public GameObject endlevelscreen;
     GameObject plate;
     Score score;
     bool instantiated = false;
@@ -93,6 +91,11 @@ public class Navigation : MonoBehaviour
         if (GlobalData.gameover && instantiated == false) {
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", SceneManager.GetActiveScene().buildIndex} });
             GameObject popup = Instantiate(menu);
+            int level = SceneManager.GetActiveScene().buildIndex;
+
+            if (level + 1 >= GlobalData.totalscenes) {
+                popup.transform.GetChild(13).gameObject.SetActive(false);
+            }
             instantiated = true;
             GameObject star1 = popup.transform.GetChild(1).gameObject;
             GameObject star2 = popup.transform.GetChild(2).gameObject;
