@@ -450,10 +450,18 @@ public class TutorialHandler : MonoBehaviour
 
                 Objects[GameObjectNames.CHEATS].SetActive(false);
                 Objects[GameObjectNames.SLICE_UI].SetActive(false);
-                Objects[GameObjectNames.INSTRUCTION_UI].SetActive(false);
+                Objects[GameObjectNames.INSTRUCTION_UI].SetActive(true);
+                Objects[GameObjectNames.FLOW_UI].SetActive(true);
+                
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
+                    x.SetTutorialInstruction("");
+                });
 
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
+                    x.SetFlowInstruction("(Press Enter to  Continue)");
+                });
                 Objects[GameObjectNames.INTRO_UI].SetActive(false);
-                Objects[GameObjectNames.FLOW_UI].SetActive(false);
+                // Objects[GameObjectNames.FLOW_UI].SetActive(false);
 
                 _pause = true;
             }
