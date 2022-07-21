@@ -42,7 +42,16 @@ public class FuseSlice : MonoBehaviour
         //Check if top n slices in have same color as the latest slice
         if (mCheckTopNSlices(SList))
         {
+            // GameObject.Find("smoke").GetComponentInChildren<ParticleSystem>().Play();
+            // Reference: https://www.youtube.com/watch?v=jQivfs34Wb0
+            
+            // Instantiate(smoking,0,0);
+
+            // animator.SetTrigger("isSmoking");
+
             //Debug.Log("Slices were same colored");
+
+
             for (int k = 1; k <= n; k++)
             {
                 Destroy(SList[SList.Count - k]);
@@ -83,6 +92,8 @@ public class FuseSlice : MonoBehaviour
         }
         //Destroy(GameObject.FindWithTag("0"));
         Debug.Log("boom");
+        // GameObject.Find("flame").GetComponentInChildren<ParticleSystem>().Play();
+        // ReferenceEquals:https://www.youtube.com/watch?v=zJFcCngLP-Q
     }
 
     /* Logic for horizontal fusion:
