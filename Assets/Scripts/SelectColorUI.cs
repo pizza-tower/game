@@ -33,18 +33,23 @@ public class SelectColorUI : MonoBehaviour
         button.GetComponent<Button>().onClick.RemoveAllListeners();
         button.GetComponent<Button>().onClick.AddListener(() =>
         {
+            /*
             if (Rewards.RewardsCurrency < 1)
             {
                 ColorPickerUI.SetActive(false);
                 return;
             }
-            Rewards.RewardsCurrency--;
+            */
+            //Rewards.RewardsCurrency--;
             GlobalData.LevelRewardConsume++;
-            ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
-            GameObject SliceOnPeel = GameObject.FindWithTag("0");
-            SliceOnPeel.GetComponent<PizzaParabola>().IsColorChanger = true;
+            Score.numPowersUsed++;
+            //ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));
+            GameObject SliceOnPeel = GameObject.FindWithTag("NS");
+            //SliceOnPeel.GetComponent<PizzaParabola>().IsColorChanger = true;
             ChangeSliceColor(SliceOnPeel, c);
             ColorPickerUI.SetActive(false);
+            GameObject.Find("ColorChanger").GetComponent<Button>().interactable=false;
+            
         });
     }
 
@@ -69,6 +74,7 @@ public class SelectColorUI : MonoBehaviour
 
     void ChangeSliceColor(GameObject g, SliceColor c)
     {
+        g.GetComponent<PizzaRotation>().mColor = c;
         var t = g.GetComponent<Materials>();
         switch (c)
         {
