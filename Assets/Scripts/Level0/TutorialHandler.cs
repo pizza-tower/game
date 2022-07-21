@@ -208,6 +208,7 @@ public class TutorialHandler : MonoBehaviour
         DisableAllArrows();
         GlobalData.ValidSlices["Level0"] = new(){ SliceColor.Yellow };
         fuseCase = true;
+        ArrowObjects[ArrowObjectNames.HFUSE].SetActive(true);
         FuseMessage(instructionCount);
         if(GlobalData.nVerticalFusions > 0)
         {
@@ -217,6 +218,7 @@ public class TutorialHandler : MonoBehaviour
             _pause = true;
             CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
             ArrowObjects[ArrowObjectNames.HFUSE].SetActive(false);
+            DestroySlices();
             return;
         }
 
@@ -242,6 +244,7 @@ public class TutorialHandler : MonoBehaviour
             }
         }
         CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
+        GlobalData.nHorizontalFusions = 0;
     }
 
     void HFuseMessage(int i){
@@ -445,13 +448,11 @@ public class TutorialHandler : MonoBehaviour
 
                 Objects[GameObjectNames.CHEATS].SetActive(true);
                 Objects[GameObjectNames.SLICE_UI].SetActive(true);
+                Objects[GameObjectNames.INSTRUCTION_UI].SetActive(false);
 
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                    x.setIntroInstruction("");
-                });
-                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => {
-                    x.SetFlowInstruction("");
-                });
+                Objects[GameObjectNames.INTRO_UI].SetActive(false);
+                Objects[GameObjectNames.FLOW_UI].SetActive(false);
+
                 _pause = true;
             }
 
@@ -473,8 +474,13 @@ public class TutorialHandler : MonoBehaviour
                     Objects[key.Key].SetActive(false);
                 }
 
-                Objects.Add(GameObjectNames.INTRO_UI, GameObject.Find(GameObjectNames.INTRO_UI));
-                Objects.Add(GameObjectNames.FLOW_UI, GameObject.Find(GameObjectNames.FLOW_UI));
+                DisableAllArrows();
+
+                Objects[GameObjectNames.INTRO_UI].SetActive(true);
+                Objects[GameObjectNames.FLOW_UI].SetActive(true);
+
+                //Objects.Add(GameObjectNames.INTRO_UI, GameObject.Find(GameObjectNames.INTRO_UI));
+                //Objects.Add(GameObjectNames.FLOW_UI, GameObject.Find(GameObjectNames.FLOW_UI));
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                     x.setIntroInstruction("Cool Right!\n Press Enter to Start Level1");
                 });

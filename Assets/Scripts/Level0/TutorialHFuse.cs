@@ -51,12 +51,25 @@ class TutorialHFuse : MonoBehaviour
 
     public static void placeSlices(GameObject slice)
     {
-
+        DestroySlices();
         for (int i = 1; i <= 5; i++)
         {
             //spawn a new slice at spawner
             createSlice(i, slice);
         }
+    }
+
+
+    static void DestroySlices()
+    {
+        foreach (List<GameObject> obj in GlobalData.globalList)
+        {
+            foreach (GameObject slice in obj)
+            {
+                Destroy(slice);
+            }
+        }
+        GlobalData.ResetGlobalList();
     }
 
     public static void checkGlobalList(GameObject slice)
@@ -66,6 +79,7 @@ class TutorialHFuse : MonoBehaviour
             if (GlobalData.globalList[i - 1].Count == 0)
             {
                 createSlice(i, slice);
+                return;
             }
         }
     }
