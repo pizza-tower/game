@@ -21,6 +21,7 @@ public class GlobalData : MonoBehaviour
     public static int nVerticalFusions = 0;
     public static int LevelRewardConsume = 0;
     public static bool isHorizontalFuse = false;
+    public static bool BombDrop = false;
 
     public static bool verticalFuse = false;
     public static bool horizontalFuse = false;
