@@ -13,6 +13,11 @@ public class NewSliceSpawn : MonoBehaviour
     float NewSliceSpawnSeconds;
     public int NeedsNewSlice = 1;
     public int NumberSpawned = 0;
+    private GameObject SpawnedSlice;
+
+    public GameObject GetSpawnedSlice(){
+        return SpawnedSlice;
+    }
     bool instantiated = false;
 
     public Mesh RedSlice;
@@ -114,6 +119,9 @@ public class NewSliceSpawn : MonoBehaviour
         NewSlice.GetComponent<MeshFilter>().sharedMesh = SliceColorToMesh(c);
         NewSlice.GetComponent<PizzaRotation>().mColor = c;
         NumberSpawned++;
+
+        SpawnedSlice = NewSlice;
+        
     }
     
     public Mesh SliceColorToMesh(SliceColor c)

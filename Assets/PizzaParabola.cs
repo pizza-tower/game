@@ -22,6 +22,12 @@ public class PizzaParabola : MonoBehaviour
     bool IsPlaced = false;
     public bool IsBomb = false;
     public bool IsColorChanger = false;
+
+    public bool GetIsPlaced()
+    {
+        return IsPlaced;
+    }
+
     float FreeFallTime = 0f;
     bool RandomDropSliceAddedToTheList = false;
     bool SliceAddedToTheList = false;
@@ -134,6 +140,8 @@ public class PizzaParabola : MonoBehaviour
     {
         if(IsPlaced)
         {
+            GlobalData.isFirstSlice = false;
+            
             return;
         }
         //if it is a random drop slice, escape the parabola part

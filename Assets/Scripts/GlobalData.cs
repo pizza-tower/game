@@ -49,6 +49,7 @@ public class GlobalData : MonoBehaviour
 
         //Setup number of slices per level
         MaxSlices = new();
+        MaxSlices.Add("Level0", 60);
         MaxSlices.Add("Level1", 20);
         MaxSlices.Add("Level2", 30);
         MaxSlices.Add("Level3", 30);
@@ -57,6 +58,8 @@ public class GlobalData : MonoBehaviour
 
         //Setup valid slices that can be spawned for a level
         ValidSlices = new();
+        // TutorialHandler will change this value in Runtime for walkthrough purposes.
+        ValidSlices.Add("Level0", new() { SliceColor.Red, SliceColor.Yellow });
         ValidSlices.Add("Level1", new() { SliceColor.Red, SliceColor.Yellow });
         ValidSlices.Add("Level2", new() { SliceColor.Red, SliceColor.Yellow });
         ValidSlices.Add("Level3", new() { SliceColor.Red, SliceColor.Yellow, SliceColor.Blue });
@@ -71,6 +74,12 @@ public class GlobalData : MonoBehaviour
         SliceColor g = SliceColor.Green;
         SliceColor b = SliceColor.Blue;
         ValidCombinations = new();
+        //Level 0
+        ValidCombinations.Add("Level0", new() {
+            new() { r, r, r, r, r, r },
+            new() { r, r, r, y, y, y },
+            new() { y, y, y, y, y, y }, 
+        });
         //LEVEL1
         ValidCombinations.Add("Level1", new() {
             new() { r, r, r, y, y ,y }
@@ -79,31 +88,31 @@ public class GlobalData : MonoBehaviour
         ValidCombinations.Add("Level2", new() {
             new() { r, r, y, y, y, y },
             new() { y, y, y, y, y, y },
-            new() { r, r, r, r, r ,r }
+            new() { r, r, r, r, r, r }
         });
         //LEVEL3
         ValidCombinations.Add("Level3", new() {
             new() { r, r, r, y, y, y },
             new() { r, y, y, y, y, y },
-            new() { y, y, y, y, y ,y }
+            new() { y, y, y, y, y, y }
         });
         //LEVEL4
          ValidCombinations.Add("Level4", new() {
             new() { b, y, r, r, r, r },
             new() { y, r, y, y, y, b },
-            new() { r, y, r, y, r ,y }
+            new() { r, y, r, y, r, y }
         });
         //LEVEL5
          ValidCombinations.Add("Level5", new() {
             new() { r, r, r, r, y, y },
             new() { y, y, y, y, y, y },
-            new() { r, r, r, y, y ,y }
+            new() { r, r, r, y, y, y }
         });
         //LEVEL6
          ValidCombinations.Add("Level6", new() {
             new() { r, r, r, g, r, r },
             new() { y, y, y, y, r, d },
-            new() { r, r, r, y, y ,y }
+            new() { r, r, r, y, y, y }
         });
     }
 

@@ -16,9 +16,9 @@ public interface IPizzaTowerUIMessageTarget : IEventSystemHandler
     void SetGold(int g);
     void IncrementGold(int g);
     void SetFlowInstruction(string text);
+    void setIntroInstruction(string text);
 
     public void ShowPopupText(string text, Vector3 position);
-
     //Popup text functions
 
 }
@@ -33,6 +33,7 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     public GameObject floatingTextPrefab;
     public Text Instruction;
     public Text FlowInstruction;
+    public Text IntroInstruction;
 
     private int score = 0;
     private int score_required = 1;
@@ -44,11 +45,11 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     }
     private void UpdateLevelText()
     {
-        levelText.text = "Level " + GlobalData.level.ToString();
+        levelText.text = "Level\n" + GlobalData.level.ToString();
     }
     private void UpdateGoldText()
     {
-        goldText.text = "x " + gold.ToString();
+        goldText.text = "Gold\n" + gold.ToString();
     }
 
     public void SetScore(int s)
@@ -81,6 +82,11 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     public void SetFlowInstruction(string inst){
         FlowInstruction.text = inst;
     }
+
+    public void setIntroInstruction(string inst){
+        IntroInstruction.text = inst;
+    }
+    
     public void ShowPopupText(string text, Vector3 position)
     {
         GameObject prefab = Instantiate(floatingTextPrefab, position, Quaternion.identity);
@@ -108,9 +114,12 @@ public class UIHandlerScript : MonoBehaviour, IPizzaTowerUIMessageTarget
     private void Update()
     {
         int m = GlobalData.MaxSlices[SceneManager.GetActiveScene().name];
-        int c = GameObject.Find("PizzaSpawner").GetComponent<NewSliceSpawn>().NumberSpawned;
-        int v = m - c;
+        GameObject spawner = GameObject.Find("PizzaSpawner");
+        if(spawner != null && spawner.activeSelf) {
+            int c = spawner.GetComponent<NewSliceSpawn>().NumberSpawned;
+            int v = m - c;
 
-        slicesText.text = "Slices Remaining\n" + v.ToString();
+            slicesText.text = "Slices Remaining\n" + v.ToString(); 
+        }
     }
 }

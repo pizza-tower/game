@@ -500,6 +500,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Diagonal_lines_gold
       objectReference: {fileID: 0}
+    - target: {fileID: 6222723410487771367, guid: c1dfe2040472240d5b018dbe55ddb4ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7120445278234378903, guid: c1dfe2040472240d5b018dbe55ddb4ea,
         type: 3}
       propertyPath: m_RootOrder
@@ -1396,6 +1401,7 @@ MonoBehaviour:
     type: 3}
   Instruction: {fileID: 1603594825}
   FlowInstruction: {fileID: 0}
+  IntroInstruction: {fileID: 0}
 --- !u!1 &828280548
 GameObject:
   m_ObjectHideFlags: 0
