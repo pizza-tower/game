@@ -92,6 +92,8 @@ public class FuseSlice : MonoBehaviour
         }
         //Destroy(GameObject.FindWithTag("0"));
         Debug.Log("boom");
+        // GameObject.Find("flame").GetComponentInChildren<ParticleSystem>().Play();
+        // ReferenceEquals:https://www.youtube.com/watch?v=zJFcCngLP-Q
     }
 
     /* Logic for horizontal fusion:

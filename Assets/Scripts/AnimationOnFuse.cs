@@ -69,7 +69,6 @@ public class AnimationOnFuse : MonoBehaviour
             pizza_half = Instantiate(animatedPizzaPrefab_half);
             pizza_half.transform.parent = transform;
             pizza_half.SetActive(false);
-
             Debug.Log("In Preparation Stage : Animation");
         }
         else if (level == "Level2")
@@ -166,7 +165,7 @@ public class AnimationOnFuse : MonoBehaviour
         Debug.Log("Ease Type" + easeType);
         Debug.Log("Target Position" + Target_allRed_position);
         //float duration = Random.Range(minAnimDuration, maxAnimDuration);
-        doAnimate(Target_allRed_position, pizza_allRed, 3);
+        doAnimate(Target_allRed_position, pizza_allRed, 3, Target_allRed.GetChild(0).gameObject);
     }
 
     public void animateOnAllYellow(Vector3 sourcePosition)
@@ -181,7 +180,7 @@ public class AnimationOnFuse : MonoBehaviour
         Debug.Log("Ease Type" + easeType);
         Debug.Log("Target Position" + Target_allYellow_position);
         //float duration = Random.Range(minAnimDuration, maxAnimDuration);
-        doAnimate(Target_allYellow_position, pizza_allYellow, 3);
+        doAnimate(Target_allYellow_position, pizza_allYellow, 3, Target_allYellow.GetChild(0).gameObject);
     }
     public void animateOnHalfHalf(Vector3 sourcePosition)
     {
@@ -201,7 +200,7 @@ public class AnimationOnFuse : MonoBehaviour
         //    doAnimate(Target_half_position, pizza_half, 5);
         //} else
         //{
-        doAnimate(Target_half_position, pizza_half, 3);
+        doAnimate(Target_half_position, pizza_half, 3, Target_half.GetChild(0).gameObject);
         // }
     }
 
@@ -211,7 +210,7 @@ public class AnimationOnFuse : MonoBehaviour
 
         //move pizza to the target cheatsheet pos
         pizza_oneRed.transform.position = sourcePosition;
-        doAnimate(Target_oneRed_position, pizza_oneRed, 3);
+        doAnimate(Target_oneRed_position, pizza_oneRed, 3, Target_oneRed.GetChild(0).gameObject);
     }
 
     public void animateOnOneBlueOneYellow(Vector3 sourcePosition)
@@ -220,7 +219,7 @@ public class AnimationOnFuse : MonoBehaviour
 
         //move pizza to the target cheatsheet pos
         pizza_oneBlueOneYellow.transform.position = sourcePosition;
-        doAnimate(Target_oneBlueOneYellow_position, pizza_oneBlueOneYellow, 3);
+        doAnimate(Target_oneBlueOneYellow_position, pizza_oneBlueOneYellow, 3, Target_oneBlueOneYellow.GetChild(0).gameObject);
     }
 
     public void animateOnTwoYellow(Vector3 sourcePosition)
@@ -229,7 +228,7 @@ public class AnimationOnFuse : MonoBehaviour
 
         //move pizza to the target cheatsheet pos
         pizza_twoYellow.transform.position = sourcePosition;
-        doAnimate(Target_twoYellow_position, pizza_twoYellow, 3);
+        doAnimate(Target_twoYellow_position, pizza_twoYellow, 3, Target_twoYellow.GetChild(0).gameObject);
     }
 
 
@@ -239,7 +238,7 @@ public class AnimationOnFuse : MonoBehaviour
 
         //move pizza to the target cheatsheet pos
         pizza_oneBlueOneRed.transform.position = sourcePosition;
-        doAnimate(Target_oneBlueOneRed_position, pizza_oneBlueOneRed, 3);
+        doAnimate(Target_oneBlueOneRed_position, pizza_oneBlueOneRed, 3, Target_oneBlueOneRed.GetChild(0).gameObject);
     }
 
 
@@ -250,7 +249,7 @@ public class AnimationOnFuse : MonoBehaviour
 
         //move pizza to the target cheatsheet pos
         pizza_star.transform.position = sourcePosition;
-        doAnimate(Target_star_position, pizza_star, 3);
+        doAnimate(Target_star_position, pizza_star, 3, Target_star.GetChild(0).gameObject);
     }
 
 
@@ -268,25 +267,26 @@ public class AnimationOnFuse : MonoBehaviour
         Debug.Log("Ease Type" + easeType);
         Debug.Log("Target Position" + Target_twoRed_position);
         //float duration = Random.Range(minAnimDuration, maxAnimDuration);
-        doAnimate(Target_twoRed_position, pizza_twoRed, 3);
+        doAnimate(Target_twoRed_position, pizza_twoRed, 3, Target_twoRed.GetChild(0).gameObject);
     }
 
-    void doAnimate(Vector3 target, GameObject gameObject, int jumpPower)
+    void doAnimate(Vector3 target, GameObject gameObject, int jumpPower, GameObject greenTick)
     {
         Vector3 originalScale = gameObject.transform.localScale;
         Sequence s = DOTween.Sequence();
         //update this 3.5f to lesser number for lesser duration of animation
         s.Append(gameObject.transform.DOJump(target, jumpPower, 1, 3.5f, false));
         s.Join(gameObject.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 4f).SetDelay(1.5f));
-        s.OnComplete(() => completeAnimation(gameObject, originalScale));
+        s.OnComplete(() => completeAnimation(gameObject, originalScale, greenTick));
         s.Play();
         Debug.Log("Animation Over");
     }
 
-    void completeAnimation(GameObject gameObject, Vector3 originalScale)
+    void completeAnimation(GameObject gameObject, Vector3 originalScale, GameObject greenTick)
     {
         Debug.Log("Animation on Complete");
         gameObject.SetActive(false);
         gameObject.transform.localScale = originalScale;
+        greenTick.SetActive(true);
     }
 }

@@ -31,6 +31,10 @@ public class SelectLevel : MonoBehaviour
     {
         LoadLevel(4);
     }
+    public void L5()
+    {
+        LoadLevel(5);
+    }
     public void Back()
     {
         SceneManager.LoadScene("MainMenu");
