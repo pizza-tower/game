@@ -513,7 +513,7 @@ public class TutorialHandler : MonoBehaviour
         ArrowObjects.Add(ArrowObjectNames.HFUSE, GameObject.Find(ArrowObjectNames.HFUSE));
         //ArrowObjects.Add(ArrowObjectNames.GOLD, GameObject.Find(ArrowObjectNames.GOLD));
         ArrowObjects.Add(ArrowObjectNames.CHEAT, GameObject.Find(ArrowObjectNames.CHEAT));
-        ArrowObjects.Add(ArrowObjectNames.REWARDS, GameObject.Find(ArrowObjectNames.REWARDS));
+        // ArrowObjects.Add(ArrowObjectNames.REWARDS, GameObject.Find(ArrowObjectNames.REWARDS));
 
         foreach(KeyValuePair<string, GameObject> key in Objects){
             Objects[key.Key].SetActive(false);
