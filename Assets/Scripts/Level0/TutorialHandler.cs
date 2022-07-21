@@ -50,9 +50,10 @@ public class TutorialHandler : MonoBehaviour
         public static readonly string CHEAT_SHEET = "CheatSheet";
         public static readonly string FLOW_UI = "FlowUI";
         public static readonly string ANCHORS = "Anchors";
-        public static readonly string BUTTON = "Button";
+        public static readonly string BUTTON = "Bomb";
         public static readonly string INTRO_UI = "IntroUI";
         public static readonly string SLICE = "Slice";
+        public static readonly string SLICE_UI = "SlicesUI";
     };
 
     class ArrowObjectNames
@@ -165,14 +166,15 @@ public class TutorialHandler : MonoBehaviour
         if(Objects[GameObjectNames.PIZZA_PEEL].activeSelf == false){
             // GameObject.Find("PizzaPeelPivot").GetComponent<PizzaPeelController>().enabled = false;
             Objects[GameObjectNames.PIZZA_PEEL].SetActive(true);
-            ArrowObjects[ArrowObjectNames.PEEL].SetActive(true);
+            
             pizzaSpawner.SetActive(true);
         }else {
-            
+            pizzaSpawner.SetActive(true);
             DisableAllArrows();
+            ArrowObjects[ArrowObjectNames.PEEL].SetActive(true);
 
             //Destroy(pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice());
-            
+
             Debug.Log("Showing Pizza Slice..");
 
             StartCoroutine(WaitFor(0.5f, () => {
@@ -366,7 +368,7 @@ public class TutorialHandler : MonoBehaviour
                 DisableAllArrows();
                 pressSpace = false;
                 pizzaSpawner.SetActive(false);
-                Objects[GameObjectNames.CHEAT_SHEET].SetActive(true);
+                //Objects[GameObjectNames.CHEAT_SHEET].SetActive(true);
                 Objects[GameObjectNames.PIZZA_PEEL].SetActive(false);
                 Objects[GameObjectNames.PLATE].SetActive(false);
                 DestroySlices();
@@ -385,7 +387,7 @@ public class TutorialHandler : MonoBehaviour
 
             // TODO : Add Animation/Video to better understand Power Ups
             if(stage == 7){
-                Objects[GameObjectNames.SCORE_UI].SetActive(true);
+                //Objects[GameObjectNames.SCORE_UI].SetActive(true);
                 DisableAllArrows();
                 ArrowObjects[ArrowObjectNames.SCORE].SetActive(true);
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
@@ -396,9 +398,9 @@ public class TutorialHandler : MonoBehaviour
 
             if(stage == 8){
                 DisableAllArrows();
-                ArrowObjects[ArrowObjectNames.GOLD].SetActive(true);
+                ArrowObjects[ArrowObjectNames.REWARDS].SetActive(true);
 
-                Objects[GameObjectNames.GOLD_UI].SetActive(true);
+                //Objects[GameObjectNames.GOLD_UI].SetActive(true);
                 Objects[GameObjectNames.BUTTON].SetActive(true);
                 Objects[GameObjectNames.COLOR_CHANGER].SetActive(true);
 
@@ -437,12 +439,12 @@ public class TutorialHandler : MonoBehaviour
         // Initialization
         Objects.Add(GameObjectNames.PIZZA_PEEL, GameObject.Find(GameObjectNames.PIZZA_PEEL));
         Objects.Add(GameObjectNames.PLATE, GameObject.Find(GameObjectNames.PLATE));
-        Objects.Add(GameObjectNames.SCORE_UI, GameObject.Find(GameObjectNames.SCORE_UI));
+        //Objects.Add(GameObjectNames.SCORE_UI, GameObject.Find(GameObjectNames.SCORE_UI));
         Objects.Add(GameObjectNames.LEVEL_UI, GameObject.Find(GameObjectNames.LEVEL_UI));
-        Objects.Add(GameObjectNames.GOLD_UI, GameObject.Find(GameObjectNames.GOLD_UI));
+        //Objects.Add(GameObjectNames.GOLD_UI, GameObject.Find(GameObjectNames.GOLD_UI));
         Objects.Add(GameObjectNames.COLOR_CHANGER, GameObject.Find(GameObjectNames.COLOR_CHANGER));
         Objects.Add(GameObjectNames.INSTRUCTION_UI, GameObject.Find(GameObjectNames.INSTRUCTION_UI));
-        Objects.Add(GameObjectNames.CHEAT_SHEET, GameObject.Find(GameObjectNames.CHEAT_SHEET));
+        //Objects.Add(GameObjectNames.CHEAT_SHEET, GameObject.Find(GameObjectNames.CHEAT_SHEET));
         Objects.Add(GameObjectNames.FLOW_UI, GameObject.Find(GameObjectNames.FLOW_UI));
         Objects.Add(GameObjectNames.ANCHORS, GameObject.Find(GameObjectNames.ANCHORS));
         Objects.Add(GameObjectNames.BUTTON, GameObject.Find(GameObjectNames.BUTTON));
@@ -453,7 +455,7 @@ public class TutorialHandler : MonoBehaviour
         ArrowObjects.Add(ArrowObjectNames.PEEL, GameObject.Find(ArrowObjectNames.PEEL));
         ArrowObjects.Add(ArrowObjectNames.SCORE, GameObject.Find(ArrowObjectNames.SCORE));
         ArrowObjects.Add(ArrowObjectNames.HFUSE, GameObject.Find(ArrowObjectNames.HFUSE));
-        ArrowObjects.Add(ArrowObjectNames.GOLD, GameObject.Find(ArrowObjectNames.GOLD));
+        //ArrowObjects.Add(ArrowObjectNames.GOLD, GameObject.Find(ArrowObjectNames.GOLD));
         ArrowObjects.Add(ArrowObjectNames.CHEAT, GameObject.Find(ArrowObjectNames.CHEAT));
         ArrowObjects.Add(ArrowObjectNames.REWARDS, GameObject.Find(ArrowObjectNames.REWARDS));
 
