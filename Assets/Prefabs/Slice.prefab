@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 8068740519241374874}
   - component: {fileID: 395132945173162829}
   - component: {fileID: -627473813856031669}
-  - component: {fileID: -3139062690639364059}
   m_Layer: 0
   m_Name: Slice
   m_TagString: 0
@@ -214,21 +213,3 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 57192a4ce725a564f9461ebefd147a78, type: 2}
   - {fileID: 2100000, guid: 7083d95e0e949b645a185f221d468cf4, type: 2}
   - {fileID: 2100000, guid: 48c9f052432f74a429a7f67d17b40b8d, type: 2}
---- !u!114 &-3139062690639364059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7934999755122050094}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 0.5882353}
-  outlineWidth: 3
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
