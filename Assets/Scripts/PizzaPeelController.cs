@@ -51,6 +51,11 @@ public class PizzaPeelController : MonoBehaviour
             if(tThrow>0.9f)
             {
                 tThrow = 0f;
+                if (GlobalData.BombDrop == true)
+                {
+                    CameraShaking.Action.Play();
+                    GlobalData.BombDrop = false;
+                }
                 ThrowAngleIndex += 1;
                 if(ThrowAngleIndex >= 3)
                 {
