@@ -6576,6 +6576,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2432090755550338912, guid: 54720e6547ca841ed86adc7826aa6b13,
         type: 3}
+    - target: {fileID: 2547822031124665990, guid: 8992b3764d431c047a8691f1d9d8bc0f,
+        type: 3}
+      propertyPath: gameoverscreen
+      value: 
+      objectReference: {fileID: 607004398892809744, guid: ac840192b517f4daf9155b782d39914d,
+        type: 3}
     - target: {fileID: 6880385219820484678, guid: 8992b3764d431c047a8691f1d9d8bc0f,
         type: 3}
       propertyPath: RedPrefab
