@@ -227,7 +227,6 @@ public class PizzaParabola : MonoBehaviour
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 1.3f);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(EndRotation), 6 * Time.deltaTime);
-            animateOnFuse(EndPoint);
         }
 
     }
@@ -242,6 +241,10 @@ public class PizzaParabola : MonoBehaviour
             fusionIndex = FuseSlice.mHorizontalFuse();
             if (fusionIndex != -1)
             {
+                if(EndPoint!=null)
+                {
+                    animateOnFuse(EndPoint);
+                }
                 for (int i = 0; i < 6; i++)
                 {
                     r = FuseSlice.mVertFuse(GlobalData.globalList[i]);
