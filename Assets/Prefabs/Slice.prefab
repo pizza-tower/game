@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 8068740519241374874}
   - component: {fileID: 395132945173162829}
   - component: {fileID: -627473813856031669}
-  - component: {fileID: -3139062690639364059}
   m_Layer: 0
   m_Name: Slice
   m_TagString: 0
@@ -46,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7934999755122050094}
-  m_Mesh: {fileID: -8279949920504463401, guid: d290f4f92c9b393419790f89f5ac4523, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: 18c0039d05d374f2f971c42ed60bbb70, type: 3}
 --- !u!23 &8439240254211433979
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -67,7 +66,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d54d2e641cd0baa40a2f5dc3a6045314, type: 2}
+  - {fileID: 2100000, guid: 7ceda3ef840e1e8489aeae437076deef, type: 2}
+  - {fileID: 2100000, guid: 758a51429824055499b63e6b76c68b57, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -201,30 +201,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialList:
-  - {fileID: 2100000, guid: 5263a35ed6ab62e4c8fcc113b91c70f6, type: 2}
-  - {fileID: 2100000, guid: d54d2e641cd0baa40a2f5dc3a6045314, type: 2}
-  - {fileID: 2100000, guid: 1882fa555b0ee1c488b86636cf7625ef, type: 2}
-  - {fileID: 2100000, guid: e227b1ccc451c50469071aa9bc28f9fc, type: 2}
+  - {fileID: 2100000, guid: 758a51429824055499b63e6b76c68b57, type: 2}
+  - {fileID: 2100000, guid: 7ceda3ef840e1e8489aeae437076deef, type: 2}
+  - {fileID: 2100000, guid: 34726a0731177534b99ad2d1d6021d31, type: 2}
+  - {fileID: 2100000, guid: fadc433e346a6de478f049f58177f0ff, type: 2}
+  - {fileID: 2100000, guid: fdab37a3462bc6d43bbf3290643ab953, type: 2}
+  - {fileID: 2100000, guid: 53edd91ee7ab91045a2b6e44633d7e59, type: 2}
+  - {fileID: 2100000, guid: 757a149d135b7624bbc7710325a3c177, type: 2}
+  - {fileID: 2100000, guid: 0a13e6334379c1e4ba660ef06e643d0c, type: 2}
+  - {fileID: 2100000, guid: fed668c17488d034885085628c13f958, type: 2}
+  - {fileID: 2100000, guid: 57192a4ce725a564f9461ebefd147a78, type: 2}
+  - {fileID: 2100000, guid: 7083d95e0e949b645a185f221d468cf4, type: 2}
   - {fileID: 2100000, guid: 48c9f052432f74a429a7f67d17b40b8d, type: 2}
-  - {fileID: 2100000, guid: 9df5d4c06418f9e429eb061bb7b58836, type: 2}
-  - {fileID: 2100000, guid: 913feae3a1143664483c9da7ddaad19f, type: 2}
-  - {fileID: 2100000, guid: 61afa68b8a6c7be4081590ef0eb92e81, type: 2}
-  - {fileID: 2100000, guid: 8805412bc9fdf1943acab24890b60a97, type: 2}
---- !u!114 &-3139062690639364059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7934999755122050094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 0.8156863}
-  outlineWidth: 10
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []

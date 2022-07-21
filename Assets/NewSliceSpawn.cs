@@ -9,8 +9,7 @@ using TMPro;
 public class NewSliceSpawn : MonoBehaviour
 {
     public GameObject Slice;
-    public GameObject endlevelscreen;
-    public GameObject winscreen;
+    public GameObject gameoverscreen;
     float NewSliceSpawnSeconds;
     public int NeedsNewSlice = 1;
     public int NumberSpawned = 0;
@@ -20,6 +19,12 @@ public class NewSliceSpawn : MonoBehaviour
         return SpawnedSlice;
     }
     bool instantiated = false;
+
+    public Mesh RedSlice;
+    public Mesh YellowSlice;
+    public Mesh BlueSlice;
+    public Mesh GreenSlice;
+    public Mesh BrownSlice;
 
 
     void Start()
@@ -37,52 +42,12 @@ public class NewSliceSpawn : MonoBehaviour
                 NeedsNewSlice = 0;
                 // TODO: Trigger game over
 
-                int level = SceneManager.GetActiveScene().buildIndex;
-                if (instantiated == false && level + 1 < GlobalData.totalscenes ) {
-                    GameObject popup = Instantiate(endlevelscreen);
-                    instantiated = true;
-                    GameObject star1 = popup.transform.GetChild(1).gameObject;
-                    GameObject star2 = popup.transform.GetChild(2).gameObject;
-                    GameObject star3 = popup.transform.GetChild(3).gameObject;
-                    star1.SetActive(false);
-                    star2.SetActive(false);
-                    star3.SetActive(false);
-                    GameObject plate = GameObject.FindWithTag("Plate");
-                    Score score =  plate.GetComponent<Score>();
-                    print("STARS");
-                    print(score.GetScoreSummary().starsEarned);
-                    if (score.GetScoreSummary().starsEarned >= 1) {
-                        star1.SetActive(true);
-                    }
-                    if (score.GetScoreSummary().starsEarned >= 2) {
-                        star2.SetActive(true);
-                    }
-                    if (score.GetScoreSummary().starsEarned >= 3) {
-                        star3.SetActive(true);
-                    }
+                if (instantiated == false ) {
+                    StartCoroutine(PopUp(gameoverscreen));
+
+         
                 }
                 
-                else if (instantiated == false) {
-                    GameObject popup = Instantiate(endlevelscreen);
-                    instantiated = true;
-                    GameObject star1 = popup.transform.GetChild(1).gameObject;
-                    GameObject star2 = popup.transform.GetChild(2).gameObject;
-                    GameObject star3 = popup.transform.GetChild(3).gameObject;
-                    star1.SetActive(false);
-                    star2.SetActive(false);
-                    star3.SetActive(false);
-                    GameObject plate = GameObject.FindWithTag("Plate");
-                    Score score =  plate.GetComponent<Score>();
-                    if (score.GetScoreSummary().starsEarned >= 1) {
-                        star1.SetActive(true);
-                    }
-                    if (score.GetScoreSummary().starsEarned >= 2) {
-                        star2.SetActive(true);
-                    }
-                    if (score.GetScoreSummary().starsEarned >= 3) {
-                        star3.SetActive(true);
-                    }
-                }
                 return;
             }
             NeedsNewSlice = 0;
@@ -95,27 +60,63 @@ public class NewSliceSpawn : MonoBehaviour
         NewSliceSpawnSeconds = 1.3f;
         spawnSlice();
     }
+    IEnumerator PopUp(GameObject panel) {
+        yield return new WaitForSeconds(2);
+                GameObject popup = Instantiate(panel);
+                instantiated = true;
+                int level = SceneManager.GetActiveScene().buildIndex;
+                if (level + 1 >= GlobalData.totalscenes) {
+                    popup.transform.GetChild(13).gameObject.SetActive(false);
+                }
+                GameObject star1 = popup.transform.GetChild(1).gameObject;
+                GameObject star2 = popup.transform.GetChild(2).gameObject;
+                GameObject star3 = popup.transform.GetChild(3).gameObject;
+                GameObject plate = GameObject.FindWithTag("Plate");
+                ScoreSummary s =  Score.GetScoreSummary();
+                if (s.starsEarned >= 1) {
+                    star1.SetActive(true);
+                }
+                if (s.starsEarned >= 2) {
+                    star2.SetActive(true);
+                }
+                if (s.starsEarned >= 3) {
+                    star3.SetActive(true);
+                }
+                Transform vertscore = popup.transform.GetChild(4);
+                TextMeshProUGUI verttext = vertscore.gameObject.GetComponent<TextMeshProUGUI>();
+                verttext.SetText(string.Format("# Vertical Fusions = {0} x 5 = {1} points", s.numVerticalFusions, s.scoreVerticalFusions));    
+
+                Transform horscore = popup.transform.GetChild(5);
+                TextMeshProUGUI hortext = horscore.gameObject.GetComponent<TextMeshProUGUI>();
+                hortext.SetText(string.Format("# Horizontal Fusions = {0} x 20 = {1} points", s.numHorizontalFusions, s.scoreHorizontalFusions));    
+
+                Transform powscore = popup.transform.GetChild(6);
+                TextMeshProUGUI powtext = powscore.gameObject.GetComponent<TextMeshProUGUI>();
+                powtext.SetText(string.Format("# Powers Used = {0} x 5 = {1} points", s.numPowersUsed, s.scorePowersUsed));    
+
+                Transform slicescore = popup.transform.GetChild(7);
+                TextMeshProUGUI slicetext = slicescore.gameObject.GetComponent<TextMeshProUGUI>();
+                slicetext.SetText(string.Format("# Slices Left = {0} x 1 = {1} points", s.numSlicesLeft, s.scoreSlicesLeft));    
+
+                Transform totalscore = popup.transform.GetChild(8);
+                TextMeshProUGUI totaltext = totalscore.gameObject.GetComponent<TextMeshProUGUI>();
+                totaltext.SetText(string.Format("Total Score = {0} points", s.scoreTotal));  
+
+    }
     public void spawnSlice() 
     {
         //spawn a new slice at spawner
         GameObject NewSlice = Instantiate(Slice) as GameObject;
         NewSlice.tag = "NS";
         NewSlice.transform.position = transform.position;
-        NewSlice.name = "Slice" + NumberSpawned;
+        NewSlice.transform.localScale = new Vector3(2, 2, 2);
+
         List<SliceColor> sColors = GlobalData.ValidSlices[SceneManager.GetActiveScene().name];
         int n = sColors.Count;
         int r = Random.Range(0, n);
         SliceColor c = sColors[r];
 
-        // Analytics tracking for Slices Thrown
-        AnalyticsResult analyticsResult = Analytics.CustomEvent(
-            "SlicesThrown",
-            new Dictionary<string, object> {
-                { "Level", SceneManager.GetActiveScene().name },
-                { "Slice", (int)c }
-            }
-        );
-        Analytics.FlushEvents();
+        NewSlice.GetComponent<MeshFilter>().sharedMesh = SliceColorToMesh(c);
         NewSlice.GetComponent<PizzaRotation>().mColor = c;
         NumberSpawned++;
 
@@ -123,5 +124,22 @@ public class NewSliceSpawn : MonoBehaviour
         
     }
     
-
+    public Mesh SliceColorToMesh(SliceColor c)
+    {
+        switch(c)
+        {
+            case SliceColor.Red:
+                return Instantiate(RedSlice);
+            case SliceColor.Yellow:
+                return Instantiate(YellowSlice);
+            case SliceColor.Blue:
+                return Instantiate(BlueSlice);
+            case SliceColor.Green:
+                return Instantiate(GreenSlice);
+            case SliceColor.DarkBrown:
+                return Instantiate(BrownSlice);
+            default:
+                return Instantiate(RedSlice);
+        }
+    }
 }
