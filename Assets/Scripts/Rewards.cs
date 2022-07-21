@@ -26,6 +26,7 @@ public class Rewards : MonoBehaviour
     }
     public void LaunchBomb()
     {
+        GlobalData.BombDrop = true;
         GlobalData.LevelRewardConsume++;
         Score.numPowersUsed++;
         //ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(GameObject.Find("UIHandler"), null, (x, y) => x.IncrementGold(-1));

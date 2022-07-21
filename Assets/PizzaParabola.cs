@@ -22,6 +22,12 @@ public class PizzaParabola : MonoBehaviour
     bool IsPlaced = false;
     public bool IsBomb = false;
     public bool IsColorChanger = false;
+
+    public bool GetIsPlaced()
+    {
+        return IsPlaced;
+    }
+
     float FreeFallTime = 0f;
     bool RandomDropSliceAddedToTheList = false;
     bool SliceAddedToTheList = false;
@@ -134,6 +140,8 @@ public class PizzaParabola : MonoBehaviour
     {
         if(IsPlaced)
         {
+            GlobalData.isFirstSlice = false;
+            
             return;
         }
         //if it is a random drop slice, escape the parabola part
@@ -152,7 +160,7 @@ public class PizzaParabola : MonoBehaviour
             if(FreeFallTime/7.0f > 0.98f && RandomDropSliceAddedToTheList == false)
             {
                 RandomDropSliceAddedToTheList = true;
-                ThrowSlice();
+                FreeFallSlice();
                 AddToList();
             }
             //when the random drop slice is landed on top of the stack, mark it as ISPlaced
@@ -227,7 +235,6 @@ public class PizzaParabola : MonoBehaviour
             }
             transform.position = MathParabola.Parabola(StartPoint, EndPoint, 5f, Animation / 1.3f);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(EndRotation), 6 * Time.deltaTime);
-            animateOnFuse(EndPoint);
         }
 
     }
@@ -242,6 +249,10 @@ public class PizzaParabola : MonoBehaviour
             fusionIndex = FuseSlice.mHorizontalFuse();
             if (fusionIndex != -1)
             {
+                if(EndPoint!=null)
+                {
+                    animateOnFuse(EndPoint);
+                }
                 for (int i = 0; i < 6; i++)
                 {
                     r = FuseSlice.mVertFuse(GlobalData.globalList[i]);

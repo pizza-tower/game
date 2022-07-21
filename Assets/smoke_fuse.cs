@@ -16,6 +16,7 @@ public class smoke_fuse : MonoBehaviour
     {
         if(GlobalData.verticalFuse)
         {
+            Debug.Log(GlobalData.level);
             GameObject smoke_vfx = Instantiate(smoke,new Vector3(4,-1,-12),Quaternion.Euler(new Vector3(90,-60,90)));
             smoke_vfx.transform.localScale = new Vector3(3,3,3);
             if(GlobalData.level == 0){
@@ -27,7 +28,7 @@ public class smoke_fuse : MonoBehaviour
             }else if(GlobalData.level == 3){
                 smoke_vfx.GetComponent<Renderer>().material.color = Color.red;
             }else if(GlobalData.level == 4){
-                smoke_vfx.GetComponent<Renderer>().material.color = Color.green;
+                smoke_vfx.GetComponent<Renderer>().material.color = Color.yellow;
             }else{
                 smoke_vfx.GetComponent<Renderer>().material.color = Color.red;
             }

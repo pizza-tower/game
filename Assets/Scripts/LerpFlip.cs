@@ -28,6 +28,11 @@ public class LerpFlip : MonoBehaviour
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(myThrowAngles[ThrowAngleIndex]), lerpRotationTime * Time.deltaTime);
             tThrow= Mathf.Lerp(tThrow, 1f, lerpRotationTime * Time.deltaTime);
+            if(GlobalData.BombDrop == true)
+            {
+                CameraShaking.Action.Play();
+                GlobalData.BombDrop = false;
+            }
             if(tThrow>0.9f)
             {
                 tThrow = 0f;

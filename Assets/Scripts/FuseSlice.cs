@@ -15,7 +15,7 @@ public class FuseSlice : MonoBehaviour
     {
         int n = GlobalData.verticalFusionHeight;
 
-        //Debug.Log("Inside check slices");
+        //Debug.Log("Inside check slices"); 
         //if the height of tower is shorter than n, return false
         if (n > SList.Count || SList.Count == 0)
         {
@@ -37,31 +37,32 @@ public class FuseSlice : MonoBehaviour
 
     public static int mVertFuse(List<GameObject> SList)
     {
-        int n = GlobalData.verticalFusionHeight;
-
-        //Check if top n slices in have same color as the latest slice
-        if (mCheckTopNSlices(SList))
+        bool cond = true;
+        int ret = 0;
+        while(cond)
         {
-            // GameObject.Find("smoke").GetComponentInChildren<ParticleSystem>().Play();
-            // Reference: https://www.youtube.com/watch?v=jQivfs34Wb0
-            
-            // Instantiate(smoking,0,0);
-
-            // animator.SetTrigger("isSmoking");
-
-            //Debug.Log("Slices were same colored");
-
-
-            for (int k = 1; k <= n; k++)
+            cond = false;
+            for (int i = SList.Count - 1; i >= 2; i--)
             {
-                Destroy(SList[SList.Count - k]);
+                SliceColor c1 = SList[i].GetComponent<PizzaRotation>().mColor;
+                SliceColor c2 = SList[i - 1].GetComponent<PizzaRotation>().mColor;
+                SliceColor c3 = SList[i - 2].GetComponent<PizzaRotation>().mColor;
+                if (c1 == c2 && c1 == c3)
+                {
+                    Destroy(SList[i]);
+                    Destroy(SList[i - 1]);
+                    Destroy(SList[i - 2]);
+                    GlobalData.nVerticalFusions++;
+                    GlobalData.verticalFuse = true;
+                    Score.numVerticalFuses++;
+                    SList.RemoveRange(i - 2, 3);
+                    cond = true;
+                    ret = 1;
+                    break;
+                }
             }
-            GlobalData.nVerticalFusions++;
-            Score.numVerticalFuses++;
-            SList.RemoveRange(SList.Count - n, n);
-            return 1;
         }
-        return 0;
+        return ret;
     }
 
     /*Bomb will fuse all slice in that SList
@@ -157,6 +158,7 @@ public class FuseSlice : MonoBehaviour
                 }
                 GlobalData.isHorizontalFuse = true;
                 GlobalData.nHorizontalFusions++;
+                GlobalData.horizontalFuse = true;
                 Score.numHorizontalFuses++;
 
                 HandleReward(r);

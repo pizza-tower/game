@@ -135,7 +135,7 @@ public class PizzaRotation : MonoBehaviour
 
     public void MaterialToNormal()
     {
-        switch(mColor)
+         switch(mColor)
         {
             case SliceColor.Red:
                 GetComponent<Materials>().ToRed();
