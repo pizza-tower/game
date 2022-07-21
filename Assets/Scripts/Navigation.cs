@@ -115,23 +115,23 @@ public class Navigation : MonoBehaviour
             }
             Transform vertscore = popup.transform.GetChild(4);
             TextMeshProUGUI verttext = vertscore.gameObject.GetComponent<TextMeshProUGUI>();
-            verttext.SetText("# Vertical Fusions = {} x 5 = {} points", s.numVerticalFusions, s.scoreVerticalFusions);    
+            verttext.SetText(string.Format("# Vertical Fusions = {0} x 5 = {1} points", s.numVerticalFusions, s.scoreVerticalFusions));    
 
             Transform horscore = popup.transform.GetChild(5);
             TextMeshProUGUI hortext = horscore.gameObject.GetComponent<TextMeshProUGUI>();
-            hortext.SetText("# Horizontal Fusions = {} x 20 = {} points", s.numHorizontalFusions, s.scoreHorizontalFusions);    
+            hortext.SetText(string.Format("# Horizontal Fusions = {0} x 20 = {1} points", s.numHorizontalFusions, s.scoreHorizontalFusions));    
 
             Transform powscore = popup.transform.GetChild(6);
             TextMeshProUGUI powtext = powscore.gameObject.GetComponent<TextMeshProUGUI>();
-            powtext.SetText("# Powers Used = {} x 5 = {} points", s.numPowersUsed, s.scorePowersUsed);    
+            powtext.SetText(string.Format("# Powers Used = {0} x 5 = {1} points", s.numPowersUsed, s.scorePowersUsed));    
 
             Transform slicescore = popup.transform.GetChild(7);
             TextMeshProUGUI slicetext = slicescore.gameObject.GetComponent<TextMeshProUGUI>();
-            slicetext.SetText("# Slices Left = {} x 5 = {} points", s.numSlicesLeft, s.scoreSlicesLeft);    
+            slicetext.SetText(string.Format("# Slices Left = {0} x 1 = {1} points", s.numSlicesLeft, s.scoreSlicesLeft));    
 
             Transform totalscore = popup.transform.GetChild(8);
             TextMeshProUGUI totaltext = totalscore.gameObject.GetComponent<TextMeshProUGUI>();
-            totaltext.SetText("Total Score = {} points", s.scoreTotal);    
+            totaltext.SetText(string.Format("Total Score = {0} points", s.scoreTotal));    
         }
         /*if(Score.CurrentScore >= 30){
             int level = SceneManager.GetActiveScene().buildIndex;

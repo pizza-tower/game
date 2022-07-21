@@ -152,7 +152,7 @@ public class PizzaParabola : MonoBehaviour
             if(FreeFallTime/7.0f > 0.98f && RandomDropSliceAddedToTheList == false)
             {
                 RandomDropSliceAddedToTheList = true;
-                ThrowSlice();
+                FreeFallSlice();
                 AddToList();
             }
             //when the random drop slice is landed on top of the stack, mark it as ISPlaced
