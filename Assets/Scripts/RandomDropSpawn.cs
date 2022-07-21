@@ -32,6 +32,7 @@ public class RandomDropSpawn : MonoBehaviour
         //spawn a new slice at spawner
         GameObject NewSlice = Instantiate(Slice) as GameObject;
         NewSlice.transform.position = transform.position;
+        NewSlice.transform.localScale = new Vector3(2, 2, 2);
         NewSlice.GetComponent<PizzaRotation>().IsRandomDrop = true;
         List<SliceColor> sColors = GlobalData.ValidSlices[SceneManager.GetActiveScene().name];
         int n = sColors.Count;
