@@ -19,7 +19,6 @@ public interface IPizzaTowerUIMessageTarget : IEventSystemHandler
     void setIntroInstruction(string text);
 
     public void ShowPopupText(string text, Vector3 position);
-
     //Popup text functions
 
 }

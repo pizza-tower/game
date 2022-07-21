@@ -207,14 +207,18 @@ public class TutorialHandler : MonoBehaviour
         GlobalData.ValidSlices["Level0"] = new(){ SliceColor.Yellow };
         fuseCase = true;
         FuseMessage(instructionCount);
-        if(GlobalData.isFirstFusionOver){
+        if(GlobalData.nVerticalFusions > 0)
+        {
             DestroySlices();
             Debug.Log("Fusion Over");
             stage++;
             _pause = true;
             CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
+            ArrowObjects[ArrowObjectNames.HFUSE].SetActive(false);
             return;
         }
+
+        ArrowObjects[ArrowObjectNames.HFUSE].SetActive(true);
 
         Debug.Log("CurrentVertSlice Name: " + (CurrentVertSlice != null ? CurrentVertSlice.name : "null"));
         if(CurrentVertSlice != null){
@@ -353,18 +357,46 @@ public class TutorialHandler : MonoBehaviour
                 // DestroySlices();
             }
 
-            if(stage == 4){
+            if(stage == 4)
+            {
+                GameObject NewSlice = Instantiate(Slice) as GameObject;
+                NewSlice.tag = "hardcoded";
+                NewSlice.name = "colv1_slice1";
+                NewSlice.transform.position = new Vector3(4.36000013f, -1.04999995f, -10.8999996f);
+                NewSlice.transform.rotation = Quaternion.Euler(new Vector3(0f, 300f, 0f));
+
+                NewSlice.GetComponent<PizzaRotation>().mColor = SliceColor.Yellow;
+                NewSlice.GetComponent<PizzaRotation>().hardcoded = true;
+                NewSlice.GetComponent<PizzaParabola>().enabled = false;
+
+                GlobalData.globalList[5].Add(NewSlice);
+
+                NewSlice = Instantiate(Slice) as GameObject;
+                NewSlice.tag = "hardcoded";
+                NewSlice.name = "colv1_slice2";
+                NewSlice.transform.position = new Vector3(4.36000013f, -0.850000024f, -10.8999996f);
+                NewSlice.transform.rotation = Quaternion.Euler(new Vector3(0f, 300f, 0f));
+
+                NewSlice.GetComponent<PizzaRotation>().mColor = SliceColor.Yellow;
+                NewSlice.GetComponent<PizzaRotation>().hardcoded = true;
+                NewSlice.GetComponent<PizzaParabola>().enabled = false;
+
+                GlobalData.globalList[5].Add(NewSlice);
+
+                stage++;
+            }
+            if(stage == 5){
                 verticalFuseCondition();
             }
             
             // TODO : Add Horizontal Fuse
 
-            if(stage == 5){
+            if(stage == 6){
                 _pause = false;
                 horizontalFuse();
             }
 
-            if(stage == 6){
+            if(stage == 7){
                 DisableAllArrows();
                 pressSpace = false;
                 pizzaSpawner.SetActive(false);
@@ -386,7 +418,7 @@ public class TutorialHandler : MonoBehaviour
             }
 
             // TODO : Add Animation/Video to better understand Power Ups
-            if(stage == 7){
+            if(stage == 8){
                 //Objects[GameObjectNames.SCORE_UI].SetActive(true);
                 DisableAllArrows();
                 ArrowObjects[ArrowObjectNames.SCORE].SetActive(true);
@@ -396,7 +428,7 @@ public class TutorialHandler : MonoBehaviour
                 _pause = true;
             }
 
-            if(stage == 8){
+            if(stage == 9){
                 DisableAllArrows();
                 ArrowObjects[ArrowObjectNames.REWARDS].SetActive(true);
 
@@ -421,14 +453,14 @@ public class TutorialHandler : MonoBehaviour
             //     _pause = true;
             // }
 
-            if(stage == 9){
+            if(stage == 10){
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                     x.setIntroInstruction("Cool Right!\n Press Enter to Start Level1");
                 });
                 _pause = true;
             }
 
-            if(stage == 10){
+            if(stage == 11){
                 SceneManager.LoadScene(3);
             }
         }
