@@ -89,7 +89,7 @@ public class TutorialHandler : MonoBehaviour
 
         if (iMessageNumber == 0)
             ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => {
-                x.SetTutorialInstruction("Lets Try Vertical Fuse!\n Try to make stack of three slices with no more than 5 slices!");
+                x.SetTutorialInstruction("Lets Try Vertical Fuse!\n Stack 3 Slices on same slot!");
             });
         else if (iMessageNumber == 1)
         {
@@ -139,7 +139,7 @@ public class TutorialHandler : MonoBehaviour
         ArrowObjects[ArrowObjectNames.PEEL].SetActive(true);
         Objects[GameObjectNames.PIZZA_PEEL].SetActive(true);
 
-        Debug.Log("Showing Peel..");
+        //Debug.Log("Showing Peel..");
 
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
             x.SetTutorialInstruction("Pizza Peel used to throw the pizza on to Pan");
@@ -153,7 +153,7 @@ public class TutorialHandler : MonoBehaviour
         ArrowObjects[ArrowObjectNames.PLATE].transform.position = new Vector3(-2.66078997f,-4.76942348f,1.46437407f);
         ArrowObjects[ArrowObjectNames.PLATE].transform.rotation = Quaternion.Euler(59.2067375f,180f,180f);
          ArrowObjects[ArrowObjectNames.PLATE].SetActive(true);
-        Debug.Log("Showing Pan..");
+        //Debug.Log("Showing Pan..");
 
         ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
             x.SetTutorialInstruction("Plate has 6 slots where pizzas can be thrown");
@@ -161,7 +161,6 @@ public class TutorialHandler : MonoBehaviour
         GlobalData.ValidSlices["Level0"] = new(){ SliceColor.Yellow };
     }
     
-
     void showPeelAndPizzaSlice()
     {
 
@@ -177,12 +176,12 @@ public class TutorialHandler : MonoBehaviour
 
             //Destroy(pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice());
 
-            Debug.Log("Showing Pizza Slice..");
+            //Debug.Log("Showing Pizza Slice..");
 
             StartCoroutine(WaitFor(0.5f, () => {
                 // ui_flow.SetActive(true);
                 if(CurrentVertSlice != null && CurrentVertSlice.activeSelf){
-                    Debug.Log("Waiting for Pizza Spawner to be active");
+                    //Debug.Log("Waiting for Pizza Spawner to be active");
                     ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                         x.SetTutorialInstruction("Pizza Slice rotates until you hit space to throw the pizza");
                     });
@@ -213,7 +212,7 @@ public class TutorialHandler : MonoBehaviour
         if(GlobalData.nVerticalFusions > 0)
         {
             DestroySlices();
-            Debug.Log("Fusion Over");
+            //Debug.Log("Fusion Over");
             stage++;
             _pause = true;
             CurrentVertSlice = pizzaSpawner.GetComponent<NewSliceSpawn>().GetSpawnedSlice();
@@ -224,7 +223,7 @@ public class TutorialHandler : MonoBehaviour
 
         ArrowObjects[ArrowObjectNames.HFUSE].SetActive(true);
 
-        Debug.Log("CurrentVertSlice Name: " + (CurrentVertSlice != null ? CurrentVertSlice.name : "null"));
+        ////Debug.Log("CurrentVertSlice Name: " + (CurrentVertSlice != null ? CurrentVertSlice.name : "null"));
         if(CurrentVertSlice != null){
             
             isPlaced = CurrentVertSlice.GetComponent<PizzaParabola>().GetIsPlaced();
@@ -232,8 +231,8 @@ public class TutorialHandler : MonoBehaviour
                 return;
             
             isPlaced = false;
-            Debug.Log("Slices Count: " + CalculateSlices());
-            Debug.Log("GlobalData.isFirstFusionOver: " + GlobalData.isFirstFusionOver);
+            ////Debug.Log("Slices Count: " + CalculateSlices());
+            ////Debug.Log("GlobalData.isFirstFusionOver: " + GlobalData.isFirstFusionOver);
             if(instructionCount == 1 && CalculateSlices() == 1)
                 instructionCount = 2;
 
@@ -267,6 +266,8 @@ public class TutorialHandler : MonoBehaviour
     bool isHInitDone = false;
     int instr = 0;
     void horizontalFuse(){
+        ArrowObjects[ArrowObjectNames.HFUSE].SetActive(true);
+
         GlobalData.ValidSlices["Level0"] = new() { SliceColor.Red };
         if (CurrentVertSlice == null || CurrentVertSlice.activeSelf == false)
         {
@@ -274,7 +275,7 @@ public class TutorialHandler : MonoBehaviour
             isHInitDone = true;
         }
 
-        Debug.Log("Slice: " + CurrentVertSlice != null ? CurrentVertSlice.name: "null");
+        ////Debug.Log("Slice: " + CurrentVertSlice != null ? CurrentVertSlice.name: "null");
         fuseCase = true;
         
         HFuseMessage(instr);
@@ -287,7 +288,7 @@ public class TutorialHandler : MonoBehaviour
         Objects[GameObjectNames.PIZZA_PEEL].SetActive(true);
         pizzaSpawner.SetActive(true);
 
-        //Debug.Log("GlobalData.nHorizontalFusions: " + GlobalData.nHorizontalFusions);
+        ////Debug.Log("GlobalData.nHorizontalFusions: " + GlobalData.nHorizontalFusions);
         if (GlobalData.nHorizontalFusions > 0) { 
             stage++;
             _pause = true;
@@ -304,8 +305,8 @@ public class TutorialHandler : MonoBehaviour
             if (isPlaced)
             {
                 //isPlaced = false;
-                Debug.Log("HFUSE CurrentVertSlice Name: " + CurrentVertSlice.name);
-                Debug.Log("GlobalData.nHorizontalFusions: " + GlobalData.nHorizontalFusions);
+                //Debug.Log("HFUSE CurrentVertSlice Name: " + CurrentVertSlice.name);
+                //Debug.Log("GlobalData.nHorizontalFusions: " + GlobalData.nHorizontalFusions);
                 if (GlobalData.nHorizontalFusions == 0)
                 {
                     //isHInitDone = false;
@@ -316,14 +317,14 @@ public class TutorialHandler : MonoBehaviour
             }
         }
         
-        Debug.Log("CurrentVertSlice Name: " + (CurrentVertSlice != null ? CurrentVertSlice.name : "null"));
+        //Debug.Log("CurrentVertSlice Name: " + (CurrentVertSlice != null ? CurrentVertSlice.name : "null"));
         //}
     }
 
     private IEnumerator Walkthrough()
     {
 
-        // Debug.Log("Slices Count: " + CalculateSlices() + " -> " + stage);
+        // //Debug.Log("Slices Count: " + CalculateSlices() + " -> " + stage);
 
         while (!_pause){
             yield return new WaitForSeconds(0.5f);
@@ -541,7 +542,7 @@ public class TutorialHandler : MonoBehaviour
 
     void Update()
     {   
-        // Debug.Log("stage: "+ stage + " ----->" + fuseCase + " ----->" + WalkthroughDone);
+        // //Debug.Log("stage: "+ stage + " ----->" + fuseCase + " ----->" + WalkthroughDone);
         StartCoroutine(Walkthrough());
         if (((!pressSpace && Input.GetKeyDown(KeyCode.Return)) 
             || (pressSpace &&  Input.GetKeyDown(KeyCode.Space)) && !fuseCase)){
