@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1645382218878270476}
-  - component: {fileID: 2838511791279823281}
   - component: {fileID: 2030799447456672595}
   m_Layer: 0
   m_Name: RandomDropSpawner
@@ -33,23 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2838511791279823281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8635773656617038171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e4a9076be87994d98da5c58bd8404b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  YellowPrefab: {fileID: 0}
-  RedPrefab: {fileID: 0}
-  NeedsNewSlice: 1
-  NewSliceSpawnSeconds: 0
-  IsRed: 0
 --- !u!114 &2030799447456672595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fed0ef1923c544f4b484c11e0b0d472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Slice: {fileID: 7934999755122050094, guid: e76424a885d244c4f8408ebfa570ecb0, type: 3}
+  NeedsNewSlice: 1
+  NewSliceSpawnSeconds: 0

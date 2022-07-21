@@ -10,7 +10,7 @@ public class PizzaRotation : MonoBehaviour
     public int TagInInt;
     private bool AssignMaterial = false;
     public bool hardcoded = false;
-
+    public bool IsRandomDrop = false;
     [SerializeField] [Range(0f, 6f)] float lerpRotationTime;
     [SerializeField] [Range(0f, 8f)] float lerpPositionTime;
     [SerializeField] Vector3[] myAngles;
@@ -46,9 +46,9 @@ public class PizzaRotation : MonoBehaviour
     {
         if(AssignMaterial == false)
         {
-             if(mColor == SliceColor.Brown)
+             if(mColor == SliceColor.Blue)
             {
-                gameObject.GetComponent<Materials>().ToBrown();
+                gameObject.GetComponent<Materials>().ToBlue();
             }
             else if(mColor == SliceColor.Red)
             {
@@ -73,7 +73,11 @@ public class PizzaRotation : MonoBehaviour
            
             AssignMaterial = true;
         }
-        if(IsRotating == 1  && StopRotate == 0 && hardcoded!=true)
+        if(IsRandomDrop)
+        {
+            return;
+        }
+        if(IsRotating == 1  && StopRotate == 0 && hardcoded!=true && IsRandomDrop == false)
         {
             //flip and rotate animation
             
@@ -139,8 +143,8 @@ public class PizzaRotation : MonoBehaviour
             case SliceColor.Yellow:
                 GetComponent<Materials>().ToYellow();
                 break;
-            case SliceColor.Brown:
-                GetComponent<Materials>().ToBrown();
+            case SliceColor.Blue:
+                GetComponent<Materials>().ToBlue();
                 break;
             case SliceColor.DarkBrown:
                 GetComponent<Materials>().ToDarkBrown();
@@ -160,8 +164,9 @@ public class PizzaRotation : MonoBehaviour
             case SliceColor.Yellow:
                 GetComponent<Materials>().ToYellowTransparent();
                 break;
-            case SliceColor.Brown:
-                GetComponent<Materials>().ToBrownTransparent();
+            case SliceColor.Blue:
+                //GetComponent<Materials>().ToBrownTransparent();
+                GetComponent<Materials>().ToBlueTransparent();
                 break;
             case SliceColor.DarkBrown:
                 GetComponent<Materials>().ToDarkBrownTransparent();

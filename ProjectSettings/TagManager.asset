@@ -30,6 +30,8 @@ TagManager:
   - RewardButton
   - hardcoded
   - flowui
+  - RandomSliceSpawner
+  - NS
   layers:
   - Default
   - TransparentFX

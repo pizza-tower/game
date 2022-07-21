@@ -25,7 +25,7 @@ public class Materials : MonoBehaviour
     {
         Rend.sharedMaterial = MaterialList[1];
     }
-    public void ToBrown()
+    public void ToBlue()
     {
         Rend.sharedMaterial = MaterialList[6];
     }
@@ -51,6 +51,10 @@ public class Materials : MonoBehaviour
     {
         Rend.sharedMaterial = MaterialList[3];
     }
+    public void ToBlueTransparent()
+    {
+        Rend.sharedMaterial = MaterialList[3];
+    }
     public void ToDarkBrownTransparent()
     {
         Rend.sharedMaterial = MaterialList[3];
@@ -73,7 +77,7 @@ public class Materials : MonoBehaviour
     public void FlipColor()
     {
         SliceColor c = GetComponent<PizzaRotation>().mColor;
-        if(c == SliceColor.Red || c == SliceColor.Brown)
+        if(c == SliceColor.Red || c == SliceColor.Blue)
         {
             //Brown, Red slices will be turned yellow when colorchanger slice is thrown.
             ToYellow();

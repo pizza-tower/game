@@ -12,7 +12,7 @@ public class PizzaPeelController : MonoBehaviour
     [SerializeField] [Range(0f, 12f)] float lerpRotationTime;
     [SerializeField] Vector3[] myFlipAngles;
     [SerializeField] Vector3[] myThrowAngles;
-
+    float ResetWaitSeconds = 1.3f;
     public int throwIt = 0;
     int flipAngleIndex; 
     int ThrowAngleIndex = 0;
@@ -23,9 +23,16 @@ public class PizzaPeelController : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
+        //ResetWaitSeconds = 0f;
     }
     public void Reset()
     {
+        StartCoroutine(ResetTimer());
+    }
+    IEnumerator ResetTimer()
+    {
+        yield return new WaitForSeconds(ResetWaitSeconds);
+        ResetWaitSeconds = 1.3f;
         isThrowing = 0;
         ThrowAngleIndex = 0;
     }

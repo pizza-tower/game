@@ -10,8 +10,8 @@ public class Navigation : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject menu;
-    public GameObject   winscreen;
-    public GameObject endlevelscreen;
+    GameObject plate;
+    Score score;
     bool instantiated = false;
     void CleanGlobalList()
     {
@@ -24,6 +24,9 @@ public class Navigation : MonoBehaviour
     }
     void Start()
     {
+        plate = GameObject.FindWithTag("Plate");
+        score = plate.GetComponent<Score>();
+
     }
     public void BackToMenu()
     {
@@ -66,7 +69,6 @@ public class Navigation : MonoBehaviour
         GlobalData.previousSlice="AnchorOne";
         GlobalData.isFirstFusionOver = false;
         GlobalData.gameover = false;
-        Score.CurrentScore = 0;
         GlobalData.nHorizontalFusions = 0;
         GlobalData.nVerticalFusions = 0;
         //CleanGlobalList();
@@ -89,12 +91,49 @@ public class Navigation : MonoBehaviour
         if (GlobalData.gameover && instantiated == false) {
             AnalyticsResult analyticsResult = Analytics.CustomEvent("Level Die", new Dictionary<string, object> { { "level", SceneManager.GetActiveScene().buildIndex} });
             GameObject popup = Instantiate(menu);
+            int level = SceneManager.GetActiveScene().buildIndex;
+
+            if (level + 1 >= GlobalData.totalscenes) {
+                popup.transform.GetChild(13).gameObject.SetActive(false);
+            }
             instantiated = true;
-            Transform finalscore = popup.transform.GetChild(1);
-            TextMeshProUGUI scoretext = finalscore.gameObject.GetComponent<TextMeshProUGUI>();
-            scoretext.SetText("score: {0}", Score.CurrentScore);    
+            GameObject star1 = popup.transform.GetChild(1).gameObject;
+            GameObject star2 = popup.transform.GetChild(2).gameObject;
+            GameObject star3 = popup.transform.GetChild(3).gameObject;
+            GameObject plate = GameObject.FindWithTag("Plate");
+            ScoreSummary s = Score.GetScoreSummary();
+            print("STARS");
+            print(s.starsEarned);
+            if (s.starsEarned >= 1) {
+                star1.SetActive(true);
+            }
+            if (s.starsEarned >= 2) {
+                star2.SetActive(true);
+            }
+            if (s.starsEarned >= 3) {
+                star3.SetActive(true);
+            }
+            Transform vertscore = popup.transform.GetChild(4);
+            TextMeshProUGUI verttext = vertscore.gameObject.GetComponent<TextMeshProUGUI>();
+            verttext.SetText("# Vertical Fusions = {} x 5 = {} points", s.numVerticalFusions, s.scoreVerticalFusions);    
+
+            Transform horscore = popup.transform.GetChild(5);
+            TextMeshProUGUI hortext = horscore.gameObject.GetComponent<TextMeshProUGUI>();
+            hortext.SetText("# Horizontal Fusions = {} x 20 = {} points", s.numHorizontalFusions, s.scoreHorizontalFusions);    
+
+            Transform powscore = popup.transform.GetChild(6);
+            TextMeshProUGUI powtext = powscore.gameObject.GetComponent<TextMeshProUGUI>();
+            powtext.SetText("# Powers Used = {} x 5 = {} points", s.numPowersUsed, s.scorePowersUsed);    
+
+            Transform slicescore = popup.transform.GetChild(7);
+            TextMeshProUGUI slicetext = slicescore.gameObject.GetComponent<TextMeshProUGUI>();
+            slicetext.SetText("# Slices Left = {} x 5 = {} points", s.numSlicesLeft, s.scoreSlicesLeft);    
+
+            Transform totalscore = popup.transform.GetChild(8);
+            TextMeshProUGUI totaltext = totalscore.gameObject.GetComponent<TextMeshProUGUI>();
+            totaltext.SetText("Total Score = {} points", s.scoreTotal);    
         }
-        if(Score.CurrentScore >= 30){
+        /*if(Score.CurrentScore >= 30){
             int level = SceneManager.GetActiveScene().buildIndex;
             if (level + 1 >= GlobalData.totalscenes) {
                 if(instantiated == false){
@@ -117,7 +156,6 @@ public class Navigation : MonoBehaviour
             
             }
 
-             }
-        } 
-    // }
+        }*/
+    }
 }
