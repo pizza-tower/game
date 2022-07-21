@@ -419,7 +419,7 @@ public class TutorialHandler : MonoBehaviour
 
                 ArrowObjects[ArrowObjectNames.CHEAT].SetActive(true);
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                    x.setIntroInstruction("NOTE: Ways to make Horizontal Fuses");
+                    x.setIntroInstruction("Ways to complete Orders to finish the level");
                 });
                 _pause = true;
             }
@@ -432,14 +432,15 @@ public class TutorialHandler : MonoBehaviour
                 Objects[GameObjectNames.SLICE_UI].SetActive(true);
 
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                    x.setIntroInstruction("These are the Number of SLICES available");
+                    x.setIntroInstruction("Complete Orders within the available SLICES");
                 });
                 _pause = true;
             }
 
-            if(stage == 9){
+            if(stage == 9)
+            {
                 DisableAllArrows();
-                ArrowObjects[ArrowObjectNames.REWARDS].SetActive(true);
+                //ArrowObjects[ArrowObjectNames.REWARDS].SetActive(true);
 
 
                 //Objects[GameObjectNames.GOLD_UI].SetActive(true);
@@ -447,8 +448,8 @@ public class TutorialHandler : MonoBehaviour
                 Objects[GameObjectNames.COLOR_CHANGER].SetActive(true);
                 Objects[GameObjectNames.REWARDS_UI].SetActive(true);
 
-                Objects[GameObjectNames.CHEATS].SetActive(true);
-                Objects[GameObjectNames.SLICE_UI].SetActive(true);
+                Objects[GameObjectNames.CHEATS].SetActive(false);
+                Objects[GameObjectNames.SLICE_UI].SetActive(false);
                 Objects[GameObjectNames.INSTRUCTION_UI].SetActive(false);
 
                 Objects[GameObjectNames.INTRO_UI].SetActive(false);
@@ -457,7 +458,7 @@ public class TutorialHandler : MonoBehaviour
                 _pause = true;
             }
 
-            // if(stage == 9){
+            // if(stage == 10){
             //     // Objects[GameObjectNames.PIZZA_PEEL].SetActive(false);
             //     DisableAllArrows();
             //     ArrowObjects[ArrowObjectNames.SCORE].SetActive(true);
@@ -468,7 +469,7 @@ public class TutorialHandler : MonoBehaviour
             //     _pause = true;
             // }
 
-            if(stage == 10){
+            if (stage == 10){
 
                 foreach (KeyValuePair<string, GameObject> key in Objects)
                 {
