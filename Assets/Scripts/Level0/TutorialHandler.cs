@@ -54,6 +54,8 @@ public class TutorialHandler : MonoBehaviour
         public static readonly string INTRO_UI = "IntroUI";
         public static readonly string SLICE = "Slice";
         public static readonly string SLICE_UI = "SlicesUI";
+        public static readonly string REWARDS_UI = "Rewards";
+        public static readonly string CHEATS = "Cheats";
     };
 
     class ArrowObjectNames
@@ -405,6 +407,7 @@ public class TutorialHandler : MonoBehaviour
                 Objects[GameObjectNames.PLATE].SetActive(false);
                 DestroySlices();
                 Destroy(pizzaSpawnerComponent.GetSpawnedSlice());
+                Objects[GameObjectNames.CHEATS].SetActive(true);
                 Objects[GameObjectNames.ANCHORS].SetActive(false);
                 Objects[GameObjectNames.INSTRUCTION_UI].SetActive(false);
 
@@ -422,8 +425,10 @@ public class TutorialHandler : MonoBehaviour
                 //Objects[GameObjectNames.SCORE_UI].SetActive(true);
                 DisableAllArrows();
                 ArrowObjects[ArrowObjectNames.SCORE].SetActive(true);
+                Objects[GameObjectNames.SLICE_UI].SetActive(true);
+
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                    x.setIntroInstruction("AIM: Gain the total SCORE needed to complete LEVEL");
+                    x.setIntroInstruction("These are the Number of SLICES available");
                 });
                 _pause = true;
             }
@@ -432,12 +437,20 @@ public class TutorialHandler : MonoBehaviour
                 DisableAllArrows();
                 ArrowObjects[ArrowObjectNames.REWARDS].SetActive(true);
 
+
                 //Objects[GameObjectNames.GOLD_UI].SetActive(true);
                 Objects[GameObjectNames.BUTTON].SetActive(true);
                 Objects[GameObjectNames.COLOR_CHANGER].SetActive(true);
+                Objects[GameObjectNames.REWARDS_UI].SetActive(true);
+
+                Objects[GameObjectNames.CHEATS].SetActive(true);
+                Objects[GameObjectNames.SLICE_UI].SetActive(true);
 
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
-                    x.setIntroInstruction("sell GOLD to USE POWER UPs");
+                    x.setIntroInstruction("");
+                });
+                ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null, (x, y) => {
+                    x.SetFlowInstruction("");
                 });
                 _pause = true;
             }
@@ -454,6 +467,14 @@ public class TutorialHandler : MonoBehaviour
             // }
 
             if(stage == 10){
+
+                foreach (KeyValuePair<string, GameObject> key in Objects)
+                {
+                    Objects[key.Key].SetActive(false);
+                }
+
+                Objects.Add(GameObjectNames.INTRO_UI, GameObject.Find(GameObjectNames.INTRO_UI));
+                Objects.Add(GameObjectNames.FLOW_UI, GameObject.Find(GameObjectNames.FLOW_UI));
                 ExecuteEvents.Execute<IPizzaTowerUIMessageTarget>(ui_handler, null,(x, y) => {
                     x.setIntroInstruction("Cool Right!\n Press Enter to Start Level1");
                 });
@@ -482,6 +503,9 @@ public class TutorialHandler : MonoBehaviour
         Objects.Add(GameObjectNames.BUTTON, GameObject.Find(GameObjectNames.BUTTON));
         Objects.Add(GameObjectNames.INTRO_UI, GameObject.Find(GameObjectNames.INTRO_UI));
         Objects.Add(GameObjectNames.SLICE, GameObject.Find(GameObjectNames.SLICE));
+        Objects.Add(GameObjectNames.REWARDS_UI, GameObject.Find(GameObjectNames.REWARDS_UI));
+        Objects.Add(GameObjectNames.CHEATS, GameObject.Find(GameObjectNames.CHEATS));
+        Objects.Add(GameObjectNames.SLICE_UI, GameObject.Find(GameObjectNames.SLICE_UI));
 
         ArrowObjects.Add(ArrowObjectNames.PLATE, GameObject.Find(ArrowObjectNames.PLATE));
         ArrowObjects.Add(ArrowObjectNames.PEEL, GameObject.Find(ArrowObjectNames.PEEL));
