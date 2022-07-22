@@ -60,7 +60,7 @@ public class Score : MonoBehaviour
 
         s.starsEarned = 1;
         if (s.scoreTotal > 65) s.starsEarned = 2;
-        if (s.scoreTotal > 75) s.starsEarned = 3;
+        if (s.scoreTotal > 85) s.starsEarned = 3;
 
         return s;
     }
