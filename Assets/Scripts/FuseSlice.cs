@@ -53,6 +53,7 @@ public class FuseSlice : MonoBehaviour
                     Destroy(SList[i - 1]);
                     Destroy(SList[i - 2]);
                     GlobalData.nVerticalFusions++;
+                    GlobalData.verticalFuse = true;
                     Score.numVerticalFuses++;
                     SList.RemoveRange(i - 2, 3);
                     cond = true;
@@ -157,6 +158,7 @@ public class FuseSlice : MonoBehaviour
                 }
                 GlobalData.isHorizontalFuse = true;
                 GlobalData.nHorizontalFusions++;
+                GlobalData.horizontalFuse = true;
                 Score.numHorizontalFuses++;
 
                 HandleReward(r);
